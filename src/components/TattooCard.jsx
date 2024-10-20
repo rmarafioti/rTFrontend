@@ -3,7 +3,7 @@ export default function TattooCard() {
     <article>
       <h1>Tattoo Card</h1>
       <p>
-        component placed in the drop component for the user to enter individula
+        component placed in the drop component for the user to enter individual
         services for the day
       </p>
     </article>
