@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 
 // serviceInput is an object:
 
-export default function TattooCard() {
+export default function TattooCard({ addedService, setAddedService }) {
   //create a validation errro if no description is entered
   const inputValidationError = {
     description: false,
@@ -19,8 +19,6 @@ export default function TattooCard() {
     giftCert: 0,
   };
 
-  // setter and getter for addedService starts as an empty array
-  const [addedService, setAddedService] = useState([]);
   // setter and a getter to set user values from the input form
   const [formValues, setFormValues] = useState(serviceInput);
   //setter and getter for validation error
@@ -52,7 +50,6 @@ export default function TattooCard() {
   //write a function addService will place user input service into the addedServive array
   const addService = (e) => {
     e.preventDefault();
-
     const isDescriptionValid = validateField(
       "description",
       formValues.description
@@ -67,12 +64,6 @@ export default function TattooCard() {
   const removeService = (index) => {
     const newAddedServices = addedService.filter((_, i) => i !== index);
     setAddedService(newAddedServices);
-    onChange({
-      target: {
-        name: name,
-        value: newAddedServices.join(", "),
-      },
-    });
   };
 
   return (
