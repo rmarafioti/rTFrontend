@@ -43,14 +43,27 @@ export default function Drop() {
 
   const shopTotal = businessTotal();
 
-  //create a function to calculate what the shop owes the team member
+  //create a function to calculate what the business owes the team member
   const shopOwes = (cash, deposit) => {
     //your total - cash and deposits = shop owes
     const shopOwesSum = yourTotal - (cash || 0) - (deposit || 0);
-    return shopOwesSum;
+    //else if shopOwesSum < 0 return 0
+    return shopOwesSum < 0 ? 0 : shopOwesSum;
   };
 
   const shopOwesTotal = shopOwes(serviceTotals.cash, serviceTotals.deposit);
+
+  //create a function to calculate what the team member owes the business
+  const teamMemberOwes = (credit, giftCert) => {
+    //your total - credit and giftCerts = team member owes
+    const teamMemberOwesSum = shopTotal - (credit || 0) - (giftCert || 0);
+    return teamMemberOwesSum < 0 ? 0 : teamMemberOwesSum;
+  };
+
+  const teamMemberOwesTotal = teamMemberOwes(
+    serviceTotals.credit,
+    serviceTotals.giftCert
+  );
 
   return (
     <article className="pageSetup">
@@ -94,6 +107,10 @@ export default function Drop() {
       <div>
         <h2>Shop Owes:</h2>
         <p>${shopOwesTotal}</p>
+      </div>
+      <div>
+        <h2>You Owe The Shop:</h2>
+        <p>${teamMemberOwesTotal}</p>
       </div>
     </article>
   );
