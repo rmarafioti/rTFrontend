@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import TattooCard from "./TattooCard";
 
+/**
+ *
+ * @returns the drop section of the application where a team member can enter in their services
+ */
 export default function Drop() {
   const [addedService, setAddedService] = useState([]);
 
@@ -18,13 +22,14 @@ export default function Drop() {
     );
   };
 
+  const serviceTotals = calculateServiceTotals();
+
   //create a function to add up the total of all the services.
   const dropTotal = (totals) => {
     const sum = totals.cash + totals.credit + totals.deposit + totals.giftCert;
     return sum;
   };
 
-  const serviceTotals = calculateServiceTotals();
   const fullTotal = dropTotal(serviceTotals);
 
   //create a function to calculate the team members cut - hardcoded 60%
@@ -57,6 +62,7 @@ export default function Drop() {
   const teamMemberOwes = (credit, giftCert) => {
     //your total - credit and giftCerts = team member owes
     const teamMemberOwesSum = shopTotal - (credit || 0) - (giftCert || 0);
+    //else if teamMemberOwesSum < 0 return 0
     return teamMemberOwesSum < 0 ? 0 : teamMemberOwesSum;
   };
 
@@ -81,7 +87,9 @@ export default function Drop() {
           addedService={addedService}
           setAddedService={setAddedService}
         />
-        {/*<input
+        {/*
+        keep thsi out until we implement backend routes
+        <input
           className="dropFormInput"
           id="submitDrop"
           type="submit"
@@ -89,29 +97,31 @@ export default function Drop() {
           aria-label="form_submit"
         />*/}
       </form>
-      <div>
-        <h2>Total Sevices:</h2>
-        <p>Cash: ${serviceTotals.cash}</p>
-        <p>Credit: ${serviceTotals.credit}</p>
-        <p>Deposit: ${serviceTotals.deposit}</p>
-        <p>Gift Certificate: ${serviceTotals.giftCert}</p>
-      </div>
-      <div>
-        <h2>Drop Total:</h2>
-        <p>${fullTotal}</p>
-        <h2>Your Total:</h2>
-        <p>${yourTotal}</p>
-        <h2>Shop Total:</h2>
-        <p>${shopTotal}</p>
-      </div>
-      <div>
-        <h2>Shop Owes:</h2>
-        <p>${shopOwesTotal}</p>
-      </div>
-      <div>
-        <h2>You Owe The Shop:</h2>
-        <p>${teamMemberOwesTotal}</p>
-      </div>
+      <section className="totalsSection">
+        <div className="totalServices">
+          <h2>Sevice Totals:</h2>
+          <p>Cash: ${serviceTotals.cash}</p>
+          <p>Credit: ${serviceTotals.credit}</p>
+          <p>Deposit: ${serviceTotals.deposit}</p>
+          <p>Gift Certificate: ${serviceTotals.giftCert}</p>
+        </div>
+        <div className="dropTotal">
+          <h2>Drop Total:</h2>
+          <p>${fullTotal}</p>
+        </div>
+        <div className="percentageTotals">
+          <h2>Your Total:</h2>
+          <p>${yourTotal}</p>
+          <h2>Shop Total:</h2>
+          <p>${shopTotal}</p>
+        </div>
+        <div className="cutTotals">
+          <h2>Shop Owes:</h2>
+          <p>${shopOwesTotal}</p>
+          <h2>You Owe The Shop:</h2>
+          <p>${teamMemberOwesTotal}</p>
+        </div>
+      </section>
     </article>
   );
 }

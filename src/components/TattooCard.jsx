@@ -5,11 +5,6 @@ import { IoClose } from "react-icons/io5";
 // serviceInput is an object:
 
 export default function TattooCard({ addedService, setAddedService }) {
-  //create a validation errro if no description is entered
-  const inputValidationError = {
-    description: false,
-  };
-
   // create a variable named serviceInput which is a object of key value pairs the users will input values to via the service form
   const serviceInput = {
     description: "",
@@ -17,6 +12,11 @@ export default function TattooCard({ addedService, setAddedService }) {
     credit: "",
     deposit: "",
     giftCert: "",
+  };
+
+  //create a validation errror if no description is entered
+  const inputValidationError = {
+    description: false,
   };
 
   // setter and a getter to set user values from the input form
@@ -54,7 +54,7 @@ export default function TattooCard({ addedService, setAddedService }) {
     });
   };
 
-  //write a function addService will place user input service into the addedServive array
+  //create a function addService to place team member input for a service into the addedServive array
   const addService = (e) => {
     e.preventDefault();
     const isDescriptionValid = validateField(
@@ -67,7 +67,7 @@ export default function TattooCard({ addedService, setAddedService }) {
     }
   };
 
-  //write a function removeService user will be able to remove an added service
+  //create a function removeService so a team member will be able to remove an added service
   const removeService = (index) => {
     const newAddedServices = addedService.filter((_, i) => i !== index);
     setAddedService(newAddedServices);
@@ -92,7 +92,7 @@ export default function TattooCard({ addedService, setAddedService }) {
           onChange={handleInputChange}
           required
         />
-        <div>
+        <div className="serviceFormSection">
           <label className="labelName">Cash: </label>
           <input
             className="serviceFormInput"
@@ -122,7 +122,7 @@ export default function TattooCard({ addedService, setAddedService }) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="serviceFormSection">
           <label className="labelName">Deposit: </label>
           <input
             className="serviceFormInput"
@@ -161,7 +161,6 @@ export default function TattooCard({ addedService, setAddedService }) {
           Add Service
         </button>
       </form>
-
       <section>
         <h2>Added Services:</h2>
         <div>
