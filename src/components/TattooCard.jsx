@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoClose } from "react-icons/io5";
 //we have a serviceInput and addedService
 
 // serviceInput is an object:
@@ -48,7 +49,7 @@ export default function TattooCard() {
     });
   };
 
-  //write a function addService with will place user inputted service into the addedServive array
+  //write a function addService will place user input service into the addedServive array
   const addService = (e) => {
     e.preventDefault();
 
@@ -60,6 +61,18 @@ export default function TattooCard() {
       setAddedService([...addedService, formValues]);
       setFormValues(serviceInput);
     }
+  };
+
+  //write a function removeService user will be able to remove an added service
+  const removeService = (index) => {
+    const newAddedServices = addedService.filter((_, i) => i !== index);
+    setAddedService(newAddedServices);
+    onChange({
+      target: {
+        name: name,
+        value: newAddedServices.join(", "),
+      },
+    });
   };
 
   return (
@@ -136,16 +149,19 @@ export default function TattooCard() {
       </form>
 
       <section>
-        <h2>Added Services</h2>
-        <ul>
+        <h2>Added Services:</h2>
+        <div>
           {addedService.map((service, index) => (
-            <li key={index}>
+            <div key={index}>
               {service.description} - Cash: ${service.cash}, Credit: $
               {service.credit}, Deposit: ${service.deposit}, Gift Certificate: $
               {service.giftCert}
-            </li>
+              <div onClick={() => removeService(index)}>
+                <IoClose />
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
     </article>
   );
