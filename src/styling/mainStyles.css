@@ -8,6 +8,12 @@
     border-bottom: 1px solid black;
   }
 
+  #footer, #navbar {
+    color: white;
+    background-color: black;
+    width: 100vw;
+  }
+
   .serviceForm, .dropForm {
     display: flex;
     flex-direction: column;

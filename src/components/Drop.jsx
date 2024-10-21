@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import TattooCard from "./TattooCard";
 
-//create a function to add up the total of all the services.
-
 export default function Drop() {
   const [addedService, setAddedService] = useState([]);
 
+  //create a function to track the total of each formValue when a service is added.
   const calculateServiceTotals = () => {
     return addedService.reduce(
       (acc, service) => {
@@ -19,6 +18,7 @@ export default function Drop() {
     );
   };
 
+  //create a function to add up the total of all the services.
   const dropTotal = (totals) => {
     const sum = totals.cash + totals.credit + totals.deposit + totals.giftCert;
     return sum;
@@ -26,6 +26,31 @@ export default function Drop() {
 
   const serviceTotals = calculateServiceTotals();
   const fullTotal = dropTotal(serviceTotals);
+
+  //create a function to calculate the team members cut - hardcoded 60%
+  const teamMemberTotal = () => {
+    const sum = fullTotal * 0.6;
+    return sum;
+  };
+
+  const yourTotal = teamMemberTotal();
+
+  //create a function to calculate the business' cut
+  const businessTotal = () => {
+    const businessSum = fullTotal - yourTotal;
+    return businessSum;
+  };
+
+  const shopTotal = businessTotal();
+
+  //create a function to calculate what the shop owes the team member
+  const shopOwes = (cash, deposit) => {
+    //your total - cash and deposits = shop owes
+    const shopOwesSum = yourTotal - (cash || 0) - (deposit || 0);
+    return shopOwesSum;
+  };
+
+  const shopOwesTotal = shopOwes(serviceTotals.cash, serviceTotals.deposit);
 
   return (
     <article className="pageSetup">
@@ -43,13 +68,13 @@ export default function Drop() {
           addedService={addedService}
           setAddedService={setAddedService}
         />
-        <input
+        {/*<input
           className="dropFormInput"
           id="submitDrop"
           type="submit"
           value="Submit Drop"
           aria-label="form_submit"
-        />
+        />*/}
       </form>
       <div>
         <h2>Total Sevices:</h2>
@@ -61,6 +86,14 @@ export default function Drop() {
       <div>
         <h2>Drop Total:</h2>
         <p>${fullTotal}</p>
+        <h2>Your Total:</h2>
+        <p>${yourTotal}</p>
+        <h2>Shop Total:</h2>
+        <p>${shopTotal}</p>
+      </div>
+      <div>
+        <h2>Shop Owes:</h2>
+        <p>${shopOwesTotal}</p>
       </div>
     </article>
   );

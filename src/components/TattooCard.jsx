@@ -13,10 +13,10 @@ export default function TattooCard({ addedService, setAddedService }) {
   // create a variable named serviceInput which is a object of key value pairs the users will input values to via the service form
   const serviceInput = {
     description: "",
-    cash: 0,
-    credit: 0,
-    deposit: 0,
-    giftCert: 0,
+    cash: "",
+    credit: "",
+    deposit: "",
+    giftCert: "",
   };
 
   // setter and a getter to set user values from the input form
@@ -43,7 +43,14 @@ export default function TattooCard({ addedService, setAddedService }) {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value,
+      [name]:
+        name === "cash" ||
+        name === "credit" ||
+        name === "deposit" ||
+        name === "giftCert"
+          ? //change to parseFloat() for decimal values
+            parseInt(value) || 0 // Ensure the value is parsed as a number
+          : value, // For text fields like description
     });
   };
 
@@ -93,6 +100,10 @@ export default function TattooCard({ addedService, setAddedService }) {
             type="number"
             name="cash"
             aria-label="cash amount"
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+            inputMode="decimal"
             value={formValues.cash}
             onChange={handleInputChange}
           />
@@ -103,6 +114,10 @@ export default function TattooCard({ addedService, setAddedService }) {
             type="number"
             name="credit"
             aria-label="credit amount"
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+            inputMode="decimal"
             value={formValues.credit}
             onChange={handleInputChange}
           />
@@ -115,6 +130,10 @@ export default function TattooCard({ addedService, setAddedService }) {
             type="number"
             name="deposit"
             aria-label="deposit"
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+            inputMode="decimal"
             value={formValues.deposit}
             onChange={handleInputChange}
           />
@@ -123,8 +142,12 @@ export default function TattooCard({ addedService, setAddedService }) {
             className="serviceFormInput"
             id="giftcertInput"
             type="number"
-            name="gift certificate"
-            aria-label="gift certificate"
+            name="giftCert"
+            aria-label="giftCert"
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+            inputMode="decimal"
             value={formValues.giftCert}
             onChange={handleInputChange}
           />
