@@ -7,3 +7,41 @@
     margin: 1rem;
     border-bottom: 1px solid black;
   }
+
+  .serviceForm, .dropForm {
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+  }
+
+  .labelName {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .serviceFormInput, .dropFormInput {
+    margin: .5rem;
+    padding: .5rem;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    width: 480px;
+  }
+
+  #cashInput, #creditInput, #depositInput, #giftcertInput {
+    width: 150px;
+  }
+
+  #addService:hover {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+  }
+
+  #submitDrop {
+    color: white;
+    background-color: black;
+    margin: 1rem;
+    width: 600px;
+    cursor: pointer;
+  }
