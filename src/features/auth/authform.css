@@ -1,0 +1,43 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginInputSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 600px;
+}
+
+.labelName {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.loginFormInput {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+  width: 480px;
+}
+
+.authAction{
+    color: white;
+    background-color: black;
+    margin: 1rem;
+    width: 600px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 586px) {
+     .loginForm, .loginInputSection, .loginFormInput, .authAction {
+        width: 95%;
+    }
+  }
+
+

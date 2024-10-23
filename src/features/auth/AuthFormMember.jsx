@@ -17,6 +17,8 @@ export default function AuthFormMember() {
 
   // Controlled form fields
   const [username, setUsername] = useState("");
+  const [business, setBusiness] = useState("");
+  const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
@@ -31,7 +33,7 @@ export default function AuthFormMember() {
     evt.preventDefault();
 
     const authMethod = isLogin ? login : register;
-    const credentials = { name, username, password };
+    const credentials = { name, username, business, password };
 
     // We don't want to navigate if there's an error.
     // `unwrap` will throw an error if there is one
@@ -46,51 +48,64 @@ export default function AuthFormMember() {
   };
   //create a login in form that reflects user and owner tables
   return (
-    <article className="authForm">
+    <article className="pageSetup">
       <h1>Team Member Portal</h1>
-      <h2 id="loginTitle">{authAction}</h2>
-      <form className="form" onSubmit={attemptAuth}>
-        <div id="authForm">
-          <label className="formName">
-            Name
-            <input
-              className="input"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-            />
-          </label>
-          <label className="formName">
-            Username
-            <input
-              className="input"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              autoComplete="username"
-            />
-          </label>
-          <label className="formName">
-            Password
-            <input
-              className="input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
-          </label>
+      <h2>{authAction}</h2>
+      <form className="loginForm" onSubmit={attemptAuth}>
+        <div className="loginInputSection">
+          <label className="labelName">Name</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            autoComplete="name"
+          />
         </div>
-        <button id="loginButton">{authAction}</button>
+        <div className="loginInputSection">
+          <label className="labelName">Username</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
+          />
+        </div>
+        <div className="loginInputSection">
+          <label className="labelName">Business</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={business}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </div>
+        <div className="loginInputSection">
+          <label className="labelName">Business Code</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={code}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </div>
+        <div className="loginInputSection">
+          <label className="labelName">Password</label>
+          <input
+            className="loginFormInput"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </div>
+        <button className="authAction">{authAction}</button>
       </form>
-      <a id="bottomMessage" onClick={() => setIsLogin(!isLogin)}>
-        {altCopy}
-      </a>
-
-      {(loginLoading || registerLoading) && (
-        <p id="waitMessage">Please wait...</p>
-      )}
+      <a onClick={() => setIsLogin(!isLogin)}>{altCopy}</a>
+      {(loginLoading || registerLoading) && <p>Please wait...</p>}
       {loginError && <p role="alert">{loginError}</p>}
       {registerError && <p role="alert">{registerError}</p>}
     </article>

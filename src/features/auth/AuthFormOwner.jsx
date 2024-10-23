@@ -46,51 +46,44 @@ export default function AuthFormOwner() {
   };
   //create a login in form that reflects user and owner tables
   return (
-    <article className="authForm">
+    <article className="pageSetup">
       <h1>Owner Portal</h1>
-      <h2 id="loginTitle">{authAction}</h2>
-      <form className="form" onSubmit={attemptAuth}>
-        <div id="authForm">
-          <label className="formName">
-            Name
-            <input
-              className="input"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-            />
-          </label>
-          <label className="formName">
-            Username
-            <input
-              className="input"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              autoComplete="username"
-            />
-          </label>
-          <label className="formName">
-            Password
-            <input
-              className="input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
-          </label>
+      <h2>{authAction}</h2>
+      <form className="loginForm" onSubmit={attemptAuth}>
+        <div className="loginInputSection">
+          <label className="labelName">Name </label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            autoComplete="name"
+          />
         </div>
-        <button id="loginButton">{authAction}</button>
+        <div className="loginInputSection">
+          <label className="labelName">Username</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
+          />
+        </div>
+        <div className="loginInputSection">
+          <label className="labelName">Password</label>
+          <input
+            className="loginFormInput"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </div>
+        <button className="authAction">{authAction}</button>
       </form>
-      <a id="bottomMessage" onClick={() => setIsLogin(!isLogin)}>
-        {altCopy}
-      </a>
-
-      {(loginLoading || registerLoading) && (
-        <p id="waitMessage">Please wait...</p>
-      )}
+      <a onClick={() => setIsLogin(!isLogin)}>{altCopy}</a>
+      {(loginLoading || registerLoading) && <p>Please wait...</p>}
       {loginError && <p role="alert">{loginError}</p>}
       {registerError && <p role="alert">{registerError}</p>}
     </article>
