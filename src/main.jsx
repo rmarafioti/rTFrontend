@@ -5,9 +5,9 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Root from "./layout/Root";
+import Home from "./features/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
-import Dashboard from "./features/Dashboard";
 
 import "./index.css";
 
@@ -16,9 +16,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     children: [
-      { path: "/", element: <Dashboard /> },
+      { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
-      { path: "/authteammember", element: <AuthFormMember /> },
+      { path: "/authmember", element: <AuthFormMember /> },
+      /*{ path: "/dashboardermember/"}, element:*/
     ],
   },
 ]);
