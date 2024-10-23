@@ -5,13 +5,13 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Root from "./layout/Root";
-import Home from "./features/Home";
+import Home from "./layout/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
-import CreateBusiness from "./features/CreateBusiness";
-import DashboardOwner from "./features/DashboardOwner";
+import CreateBusiness from "./features/owner/CreateBusiness";
+import DashboardOwner from "./features/owner/DashboardOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
-import DashboardMember from "./features/DashboardMember";
-import MemberDrop from "./features/MemberDrop";
+import DashboardMember from "./features/members/DashboardMember";
+import MemberDrop from "./features/members/MemberDrop";
 
 import "./index.css";
 

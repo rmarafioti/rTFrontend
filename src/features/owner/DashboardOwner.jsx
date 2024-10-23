@@ -1,4 +1,4 @@
-import "../styling/mainStyles.css";
+import "../../styling/mainStyles.css";
 
 export default function DashboardOwner() {
   return (

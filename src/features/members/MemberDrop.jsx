@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import Drop from "../components/Drop";
+import Drop from "../../components/Drop";
 
-import "../styling/mainStyles.css";
+import "../../styling/mainStyles.css";
 
 export default function MemberDrop() {
   return (

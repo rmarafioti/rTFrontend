@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import "../styling/mainStyles.css";
+import "../../styling/mainStyles.css";
 
 export default function Dashboard() {
   return (
