@@ -1,7 +1,11 @@
+import { NavLink } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <nav className="pageSetup" id="navbar">
-      <h1>Navbar</h1>
+      <NavLink to={`/`}>
+        <h1>Right Track Bookkeeping</h1>
+      </NavLink>
     </nav>
   );
 }

@@ -21,10 +21,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
+      { path: "/ownerdashboard/", element: <DashboardOwner /> },
       { path: "/authmember", element: <AuthFormMember /> },
-      { path: "/dashboardmember/", element: <DashboardMember /> },
+      { path: "/memberdashboard/", element: <DashboardMember /> },
       { path: "/memberdrop/", element: <MemberDrop /> },
-      { path: "/dashboardowner/", element: <DashboardOwner /> },
     ],
   },
 ]);
