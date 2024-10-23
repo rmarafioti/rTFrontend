@@ -1,3 +1,5 @@
+import Drop from "../components/Drop";
+
 import "../styling/mainStyles.css";
 
 export default function Dashboard() {
@@ -8,6 +10,7 @@ export default function Dashboard() {
       <p>
         an app for business owners to track funds and streamline bookkeeping
       </p>
+      <Drop />
     </article>
   );
 }
