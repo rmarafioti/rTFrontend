@@ -8,6 +8,9 @@ import Root from "./layout/Root";
 import Home from "./features/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
+import DashboardMember from "./features/DashboardMember";
+import MemberDrop from "./features/MemberDrop";
+import DashboardOwner from "./features/DashboardOwner";
 
 import "./index.css";
 
@@ -19,7 +22,9 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
       { path: "/authmember", element: <AuthFormMember /> },
-      /*{ path: "/dashboardermember/"}, element:*/
+      { path: "/dashboardmember/", element: <DashboardMember /> },
+      { path: "/memberdrop/", element: <MemberDrop /> },
+      { path: "/dashboardowner/", element: <DashboardOwner /> },
     ],
   },
 ]);

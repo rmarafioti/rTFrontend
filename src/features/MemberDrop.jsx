@@ -2,11 +2,11 @@ import Drop from "../components/Drop";
 
 import "../styling/mainStyles.css";
 
-export default function Dashboard() {
+export default function MemberDrop() {
   return (
     <article className="pageSetup">
-      <h2>Member Dashboard</h2>
-      <p>submit a drop</p>
+      <h2>Sumbit your daily drop</h2>
+      <Drop />
     </article>
   );
 }
