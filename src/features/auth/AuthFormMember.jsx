@@ -17,6 +17,8 @@ export default function AuthFormMember() {
 
   // Controlled form fields
   const [username, setUsername] = useState("");
+  const [business, setBusiness] = useState("");
+  const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
@@ -31,7 +33,7 @@ export default function AuthFormMember() {
     evt.preventDefault();
 
     const authMethod = isLogin ? login : register;
-    const credentials = { name, username, password };
+    const credentials = { name, username, business, password };
 
     // We don't want to navigate if there's an error.
     // `unwrap` will throw an error if there is one
@@ -68,6 +70,26 @@ export default function AuthFormMember() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
+          />
+        </div>
+        <div className="loginInputSection">
+          <label className="labelName">Business</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={business}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </div>
+        <div className="loginInputSection">
+          <label className="labelName">Business Code</label>
+          <input
+            className="loginFormInput"
+            type="text"
+            value={code}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
         </div>
         <div className="loginInputSection">

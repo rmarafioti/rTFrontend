@@ -7,10 +7,11 @@ import store from "./store";
 import Root from "./layout/Root";
 import Home from "./features/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
+import CreateBusiness from "./features/CreateBusiness";
+import DashboardOwner from "./features/DashboardOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
 import DashboardMember from "./features/DashboardMember";
 import MemberDrop from "./features/MemberDrop";
-import DashboardOwner from "./features/DashboardOwner";
 
 import "./index.css";
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
+      { path: "/createbusiness", element: <CreateBusiness /> },
       { path: "/ownerdashboard/", element: <DashboardOwner /> },
       { path: "/authmember", element: <AuthFormMember /> },
       { path: "/memberdashboard/", element: <DashboardMember /> },
