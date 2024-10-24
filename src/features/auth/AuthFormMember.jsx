@@ -60,6 +60,7 @@ export default function AuthFormMember() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
+            required
           />
         </div>
         <div className="loginInputSection">
@@ -70,6 +71,7 @@ export default function AuthFormMember() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
+            required
           />
         </div>
         <div className="loginInputSection">
@@ -90,6 +92,7 @@ export default function AuthFormMember() {
             value={code}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
+            required
           />
         </div>
         <div className="loginInputSection">
@@ -100,6 +103,7 @@ export default function AuthFormMember() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
+            required
           />
         </div>
         <button className="authAction">{authAction}</button>

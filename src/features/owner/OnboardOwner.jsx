@@ -1,12 +1,13 @@
 export default function OnboardOwner() {
   return (
-    <article>
-      <h1>Create your business</h1>
-      <form>
-        <label>Business Name:</label>
-        <input></input>
-        <label>Business Code:</label>
-        <input></input>
+    <article className="pageSetup">
+      <h1>Enter your business information</h1>
+      <form className="loginForm">
+        <label className="labelName">Business Name:</label>
+        <input className="loginFormInput" type="text" required />
+        <label className="labelName">Business Code:</label>
+        <input className="loginFormInput" type="text" required />
+        <button className="authAction">Create Business</button>
       </form>
     </article>
   );
