@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TattooCard from "./TattooCard";
+import ServiceCard from "./ServiceCard";
 
 import styles from "../styling/drop.module.css";
 
@@ -84,7 +84,7 @@ export default function Drop() {
           name="drop_date"
           aria-label="drop_date"
         />
-        <TattooCard
+        <ServiceCard
           addedService={addedService}
           setAddedService={setAddedService}
         />
