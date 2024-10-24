@@ -7,9 +7,10 @@ import store from "./store";
 import Root from "./layout/Root";
 import Home from "./layout/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
-import CreateBusiness from "./features/owner/CreateBusiness";
+import OnboardOwner from "./features/owner/OnboardOwner";
 import DashboardOwner from "./features/owner/DashboardOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
+import OnboardMember from "./features/members/OnboardMember";
 import DashboardMember from "./features/members/DashboardMember";
 import MemberDrop from "./features/members/MemberDrop";
 
@@ -22,9 +23,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
-      { path: "/createbusiness", element: <CreateBusiness /> },
+      { path: "/owneronboard/", element: <OnboardOwner /> },
       { path: "/ownerdashboard/", element: <DashboardOwner /> },
       { path: "/authmember", element: <AuthFormMember /> },
+      { path: "/memberonboard/", element: <OnboardMember /> },
       { path: "/memberdashboard/", element: <DashboardMember /> },
       { path: "/memberdrop/", element: <MemberDrop /> },
     ],

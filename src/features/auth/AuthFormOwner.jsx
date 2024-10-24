@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation, useRegisterMutation } from "./authSlice";
 
-import "./authform.css";
+import styles from "./authforms.module.css";
 
 /** This form allows users to register or log in. */
 export default function AuthFormOwner() {
@@ -49,38 +49,38 @@ export default function AuthFormOwner() {
     <article className="pageSetup">
       <h1>Owner Portal</h1>
       <h2>{authAction}</h2>
-      <form className="loginForm" onSubmit={attemptAuth}>
-        <div className="loginInputSection">
-          <label className="labelName">Name </label>
+      <form className={styles.loginForm} onSubmit={attemptAuth}>
+        <div className={styles.loginInputSection}>
+          <label className={styles.labelName}>Name </label>
           <input
-            className="loginFormInput"
+            className={styles.loginFormInput}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
           />
         </div>
-        <div className="loginInputSection">
-          <label className="labelName">Username</label>
+        <div className={styles.loginInputSection}>
+          <label className={styles.labelName}>Username</label>
           <input
-            className="loginFormInput"
+            className={styles.loginFormInput}
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
           />
         </div>
-        <div className="loginInputSection">
-          <label className="labelName">Password</label>
+        <div className={styles.loginInputSection}>
+          <label className={styles.labelName}>Password</label>
           <input
-            className="loginFormInput"
+            className={styles.loginFormInput}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
         </div>
-        <button className="authAction">{authAction}</button>
+        <button className={styles.authAction}>{authAction}</button>
       </form>
       <a onClick={() => setIsLogin(!isLogin)}>{altCopy}</a>
       {(loginLoading || registerLoading) && <p>Please wait...</p>}

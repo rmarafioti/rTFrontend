@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-//we have a serviceInput and addedService
 
-// serviceInput is an object:
+import styles from "../styling/serviceCard.module.css";
 
-export default function TattooCard({ addedService, setAddedService }) {
+export default function ServiceCard({ addedService, setAddedService }) {
   // create a variable named serviceInput which is a object of key value pairs the users will input values to via the service form
   const serviceInput = {
     description: "",
@@ -76,15 +75,15 @@ export default function TattooCard({ addedService, setAddedService }) {
   return (
     <article className="pageSetup">
       <h1>Service</h1>
-      <form className="serviceForm">
-        <label className="labelName">
+      <form className={styles.serviceForm}>
+        <label className={styles.labelName}>
           Description:{" "}
           {validationError.description && (
             <p>*please enter a name for this service</p>
           )}
         </label>
         <input
-          className="serviceFormInput"
+          className={styles.serviceFormInput}
           type="text"
           name="description"
           aria-label="service description"
@@ -92,11 +91,11 @@ export default function TattooCard({ addedService, setAddedService }) {
           onChange={handleInputChange}
           required
         />
-        <div className="serviceFormSection">
-          <label className="labelName">Cash: </label>
+        <div className={styles.serviceFormSection}>
+          <label className={styles.labelName}>Cash: </label>
           <input
-            className="serviceFormInput"
-            id="cashInput"
+            className={styles.serviceFormInput}
+            id={styles.cashInput}
             type="number"
             name="cash"
             aria-label="cash amount"
@@ -107,10 +106,10 @@ export default function TattooCard({ addedService, setAddedService }) {
             value={formValues.cash}
             onChange={handleInputChange}
           />
-          <label className="labelName">Credit: </label>
+          <label className={styles.labelName}>Credit: </label>
           <input
-            className="serviceFormInput"
-            id="creditInput"
+            className={styles.serviceFormInput}
+            id={styles.creditInput}
             type="number"
             name="credit"
             aria-label="credit amount"
@@ -122,11 +121,11 @@ export default function TattooCard({ addedService, setAddedService }) {
             onChange={handleInputChange}
           />
         </div>
-        <div className="serviceFormSection">
-          <label className="labelName">Deposit: </label>
+        <div className={styles.serviceFormSection}>
+          <label className={styles.labelName}>Deposit: </label>
           <input
-            className="serviceFormInput"
-            id="depositInput"
+            className={styles.serviceFormInput}
+            id={styles.depositInput}
             type="number"
             name="deposit"
             aria-label="deposit"
@@ -137,10 +136,10 @@ export default function TattooCard({ addedService, setAddedService }) {
             value={formValues.deposit}
             onChange={handleInputChange}
           />
-          <label className="labelName">Gift Certificate: </label>
+          <label className={styles.labelName}>Gift Certificate: </label>
           <input
-            className="serviceFormInput"
-            id="giftcertInput"
+            className={styles.serviceFormInput}
+            id={styles.giftcertInput}
             type="number"
             name="giftCert"
             aria-label="giftCert"
@@ -153,8 +152,8 @@ export default function TattooCard({ addedService, setAddedService }) {
           />
         </div>
         <button
-          className="serviceFormInput"
-          id="addService"
+          className={styles.serviceFormInput}
+          id={styles.addService}
           aria-label="form_submit"
           onClick={addService}
         >

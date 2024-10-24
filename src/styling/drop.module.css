@@ -1,0 +1,57 @@
+.dropForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropFormInput {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+  width: 480px;
+}
+
+.labelName {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.totalsSection {
+  margin-bottom: 4rem;
+}
+
+.totalServices,
+.dropTotal,
+.percentageTotals,
+.cutTotals {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/*#submitDrop {
+    color: white;
+    background-color: black;
+    margin: 1rem;
+    width: 600px;
+    cursor: pointer;
+  }*/
+
+@media (max-width: 586px) {
+  .dropForm,
+  .dropFormInput {
+    width: 100%;
+  }
+  .dropForm {
+    width: 90%;
+  }
+  .totalServices,
+  .dropTotal,
+  .percentageTotals,
+  .cutTotals {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
