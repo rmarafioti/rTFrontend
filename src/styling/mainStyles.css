@@ -13,20 +13,10 @@
     width: 100vw;
   }
 
-  .serviceForm, .dropForm {
+  .serviceForm {
     display: flex;
     flex-direction: column;
    align-items: center;
-  }
-
-  .totalsSection {
-    margin-bottom: 4rem;
-  }
-
-  .totalServices, .dropTotal, .percentageTotals, .cutTotals {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
   }
 
   .labelName {
@@ -34,7 +24,7 @@
     font-weight: bold;
   }
 
-  .serviceFormInput, .dropFormInput {
+  .serviceFormInput {
     margin: .5rem;
     padding: .5rem;
     font-size: 18px;
@@ -69,16 +59,8 @@
   }*/
 
   @media (max-width: 586px) {
-    .pageSetup, #footer, #navbar, .serviceFormInput, .dropForm, .dropFormInput,  #cashInput, #creditInput, #depositInput, #giftcertInput, .serviceForm, .serviceFormSection {
+    .pageSetup, #footer, #navbar, .serviceFormInput, #cashInput, #creditInput, #depositInput, #giftcertInput, .serviceForm, .serviceFormSection {
       width: 100%;
     }
 
-    .dropForm {
-      width: 90%
-    }
-  
-    .totalServices, .dropTotal, .percentageTotals, .cutTotals {
-      flex-direction: column;
-      justify-content: center;
-    }
   }

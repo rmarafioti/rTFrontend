@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import TattooCard from "./TattooCard";
 
+import styles from "../styling/drop.module.css";
+
 /**
  *
  * @returns the drop section of the application where a team member can enter in their services
@@ -74,10 +76,10 @@ export default function Drop() {
   return (
     <article className="pageSetup">
       <p>the main section where the user will enter their daily drop</p>
-      <form className="dropForm">
-        <label className="labelName">Date:</label>
+      <form className={styles.dropForm}>
+        <label className={styles.labelName}>Date:</label>
         <input
-          className="dropFormInput"
+          className={styles.dropFormInput}
           type="date"
           name="drop_date"
           aria-label="drop_date"
@@ -96,25 +98,25 @@ export default function Drop() {
           aria-label="form_submit"
         />*/}
       </form>
-      <section className="totalsSection">
-        <div className="totalServices">
+      <section className={styles.totalsSection}>
+        <div className={styles.totalServices}>
           <h2>Sevice Totals:</h2>
           <p>Cash: ${serviceTotals.cash}</p>
           <p>Credit: ${serviceTotals.credit}</p>
           <p>Deposit: ${serviceTotals.deposit}</p>
           <p>Gift Certificate: ${serviceTotals.giftCert}</p>
         </div>
-        <div className="dropTotal">
+        <div className={styles.dropTotal}>
           <h2>Drop Total:</h2>
           <p>${fullTotal}</p>
         </div>
-        <div className="percentageTotals">
+        <div className={styles.percentageTotals}>
           <h2>Your Total:</h2>
           <p>${yourTotal}</p>
           <h2>Shop Total:</h2>
           <p>${shopTotal}</p>
         </div>
-        <div className="cutTotals">
+        <div className={styles.cutTotals}>
           <h2>Shop Owes:</h2>
           <p>${shopOwesTotal}</p>
           <h2>You Owe The Shop:</h2>

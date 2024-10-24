@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation, useRegisterMutation } from "./authSlice";
 
-import styles from "./authform.module.css";
+import styles from "./authforms.module.css";
 
 /** This form allows users to register or log in. */
 export default function AuthFormOwner() {
