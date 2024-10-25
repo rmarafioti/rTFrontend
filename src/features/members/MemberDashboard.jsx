@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import "../../styling/mainStyles.css";
 
-export default function Dashboard() {
+export default function MemberDashboard() {
   return (
     <article className="pageSetup">
       <h1>Member Dashboard</h1>
