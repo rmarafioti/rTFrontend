@@ -9,6 +9,7 @@ import Home from "./layout/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
 import OnboardOwner from "./features/owner/OnboardOwner";
 import DashboardOwner from "./features/owner/DashboardOwner";
+import OwnerHandleDrops from "./features/owner/OwnerHandleDrops";
 import AuthFormMember from "./features/auth/AuthFormMember";
 import OnboardMember from "./features/members/OnboardMember";
 import DashboardMember from "./features/members/DashboardMember";
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/authowner", element: <AuthFormOwner /> },
       { path: "/owneronboard/", element: <OnboardOwner /> },
       { path: "/ownerdashboard/", element: <DashboardOwner /> },
+      { path: "/ownerhandledrops/", element: <OwnerHandleDrops /> },
       { path: "/authmember", element: <AuthFormMember /> },
       { path: "/memberonboard/", element: <OnboardMember /> },
       { path: "/memberdashboard/", element: <DashboardMember /> },
