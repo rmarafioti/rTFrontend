@@ -1,6 +1,6 @@
 import "../../styling/mainStyles.css";
 
-export default function DashboardOwner() {
+export default function OwnerDashboard() {
   return (
     <article className="pageSetup">
       <h1>Owner Dashboard</h1>

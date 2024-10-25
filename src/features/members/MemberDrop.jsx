@@ -1,17 +1,11 @@
-import { Link } from "react-router-dom";
-
-import Drop from "../../components/Drop";
-
-import "../../styling/mainStyles.css";
-
 export default function MemberDrop() {
   return (
     <article className="pageSetup">
-      <h2>Enter your daily drop</h2>
-      <Drop />
-      <Link to={`/memberdashboard`}>
-        <button>Submit your drop</button>
-      </Link>
+      <h1>Member Drop</h1>
+      <p>
+        Team Member individual drop by id including a list of services rendered
+        for that day
+      </p>
     </article>
   );
 }

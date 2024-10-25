@@ -53,7 +53,7 @@ export default function AuthFormMember() {
       <h2>{authAction}</h2>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
-          <label className="labelName">Name</label>
+          <label className={styles.labelName}>Name</label>
           <input
             className={styles.loginFormInput}
             type="text"
@@ -96,7 +96,7 @@ export default function AuthFormMember() {
           />
         </div>
         <div className={styles.loginInputSection}>
-          <label className="labelName">Password</label>
+          <label className={styles.labelName}>Password</label>
           <input
             className={styles.loginFormInput}
             type="password"

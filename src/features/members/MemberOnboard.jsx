@@ -1,6 +1,6 @@
 import styles from "../../styling/onboardForms.module.css";
 
-export default function OnboardMember() {
+export default function MemberOnboard() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>

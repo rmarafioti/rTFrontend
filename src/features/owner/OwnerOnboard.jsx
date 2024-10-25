@@ -1,6 +1,6 @@
 import styles from "../../styling/onboardForms.module.css";
 
-export default function OnboardOwner() {
+export default function OwnerOnboard() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Enter your business information</h1>
