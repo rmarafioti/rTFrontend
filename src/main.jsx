@@ -2,15 +2,18 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import store from "./store";
 
+import store from "./store";
 import Root from "./layout/Root";
 import Home from "./layout/Home";
+//authentication
 import AuthFormOwner from "./features/auth/AuthFormOwner";
+import AuthFormMember from "./features/auth/AuthFormMember";
+//owner features
 import OwnerOnboard from "./features/owner/OwnerOnboard";
 import OwnerDashboard from "./features/owner/OwnerDashboard";
 import OwnerHandleDrops from "./features/owner/OwnerHandleDrops";
-import AuthFormMember from "./features/auth/AuthFormMember";
+//member features
 import MemberOnboard from "./features/members/MemberOnboard";
 import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
