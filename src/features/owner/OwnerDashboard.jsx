@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../../styling/mainStyles.css";
 
 export default function OwnerDashboard() {
@@ -8,7 +10,10 @@ export default function OwnerDashboard() {
         Your Team Members *list team members w/ active route to their profiles
         and indicator that they have current drops*
       </h2>
-      <button>Pay Balance *for each member that has current drops*</button>
+      <Link to={`/memberarchive`}>*Member Archive*</Link>
+      <Link to={`/ownerhandledrops`}>
+        *Pay Balance for each member that has current drops*
+      </Link>
       <h3>Year Take Home Total:</h3>
       {/*possibly in graph form*/}
       <h3>Monthly Totals: *list totals*</h3>
