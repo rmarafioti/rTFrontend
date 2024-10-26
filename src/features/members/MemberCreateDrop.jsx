@@ -9,9 +9,8 @@ export default function MemberCreateDrop() {
     <article className="pageSetup">
       <h2>Enter your daily drop</h2>
       <Drop />
-      <Link to={`/memberdashboard`}>
-        <button>Submit your drop</button>
-      </Link>
+      <Link to={`/memberdashboard`}>Submit your drop</Link>
+      <Link to={`/memberdashboard`}>Back to Dashboard</Link>
     </article>
   );
 }
