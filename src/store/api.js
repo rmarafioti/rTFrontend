@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
  */
 const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "/api",
+    baseUrl: import.meta.env.VITE_API_URL || "/api", // Vite-style env variable
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
