@@ -1,15 +1,57 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useGetMeQuery, useCreateBusinessMutation } from "./ownerSlice";
+
 import styles from "../../styling/onboardForms.module.css";
 
 export default function OwnerOnboard() {
+  const { data: me } = useGetMeQuery();
+  const [createBusiness] = useCreateBusinessMutation();
+  const navigate = useNavigate();
+
+  const [businessName, setBusinessName] = useState("");
+  const [code, setCode] = useState("");
+
+  const businessSumbit = async (e) => {
+    e.preventDefault();
+    if (!me?.id) {
+      console.error("Owner ID is undefined.");
+      return;
+    }
+    try {
+      await createBusiness({
+        businessName,
+        code,
+      }).unwrap();
+      navigate("/ownerdashboard");
+    } catch (error) {
+      console.error("failed to create business:", error);
+    }
+  };
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Enter your business information</h1>
       <form className={styles.loginForm}>
         <label className={styles.labelName}>Business Name:</label>
-        <input className={styles.formInput} type="text" required />
+        <input
+          className={styles.formInput}
+          type="text"
+          value={businessName}
+          onChange={(e) => setBusinessName(e.target.value)}
+          required
+        />
         <label className={styles.labelName}>Business Code:</label>
-        <input className={styles.formInput} type="text" required />
-        <button className={styles.formSubmit}>Create Business</button>
+        <input
+          className={styles.formInput}
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          required
+        />
+        <button className={styles.formSubmit} onClick={businessSumbit}>
+          Create Business
+        </button>
       </form>
     </article>
   );
