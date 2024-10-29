@@ -17,10 +17,10 @@ export default function AuthFormMember() {
 
   // Controlled form fields
   const [username, setUsername] = useState("");
-  const [business, setBusiness] = useState("");
-  const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [memberName, setMemberName] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [code, setCode] = useState("");
 
   // Form submission
   const [login, { isLoading: loginLoading, error: loginError }] =
@@ -33,7 +33,7 @@ export default function AuthFormMember() {
     evt.preventDefault();
 
     const authMethod = isLogin ? login : register;
-    const credentials = { name, username, business, password };
+    const credentials = { username, password, memberName, businessName, code };
 
     // We don't want to navigate if there's an error.
     // `unwrap` will throw an error if there is one
@@ -41,12 +41,12 @@ export default function AuthFormMember() {
     try {
       await authMethod(credentials).unwrap();
       //set login naviagtion to proper paths
-      isLogin ? navigate("/account/") : navigate("/topics/");
+      isLogin ? navigate("/memberdashboard/") : navigate("/memberonboard/");
     } catch (err) {
       console.error(err);
     }
   };
-  //create a login in form that reflects user and owner tables
+  //create a login in form that reflects member and owner tables
   return (
     <article className="pageSetup">
       <h1>Team Member Portal</h1>
@@ -57,8 +57,8 @@ export default function AuthFormMember() {
           <input
             className={styles.loginFormInput}
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={memberName}
+            onChange={(e) => setMemberName(e.target.value)}
             autoComplete="name"
             required
           />
@@ -79,8 +79,8 @@ export default function AuthFormMember() {
           <input
             className={styles.loginFormInput}
             type="text"
-            value={business}
-            onChange={(e) => setPassword(e.target.value)}
+            value={businessName}
+            onChange={(e) => setBusinessName(e.target.value)}
             autoComplete="current-password"
           />
         </div>
@@ -90,7 +90,7 @@ export default function AuthFormMember() {
             className={styles.loginFormInput}
             type="text"
             value={code}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setCode(e.target.value)}
             autoComplete="current-password"
             required
           />
