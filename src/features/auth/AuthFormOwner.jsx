@@ -18,7 +18,7 @@ export default function AuthFormOwner() {
   // Controlled form fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
 
   // Form submission
   const [login, { isLoading: loginLoading, error: loginError }] =
@@ -31,7 +31,7 @@ export default function AuthFormOwner() {
     evt.preventDefault();
 
     const authMethod = isLogin ? login : register;
-    const credentials = { name, username, password };
+    const credentials = { username, password, ownerName };
 
     // We don't want to navigate if there's an error.
     // `unwrap` will throw an error if there is one
@@ -39,7 +39,7 @@ export default function AuthFormOwner() {
     try {
       await authMethod(credentials).unwrap();
       //set login naviagtion to proper paths
-      isLogin ? navigate("/account/") : navigate("/topics/");
+      isLogin ? navigate("/ownerdashboard/") : navigate("/owneronboard/");
     } catch (err) {
       console.error(err);
     }
@@ -55,7 +55,7 @@ export default function AuthFormOwner() {
           <input
             className={styles.loginFormInput}
             type="text"
-            value={name}
+            value={ownerName}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
           />
