@@ -4,6 +4,7 @@ import api from "../../store/api";
 /** Authentication endpoints */
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    // owner registration
     register: builder.mutation({
       query: (credentials) => ({
         url: "/auth/owner/register",
@@ -12,6 +13,16 @@ const authApi = api.injectEndpoints({
       }),
       transformErrorResponse: (response) => response.data,
     }),
+    // member registration
+    registerMember: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/member/register",
+        method: "POST",
+        body: credentials,
+      }),
+      transformErrorResponse: (response) => response.data,
+    }),
+    //owner login
     login: builder.mutation({
       query: (credentials) => ({
         url: "/auth/owner/login",
@@ -20,10 +31,24 @@ const authApi = api.injectEndpoints({
       }),
       transformErrorResponse: (response) => response.data,
     }),
+    //member login
+    loginMember: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/member/login",
+        method: "POST",
+        body: credentials,
+      }),
+      transformErrorResponse: (response) => response.data,
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApi;
+export const {
+  useRegisterMutation,
+  useRegisterMemberMutation,
+  useLoginMutation,
+  useLoginMemberMutation,
+} = authApi;
 
 /** Session storage key for auth token */
 const TOKEN_KEY = "token";

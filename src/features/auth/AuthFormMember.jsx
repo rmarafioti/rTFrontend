@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation } from "./authSlice";
+import { useRegisterMemberMutation, useLoginMemberMutation } from "./authSlice";
 
 import styles from "./authforms.module.css";
 
@@ -24,9 +24,9 @@ export default function AuthFormMember() {
 
   // Form submission
   const [login, { isLoading: loginLoading, error: loginError }] =
-    useLoginMutation();
+    useLoginMemberMutation();
   const [register, { isLoading: registerLoading, error: registerError }] =
-    useRegisterMutation();
+    useRegisterMemberMutation();
 
   /** Send the requested authentication action to the API */
   const attemptAuth = async (evt) => {
