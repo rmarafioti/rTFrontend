@@ -81,7 +81,7 @@ export default function AuthFormMember() {
             type="text"
             value={businessName}
             onChange={(e) => setBusinessName(e.target.value)}
-            autoComplete="current-password"
+            /*autoComplete="current-password"*/
           />
         </div>
         <div className={styles.loginInputSection}>
@@ -91,7 +91,7 @@ export default function AuthFormMember() {
             type="text"
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            autoComplete="current-password"
+            /*autoComplete="current-password"*/
             required
           />
         </div>
@@ -106,12 +106,23 @@ export default function AuthFormMember() {
             required
           />
         </div>
-        <button className={styles.authAction}>{authAction}</button>
+        <button
+          className={styles.authAction}
+          disabled={loginLoading || registerLoading}
+        >
+          {loginLoading || registerLoading ? "Please wait..." : authAction}
+        </button>
       </form>
       <a onClick={() => setIsLogin(!isLogin)}>{altCopy}</a>
       {(loginLoading || registerLoading) && <p>Please wait...</p>}
-      {loginError && <p role="alert">{loginError}</p>}
-      {registerError && <p role="alert">{registerError}</p>}
+      {loginError && (
+        <p role="alert">{loginError.data?.message || "Login failed"}</p>
+      )}
+      {registerError && (
+        <p role="alert">
+          {registerError.data?.message || "Registration failed"}
+        </p>
+      )}
     </article>
   );
 }

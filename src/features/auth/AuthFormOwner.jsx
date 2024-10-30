@@ -84,7 +84,6 @@ export default function AuthFormOwner() {
           className={styles.authAction}
           disabled={loginLoading || registerLoading}
         >
-          {" "}
           {loginLoading || registerLoading ? "Please wait..." : authAction}
         </button>
       </form>
