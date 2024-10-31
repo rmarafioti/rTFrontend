@@ -4,7 +4,7 @@ import { useRegisterMemberMutation } from "./authSlice";
 
 import styles from "./authforms.module.css";
 
-export default function MemberRegisterForm() {
+export default function MemberRegister() {
   const navigate = useNavigate();
   const [register, { isLoading, error }] = useRegisterMemberMutation();
 

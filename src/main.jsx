@@ -8,7 +8,7 @@ import Root from "./layout/Root";
 import Home from "./layout/Home";
 //authentication
 import AuthFormOwner from "./features/auth/AuthFormOwner";
-import MemberLogin from "./features/auth/MemberLogin";
+import MemberAuthWrapper from "./features/auth/MemberAuthWrapper";
 //owner features
 import OwnerOnboard from "./features/owner/OwnerOnboard";
 import OwnerDashboard from "./features/owner/OwnerDashboard";
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       { path: "/owneronboard/", element: <OwnerOnboard /> },
       { path: "/ownerdashboard/", element: <OwnerDashboard /> },
       { path: "/ownerhandledrops/", element: <OwnerHandleDrops /> },
-      { path: "/authmember", element: <MemberLogin /> },
+      { path: "/authmember", element: <MemberAuthWrapper /> },
       { path: "/memberonboard/", element: <MemberOnboard /> },
       { path: "/memberdashboard/", element: <MemberDashboard /> },
       { path: "/membercreatedrop/", element: <MemberCreateDrop /> },

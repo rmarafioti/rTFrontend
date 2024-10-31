@@ -4,7 +4,7 @@ import { useLoginMemberMutation } from "./authSlice";
 
 import styles from "./authforms.module.css";
 
-export default function AuthFormMember() {
+export default function MemberLogin() {
   const navigate = useNavigate();
   const [login, { isLoading, error }] = useLoginMemberMutation();
 

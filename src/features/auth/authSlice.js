@@ -53,35 +53,63 @@ export const {
 /** Session storage key for auth token */
 const TOKEN_KEY = "token";
 
-/** Reducer that stores payload's token in state and session storage */
-const storeToken = (state, { payload }) => {
+/** Reducer that stores payload's token and user data in state and session storage */
+const storeOwnerToken = (state, { payload }) => {
   state.token = payload.token;
+  state.owner = payload.ownerData; // Adjust if different in response
+  state.member = null; // Clear member data if switching roles
   sessionStorage.setItem(TOKEN_KEY, payload.token);
 };
 
-/** Keeps track of JWT sent from API */
+const storeMemberToken = (state, { payload }) => {
+  state.token = payload.token;
+  state.member = payload.memberData; // Adjust if different in response
+  state.owner = null; // Clear owner data if switching roles
+  sessionStorage.setItem(TOKEN_KEY, payload.token);
+};
+
+/** Auth slice to manage owner and member authentication */
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     token: sessionStorage.getItem(TOKEN_KEY),
+    owner: null,
+    member: null,
   },
   reducers: {
-    /** Logging out means wiping the stored token */
+    /** Logging out clears the token and both user data */
     logout: (state) => {
       state.token = null;
+      state.owner = null;
+      state.member = null;
       sessionStorage.removeItem(TOKEN_KEY);
     },
   },
   extraReducers: (builder) => {
-    // Store token when register or login succeeds
-    builder.addMatcher(api.endpoints.register.matchFulfilled, storeToken);
-    builder.addMatcher(api.endpoints.login.matchFulfilled, storeToken);
+    // Store token and owner data on successful owner registration/login
+    builder.addMatcher(
+      authApi.endpoints.register.matchFulfilled,
+      storeOwnerToken
+    );
+    builder.addMatcher(authApi.endpoints.login.matchFulfilled, storeOwnerToken);
+
+    // Store token and member data on successful member registration/login
+    builder.addMatcher(
+      authApi.endpoints.registerMember.matchFulfilled,
+      storeMemberToken
+    );
+    builder.addMatcher(
+      authApi.endpoints.loginMember.matchFulfilled,
+      storeMemberToken
+    );
   },
 });
 
 export const { logout } = authSlice.actions;
 
+// Selectors to access token, owner, and member states
 export const selectToken = (state) => state.auth.token;
 export const selectCurrentOwner = (state) => state.auth.owner;
+export const selectCurrentMember = (state) => state.auth.member;
 
 export default authSlice.reducer;
