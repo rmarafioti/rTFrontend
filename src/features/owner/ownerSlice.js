@@ -15,6 +15,7 @@ const ownerApi = api.injectEndpoints({
         method: "POST",
         body: { businessName, code },
       }),
+      invalidatesTags: ["owner"],
     }),
   }),
 });
