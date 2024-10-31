@@ -7,13 +7,13 @@ import styles from "../../styling/onboardForms.module.css";
 
 export default function OwnerOnboard() {
   const { data: me } = useGetMeQuery();
-  const [createBusiness] = useCreateBusinessMutation();
+  const [createBusiness, { isLoading }] = useCreateBusinessMutation();
   const navigate = useNavigate();
 
   const [businessName, setBusinessName] = useState("");
   const [code, setCode] = useState("");
 
-  const businessSumbit = async (e) => {
+  const businessSubmit = async (e) => {
     e.preventDefault();
     if (!me?.id) {
       console.error("Owner ID is undefined.");
@@ -32,7 +32,7 @@ export default function OwnerOnboard() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Enter your business information</h1>
-      <form className={styles.loginForm}>
+      <form className={styles.loginForm} onSubmit={businessSubmit}>
         <label className={styles.labelName}>Business Name:</label>
         <input
           className={styles.formInput}
@@ -49,7 +49,7 @@ export default function OwnerOnboard() {
           onChange={(e) => setCode(e.target.value)}
           required
         />
-        <button className={styles.formSubmit} onClick={businessSumbit}>
+        <button className={styles.formSubmit} disabled={isLoading}>
           Create Business
         </button>
       </form>
