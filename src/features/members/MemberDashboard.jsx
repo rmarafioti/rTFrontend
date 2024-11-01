@@ -1,12 +1,26 @@
+import { useGetMemberQuery } from "../../store/api";
 import { Link } from "react-router-dom";
 
 import "../../styling/mainStyles.css";
 
 export default function MemberDashboard() {
+  const { data: member, error, isLoading } = useGetMemberQuery();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <article className="pageSetup">
       <h1>Member Dashboard</h1>
-      <h2>Hello, *member name*</h2>
+      <h2>Hello, {member.memberName}</h2>
+      <p>Phone: {member.phone}</p>
+      <p>Email: {member.email}</p>
+      <p>Your Business: {member.business.businessName}</p>
+      <p>Your Business Code: {member.business.code}</p>
+      <p>Percentage: {member.percentage}</p>
+      <p>Take Home Total: {member.takeHomeTotal}</p>
+      <p>You Owe: {member.totalOwed}</p>
+      <p>Owed to You: {member.totalOwe}</p>
       <h2>You are a member of the *business name* team</h2>
       {/*this will be a fixed active route on the navbar*/}
       <Link to={`/membercreatedrop`}>Create a drop</Link>

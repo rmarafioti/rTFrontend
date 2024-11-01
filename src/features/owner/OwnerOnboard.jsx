@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { useGetMeQuery, useCreateBusinessMutation } from "./ownerSlice";
-
+import { useCreateBusinessMutation, useGetOwnerQuery } from "../../store/api";
 import styles from "../../styling/onboardForms.module.css";
 
 export default function OwnerOnboard() {
-  const { data: me } = useGetMeQuery();
+  const {
+    data: owner,
+    isLoading: ownerLoading,
+    error: ownerError,
+  } = useGetOwnerQuery();
   const [createBusiness, { isLoading }] = useCreateBusinessMutation();
   const navigate = useNavigate();
 
@@ -15,20 +17,25 @@ export default function OwnerOnboard() {
 
   const businessSubmit = async (e) => {
     e.preventDefault();
-    if (!me?.id) {
-      console.error("Owner ID is undefined.");
+    if (!owner || !owner.id) {
+      console.error("Owner ID is undefined or owner data failed to load.");
       return;
     }
     try {
       await createBusiness({
         businessName,
         code,
+        ownerId: owner.id, // Pass owner ID to associate with the business
       }).unwrap();
       navigate("/ownerdashboard");
     } catch (error) {
-      console.error("failed to create business:", error);
+      console.error("Failed to create business:", error);
     }
   };
+
+  if (ownerLoading) return <p>Loading owner data...</p>;
+  if (ownerError) return <p>Error loading owner data: {ownerError.message}</p>;
+
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Enter your business information</h1>
@@ -49,8 +56,11 @@ export default function OwnerOnboard() {
           onChange={(e) => setCode(e.target.value)}
           required
         />
-        <button className={styles.formSubmit} disabled={isLoading}>
-          Create Business
+        <button
+          className={styles.formSubmit}
+          disabled={isLoading || ownerLoading}
+        >
+          {isLoading ? "Creating..." : "Create Business"}
         </button>
       </form>
     </article>

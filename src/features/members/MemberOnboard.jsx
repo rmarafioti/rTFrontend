@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { useGetMeQuery, useLinkBusinessMutation } from "./membersSlice";
-
+import { useLinkMemberToBusinessMutation } from "../../store/api";
 import styles from "../../styling/onboardForms.module.css";
 
 export default function MemberOnboard() {
-  const { data: me } = useGetMeQuery();
-  const [linkBusiness, { isLoading, error }] = useLinkBusinessMutation();
+  const [linkBusiness, { isLoading, isSuccess, isError, error }] =
+    useLinkMemberToBusinessMutation();
   const navigate = useNavigate();
 
   const [businessName, setBusinessName] = useState("");
@@ -15,13 +13,9 @@ export default function MemberOnboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!me?.id) {
-      console.error("Member ID is undefined.");
-      return;
-    }
     try {
       await linkBusiness({ businessName, code }).unwrap();
-      navigate("/memberdashboard"); // Navigate after successful submission
+      navigate("/memberdashboard"); // Navigate after successful linking
     } catch (err) {
       console.error("Failed to link business:", err);
     }
@@ -48,8 +42,19 @@ export default function MemberOnboard() {
           required
         />
         <button className={styles.formSubmit} disabled={isLoading}>
-          Connect to Business
+          {isLoading ? "Connecting..." : "Connect to Business"}
         </button>
+        {isSuccess && (
+          <p className={styles.successMessage}>
+            Successfully linked to business!
+          </p>
+        )}
+        {isError && (
+          <p className={styles.errorMessage}>
+            Error linking to business:{" "}
+            {error?.data?.message || "An error occurred"}
+          </p>
+        )}
       </form>
     </article>
   );
