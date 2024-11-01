@@ -3,11 +3,6 @@ import api from "../../store/api";
 
 const ownerApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    //getMe query to gets the logged in owner
-    getMe: builder.query({
-      query: () => "/owner/me",
-      providesTags: ["owner"],
-    }),
     //owner creates a buisness as part of the register onboarding process
     createBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
@@ -20,4 +15,4 @@ const ownerApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetMeQuery, useCreateBusinessMutation } = ownerApi;
+export const { useCreateBusinessMutation } = ownerApi;

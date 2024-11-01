@@ -50,6 +50,32 @@ const api = createApi({
       }),
       transformErrorResponse: (response) => response.data,
     }),
+    // New endpoint to fetch owner data
+    getOwner: builder.query({
+      query: () => "/owner",
+    }),
+
+    // New endpoint to fetch member data
+    getMember: builder.query({
+      query: () => "/member",
+    }),
+    // New endpoint for owner to create a business
+    createBusiness: builder.mutation({
+      query: ({ businessName, code }) => ({
+        url: `/owner/business`,
+        method: "POST",
+        body: { businessName, code },
+      }),
+      invalidatesTags: ["Owner", "Business"],
+    }),
+    linkMemberToBusiness: builder.mutation({
+      query: ({ businessName, code }) => ({
+        url: `/member/business`,
+        method: "POST",
+        body: { businessName, code },
+      }),
+      invalidatesTags: ["Member"],
+    }),
   }),
 });
 
@@ -58,6 +84,10 @@ export const {
   useLoginOwnerMutation,
   useRegisterMemberMutation,
   useLoginMemberMutation,
+  useGetOwnerQuery,
+  useGetMemberQuery,
+  useCreateBusinessMutation,
+  useLinkMemberToBusinessMutation,
 } = api;
 
 export default api;
