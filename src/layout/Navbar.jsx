@@ -1,13 +1,20 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectToken } from "../features/auth/authSlice";
 import { useEffect } from "react";
+import { logoutOwner, selectOwnerToken } from "../features/auth/authOwnerSlice";
+import {
+  logoutMember,
+  selectMemberToken,
+} from "../features/auth/authMemberSlice";
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const token = useSelector(selectToken);
+  const ownerToken = useSelector(selectOwnerToken);
+  const memberToken = useSelector(selectMemberToken);
+
+  const token = ownerToken || memberToken; // Token is present if either owner or member is logged in
 
   // Log the token to verify its presence after login
   useEffect(() => {
@@ -15,7 +22,11 @@ export default function Navbar() {
   }, [token]);
 
   const handleLogout = async () => {
-    await dispatch(logout());
+    if (ownerToken) {
+      await dispatch(logoutOwner());
+    } else if (memberToken) {
+      await dispatch(logoutMember());
+    }
     navigate("/");
   };
 
