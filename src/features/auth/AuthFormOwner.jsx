@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation } from "./authSlice";
+import { useLoginMutation, useRegisterMutation } from "./authOwnerSlice";
 
 import styles from "./authforms.module.css";
 
