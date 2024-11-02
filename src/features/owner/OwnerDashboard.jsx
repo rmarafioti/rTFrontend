@@ -12,9 +12,9 @@ export default function OwnerDashboard() {
   return (
     <article className="pageSetup">
       <h1>Owner Dashboard</h1>
-      <p>Username: {owner.username}</p>
-      <p>Owner Name: {owner.ownerName}</p>
-      <p>Take Home Total: ${owner.takeHomeTotal}</p>
+      <p>Username: {owner?.username}</p>
+      <p>Owner Name: {owner?.ownerName}</p>
+      <p>Take Home Total: ${owner?.takeHomeTotal}</p>
 
       <h2>
         Your Team Members *list team members w/ active route to their profiles

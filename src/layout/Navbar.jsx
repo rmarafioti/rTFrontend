@@ -14,12 +14,8 @@ export default function Navbar() {
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
-  const token = ownerToken || memberToken; // Token is present if either owner or member is logged in
-
-  // Log the token to verify its presence after login
-  useEffect(() => {
-    console.log("Current token:", token); // This will log whenever `token` changes
-  }, [token]);
+  // Token is present if either owner or member is logged in
+  const token = ownerToken || memberToken;
 
   const handleLogout = async () => {
     if (ownerToken) {
@@ -37,11 +33,23 @@ export default function Navbar() {
       </NavLink>
       <ul>
         {token ? (
-          <li>
-            <a className="navLink" onClick={handleLogout}>
-              Log Out
-            </a>
-          </li>
+          <>
+            {ownerToken && (
+              <li>
+                <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
+              </li>
+            )}
+            {memberToken && (
+              <li>
+                <NavLink to="/memberdashboard">Member Dashboard</NavLink>
+              </li>
+            )}
+            <li>
+              <a className="navLink" onClick={handleLogout}>
+                Log Out
+              </a>
+            </li>
+          </>
         ) : (
           <li>
             <NavLink to="/">Log In</NavLink>

@@ -15,8 +15,8 @@ export default function MemberDashboard() {
       <h2>Hello, {member.memberName}</h2>
       <p>Phone: {member.phone}</p>
       <p>Email: {member.email}</p>
-      <p>Your Business: {member.business.businessName}</p>
-      <p>Your Business Code: {member.business.code}</p>
+      <p>Your Business: {member.business?.businessName}</p>
+      <p>Your Business Code: {member.business?.code}</p>
       <p>Percentage: {member.percentage}</p>
       <p>Take Home Total: {member.takeHomeTotal}</p>
       <p>You Owe: {member.totalOwed}</p>
