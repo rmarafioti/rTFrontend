@@ -7,7 +7,7 @@ import {
 
 import styles from "./authforms.module.css";
 
-/** This form allows users to register or log in. */
+// This form allows users to register or log in.
 export default function AuthFormOwner() {
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export default function AuthFormOwner() {
       console.error(err);
     }
   };
-  //create a login in form that reflects user and owner tables
+
   return (
     <article className="pageSetup">
       <h1>Owner Portal</h1>

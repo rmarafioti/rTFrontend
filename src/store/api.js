@@ -16,7 +16,7 @@ const api = createApi({
     },
   }),
   endpoints: (builder) => ({
-    // Owner endpoints
+    // Owner auth endpoints
     registerOwner: builder.mutation({
       query: (credentials) => ({
         url: "/auth/owner/register",
@@ -33,7 +33,7 @@ const api = createApi({
       }),
       transformErrorResponse: (response) => response.data,
     }),
-    // Member endpoints
+    // Member auth endpoints
     registerMember: builder.mutation({
       query: (credentials) => ({
         url: "/auth/member/register",
@@ -50,16 +50,16 @@ const api = createApi({
       }),
       transformErrorResponse: (response) => response.data,
     }),
-    // New endpoint to fetch owner data
+    // fetch owner data
     getOwner: builder.query({
       query: () => "/owner",
     }),
 
-    // New endpoint to fetch member data
+    // fetch member data
     getMember: builder.query({
       query: () => "/member",
     }),
-    // New endpoint for owner to create a business
+    // owner to create a business
     createBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
         url: `/owner/business`,
@@ -68,6 +68,7 @@ const api = createApi({
       }),
       invalidatesTags: ["Owner", "Business"],
     }),
+    // link member to a business
     linkMemberToBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
         url: `/member/business`,
