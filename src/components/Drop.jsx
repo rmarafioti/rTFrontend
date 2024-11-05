@@ -7,7 +7,13 @@ import styles from "../styling/drop.module.css";
  *
  * @returns the drop section of the application where a team member can enter in their services
  */
-export default function Drop() {
+export default function Drop({ dropId }) {
+  console.log("Received dropId in Drop:", dropId);
+
+  if (!dropId) {
+    console.error("Drop ID is missing in Drop component.");
+    return <p>Error: Drop ID is missing.</p>;
+  }
   const [addedService, setAddedService] = useState([]);
 
   //create a function to track the total of each formValue when a service is added.
@@ -87,6 +93,7 @@ export default function Drop() {
         <ServiceCard
           addedService={addedService}
           setAddedService={setAddedService}
+          dropId={dropId}
         />
         {/*
         keep thsi out until we implement backend routes

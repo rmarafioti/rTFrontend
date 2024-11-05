@@ -3,7 +3,8 @@ import { IoClose } from "react-icons/io5";
 
 import styles from "../styling/serviceCard.module.css";
 
-export default function ServiceCard({ addedService, setAddedService }) {
+export default function ServiceCard({ dropId, addedService, setAddedService }) {
+  console.log("Received dropId in ServiceCard:", dropId);
   // create a variable named serviceInput which is a object of key value pairs the users will input values to via the service form
   const serviceInput = {
     description: "",

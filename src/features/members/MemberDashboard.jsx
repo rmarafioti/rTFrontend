@@ -15,8 +15,14 @@ export default function MemberDashboard() {
   const dropCreateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createDrop().unwrap();
-      navigate("/membercreatedrop/"); // Navigate after successful linking
+      const newDrop = await createDrop().unwrap();
+
+      if (newDrop?.id) {
+        // Correctly pass dropId in the state
+        navigate("/membercreatedrop", { state: { dropId: newDrop.id } });
+      } else {
+        console.error("Failed to create drop: Missing drop ID");
+      }
     } catch (err) {
       console.error("Failed to create drop:", err);
     }
