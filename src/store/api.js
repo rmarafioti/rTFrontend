@@ -99,7 +99,7 @@ const api = createApi({
         method: "POST",
         body: { description, cash, credit, deposit, giftCertAmount },
       }),
-      /*invalidatesTags: ["Member"],*/
+      invalidatesTags: ["Member"],
     }),
 
     // member get all services by id

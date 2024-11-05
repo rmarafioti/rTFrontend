@@ -10,11 +10,6 @@ export default function MemberCreateDrop() {
 
   console.log("Received dropId in MemberCreateDrop:", dropId);
 
-  if (!dropId) {
-    console.error("Drop ID is missing in MemberCreateDrop.");
-    return <p>Error: Drop ID is missing.</p>;
-  }
-
   return (
     <article className="pageSetup">
       <h2>Enter your daily drop</h2>
