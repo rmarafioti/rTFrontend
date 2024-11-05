@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import Drop from "../../components/Drop";
 
 import "../../styling/mainStyles.css";
@@ -7,6 +7,7 @@ import "../../styling/mainStyles.css";
 export default function MemberCreateDrop() {
   const location = useLocation();
   const dropId = location.state?.dropId;
+
   console.log("Received dropId in MemberCreateDrop:", dropId);
 
   if (!dropId) {
