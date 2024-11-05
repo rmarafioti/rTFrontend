@@ -85,6 +85,55 @@ const api = createApi({
       }),
       invalidatesTags: ["Member"],
     }),
+    // member create a service
+    memberCreateService: builder.mutation({
+      query: ({
+        dropId,
+        description,
+        cash,
+        credit,
+        deposit,
+        giftCertAmount,
+      }) => ({
+        url: `/member/createservice/${dropId}`, // use dropId from the function call
+        method: "POST",
+        body: { description, cash, credit, deposit, giftCertAmount },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member get all services by id
+    memberGetDropServices: builder.query({
+      query: (drop_id) => ({
+        url: `/member/allservices/` + drop_id,
+        method: "GET",
+      }),
+      providesTags: ["Member"],
+    }),
+    //member delete service
+    memberDeleteService: builder.mutation({
+      query: (service_id) => ({
+        url: `/member/deleteservice/` + service_id,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Member"],
+    }),
+    // member edit service
+    memberEditService: builder.mutation({
+      query: ({
+        service_id,
+        description,
+        cash,
+        credit,
+        deposit,
+        giftCertAmount,
+      }) => ({
+        url: `/member/updateservice/${service_id}`,
+        method: "PATCH",
+        body: { description, cash, credit, deposit, giftCertAmount },
+      }),
+      invalidatesTags: ["Member"],
+    }),
   }),
 });
 
@@ -98,6 +147,10 @@ export const {
   useCreateBusinessMutation,
   useLinkMemberToBusinessMutation,
   useMemberCreateDropMutation,
+  useMemberCreateServiceMutation,
+  useMemberGetDropServicesQuery,
+  useMemberEditServiceMutation,
+  useMemberDeleteServiceMutation,
 } = api;
 
 export default api;
