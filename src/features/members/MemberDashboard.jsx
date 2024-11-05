@@ -1,10 +1,26 @@
-import { useGetMemberQuery } from "../../store/api";
+import { useNavigate } from "react-router-dom";
+import {
+  useGetMemberQuery,
+  useMemberCreateDropMutation,
+} from "../../store/api";
 import { Link } from "react-router-dom";
 
 import "../../styling/mainStyles.css";
 
 export default function MemberDashboard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
+  const [createDrop] = useMemberCreateDropMutation();
+  const navigate = useNavigate();
+
+  const dropCreateSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createDrop().unwrap();
+      navigate("/membercreatedrop/"); // Navigate after successful linking
+    } catch (err) {
+      console.error("Failed to create drop:", err);
+    }
+  };
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -30,7 +46,7 @@ export default function MemberDashboard() {
       <h1>Member Dashboard</h1>
       <MemberCard />
       {/*this will be a fixed active route on the navbar*/}
-      <Link to={`/membercreatedrop`}>Create a drop</Link>
+      <button onClick={dropCreateSubmit}>Create a drop</button>
       {/*possibly in graph form*/}
       <h3>Monthly Totals: *list totals*</h3>
       <h3>Current Drops: *list by date / link to individul drop's page*</h3>

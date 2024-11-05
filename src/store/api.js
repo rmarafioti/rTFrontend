@@ -77,6 +77,14 @@ const api = createApi({
       }),
       invalidatesTags: ["Member"],
     }),
+    // member create drop
+    memberCreateDrop: builder.mutation({
+      query: () => ({
+        url: `/member/createdrop`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Member"],
+    }),
   }),
 });
 
@@ -89,6 +97,7 @@ export const {
   useGetMemberQuery,
   useCreateBusinessMutation,
   useLinkMemberToBusinessMutation,
+  useMemberCreateDropMutation,
 } = api;
 
 export default api;
