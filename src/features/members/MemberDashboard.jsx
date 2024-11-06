@@ -69,7 +69,7 @@ export default function MemberDashboard() {
       <h3>Monthly Totals: *list totals*</h3>
 
       {/* edit drop functionality will be located on the member drop page instead of here */}
-      <Link to={`/membereditdrops`}>Edit Drops</Link>
+      {/*<Link to={`/membereditdrops`}>Edit Drops</Link>*/}
       {/* active link to navigate a team member to all drops where paid = true*/}
       <Link to={`/memberarchive`}>Your Archived Drops</Link>
     </article>
