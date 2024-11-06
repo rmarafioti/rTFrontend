@@ -68,6 +68,7 @@ const api = createApi({
       }),
       invalidatesTags: ["Owner", "Business"],
     }),
+
     // link member to a business
     linkMemberToBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
@@ -77,6 +78,7 @@ const api = createApi({
       }),
       invalidatesTags: ["Member"],
     }),
+
     // member create drop
     memberCreateDrop: builder.mutation({
       query: () => ({
@@ -85,6 +87,32 @@ const api = createApi({
       }),
       invalidatesTags: ["Member"],
     }),
+
+    // member update a drop
+    memberUpdateDrop: builder.mutation({
+      query: ({
+        dropId,
+        date,
+        total,
+        memberCut,
+        businessCut,
+        memberOwes,
+        businessOwes,
+      }) => ({
+        url: `/member/updatedrop/${dropId}`,
+        method: "POST",
+        body: {
+          date,
+          total,
+          memberCut,
+          businessCut,
+          memberOwes,
+          businessOwes,
+        },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
     // member create a service
     memberCreateService: builder.mutation({
       query: ({
@@ -110,6 +138,7 @@ const api = createApi({
       }),
       providesTags: ["Member"],
     }),
+
     //member delete service
     memberDeleteService: builder.mutation({
       query: (service_id) => ({
@@ -118,6 +147,7 @@ const api = createApi({
       }),
       invalidatesTags: ["Member"],
     }),
+
     // member edit service
     memberEditService: builder.mutation({
       query: ({
@@ -147,6 +177,7 @@ export const {
   useCreateBusinessMutation,
   useLinkMemberToBusinessMutation,
   useMemberCreateDropMutation,
+  useMemberUpdateDropMutation,
   useMemberCreateServiceMutation,
   useMemberGetDropServicesQuery,
   useMemberEditServiceMutation,

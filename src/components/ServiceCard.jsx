@@ -42,7 +42,7 @@ export default function ServiceCard({ addedService, setAddedService }) {
   return (
     <article className="pageSetup">
       <h1>Service</h1>
-      <form className={styles.serviceForm}>
+      <section className={styles.serviceForm}>
         <label className={styles.labelName}>Description:</label>
         <input
           className={styles.serviceFormInput}
@@ -102,7 +102,7 @@ export default function ServiceCard({ addedService, setAddedService }) {
         >
           Add Service
         </button>
-      </form>
+      </section>
 
       <section>
         <h2>Services to be Added:</h2>

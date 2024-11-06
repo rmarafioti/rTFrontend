@@ -18,7 +18,6 @@ export default function MemberDashboard() {
       const newDrop = await createDrop().unwrap();
 
       if (newDrop?.id) {
-        // Correctly pass dropId in the state
         navigate("/membercreatedrop", { state: { dropId: newDrop.id } });
       } else {
         console.error("Failed to create drop: Missing drop ID");
@@ -51,9 +50,7 @@ export default function MemberDashboard() {
     <article className="pageSetup">
       <h1>Member Dashboard</h1>
       <MemberCard />
-      {/*this will be a fixed active route on the navbar*/}
       <button onClick={dropCreateSubmit}>Create a drop</button>
-      {/*possibly in graph form*/}
       <h3>Monthly Totals: *list totals*</h3>
       <h3>Current Drops: *list by date / link to individul drop's page*</h3>
       <Link to={`/membereditdrops`}>Edit Drops</Link>
