@@ -68,12 +68,99 @@ const api = createApi({
       }),
       invalidatesTags: ["Owner", "Business"],
     }),
+
     // link member to a business
     linkMemberToBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
         url: `/member/business`,
         method: "POST",
         body: { businessName, code },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member create drop
+    memberCreateDrop: builder.mutation({
+      query: () => ({
+        url: `/member/createdrop`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member update a drop
+    memberUpdateDrop: builder.mutation({
+      query: ({
+        dropId,
+        date,
+        total,
+        memberCut,
+        businessCut,
+        memberOwes,
+        businessOwes,
+      }) => ({
+        url: `/member/updatedrop/${dropId}`,
+        method: "POST",
+        body: {
+          date,
+          total,
+          memberCut,
+          businessCut,
+          memberOwes,
+          businessOwes,
+        },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member create a service
+    memberCreateService: builder.mutation({
+      query: ({
+        dropId,
+        description,
+        cash,
+        credit,
+        deposit,
+        giftCertAmount,
+      }) => ({
+        url: `/member/createservice/${dropId}`, // use dropId from the function call
+        method: "POST",
+        body: { description, cash, credit, deposit, giftCertAmount },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member get all services by id
+    memberGetDropServices: builder.query({
+      query: (drop_id) => ({
+        url: `/member/allservices/` + drop_id,
+        method: "GET",
+      }),
+      providesTags: ["Member"],
+    }),
+
+    //member delete service
+    memberDeleteService: builder.mutation({
+      query: (service_id) => ({
+        url: `/member/deleteservice/` + service_id,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member edit service
+    memberEditService: builder.mutation({
+      query: ({
+        service_id,
+        description,
+        cash,
+        credit,
+        deposit,
+        giftCertAmount,
+      }) => ({
+        url: `/member/updateservice/${service_id}`,
+        method: "PATCH",
+        body: { description, cash, credit, deposit, giftCertAmount },
       }),
       invalidatesTags: ["Member"],
     }),
@@ -89,6 +176,12 @@ export const {
   useGetMemberQuery,
   useCreateBusinessMutation,
   useLinkMemberToBusinessMutation,
+  useMemberCreateDropMutation,
+  useMemberUpdateDropMutation,
+  useMemberCreateServiceMutation,
+  useMemberGetDropServicesQuery,
+  useMemberEditServiceMutation,
+  useMemberDeleteServiceMutation,
 } = api;
 
 export default api;
