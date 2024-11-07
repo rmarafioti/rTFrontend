@@ -32,18 +32,22 @@ export default function MemberDashboard() {
     }
   };
 
-  // Calculate total owed to the member by the business
-  const businessOwesTotal = member.drop
+  // Calculate business total fro unpaid drops
+  const businessTotal = member.drop
     .filter((drop) => !drop.paid)
     .reduce((total, drop) => total + drop.businessOwes, 0);
 
-  // Calculate total the member owes to the business
-  const memberOwesTotal =
-    businessOwesTotal > 0
-      ? 0 // If the business owes the member, memberOwes should be 0
-      : member.drop
-          .filter((drop) => !drop.paid)
-          .reduce((total, drop) => total + drop.memberOwes, 0);
+  // Calculate member total for unpaid drops
+  const memberTotal = member.drop
+    .filter((drop) => !drop.paid)
+    .reduce((total, drop) => total + drop.memberOwes, 0);
+
+  // Business owes total is the business totol for the unpaid drops - member toatl which is there daily take home in cash
+
+  const businessOwesTotal = businessTotal - memberTotal;
+
+  // if business owes total is greater than 0 than member owes total should be 0 else it is the accumulation of member total
+  const memberOwesTotal = businessOwesTotal > 0 ? 0 : memberTotal;
 
   function MemberCard() {
     return (
