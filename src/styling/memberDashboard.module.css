@@ -1,0 +1,8 @@
+.memberDrops {
+    display: flex;
+    flex-direction: column;
+}
+
+.memberDrop {
+    margin: .5rem;
+}
