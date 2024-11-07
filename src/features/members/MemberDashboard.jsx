@@ -56,20 +56,18 @@ export default function MemberDashboard() {
         <p>Your are a member of the {member.business?.businessName} team</p>
         <p>Your Business Code: {member.business?.code}</p>
         <p>Your Team Members:</p>
-
         {member?.business?.businessMember?.length > 0 ? (
           member.business.businessMember.map((businessMember) => (
             <div>
               <p key={businessMember.id}>{businessMember.memberName}</p>
+              {/* create a message model so members can send messages back and forth*/}
               <button>Send Message</button>
             </div>
           ))
         ) : (
           <p>You have no team members yet</p>
         )}
-
-        {/* list out all team members linked to the business and map them out send them a message THIS IS A STRETCH GOAL */}
-
+        {/*create enums for percentages, allowing a business owner to change a team members percentage*/}
         <p>Percentage: {member.percentage} / 40</p>
       </section>
     );
@@ -103,6 +101,7 @@ export default function MemberDashboard() {
             <p>All your drops are up to date</p>
           )}
         </div>
+        {/* create the ability for a owner and team member to fill out a form with a message to paid amount owed*/}
         <p>Owed to You: {businessOwesTotal}</p>
         <p>You Owe: {memberOwesTotal}</p>
       </section>
