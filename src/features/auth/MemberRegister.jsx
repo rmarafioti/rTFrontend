@@ -11,13 +11,11 @@ export default function MemberRegister() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [memberName, setMemberName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
 
   const handleRegister = async (evt) => {
     evt.preventDefault();
     try {
-      await register({ username, password, memberName, email, phone }).unwrap();
+      await register({ username, password, memberName }).unwrap();
       navigate("/memberonboard");
     } catch (err) {
       console.error(err);
@@ -47,26 +45,6 @@ export default function MemberRegister() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
-            required
-          />
-        </div>
-        <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Phone</label>
-          <input
-            className={styles.loginFormInput}
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-        </div>
-        <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Email</label>
-          <input
-            className={styles.loginFormInput}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

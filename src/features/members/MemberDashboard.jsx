@@ -12,6 +12,10 @@ export default function MemberDashboard() {
   const [createDrop] = useMemberCreateDropMutation();
   const navigate = useNavigate();
 
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  //creates a new drop when button is clicked
   const dropCreateSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,21 +31,53 @@ export default function MemberDashboard() {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   function MemberCard() {
     return (
       <section>
         <h2>Hello, {member.memberName}</h2>
-        <p>Phone: {member.phone}</p>
-        <p>Email: {member.email}</p>
         <p>Your are a member of the {member.business?.businessName} team</p>
         <p>Your Business Code: {member.business?.code}</p>
-        <p>Percentage: {member.percentage}</p>
-        <p>Take Home Total: {member.takeHomeTotal}</p>
-        <p>You Owe: {member.totalOwed}</p>
-        <p>Owed to You: {member.totalOwe}</p>
+        {/* list out all team members linked to the business and map them out send them a message THIS IS A STRETCH GOAL */}
+        <p>Your Team Members:</p>
+        <p>Percentage: {member.percentage} / 40</p>
+      </section>
+    );
+  }
+
+  function DropCard() {
+    return (
+      <section>
+        <h3>
+          Take Home Total:{" "}
+          {member.drop.reduce((total, drop) => total + drop.memberCut, 0)}
+        </h3>
+        <h3>Monthly Totals: *list totals*</h3>
+        <h3>Current Drops:</h3>
+        {member?.drop?.length ? (
+          member.drop
+            .filter((drop) => !drop.paid)
+            .map((drop) => (
+              <Link to={`/memberdrop/${drop.id}`} key={drop.id}>
+                {new Date(drop.date).toLocaleDateString("en-US", {
+                  timeZone: "UTC",
+                })}
+              </Link>
+            ))
+        ) : (
+          <p>You have no drops at this time</p>
+        )}
+        <p>
+          Owed to You:{" "}
+          {member.drop
+            .filter((drop) => !drop.paid)
+            .reduce((total, drop) => total + drop.businessOwes, 0)}
+        </p>
+        <p>
+          You Owe:{" "}
+          {member.drop
+            .filter((drop) => !drop.paid)
+            .reduce((total, drop) => total + drop.memberOwes, 0)}
+        </p>
       </section>
     );
   }
@@ -51,12 +87,9 @@ export default function MemberDashboard() {
       <h1>Member Dashboard</h1>
       <MemberCard />
       <button onClick={dropCreateSubmit}>Create a drop</button>
-      <h3>Monthly Totals: *list totals*</h3>
-      <h3>Current Drops: *list by date / link to individul drop's page*</h3>
-      <Link to={`/membereditdrops`}>Edit Drops</Link>
-      <h3>You Currently Owe: *balance to pay*</h3>
-      <Link to={`/memberhandledrops`}>Pay Balance</Link>
-      <h3>Owed to You: *balance business owes*</h3>
+      <DropCard />
+      {/* list drop totals for each month / functionality can be a separate component STRETCH GOAL */}
+      {/* active link to navigate a team member to all drops where paid = true*/}
       <Link to={`/memberarchive`}>Your Archived Drops</Link>
     </article>
   );
