@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       { path: "/membereditdrops/", element: <MemberEditDrops /> },
       { path: "/memberhandledrops/", element: <MemberHandleDrops /> },
       { path: "/memberarchive/", element: <MemberArchive /> },
-      { path: "/memberdrop/", element: <MemberDrop /> },
+      { path: "/memberdrop/:dropId", element: <MemberDrop /> },
     ],
   },
 ]);

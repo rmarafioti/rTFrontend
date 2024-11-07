@@ -52,12 +52,19 @@ const api = createApi({
     }),
     // fetch owner data
     getOwner: builder.query({
-      query: () => "/owner",
+      query: () => ({
+        url: "/owner",
+        method: "GET",
+      }),
+      providesTags: ["Owner"],
     }),
-
     // fetch member data
     getMember: builder.query({
-      query: () => "/member",
+      query: () => ({
+        url: "/member",
+        method: "GET",
+      }),
+      providesTags: ["Member"],
     }),
     // owner to create a business
     createBusiness: builder.mutation({
@@ -139,6 +146,15 @@ const api = createApi({
       providesTags: ["Member"],
     }),
 
+    // member get drop by id
+    memberGetDrop: builder.query({
+      query: (dropId) => ({
+        url: `member/getdrop/${dropId}`,
+        method: "GET",
+      }),
+      providesTags: ["Member"],
+    }),
+
     //member delete service
     memberDeleteService: builder.mutation({
       query: (service_id) => ({
@@ -179,6 +195,7 @@ export const {
   useMemberCreateDropMutation,
   useMemberUpdateDropMutation,
   useMemberCreateServiceMutation,
+  useMemberGetDropQuery,
   useMemberGetDropServicesQuery,
   useMemberEditServiceMutation,
   useMemberDeleteServiceMutation,
