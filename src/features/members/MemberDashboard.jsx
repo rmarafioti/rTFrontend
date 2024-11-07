@@ -31,9 +31,6 @@ export default function MemberDashboard() {
     }
   };
 
-  //navigates the user to drop page by its id when clicked
-  const getDropSubmit = async (e) => {};
-
   function MemberCard() {
     return (
       <section>
@@ -55,7 +52,6 @@ export default function MemberDashboard() {
           {member.drop.reduce((total, drop) => total + drop.memberCut, 0)}
         </h3>
         <h3>Monthly Totals: *list totals*</h3>
-        {/* make each drop date an active link to naviagate to /memberdrop where me will get drop by ID and all services for the drop*/}
         <h3>Current Drops:</h3>
         {member?.drop?.length ? (
           member.drop
@@ -93,8 +89,6 @@ export default function MemberDashboard() {
       <button onClick={dropCreateSubmit}>Create a drop</button>
       <DropCard />
       {/* list drop totals for each month / functionality can be a separate component STRETCH GOAL */}
-      {/* edit drop functionality will be located on the member drop page instead of here */}
-      {/*<Link to={`/membereditdrops`}>Edit Drops</Link>*/}
       {/* active link to navigate a team member to all drops where paid = true*/}
       <Link to={`/memberarchive`}>Your Archived Drops</Link>
     </article>
