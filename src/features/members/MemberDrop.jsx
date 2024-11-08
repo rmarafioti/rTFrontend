@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useMemberGetDropQuery } from "../../store/api";
+import { useMemberGetDropQuery } from "./membersSlice";
 import { Link } from "react-router-dom";
 
 export default function MemberDrop() {

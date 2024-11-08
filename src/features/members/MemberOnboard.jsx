@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLinkMemberToBusinessMutation } from "../../store/api";
+import { useLinkMemberToBusinessMutation } from "./membersSlice";
 import styles from "../../styling/onboardForms.module.css";
 
 export default function MemberOnboard() {

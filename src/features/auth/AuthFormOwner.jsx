@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  useLoginOwnerMutation,
   useRegisterOwnerMutation,
-} from "../../store/api";
+  useLoginOwnerMutation,
+} from "./authOwnerSlice";
 
 import styles from "./authforms.module.css";
 

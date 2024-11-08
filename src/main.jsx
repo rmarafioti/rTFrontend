@@ -8,7 +8,6 @@ import Root from "./layout/Root";
 import Home from "./layout/Home";
 //authentication
 import AuthFormOwner from "./features/auth/AuthFormOwner";
-/*import MemberAuthWrapper from "./features/auth/MemberAuthWrapper";*/
 import AuthFormMember from "./features/auth/AuthFormMember";
 //owner features
 import OwnerOnboard from "./features/owner/OwnerOnboard";

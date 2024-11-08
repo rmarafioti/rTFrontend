@@ -4,7 +4,7 @@ import ServiceCard from "./ServiceCard";
 import {
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
-} from "../store/api";
+} from "../features/members/membersSlice";
 import styles from "../styling/drop.module.css";
 
 export default function Drop({ dropId }) {

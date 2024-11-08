@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useLoginMemberMutation,
   useRegisterMemberMutation,
-} from "../../store/api";
+} from "./authMemberSlice";
 
 import styles from "./authforms.module.css";
 

@@ -1,8 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import {
-  useGetMemberQuery,
-  useMemberCreateDropMutation,
-} from "../../store/api";
+import { useGetMemberQuery, useMemberCreateDropMutation } from "./membersSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/MemberDashboard.module.css";

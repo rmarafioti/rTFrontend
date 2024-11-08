@@ -15,141 +15,17 @@ const api = createApi({
       return headers;
     },
   }),
-  endpoints: (builder) => ({
-    // Owner auth endpoints
-    registerOwner: builder.mutation({
-      query: (credentials) => ({
-        url: "/auth/owner/register",
-        method: "POST",
-        body: credentials,
-      }),
-      transformErrorResponse: (response) => response.data,
-    }),
-    loginOwner: builder.mutation({
-      query: (credentials) => ({
-        url: "/auth/owner/login",
-        method: "POST",
-        body: credentials,
-      }),
-      transformErrorResponse: (response) => response.data,
-    }),
-    // Member auth endpoints
-    registerMember: builder.mutation({
-      query: (credentials) => ({
-        url: "/auth/member/register",
-        method: "POST",
-        body: credentials,
-      }),
-      transformErrorResponse: (response) => response.data,
-    }),
-    loginMember: builder.mutation({
-      query: (credentials) => ({
-        url: "/auth/member/login",
-        method: "POST",
-        body: credentials,
-      }),
-      transformErrorResponse: (response) => response.data,
-    }),
-    // fetch owner data
-    getOwner: builder.query({
-      query: () => ({
-        url: "/owner",
-        method: "GET",
-      }),
-      providesTags: ["Owner"],
-    }),
-    // fetch member data
-    getMember: builder.query({
-      query: () => ({
-        url: "/member",
-        method: "GET",
-      }),
-      providesTags: ["Member"],
-    }),
-    // owner to create a business
-    createBusiness: builder.mutation({
-      query: ({ businessName, code }) => ({
-        url: `/owner/business`,
-        method: "POST",
-        body: { businessName, code },
-      }),
-      invalidatesTags: ["Owner", "Business"],
-    }),
+  endpoints: () => ({}),
+});
 
-    // link member to a business
-    linkMemberToBusiness: builder.mutation({
-      query: ({ businessName, code }) => ({
-        url: `/member/business`,
-        method: "POST",
-        body: { businessName, code },
-      }),
-      invalidatesTags: ["Member"],
-    }),
+export default api;
 
-    // member create drop
-    memberCreateDrop: builder.mutation({
-      query: () => ({
-        url: `/member/createdrop`,
-        method: "POST",
-      }),
-      invalidatesTags: ["Member"],
-    }),
-
-    // member update a drop
-    memberUpdateDrop: builder.mutation({
-      query: ({
-        dropId,
-        date,
-        total,
-        memberCut,
-        businessCut,
-        memberOwes,
-        businessOwes,
-      }) => ({
-        url: `/member/updatedrop/${dropId}`,
-        method: "POST",
-        body: {
-          date,
-          total,
-          memberCut,
-          businessCut,
-          memberOwes,
-          businessOwes,
-        },
-      }),
-      invalidatesTags: ["Member"],
-    }),
-
-    // member create a service
-    memberCreateService: builder.mutation({
-      query: ({
-        dropId,
-        description,
-        cash,
-        credit,
-        deposit,
-        giftCertAmount,
-      }) => ({
-        url: `/member/createservice/${dropId}`, // use dropId from the function call
-        method: "POST",
-        body: { description, cash, credit, deposit, giftCertAmount },
-      }),
-      invalidatesTags: ["Member"],
-    }),
+/*endpoints: (builder) => ({
 
     // member get all services by id
     memberGetDropServices: builder.query({
       query: (drop_id) => ({
         url: `/member/allservices/` + drop_id,
-        method: "GET",
-      }),
-      providesTags: ["Member"],
-    }),
-
-    // member get drop by id
-    memberGetDrop: builder.query({
-      query: (dropId) => ({
-        url: `member/getdrop/${dropId}`,
         method: "GET",
       }),
       providesTags: ["Member"],
@@ -201,4 +77,4 @@ export const {
   useMemberDeleteServiceMutation,
 } = api;
 
-export default api;
+export default api;*/
