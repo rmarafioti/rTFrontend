@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCreateBusinessMutation, useGetOwnerQuery } from "../../store/api";
+import { useGetOwnerQuery, useCreateBusinessMutation } from "./ownerSlice";
 import styles from "../../styling/onboardForms.module.css";
 
 export default function OwnerOnboard() {

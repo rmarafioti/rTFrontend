@@ -3,6 +3,32 @@ import api from "../../store/api"; // Import api, not hooks
 
 const TOKEN_KEY = "memberToken";
 
+// Authentication member endpoints
+const authMemberApi = api.injectEndpoints({
+  endpoints: (builder) => ({
+    // Member auth endpoints
+    registerMember: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/member/register",
+        method: "POST",
+        body: credentials,
+      }),
+      transformErrorResponse: (response) => response.data,
+    }),
+    loginMember: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/member/login",
+        method: "POST",
+        body: credentials,
+      }),
+      transformErrorResponse: (response) => response.data,
+    }),
+  }),
+});
+
+export const { useRegisterMemberMutation, useLoginMemberMutation } =
+  authMemberApi;
+
 const storeMemberToken = (state, { payload }) => {
   state.token = payload.token;
   state.member = payload.memberData;

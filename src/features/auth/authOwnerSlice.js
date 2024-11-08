@@ -3,6 +3,30 @@ import api from "../../store/api"; // Import api, not hooks
 
 const TOKEN_KEY = "ownerToken";
 
+// Authentication owner endpoints
+const authOwnerApi = api.injectEndpoints({
+  endpoints: (builder) => ({
+    registerOwner: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/owner/register",
+        method: "POST",
+        body: credentials,
+      }),
+      transformErrorResponse: (response) => response.data,
+    }),
+    loginOwner: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/owner/login",
+        method: "POST",
+        body: credentials,
+      }),
+      transformErrorResponse: (response) => response.data,
+    }),
+  }),
+});
+
+export const { useRegisterOwnerMutation, useLoginOwnerMutation } = authOwnerApi;
+
 const storeOwnerToken = (state, { payload }) => {
   state.token = payload.token;
   state.owner = payload.ownerData;

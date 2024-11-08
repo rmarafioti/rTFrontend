@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useGetOwnerQuery } from "../../store/api";
+import { useGetOwnerQuery } from "./ownerSlice";
 
 import "../../styling/mainStyles.css";
 

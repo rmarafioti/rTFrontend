@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  useRegisterOwnerMutation,
-  useLoginOwnerMutation,
-} from "./authOwnerSlice";
+  useLoginMemberMutation,
+  useRegisterMemberMutation,
+} from "./authMemberSlice";
 
 import styles from "./authforms.module.css";
 
 // This form allows users to register or log in.
-export default function AuthFormOwner() {
+export default function AuthFormMember() {
   const navigate = useNavigate();
 
   // Handles swapping between login and register
@@ -21,20 +21,20 @@ export default function AuthFormOwner() {
   // Controlled form fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [ownerName, setOwnerName] = useState("");
+  const [memberName, setMemberName] = useState("");
 
   // Form submission
   const [login, { isLoading: loginLoading, error: loginError }] =
-    useLoginOwnerMutation();
+    useLoginMemberMutation();
   const [register, { isLoading: registerLoading, error: registerError }] =
-    useRegisterOwnerMutation();
+    useRegisterMemberMutation();
 
   /** Send the requested authentication action to the API */
   const attemptAuth = async (evt) => {
     evt.preventDefault();
 
     const authMethod = isLogin ? login : register;
-    const credentials = { username, password, ownerName };
+    const credentials = { username, password, memberName };
 
     // We don't want to navigate if there's an error.
     // `unwrap` will throw an error if there is one
@@ -42,7 +42,7 @@ export default function AuthFormOwner() {
     try {
       await authMethod(credentials).unwrap();
       //set login naviagtion to proper paths
-      isLogin ? navigate("/ownerdashboard/") : navigate("/owneronboard/");
+      isLogin ? navigate("/memberdashboard/") : navigate("/memberonboard/");
     } catch (err) {
       console.error(err);
     }
@@ -50,7 +50,7 @@ export default function AuthFormOwner() {
 
   return (
     <article className="pageSetup">
-      <h1>Owner Portal</h1>
+      <h1>Member Portal</h1>
       <h2>{authAction}</h2>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
@@ -58,8 +58,8 @@ export default function AuthFormOwner() {
           <input
             className={styles.loginFormInput}
             type="text"
-            value={ownerName}
-            onChange={(e) => setOwnerName(e.target.value)}
+            value={memberName}
+            onChange={(e) => setMemberName(e.target.value)}
             autoComplete="name"
           />
         </div>

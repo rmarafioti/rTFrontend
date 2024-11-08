@@ -1,8 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import {
-  useGetMemberQuery,
-  useMemberCreateDropMutation,
-} from "../../store/api";
+import { useGetMemberQuery, useMemberCreateDropMutation } from "./membersSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/MemberDashboard.module.css";
@@ -44,7 +41,7 @@ export default function MemberDashboard() {
 
   // Business owes total is the business totol for the unpaid drops - member toatl which is there daily take home in cash
 
-  const businessOwesTotal = businessTotal - memberTotal;
+  const businessOwesTotal = memberTotal > 0 ? 0 : businessTotal - memberTotal;
 
   // if business owes total is greater than 0 than member owes total should be 0 else it is the accumulation of member total
   const memberOwesTotal = businessOwesTotal > 0 ? 0 : memberTotal;
