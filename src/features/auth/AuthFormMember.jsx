@@ -50,7 +50,7 @@ export default function AuthFormMember() {
 
   return (
     <article className="pageSetup">
-      <h1>Owner Portal</h1>
+      <h1>Member Portal</h1>
       <h2>{authAction}</h2>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
@@ -58,7 +58,7 @@ export default function AuthFormMember() {
           <input
             className={styles.loginFormInput}
             type="text"
-            value={ownerName}
+            value={memberName}
             onChange={(e) => setMemberName(e.target.value)}
             autoComplete="name"
           />
