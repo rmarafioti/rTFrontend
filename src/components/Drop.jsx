@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import {
   useMemberCreateServiceMutation,
@@ -13,6 +14,7 @@ export default function Drop({ dropId }) {
   const [date, setDate] = useState("");
   const [createService] = useMemberCreateServiceMutation();
   const [updateDrop] = useMemberUpdateDropMutation();
+  const navigate = useNavigate();
 
   // Function to add up totals for all added services
   const calculateServiceTotals = () => {
@@ -74,6 +76,7 @@ export default function Drop({ dropId }) {
 
       console.log("Drop updated successfully");
       setAddedService([]); // Clear after submission
+      navigate("/memberdashboard");
     } catch (error) {
       console.error("Error adding services:", error);
     }

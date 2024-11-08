@@ -9,7 +9,7 @@ export default function OwnerDashboard() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // MAKE THIS A COMPONENT: create a business team card, .map over the team mebers to display all of them
+  // map out the team members and show a list of their current drops, create a form to pay drops which them with change the paid boolean expression to true
   function BusinessMembersCard() {
     return (
       <section>

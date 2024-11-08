@@ -5,6 +5,7 @@ import {
 } from "../../store/api";
 import { Link } from "react-router-dom";
 
+import styles from "../../styling/MemberDashboard.module.css";
 import "../../styling/mainStyles.css";
 
 export default function MemberDashboard() {
@@ -31,14 +32,42 @@ export default function MemberDashboard() {
     }
   };
 
+  // Calculate business total fro unpaid drops
+  const businessTotal = member.drop
+    .filter((drop) => !drop.paid)
+    .reduce((total, drop) => total + drop.businessOwes, 0);
+
+  // Calculate member total for unpaid drops
+  const memberTotal = member.drop
+    .filter((drop) => !drop.paid)
+    .reduce((total, drop) => total + drop.memberOwes, 0);
+
+  // Business owes total is the business totol for the unpaid drops - member toatl which is there daily take home in cash
+
+  const businessOwesTotal = businessTotal - memberTotal;
+
+  // if business owes total is greater than 0 than member owes total should be 0 else it is the accumulation of member total
+  const memberOwesTotal = businessOwesTotal > 0 ? 0 : memberTotal;
+
   function MemberCard() {
     return (
       <section>
         <h2>Hello, {member.memberName}</h2>
         <p>Your are a member of the {member.business?.businessName} team</p>
         <p>Your Business Code: {member.business?.code}</p>
-        {/* list out all team members linked to the business and map them out send them a message THIS IS A STRETCH GOAL */}
         <p>Your Team Members:</p>
+        {member?.business?.businessMember?.length > 0 ? (
+          member.business.businessMember.map((businessMember) => (
+            <div>
+              <p key={businessMember.id}>{businessMember.memberName}</p>
+              {/* create a message model so members can send messages back and forth*/}
+              <button>Send Message</button>
+            </div>
+          ))
+        ) : (
+          <p>You have no team members yet</p>
+        )}
+        {/*create enums for percentages, allowing a business owner to change a team members percentage*/}
         <p>Percentage: {member.percentage} / 40</p>
       </section>
     );
@@ -53,31 +82,28 @@ export default function MemberDashboard() {
         </h3>
         <h3>Monthly Totals: *list totals*</h3>
         <h3>Current Drops:</h3>
-        {member?.drop?.length ? (
-          member.drop
-            .filter((drop) => !drop.paid)
-            .map((drop) => (
-              <Link to={`/memberdrop/${drop.id}`} key={drop.id}>
-                {new Date(drop.date).toLocaleDateString("en-US", {
-                  timeZone: "UTC",
-                })}
-              </Link>
-            ))
-        ) : (
-          <p>You have no drops at this time</p>
-        )}
-        <p>
-          Owed to You:{" "}
-          {member.drop
-            .filter((drop) => !drop.paid)
-            .reduce((total, drop) => total + drop.businessOwes, 0)}
-        </p>
-        <p>
-          You Owe:{" "}
-          {member.drop
-            .filter((drop) => !drop.paid)
-            .reduce((total, drop) => total + drop.memberOwes, 0)}
-        </p>
+        <div className={styles.memberDrops}>
+          {member?.drop?.length ? (
+            member.drop
+              .filter((drop) => !drop.paid)
+              .map((drop) => (
+                <Link
+                  className={styles.memberDrop}
+                  to={`/memberdrop/${drop.id}`}
+                  key={drop.id}
+                >
+                  {new Date(drop.date).toLocaleDateString("en-US", {
+                    timeZone: "UTC",
+                  })}
+                </Link>
+              ))
+          ) : (
+            <p>All your drops are up to date</p>
+          )}
+        </div>
+        {/* create the ability for a owner and team member to fill out a form with a message to paid amount owed*/}
+        <p>Owed to You: {businessOwesTotal}</p>
+        <p>You Owe: {memberOwesTotal}</p>
       </section>
     );
   }
