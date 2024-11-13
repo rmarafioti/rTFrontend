@@ -1,25 +1,51 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetOwnerQuery, usePayMemberDropsMutation } from "./ownerSlice";
-
 import "../../styling/mainStyles.css";
 
 export default function OwnerDashboard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();
   const [payMemberDrops] = usePayMemberDropsMutation();
 
+  // State to manage payment messages for each member
+  const [paidMessages, setPaidMessages] = useState({});
+
+  const paymentOptions = [
+    "Paid via Cash",
+    "Paid via Zelle",
+    "Paid via Venmo",
+    "Paid via PayPal",
+    "Other",
+  ];
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  // Handle message change for a specific member
+  const handleMessageChange = (memberId, message) => {
+    setPaidMessages((prev) => ({
+      ...prev,
+      [memberId]: message,
+    }));
+  };
+
+  // Handle payout for a specific member
   const handlePayout = async (memberId) => {
+    const message = paidMessages[memberId] || "";
     try {
-      await payMemberDrops(memberId).unwrap();
+      await payMemberDrops({ memberId, paidMessage: message }).unwrap();
       console.log(`Paid out drops for member with ID: ${memberId}`);
-    } catch (e) {
-      console.error("Error paying out drop:", err);
+
+      // Clear the message for the current member after successful payment
+      setPaidMessages((prev) => ({
+        ...prev,
+        [memberId]: "",
+      }));
+    } catch (error) {
+      console.error("Error paying out drop:", error);
     }
   };
 
-  // map out the team members and show a list of their current drops, create a form to pay drops which them with change the paid boolean expression to true
   function BusinessMembersCard() {
     return (
       <section>
@@ -36,32 +62,51 @@ export default function OwnerDashboard() {
                     );
                     const allPaid = unpaidDrops.length === 0;
 
+                    // Calculate the total of unpaid drops
+                    const unpaidTotal = unpaidDrops.reduce(
+                      (total, drop) => total + drop.memberCut,
+                      0
+                    );
+
                     return (
                       <li key={member.id}>
                         <p>{member.memberName}</p>
                         <div>
-                          {unpaidDrops.length
-                            ? unpaidDrops.map((drop) => (
-                                <Link
-                                  to={`/memberdrop/${drop.id}`}
-                                  key={drop.id}
-                                >
-                                  {new Date(drop.date).toLocaleDateString(
-                                    "en-US",
-                                    {
-                                      timeZone: "UTC",
-                                    }
-                                  )}
-                                </Link>
-                              ))
-                            : " "}
+                          {unpaidDrops.length > 0 ? (
+                            unpaidDrops.map((drop) => (
+                              <Link to={`/memberdrop/${drop.id}`} key={drop.id}>
+                                {new Date(drop.date).toLocaleDateString(
+                                  "en-US",
+                                  {
+                                    timeZone: "UTC",
+                                  }
+                                )}
+                              </Link>
+                            ))
+                          ) : (
+                            <p>No unpaid drops</p>
+                          )}
                         </div>
                         <p>Owed: ${member.totalOwe}</p>
                         {allPaid ? (
                           <p>All drop payments up to date</p>
                         ) : (
-                          <p>Pay: ${member.totalOwed}</p>
+                          <p>Pay: ${unpaidTotal}</p>
                         )}
+                        <label>Payment Method:</label>
+                        <select
+                          value={paidMessages[member.id] || ""}
+                          onChange={(e) =>
+                            handleMessageChange(member.id, e.target.value)
+                          }
+                        >
+                          <option value="">Select Payment Method</option>
+                          {paymentOptions.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
                         <button onClick={() => handlePayout(member.id)}>
                           Payout Team Member
                         </button>
@@ -89,12 +134,8 @@ export default function OwnerDashboard() {
       <p>Take Home Total: ${owner?.takeHomeTotal}</p>
       <BusinessMembersCard />
       <Link to={`/memberarchive`}>*Member Archive*</Link>
-      <Link to={`/ownerhandledrops`}>
-        *Pay Balance for each member that has current drops functionality has
-        been created but we also need to send the member a notifcation*
-      </Link>
+      <Link to={`/ownerhandledrops`}>*Handle Drops*</Link>
       <h3>Year Take Home Total:</h3>
-      {/*possibly in graph form*/}
       <h3>Monthly Totals: *list totals*</h3>
     </article>
   );

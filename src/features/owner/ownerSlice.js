@@ -19,14 +19,15 @@ const ownerApi = api.injectEndpoints({
         method: "POST",
         body: { businessName, code },
       }),
-      invalidatesTags: ["owner"],
+      invalidatesTags: ["Owner"],
     }),
 
     //owner marks drops paid for a team member by id
     payMemberDrops: builder.mutation({
-      query: (memberId) => ({
+      query: ({ memberId, paidMessage }) => ({
         url: `owner/droppaid/${memberId}`,
         method: "PATCH",
+        body: { paidMessage },
       }),
       invalidatesTags: ["Owner", "Member"],
     }),

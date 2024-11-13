@@ -71,6 +71,9 @@ export default function MemberDashboard() {
   }
 
   function DropCard() {
+    const unpaidDrops = member.drop?.filter((drop) => !drop.paid);
+    const allPaid = unpaidDrops?.length === 0;
+
     return (
       <section>
         <h3>
@@ -80,22 +83,20 @@ export default function MemberDashboard() {
         <h3>Monthly Totals: *list totals*</h3>
         <h3>Current Drops:</h3>
         <div className={styles.memberDrops}>
-          {member?.drop?.length ? (
-            member.drop
-              .filter((drop) => !drop.paid)
-              .map((drop) => (
-                <Link
-                  className={styles.memberDrop}
-                  to={`/memberdrop/${drop.id}`}
-                  key={drop.id}
-                >
-                  {new Date(drop.date).toLocaleDateString("en-US", {
-                    timeZone: "UTC",
-                  })}
-                </Link>
-              ))
+          {unpaidDrops?.length ? (
+            unpaidDrops.map((drop) => (
+              <Link
+                className={styles.memberDrop}
+                to={`/memberdrop/${drop.id}`}
+                key={drop.id}
+              >
+                {new Date(drop.date).toLocaleDateString("en-US", {
+                  timeZone: "UTC",
+                })}
+              </Link>
+            ))
           ) : (
-            <p>All your drops are up to date</p>
+            <p>All your drops are paid up to date</p>
           )}
         </div>
         {/* create the ability for a owner and team member to fill out a form with a message to paid amount owed*/}
