@@ -57,6 +57,20 @@ const memberApi = api.injectEndpoints({
       providesTags: ["Member"],
     }),
 
+    // member update member info
+    memberUpdateInfo: builder.mutation({
+      query: ({ memberId, memberCut, memberOwes, businessOwes }) => ({
+        url: `/member/updatememberinfo/${memberId}`,
+        method: "POST",
+        body: {
+          memberCut: memberCut,
+          memberOwes: memberOwes,
+          businessOwes: businessOwes,
+        },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
     // member update a drop
     memberUpdateDrop: builder.mutation({
       query: ({
@@ -91,4 +105,5 @@ export const {
   useMemberCreateDropMutation,
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
+  useMemberUpdateInfoMutation,
 } = memberApi;
