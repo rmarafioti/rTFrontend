@@ -21,7 +21,20 @@ const ownerApi = api.injectEndpoints({
       }),
       invalidatesTags: ["owner"],
     }),
+
+    //owner marks drops paid for a team member by id
+    payMemberDrops: builder.mutation({
+      query: (memberId) => ({
+        url: `owner/droppaid/${memberId}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Owner", "Member"],
+    }),
   }),
 });
 
-export const { useGetOwnerQuery, useCreateBusinessMutation } = ownerApi;
+export const {
+  useGetOwnerQuery,
+  useCreateBusinessMutation,
+  usePayMemberDropsMutation,
+} = ownerApi;
