@@ -26,26 +26,39 @@ export default function OwnerDashboard() {
         <h2>Your Team Members</h2>
         {owner?.ownerBusiness?.length ? (
           owner.ownerBusiness.map((business) => (
-            <div key={business.id} className="business-card">
+            <div key={business.id}>
               <h3>{business.businessName}</h3>
               <ul>
                 {business.businessMember?.length ? (
                   business.businessMember.map((member) => {
-                    // Filter to get unpaid drops for each member
-                    const unpaidDrops = member.drop
-                      ? member.drop.filter((drop) => !drop.paid)
-                      : [];
-
-                    // If there are no unpaid drops, show "All drops have been paid"
+                    const unpaidDrops = member.drop?.filter(
+                      (drop) => !drop.paid
+                    );
                     const allPaid = unpaidDrops.length === 0;
 
                     return (
                       <li key={member.id}>
                         <p>{member.memberName}</p>
+                        <div>
+                          {unpaidDrops.length
+                            ? unpaidDrops.map((drop) => (
+                                <Link
+                                  to={`/memberdrop/${drop.id}`}
+                                  key={drop.id}
+                                >
+                                  {new Date(drop.date).toLocaleDateString(
+                                    "en-US",
+                                    {
+                                      timeZone: "UTC",
+                                    }
+                                  )}
+                                </Link>
+                              ))
+                            : " "}
+                        </div>
                         <p>Owed: ${member.totalOwe}</p>
-                        {/* Show the Pay amount only if there are unpaid drops */}
                         {allPaid ? (
-                          <p>Current drops have been paid</p>
+                          <p>All drop payments up to date</p>
                         ) : (
                           <p>Pay: ${member.totalOwed}</p>
                         )}
