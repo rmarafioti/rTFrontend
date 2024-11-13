@@ -95,6 +95,16 @@ const memberApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Member"],
     }),
+
+    // Owner take-home total is updated when a member submits a drop
+    ownerUpdateTotal: builder.mutation({
+      query: ({ businessCut }) => ({
+        url: `/member/businesstotalupdate`,
+        method: "PATCH",
+        body: { businessCut },
+      }),
+      invalidatesTags: ["Owner"],
+    }),
   }),
 });
 
@@ -106,4 +116,5 @@ export const {
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
   useMemberUpdateInfoMutation,
+  useOwnerUpdateTotalMutation,
 } = memberApi;

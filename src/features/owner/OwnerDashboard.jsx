@@ -23,8 +23,8 @@ export default function OwnerDashboard() {
                   business.businessMember.map((member) => (
                     <li key={member.id}>
                       <p>{member.memberName}</p>
-                      <p>Total Owe: {member.totalOwe}</p>
-                      <p>Total Owed: {member.totalOwed}</p>
+                      <p>Owed: {member.totalOwe}</p>
+                      <p>Pay: {member.totalOwed}</p>
                     </li>
                   ))
                 ) : (
