@@ -55,8 +55,8 @@ export default function MemberDashboard() {
         <p>Your Team Members:</p>
         {member?.business?.businessMember?.length > 0 ? (
           member.business.businessMember.map((businessMember) => (
-            <div>
-              <p key={businessMember.id}>{businessMember.memberName}</p>
+            <div key={businessMember.id}>
+              <p>{businessMember.memberName}</p>
               {/* create a message model so members can send messages back and forth*/}
               <button>Send Message</button>
             </div>

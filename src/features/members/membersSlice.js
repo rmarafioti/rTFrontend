@@ -57,6 +57,20 @@ const memberApi = api.injectEndpoints({
       providesTags: ["Member"],
     }),
 
+    // member update member info
+    memberUpdateInfo: builder.mutation({
+      query: ({ memberId, memberCut, memberOwes, businessOwes }) => ({
+        url: `/member/updatememberinfo/${memberId}`,
+        method: "POST",
+        body: {
+          memberCut: memberCut,
+          memberOwes: memberOwes,
+          businessOwes: businessOwes,
+        },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
     // member update a drop
     memberUpdateDrop: builder.mutation({
       query: ({
@@ -81,6 +95,16 @@ const memberApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Member"],
     }),
+
+    // Owner take-home total is updated when a member submits a drop
+    ownerUpdateTotal: builder.mutation({
+      query: ({ businessCut }) => ({
+        url: `/member/businesstotalupdate`,
+        method: "PATCH",
+        body: { businessCut },
+      }),
+      invalidatesTags: ["Owner"],
+    }),
   }),
 });
 
@@ -91,4 +115,6 @@ export const {
   useMemberCreateDropMutation,
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
+  useMemberUpdateInfoMutation,
+  useOwnerUpdateTotalMutation,
 } = memberApi;

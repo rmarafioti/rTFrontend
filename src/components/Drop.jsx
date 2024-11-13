@@ -2,18 +2,26 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import {
+  useGetMemberQuery,
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
+  useMemberUpdateInfoMutation,
+  useOwnerUpdateTotalMutation,
 } from "../features/members/membersSlice";
 import styles from "../styling/drop.module.css";
 
 export default function Drop({ dropId }) {
   console.log("Received dropId in Drop:", dropId);
 
+  const { data: member } = useGetMemberQuery();
+  const memberId = member?.id;
+
   const [addedService, setAddedService] = useState([]);
   const [date, setDate] = useState("");
   const [createService] = useMemberCreateServiceMutation();
   const [updateDrop] = useMemberUpdateDropMutation();
+  const [updateMemberInfo] = useMemberUpdateInfoMutation();
+  const [ownerUpdateTotal] = useOwnerUpdateTotalMutation();
   const navigate = useNavigate();
 
   // Function to add up totals for all added services
@@ -73,6 +81,24 @@ export default function Drop({ dropId }) {
         memberOwes: memberOwes,
         businessOwes: businessOwes,
       }).unwrap();
+
+      console.log("Sending update request with data:", {
+        memberId,
+        memberCut,
+        memberOwes,
+        businessOwes,
+      });
+
+      await updateMemberInfo({
+        memberId,
+        memberCut,
+        memberOwes,
+        businessOwes,
+      }).unwrap();
+
+      console.log("Member information updated successfully");
+
+      await ownerUpdateTotal({ businessCut }).unwrap();
 
       console.log("Drop updated successfully");
       setAddedService([]); // Clear after submission
