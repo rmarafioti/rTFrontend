@@ -51,7 +51,16 @@ const memberApi = api.injectEndpoints({
     // member get drop by id
     memberGetDrop: builder.query({
       query: (dropId) => ({
-        url: `member/getdrop/${dropId}`,
+        url: `/member/getdrop/${dropId}`,
+        method: "GET",
+      }),
+      providesTags: ["Member"],
+    }),
+
+    // member gets all paid drops
+    memberGetPaidDrops: builder.query({
+      query: () => ({
+        url: `/member/getpaiddrops`,
         method: "GET",
       }),
       providesTags: ["Member"],
@@ -111,6 +120,7 @@ const memberApi = api.injectEndpoints({
 export const {
   useGetMemberQuery,
   useMemberGetDropQuery,
+  useMemberGetPaidDropsQuery,
   useLinkMemberToBusinessMutation,
   useMemberCreateDropMutation,
   useMemberCreateServiceMutation,
