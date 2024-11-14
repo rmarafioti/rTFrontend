@@ -50,22 +50,22 @@ export default function MemberDashboard() {
     return (
       <section>
         <h2>Hello, {member.memberName}</h2>
-        <p>Your are a member of the {member.business?.businessName} team</p>
-        <p>Your Business Code: {member.business?.code}</p>
-        <p>Your Team Members:</p>
+        {/*<p>Your are a member of the {member.business?.businessName} team</p>
+        <p>Your Business Code: {member.business?.code}</p>*/}
+        {/*<p>Your Team Members:</p>
         {member?.business?.businessMember?.length > 0 ? (
           member.business.businessMember.map((businessMember) => (
             <div key={businessMember.id}>
               <p>{businessMember.memberName}</p>
               {/* create a message model so members can send messages back and forth*/}
-              <button>Send Message</button>
+        {/*<button>Send Message</button>
             </div>
           ))
         ) : (
           <p>You have no team members yet</p>
-        )}
+        )}*/}
         {/*create enums for percentages, allowing a business owner to change a team members percentage*/}
-        <p>Percentage: {member.percentage} / 40</p>
+        {/*<p>Percentage: {member.percentage} / 40</p>*/}
       </section>
     );
   }
@@ -77,10 +77,10 @@ export default function MemberDashboard() {
     return (
       <section>
         <h3>
-          Take Home Total:{" "}
+          Take Home Total to Date:{" "}
           {member.drop.reduce((total, drop) => total + drop.memberCut, 0)}
         </h3>
-        <h3>Monthly Totals: *list totals*</h3>
+        {/*<h3>Monthly Totals: *list totals*</h3>*/}
         <h3>Current Drops:</h3>
         <div className={styles.memberDrops}>
           {unpaidDrops?.length ? (
@@ -106,12 +106,37 @@ export default function MemberDashboard() {
     );
   }
 
+  function NotificationCard({ member }) {
+    const paidDrops = member.drop?.filter((drop) => drop.paid);
+
+    return (
+      <section>
+        <h3>Payment Notifications:</h3>
+        {paidDrops?.length ? (
+          paidDrops.map((drop) => (
+            <div key={drop.id}>
+              <p>
+                {drop.paidMessage || "payment received"} on{" "}
+                {new Date(drop.paidDate).toLocaleDateString("en-US", {
+                  timeZone: "UTC",
+                })}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p>No payment notifications yet.</p>
+        )}
+      </section>
+    );
+  }
+
   return (
     <article className="pageSetup">
       <h1>Member Dashboard</h1>
       <MemberCard />
-      <button onClick={dropCreateSubmit}>Create a drop</button>
       <DropCard />
+      <button onClick={dropCreateSubmit}>Create a drop</button>
+      <NotificationCard member={member} />
       {/* list drop totals for each month / functionality can be a separate component STRETCH GOAL */}
       {/* active link to navigate a team member to all drops where paid = true*/}
       <Link to={`/memberarchive`}>Your Archived Drops</Link>
