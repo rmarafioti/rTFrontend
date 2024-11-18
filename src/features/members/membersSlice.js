@@ -114,6 +114,21 @@ const memberApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Owner"],
     }),
+
+    // member posts a pay notice
+    memberPayNotice: builder.mutation({
+      query: ({ payee, paidMessage, amount, dropIds }) => ({
+        url: `member/paynotice`,
+        method: "POST",
+        body: {
+          payee,
+          paidMessage,
+          amount,
+          dropIds,
+        },
+      }),
+      invalidatesTags: ["Member", "Owner"],
+    }),
   }),
 });
 
@@ -127,4 +142,5 @@ export const {
   useMemberUpdateDropMutation,
   useMemberUpdateInfoMutation,
   useOwnerUpdateTotalMutation,
+  useMemberPayNoticeMutation,
 } = memberApi;
