@@ -62,7 +62,7 @@ export default function OwnerDashboard() {
                     );
                     const allPaid = unpaidDrops.length === 0;
 
-                    // Calculate the total of unpaid drops
+                    // Calculate the total amount of unpaid drops
                     const unpaidTotal = unpaidDrops.reduce(
                       (total, drop) => total + drop.memberCut,
                       0
@@ -88,28 +88,30 @@ export default function OwnerDashboard() {
                           )}
                         </div>
                         <p>Owed: ${member.totalOwe}</p>
-                        {allPaid ? (
-                          <p>All drop payments up to date</p>
-                        ) : (
-                          <p>Pay: ${unpaidTotal}</p>
+                        {!allPaid && <p>Pay: ${unpaidTotal}</p>}
+
+                        {/* Only show payment options and button if there are unpaid drops */}
+                        {!allPaid && (
+                          <>
+                            <label>Payment Method:</label>
+                            <select
+                              value={paidMessages[member.id] || ""}
+                              onChange={(e) =>
+                                handleMessageChange(member.id, e.target.value)
+                              }
+                            >
+                              <option value="">Select Payment Method</option>
+                              {paymentOptions.map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                            <button onClick={() => handlePayout(member.id)}>
+                              Payout Team Member
+                            </button>
+                          </>
                         )}
-                        <label>Payment Method:</label>
-                        <select
-                          value={paidMessages[member.id] || ""}
-                          onChange={(e) =>
-                            handleMessageChange(member.id, e.target.value)
-                          }
-                        >
-                          <option value="">Select Payment Method</option>
-                          {paymentOptions.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                        <button onClick={() => handlePayout(member.id)}>
-                          Payout Team Member
-                        </button>
                       </li>
                     );
                   })
