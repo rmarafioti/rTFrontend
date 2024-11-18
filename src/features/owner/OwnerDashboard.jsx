@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetOwnerQuery, usePayMemberDropsMutation } from "./ownerSlice";
+import {
+  useGetOwnerQuery,
+  usePayMemberDropsMutation,
+  useOwnerPayDropsMutation,
+} from "./ownerSlice";
 import "../../styling/mainStyles.css";
 
 export default function OwnerDashboard() {
@@ -68,6 +72,8 @@ export default function OwnerDashboard() {
                       0
                     );
 
+                    const payAmount = member.totalOwe > 0 ? 0 : unpaidTotal;
+
                     return (
                       <li key={member.id}>
                         <p>{member.memberName}</p>
@@ -87,11 +93,15 @@ export default function OwnerDashboard() {
                             <p>No unpaid drops</p>
                           )}
                         </div>
-                        <p>Owed: ${member.totalOwe}</p>
-                        {!allPaid && <p>Pay: ${unpaidTotal}</p>}
-
-                        {/* Only show payment options and button if there are unpaid drops */}
                         {!allPaid && (
+                          <>
+                            <p>Owed: ${member.totalOwe}</p>
+                            <p>Pay: ${payAmount}</p>
+                          </>
+                        )}
+
+                        {/* Only show payment options and button if the 'Pay' is greater than 0 */}
+                        {payAmount > 0 && (
                           <>
                             <label>Payment Method:</label>
                             <select
@@ -128,6 +138,87 @@ export default function OwnerDashboard() {
     );
   }
 
+  function OwnerNotificationCard() {
+    const [confirmPayment, { isLoading }] = useOwnerPayDropsMutation();
+
+    // Extract payment notices using reduce
+    const payNotices = owner?.ownerBusiness?.reduce((acc, business) => {
+      business.businessMember.forEach((member) => {
+        member.drop.forEach((drop) => {
+          if (drop.paidNotice) {
+            const existingNotice = acc.find(
+              (notice) => notice.id === drop.paidNotice.id
+            );
+            if (!existingNotice) {
+              acc.push({ ...drop.paidNotice, drops: [drop] });
+            } else {
+              existingNotice.drops.push(drop);
+            }
+          }
+        });
+      });
+      return acc;
+    }, []);
+
+    const handleConfirmPayment = async (notice) => {
+      try {
+        const dropIds = notice.drops.map((drop) => drop.id);
+
+        console.log("Attempting to confirm payment for drop IDs:", dropIds);
+
+        await confirmPayment({
+          payee: notice.payee,
+          paidMessage: notice.paidMessage,
+          amount: notice.amount,
+          dropIds,
+        }).unwrap();
+
+        console.log("Payment confirmed for notice ID:", notice.id);
+      } catch (error) {
+        console.error("Error confirming payment:", error);
+      }
+    };
+
+    return (
+      <section>
+        <h2>Payment Notices</h2>
+        {payNotices?.length ? (
+          payNotices.map((notice) => (
+            <div key={notice.id}>
+              <h4>Notice from: {notice.payee}</h4>
+              <p>
+                Amount: ${notice.amount} on{" "}
+                {new Date(notice.paidDate).toLocaleDateString("en-US")}
+              </p>
+              <p>Message: {notice.paidMessage || "No message provided"}</p>
+              <h5>Paid for Drops on:</h5>
+              <ul>
+                {notice.drops.map((drop) => (
+                  <li key={drop.id}>
+                    {new Date(drop.date).toLocaleDateString("en-US")}
+                  </li>
+                ))}
+              </ul>
+              {/* Check if the drop has been paid */}
+              {notice.drops.every((drop) => drop.paidDrop) ? (
+                <p className="confirmed">Payment Confirmed</p>
+              ) : (
+                <button
+                  onClick={() => handleConfirmPayment(notice)}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Processing..." : "Confirm Payment"}
+                </button>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No payment notices found</p>
+        )}
+      </section>
+    );
+  }
+
   return (
     <article className="pageSetup">
       <h1>Owner Dashboard</h1>
@@ -135,10 +226,10 @@ export default function OwnerDashboard() {
       <p>Owner Name: {owner?.ownerName}</p>
       <p>Take Home Total: ${owner?.takeHomeTotal}</p>
       <BusinessMembersCard />
+      <OwnerNotificationCard />
       <Link to={`/memberarchive`}>*Member Archive*</Link>
-      <Link to={`/ownerhandledrops`}>*Handle Drops*</Link>
-      <h3>Year Take Home Total:</h3>
-      <h3>Monthly Totals: *list totals*</h3>
+      {/*<h3>Year Take Home Total:</h3>*/}
+      {/*<h3>Monthly Totals: *list totals*</h3>*/}
     </article>
   );
 }
