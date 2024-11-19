@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  useGetOwnerQuery,
-  usePayMemberDropsMutation,
-  useOwnerPayDropsMutation,
-} from "./ownerSlice";
+import { useGetOwnerQuery, useOwnerPayDropsMutation } from "./ownerSlice";
 import "../../styling/mainStyles.css";
 
 export default function OwnerDashboard() {
+  const [confirmPayment] = useOwnerPayDropsMutation();
   const { data: owner, error, isLoading } = useGetOwnerQuery();
-  const [payMemberDrops] = usePayMemberDropsMutation();
 
   // State to manage payment messages for each member
   const [paidMessages, setPaidMessages] = useState({});
@@ -34,16 +30,29 @@ export default function OwnerDashboard() {
   };
 
   // Handle payout for a specific member
-  const handlePayout = async (memberId) => {
-    const message = paidMessages[memberId] || "";
+  const handlePayout = async (member) => {
+    const message = paidMessages[member.id] || ""; // Get the payment message for the member
+    const unpaidDrops = member.drop?.filter((drop) => !drop.paid); // Get unpaid drops for the member
+    const dropIds = unpaidDrops.map((drop) => drop.id); // Extract drop IDs from unpaid drops
+    const amount = unpaidDrops.reduce(
+      (total, drop) => total + drop.memberCut,
+      0
+    ); // Calculate the total amount
+
     try {
-      await payMemberDrops({ memberId, paidMessage: message }).unwrap();
-      console.log(`Paid out drops for member with ID: ${memberId}`);
+      await confirmPayment({
+        payee: owner.ownerName, // Member's name as the payee
+        paidMessage: message, // Message entered by the owner
+        amount, // Total amount to pay
+        dropIds, // List of unpaid drop IDs
+      }).unwrap();
+
+      console.log(`Paid out drops for member with ID: ${member.id}`);
 
       // Clear the message for the current member after successful payment
       setPaidMessages((prev) => ({
         ...prev,
-        [memberId]: "",
+        [member.id]: "",
       }));
     } catch (error) {
       console.error("Error paying out drop:", error);
@@ -117,7 +126,7 @@ export default function OwnerDashboard() {
                                 </option>
                               ))}
                             </select>
-                            <button onClick={() => handlePayout(member.id)}>
+                            <button onClick={() => handlePayout(member)}>
                               Payout Team Member
                             </button>
                           </>
@@ -139,7 +148,7 @@ export default function OwnerDashboard() {
   }
 
   function OwnerNotificationCard() {
-    const [confirmPayment, { isLoading }] = useOwnerPayDropsMutation();
+    /*const [confirmPayment, { isLoading }] = useOwnerPayDropsMutation();*/
 
     // Extract payment notices using reduce
     const payNotices = owner?.ownerBusiness?.reduce((acc, business) => {
