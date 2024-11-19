@@ -1,5 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetMemberQuery, useMemberCreateDropMutation } from "./membersSlice";
+import {
+  useGetMemberQuery,
+  useMemberCreateDropMutation,
+  useMemberPayNoticeMutation,
+} from "./membersSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/MemberDashboard.module.css";
@@ -71,8 +76,56 @@ export default function MemberDashboard() {
   }
 
   function DropCard() {
+    const [payNotice, { isLoading }] = useMemberPayNoticeMutation();
+
+    // State to manage payment messages for each member
+    const [paidMessages, setPaidMessages] = useState({});
+
+    const paymentOptions = [
+      "Paid via Cash",
+      "Paid via Zelle",
+      "Paid via Venmo",
+      "Paid via PayPal",
+      "Other",
+    ];
+
+    // Handle message change for a specific member
+    const handleMessageChange = (memberId, message) => {
+      setPaidMessages((prev) => ({
+        ...prev,
+        [memberId]: message,
+      }));
+    };
+
     const unpaidDrops = member.drop?.filter((drop) => !drop.paid);
+
+    // Check if there's already a `paidNotice` for these unpaid drops
+    const hasPendingNotice = unpaidDrops.some((drop) => drop.paidNotice);
+
     const allPaid = unpaidDrops?.length === 0;
+
+    // Collect the IDs of unpaid drops
+    const unpaidDropIds = unpaidDrops?.map((drop) => drop.id) || [];
+
+    // send a paymnet notice
+    const sendPaymentNotice = async (memberId) => {
+      const message = paidMessages[memberId] || "";
+      if (unpaidDropIds.length === 0) {
+        console.error("No drops to pay");
+        return;
+      }
+      try {
+        await payNotice({
+          payee: member.memberName,
+          paidMessage: message,
+          amount: memberOwesTotal,
+          dropIds: unpaidDropIds,
+        }).unwrap();
+        handleMessageChange(memberId, "");
+      } catch (error) {
+        console.error("Error sending payment notice:", error);
+      }
+    };
 
     return (
       <section>
@@ -102,25 +155,81 @@ export default function MemberDashboard() {
         {/* create the ability for a owner and team member to fill out a form with a message to paid amount owed*/}
         <p>Owed to You: {businessOwesTotal}</p>
         <p>You Owe: {memberOwesTotal}</p>
+
+        {/* Render payment notification section if the member owes the business */}
+        {memberOwesTotal > 0 && (
+          <div>
+            {hasPendingNotice ? (
+              <p>Notice sent! Confirmation of payment pending.</p>
+            ) : (
+              <>
+                <h4>Send Payment Notice</h4>
+                <label>Payment Method:</label>
+                <select
+                  value={paidMessages[member.id] || ""}
+                  onChange={(e) =>
+                    handleMessageChange(member.id, e.target.value)
+                  }
+                >
+                  <option value="">Select Payment Method</option>
+                  {paymentOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  onClick={() => sendPaymentNotice(member.id)}
+                  disabled={isLoading || !paidMessages[member.id]?.trim()}
+                >
+                  {isLoading ? "Sending..." : "Send Payment Notice"}
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </section>
     );
   }
 
   function NotificationCard({ member }) {
-    const paidDrops = member.drop?.filter((drop) => drop.paid);
+    // Extract all unique paidDrops from the member's drops
+    const paidDrops = member.drop
+      ?.filter((drop) => drop.paidDrop)
+      .map((drop) => drop.paidDrop)
+      .filter(
+        (value, index, self) =>
+          self.findIndex((pd) => pd.id === value.id) === index
+      );
 
     return (
       <section>
         <h3>Payment Notifications:</h3>
         {paidDrops?.length ? (
-          paidDrops.map((drop) => (
-            <div key={drop.id}>
+          paidDrops.map((paidDrop) => (
+            <div key={paidDrop.id}>
+              <h4>Payment Received:</h4>
               <p>
-                {drop.paidMessage || "payment received"} on{" "}
-                {new Date(drop.paidDate).toLocaleDateString("en-US", {
+                ${paidDrop.amount} from {paidDrop.payee} on{" "}
+                {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
                   timeZone: "UTC",
                 })}
               </p>
+              <p>{paidDrop.paidMessage || "No message provided"}</p>
+
+              {/* Map over the drops associated with this paidDrop */}
+              <h5>Paid for Drops on:</h5>
+              <ul>
+                {member.drop
+                  ?.filter((drop) => drop.paidDrop?.id === paidDrop.id)
+                  .map((drop) => (
+                    <li key={drop.id}>
+                      {new Date(drop.date).toLocaleDateString("en-US", {
+                        timeZone: "UTC",
+                      })}
+                    </li>
+                  ))}
+              </ul>
             </div>
           ))
         ) : (
