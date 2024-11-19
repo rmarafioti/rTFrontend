@@ -219,6 +219,29 @@ export default function OwnerDashboard() {
     );
   }
 
+  function MemberArchivesCard() {
+    return (
+      <section>
+        <h2>Team Member Archives</h2>
+        {owner?.ownerBusiness?.length ? (
+          <ul>
+            {owner.ownerBusiness.map((business) =>
+              business.businessMember?.map((member) => (
+                <li key={member.id}>
+                  <Link to={`/ownermembersarchive/${member.id}`}>
+                    {member.memberName}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
+        ) : (
+          <p>No Members Found</p>
+        )}
+      </section>
+    );
+  }
+
   return (
     <article className="pageSetup">
       <h1>Owner Dashboard</h1>
@@ -227,9 +250,7 @@ export default function OwnerDashboard() {
       <p>Take Home Total: ${owner?.takeHomeTotal}</p>
       <BusinessMembersCard />
       <OwnerNotificationCard />
-      <Link to={`/memberarchive`}>*Member Archive*</Link>
-      {/*<h3>Year Take Home Total:</h3>*/}
-      {/*<h3>Monthly Totals: *list totals*</h3>*/}
+      <MemberArchivesCard />
     </article>
   );
 }

@@ -31,7 +31,6 @@ export default function MemberDrop() {
           <p>Credit: {service.credit}</p>
           <p>Deposit: {service.deposit}</p>
           <p>Gift Certificate: {service.giftCertAmount}</p>
-          <button>Edit Service</button>
         </div>
       ))}
       <Link to={`/memberdashboard`}>Back to Dashboard</Link>

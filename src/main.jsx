@@ -12,6 +12,7 @@ import AuthFormMember from "./features/auth/AuthFormMember";
 //owner features
 import OwnerOnboard from "./features/owner/OwnerOnboard";
 import OwnerDashboard from "./features/owner/OwnerDashboard";
+import OwnerMembersArchice from "./features/owner/OwnerMembersArchive";
 //member features
 import MemberOnboard from "./features/members/MemberOnboard";
 import MemberDashboard from "./features/members/MemberDashboard";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       { path: "/authowner", element: <AuthFormOwner /> },
       { path: "/owneronboard/", element: <OwnerOnboard /> },
       { path: "/ownerdashboard/", element: <OwnerDashboard /> },
+      {
+        path: "/ownermembersarchive/:memberId",
+        element: <OwnerMembersArchice />,
+      },
       { path: "/authmember", element: <AuthFormMember /> },
       { path: "/memberonboard/", element: <MemberOnboard /> },
       { path: "/memberdashboard/", element: <MemberDashboard /> },
