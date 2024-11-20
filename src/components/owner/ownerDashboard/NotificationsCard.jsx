@@ -1,7 +1,7 @@
 import {
   useGetOwnerQuery,
   useOwnerPayDropsMutation,
-} from "../../features/owner/ownerSlice";
+} from "../../../features/owner/ownerSlice";
 
 import "../../styling/mainStyles.css";
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   useGetOwnerQuery,
   useOwnerPayDropsMutation,
-} from "../../features/owner/ownerSlice";
+} from "../../../features/owner/ownerSlice";
 import { Link } from "react-router-dom";
 
 export default function TeamMembersCard() {
