@@ -1,6 +1,6 @@
-import TeamMembersCard from "../../components/owner/TeamMembersCard";
-import NotificationsCard from "../../components/owner/NotificationsCard";
-import MemberArchivesCard from "../../components/owner/MemberArchivesCard";
+import TeamMembersCard from "../../components/owner/ownerDashboard/TeamMembersCard";
+import NotificationsCard from "../../components/owner/ownerDashboard/NotificationsCard";
+import MemberArchivesCard from "../../components/owner/ownerDashboard/MemberArchivesCard";
 import { useGetOwnerQuery } from "./ownerSlice";
 import "../../styling/mainStyles.css";
 

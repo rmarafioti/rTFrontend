@@ -5,7 +5,7 @@ import {
   useMemberPayNoticeMutation,
 } from "../../../features/members/membersSlice";
 
-import styles from "../../styling/memberDashboard.module.css";
+import styles from "../../../styling/memberDashboard.module.css";
 
 export default function PayNoticeCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();

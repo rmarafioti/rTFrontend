@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useGetMemberQuery, useMemberCreateDropMutation } from "./membersSlice";
 import { Link } from "react-router-dom";
-import PayNoticeCard from "../../components/member/PayNoticeCard";
-import MemberNotificationsCard from "../../components/member/MemberNotificationsCard";
+import PayNoticeCard from "../../components/member/memberDashboard/PayNoticeCard";
+import MemberNotificationsCard from "../../components/member/memberDashboard/MemberNotificationsCard";
 
 import "../../styling/mainStyles.css";
 
