@@ -7,6 +7,14 @@
     margin: 1rem 1rem 0rem 1rem;
   }
 
+  .paymentMessage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
   #footer, #navbar {
     color: white;
     background-color: black;
