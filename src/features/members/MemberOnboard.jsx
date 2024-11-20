@@ -36,7 +36,7 @@ export default function MemberOnboard() {
         <label className={styles.labelName}>Business Code:</label>
         <input
           className={styles.formInput}
-          type="text"
+          type="password"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           required
