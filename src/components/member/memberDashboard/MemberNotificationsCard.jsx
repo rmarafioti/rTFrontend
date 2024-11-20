@@ -1,4 +1,4 @@
-import { useGetMemberQuery } from "../../features/members/membersSlice";
+import { useGetMemberQuery } from "../../../features/members/membersSlice";
 
 export default function MemberNotificationsCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();

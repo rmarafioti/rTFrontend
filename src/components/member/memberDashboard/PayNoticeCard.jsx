@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   useGetMemberQuery,
   useMemberPayNoticeMutation,
-} from "../../features/members/membersSlice";
+} from "../../../features/members/membersSlice";
 
 import styles from "../../styling/memberDashboard.module.css";
 
