@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import styles from "../styling/serviceCard.module.css";
+import styles from "../../../styling/serviceCard.module.css";
 
 export default function ServiceCard({ addedService, setAddedService }) {
   const [formValues, setFormValues] = useState({

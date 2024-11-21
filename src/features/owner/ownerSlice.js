@@ -22,19 +22,9 @@ const ownerApi = api.injectEndpoints({
       invalidatesTags: ["Owner"],
     }),
 
-    //owner marks drops paid for a team member by id
-    /*payMemberDrops: builder.mutation({
-      query: ({ memberId, paidMessage }) => ({
-        url: `owner/droppaid/${memberId}`,
-        method: "PATCH",
-        body: { paidMessage },
-      }),
-      invalidatesTags: ["Owner", "Member"],
-    }),*/
-
     //owner posts a drop paid
     ownerPayDrops: builder.mutation({
-      query: ({ payee, paidMessage, amount, dropIds }) => ({
+      query: ({ payee, paidMessage, amount, dropIds, memberId }) => ({
         url: `owner/paydrops`,
         method: "POST",
         body: {
@@ -42,6 +32,7 @@ const ownerApi = api.injectEndpoints({
           paidMessage,
           amount,
           dropIds,
+          memberId,
         },
       }),
       invalidatesTags: ["Owner", "Member"],
@@ -52,6 +43,5 @@ const ownerApi = api.injectEndpoints({
 export const {
   useGetOwnerQuery,
   useCreateBusinessMutation,
-  /*usePayMemberDropsMutation,*/
   useOwnerPayDropsMutation,
 } = ownerApi;

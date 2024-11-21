@@ -7,8 +7,8 @@ import {
   useMemberUpdateDropMutation,
   useMemberUpdateInfoMutation,
   useOwnerUpdateTotalMutation,
-} from "../features/members/membersSlice";
-import styles from "../styling/drop.module.css";
+} from "../../../features/members/membersSlice";
+import styles from "../../../styling/drop.module.css";
 
 export default function Drop({ dropId }) {
   console.log("Received dropId in Drop:", dropId);

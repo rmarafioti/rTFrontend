@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import Drop from "../../components/Drop";
+import Drop from "../../components/member/createDrop/Drop";
 
 import "../../styling/mainStyles.css";
 
