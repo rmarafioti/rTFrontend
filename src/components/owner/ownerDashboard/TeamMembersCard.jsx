@@ -47,6 +47,7 @@ export default function TeamMembersCard() {
         paidMessage: message, // Message entered by the owner
         amount, // Total amount to pay
         dropIds, // List of unpaid drop IDs
+        memberId: member.id,
       }).unwrap();
 
       console.log(`Paid out drops for member with ID: ${member.id}`);

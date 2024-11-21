@@ -37,11 +37,19 @@ export default function NotificationsCard() {
 
       console.log("Attempting to confirm payment for drop IDs:", dropIds);
 
+      const memberId = notice.drops[0]?.member_id;
+
+      if (!memberId) {
+        console.error("Member ID not found in notice drops");
+        return;
+      }
+
       await confirmPayment({
         payee: notice.payee,
         paidMessage: notice.paidMessage,
         amount: notice.amount,
         dropIds,
+        memberId,
       }).unwrap();
 
       console.log("Payment confirmed for notice ID:", notice.id);
