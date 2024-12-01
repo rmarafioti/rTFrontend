@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   useGetMemberQuery,
   useMemberPayNoticeMutation,
+  useMemberDeleteDropMutation,
 } from "../../../features/members/membersSlice";
 
 import styles from "../../../styling/memberDashboard.module.css";
@@ -10,6 +11,7 @@ import styles from "../../../styling/memberDashboard.module.css";
 export default function PayNoticeCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
   const [payNotice] = useMemberPayNoticeMutation();
+  const [deleteDrop] = useMemberDeleteDropMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -78,21 +80,33 @@ export default function PayNoticeCard() {
     }
   };
 
+  // send delete drop
+  const submitDeleteDrop = async (dropId) => {
+    console.log("Deleting drop with ID:", dropId);
+    try {
+      await deleteDrop(dropId).unwrap();
+      console.log("Successfully deleted drop with ID: ${dropId}");
+    } catch (error) {
+      console.error("Error deleting drop with ID ${dropId}:", error);
+    }
+  };
+
   return (
     <section>
       <h3>Current Drops:</h3>
       <div className={styles.memberDrops}>
         {unpaidDrops?.length ? (
           unpaidDrops.map((drop) => (
-            <Link
-              className={styles.memberDrop}
-              to={`/memberdrop/${drop.id}`}
-              key={drop.id}
-            >
-              {new Date(drop.date).toLocaleDateString("en-US", {
-                timeZone: "UTC",
-              })}
-            </Link>
+            <div key={drop.id}>
+              <Link className={styles.memberDrop} to={`/memberdrop/${drop.id}`}>
+                {new Date(drop.date).toLocaleDateString("en-US", {
+                  timeZone: "UTC",
+                })}
+              </Link>
+              <button onClick={() => submitDeleteDrop(drop.id)}>
+                Delete Drop
+              </button>
+            </div>
           ))
         ) : (
           <p>All your drops are paid up to date</p>
