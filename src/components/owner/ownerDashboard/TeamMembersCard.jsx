@@ -88,7 +88,10 @@ export default function TeamMembersCard() {
                       <div>
                         {unpaidDrops.length > 0 ? (
                           unpaidDrops.map((drop) => (
-                            <Link to={`/memberdrop/${drop.id}`} key={drop.id}>
+                            <Link
+                              to={`/ownermemberdrop/${drop.id}`}
+                              key={drop.id}
+                            >
                               {new Date(drop.date).toLocaleDateString("en-US", {
                                 timeZone: "UTC",
                               })}

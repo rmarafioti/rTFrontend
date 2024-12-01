@@ -51,7 +51,7 @@ const memberApi = api.injectEndpoints({
     // member get drop by id
     memberGetDrop: builder.query({
       query: (dropId) => ({
-        url: `/member/getdrop/${dropId}`,
+        url: `/member/drops/${dropId}`,
         method: "GET",
       }),
       providesTags: ["Member"],
@@ -66,20 +66,6 @@ const memberApi = api.injectEndpoints({
       providesTags: ["Member"],
     }),
 
-    // member update member info
-    memberUpdateInfo: builder.mutation({
-      query: ({ memberId, memberCut, memberOwes, businessOwes }) => ({
-        url: `/member/updatememberinfo/${memberId}`,
-        method: "POST",
-        body: {
-          memberCut: memberCut,
-          memberOwes: memberOwes,
-          businessOwes: businessOwes,
-        },
-      }),
-      invalidatesTags: ["Member"],
-    }),
-
     // member update a drop
     memberUpdateDrop: builder.mutation({
       query: ({
@@ -91,7 +77,7 @@ const memberApi = api.injectEndpoints({
         memberOwes,
         businessOwes,
       }) => ({
-        url: `/member/updatedrop/${dropId}`,
+        url: `/member/drops/${dropId}`,
         method: "POST",
         body: {
           date,
@@ -100,6 +86,29 @@ const memberApi = api.injectEndpoints({
           businessCut,
           memberOwes,
           businessOwes,
+        },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member delete a drop
+    memberDeleteDrop: builder.mutation({
+      query: (dropId) => ({
+        url: `/member/drops/${dropId}`,
+        method: "Delete",
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
+    // member update member info
+    memberUpdateInfo: builder.mutation({
+      query: ({ memberId, memberCut, memberOwes, businessOwes }) => ({
+        url: `/member/updatememberinfo/${memberId}`,
+        method: "POST",
+        body: {
+          memberCut: memberCut,
+          memberOwes: memberOwes,
+          businessOwes: businessOwes,
         },
       }),
       invalidatesTags: ["Member"],
@@ -140,6 +149,7 @@ export const {
   useMemberCreateDropMutation,
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
+  useMemberDeleteDropMutation,
   useMemberUpdateInfoMutation,
   useOwnerUpdateTotalMutation,
   useMemberPayNoticeMutation,

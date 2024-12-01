@@ -27,7 +27,7 @@ export default function OwnerMembersArchice() {
         <ul>
           {archivedDrops.map((drop) => (
             <li key={drop.id}>
-              <Link to={`/memberdrop/${drop.id}`}>
+              <Link to={`/ownermemberdrop/${drop.id}`}>
                 {new Date(drop.date).toLocaleDateString("en-US")}
               </Link>
             </li>
