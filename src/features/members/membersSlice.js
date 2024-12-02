@@ -12,6 +12,20 @@ const memberApi = api.injectEndpoints({
       providesTags: ["Member"],
     }),
 
+    // member update member info
+    memberUpdateInfo: builder.mutation({
+      query: ({ memberCut, memberOwes, businessOwes }) => ({
+        url: `/member`,
+        method: "POST",
+        body: {
+          memberCut: memberCut,
+          memberOwes: memberOwes,
+          businessOwes: businessOwes,
+        },
+      }),
+      invalidatesTags: ["Member"],
+    }),
+
     // link member to a business
     linkMemberToBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
@@ -88,7 +102,7 @@ const memberApi = api.injectEndpoints({
           businessOwes,
         },
       }),
-      invalidatesTags: ["Member"],
+      invalidatesTags: ["Member", "Owner"],
     }),
 
     // member delete a drop
@@ -98,30 +112,6 @@ const memberApi = api.injectEndpoints({
         method: "Delete",
       }),
       invalidatesTags: ["Member"],
-    }),
-
-    // member update member info
-    memberUpdateInfo: builder.mutation({
-      query: ({ memberId, memberCut, memberOwes, businessOwes }) => ({
-        url: `/member/updatememberinfo/${memberId}`,
-        method: "POST",
-        body: {
-          memberCut: memberCut,
-          memberOwes: memberOwes,
-          businessOwes: businessOwes,
-        },
-      }),
-      invalidatesTags: ["Member"],
-    }),
-
-    // Owner take-home total is updated when a member submits a drop
-    ownerUpdateTotal: builder.mutation({
-      query: ({ businessCut }) => ({
-        url: `/member/businesstotalupdate`,
-        method: "PATCH",
-        body: { businessCut },
-      }),
-      invalidatesTags: ["Owner"],
     }),
 
     // member posts a pay notice
@@ -151,6 +141,5 @@ export const {
   useMemberUpdateDropMutation,
   useMemberDeleteDropMutation,
   useMemberUpdateInfoMutation,
-  useOwnerUpdateTotalMutation,
   useMemberPayNoticeMutation,
 } = memberApi;
