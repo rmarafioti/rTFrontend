@@ -6,7 +6,6 @@ import {
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
   useMemberUpdateInfoMutation,
-  useOwnerUpdateTotalMutation,
 } from "../../../features/members/membersSlice";
 import styles from "../../../styling/drop.module.css";
 
@@ -21,7 +20,6 @@ export default function Drop({ dropId }) {
   const [createService] = useMemberCreateServiceMutation();
   const [updateDrop] = useMemberUpdateDropMutation();
   const [updateMemberInfo] = useMemberUpdateInfoMutation();
-  const [ownerUpdateTotal] = useOwnerUpdateTotalMutation();
   const navigate = useNavigate();
 
   // Function to add up totals for all added services
@@ -97,8 +95,6 @@ export default function Drop({ dropId }) {
       }).unwrap();
 
       console.log("Member information updated successfully");
-
-      await ownerUpdateTotal({ businessCut }).unwrap();
 
       console.log("Drop updated successfully");
       setAddedService([]); // Clear after submission

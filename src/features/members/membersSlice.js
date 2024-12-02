@@ -102,7 +102,7 @@ const memberApi = api.injectEndpoints({
           businessOwes,
         },
       }),
-      invalidatesTags: ["Member"],
+      invalidatesTags: ["Member", "Owner"],
     }),
 
     // member delete a drop
@@ -112,16 +112,6 @@ const memberApi = api.injectEndpoints({
         method: "Delete",
       }),
       invalidatesTags: ["Member"],
-    }),
-
-    // Owner take-home total is updated when a member submits a drop
-    ownerUpdateTotal: builder.mutation({
-      query: ({ businessCut }) => ({
-        url: `/member/businesstotalupdate`,
-        method: "PATCH",
-        body: { businessCut },
-      }),
-      invalidatesTags: ["Owner"],
     }),
 
     // member posts a pay notice
@@ -151,6 +141,5 @@ export const {
   useMemberUpdateDropMutation,
   useMemberDeleteDropMutation,
   useMemberUpdateInfoMutation,
-  useOwnerUpdateTotalMutation,
   useMemberPayNoticeMutation,
 } = memberApi;
