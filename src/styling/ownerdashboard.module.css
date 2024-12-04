@@ -1,0 +1,46 @@
+/* Take Home Total Section */
+
+.takeHomeTotalSection, .teamMembersSection {
+    margin: 1rem 0rem 1rem 0rem;
+    padding: .5rem;
+    border: 1px solid rgb(187, 192, 196);
+}
+
+.takeHomeKey, .balances {
+    font-size: 20px;
+}
+
+.teamMember {
+    list-style-type: none;
+}
+.takeHomeValue, .teamMemberName {
+    font-size: 22px;
+}
+
+.unpaidDrops, .paymentSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.unpaidDrop {
+    padding: .5rem;
+}
+
+.paymentSection {
+    margin: 1rem 0rem 1rem 0rem;
+    border-top: 1px solid rgb(187, 192, 196);
+}
+
+.paymentTitle {
+    font-size: 22px;
+    padding: 1rem 0rem 1rem 0rem;
+}
+
+.paymentMethod {
+    font-size: 16px;
+    padding: .5rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgb(187, 192, 196);
+}
+

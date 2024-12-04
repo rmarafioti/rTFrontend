@@ -5,6 +5,8 @@ import {
 } from "../../../features/owner/ownerSlice";
 import { Link } from "react-router-dom";
 
+import styles from "../../../styling/ownerdashboard.module.css";
+
 export default function TeamMembersCard() {
   const [confirmPayment] = useOwnerPayDropsMutation();
   const { data: owner, error, isLoading } = useGetOwnerQuery();
@@ -64,11 +66,11 @@ export default function TeamMembersCard() {
 
   return (
     <section>
-      <h2>Your Team Members</h2>
+      <h2>Your Team Members:</h2>
       {owner?.ownerBusiness?.length ? (
         owner.ownerBusiness.map((business) => (
-          <div key={business.id}>
-            <ul>
+          <div className={styles.teamMembersSection} key={business.id}>
+            <ul className={styles.teamMember}>
               {business.businessMember?.length ? (
                 business.businessMember.map((member) => {
                   const unpaidDrops = member.drop?.filter((drop) => !drop.paid);
@@ -84,13 +86,16 @@ export default function TeamMembersCard() {
 
                   return (
                     <li key={member.id}>
-                      <p>{member.memberName}</p>
-                      <div>
+                      <p className={styles.teamMemberName}>
+                        {member.memberName}
+                      </p>
+                      <div className={styles.unpaidDrops}>
                         {unpaidDrops.length > 0 ? (
                           unpaidDrops.map((drop) => (
                             <Link
                               to={`/ownermemberdrop/${drop.id}`}
                               key={drop.id}
+                              className={styles.unpaidDrop}
                             >
                               {new Date(drop.date).toLocaleDateString("en-US", {
                                 timeZone: "UTC",
@@ -103,21 +108,28 @@ export default function TeamMembersCard() {
                       </div>
                       {!allPaid && (
                         <>
-                          <p>Owed: ${member.totalOwe}</p>
-                          <p>Pay: ${payAmount}</p>
+                          <p className={styles.balances}>
+                            Team Member Owes: ${member.totalOwe}
+                          </p>
+                          <p className={styles.balances}>
+                            Balance to Pay: ${payAmount}
+                          </p>
                         </>
                       )}
 
                       {/* Only show payment options and button if the 'Pay' is greater than 0 or not all paid*/}
                       {member.totalOwe > 0 ||
                         (!allPaid && (
-                          <>
-                            <label>Payment Method:</label>
+                          <div className={styles.paymentSection}>
+                            <label className={styles.paymentTitle}>
+                              Payment Method:
+                            </label>
                             <select
                               value={paidMessages[member.id] || ""}
                               onChange={(e) =>
                                 handleMessageChange(member.id, e.target.value)
                               }
+                              className={styles.paymentMethod}
                             >
                               <option value="">Select Payment Method</option>
                               {paymentOptions.map((option) => (
@@ -129,7 +141,7 @@ export default function TeamMembersCard() {
                             <button onClick={() => handlePayout(member)}>
                               Payout Team Member
                             </button>
-                          </>
+                          </div>
                         ))}
                     </li>
                   );

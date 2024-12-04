@@ -50,7 +50,7 @@ h1,
 h2,
 h3,
 p {
-  margin: 1rem;
+  margin: .5rem;
 }
 
 button {
@@ -64,7 +64,8 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  color: white;
+  background-color: rgb(36, 37, 38);
 }
 button:focus,
 button:focus-visible {
