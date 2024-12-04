@@ -1,46 +1,79 @@
 /* Take Home Total Section */
 
-.takeHomeTotalSection, .teamMembersSection {
-    margin: 1rem 0rem 1rem 0rem;
-    padding: .5rem;
-    border: 1px solid rgb(187, 192, 196);
+.takeHomeTotalSection,
+.teamMembersSection,
+.noticeSection,
+.archivesSection {
+  margin: 1rem 0rem 1rem 0rem;
+  padding: 0.5rem;
+  border: 1px solid rgb(187, 192, 196);
+  width: 460px;
 }
 
-.takeHomeKey, .balances {
-    font-size: 20px;
+.takeHomeKey,
+.balances {
+  font-size: 20px;
 }
 
-.teamMember {
-    list-style-type: none;
+.teamMember, .archiveName {
+  list-style-type: none;
 }
-.takeHomeValue, .teamMemberName {
-    font-size: 22px;
+.takeHomeValue,
+.teamMemberName {
+  font-size: 22px;
 }
 
-.unpaidDrops, .paymentSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Team Member Card Section */
+
+.unpaidDrops,
+.paymentSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .unpaidDrop {
-    padding: .5rem;
+  padding: 0.5rem;
 }
 
 .paymentSection {
-    margin: 1rem 0rem 1rem 0rem;
-    border-top: 1px solid rgb(187, 192, 196);
+  margin: 1rem 0rem 1rem 0rem;
+  border-top: 1px solid rgb(187, 192, 196);
 }
 
 .paymentTitle {
-    font-size: 22px;
-    padding: 1rem 0rem 1rem 0rem;
+  font-size: 22px;
+  padding: 1rem 0rem 1rem 0rem;
 }
 
 .paymentMethod {
-    font-size: 16px;
-    padding: .5rem;
-    margin-bottom: 1rem;
-    border: 1px solid rgb(187, 192, 196);
+  font-size: 16px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgb(187, 192, 196);
 }
 
+/* Notification Card Section */
+
+.paymentMessage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Members Archive Section */
+
+.archiveName {
+    padding: .5rem;
+}
+.link {
+    color: rgb(36, 37, 38);
+    background-color: rgb(225, 230, 235);
+    padding: .5rem;
+}
+.link:hover {
+    color: rgb(36, 37, 38);
+    background-color: rgb(188, 192, 197);
+}
