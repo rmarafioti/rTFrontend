@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { logoutOwner, selectOwnerToken } from "../features/auth/authOwnerSlice";
 import {
   logoutMember,
   selectMemberToken,
 } from "../features/auth/authMemberSlice";
+
+import styles from "../styling/layout.module.css";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -27,31 +28,29 @@ export default function Navbar() {
   };
 
   return (
-    <nav id="navbar">
-      <NavLink to={`/`}>
-        <h1>Right Track Bookkeeping</h1>
-      </NavLink>
-      <ul>
+    <nav className={styles.navbar}>
+      <h1 className={styles.title}>Right Track Bookkeeping</h1>
+      <ul className={styles.menu}>
         {token ? (
           <>
             {ownerToken && (
-              <li>
+              <li className={styles.menuItem}>
                 <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
               </li>
             )}
             {memberToken && (
-              <li>
+              <li className={styles.menuItem}>
                 <NavLink to="/memberdashboard">Member Dashboard</NavLink>
               </li>
             )}
-            <li>
-              <a className="navLink" onClick={handleLogout}>
+            <li className={styles.menuItem}>
+              <a className={styles.menuItem} onClick={handleLogout}>
                 Log Out
               </a>
             </li>
           </>
         ) : (
-          <li>
+          <li className={styles.menuItem}>
             <NavLink to="/">Log In</NavLink>
           </li>
         )}

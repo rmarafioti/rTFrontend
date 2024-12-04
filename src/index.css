@@ -6,10 +6,10 @@
 }
 
 :root {
-  font-family: "Roboto Flex", sans-serif;
-  font-optical-sizing: auto;
+  font-family: "Cantata One", serif;
   font-weight: 400;
   font-style: normal;
+
   font-variation-settings: "slnt" 0, "wdth" 100, "GRAD" 0, "XOPQ" 96, "XTRA" 468,
     "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712;
 
@@ -23,23 +23,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-/*body {
-  margin: 0;
+.layout {
   display: flex;
   flex-direction: column;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}*/
+  width: 100vw;
+  min-height: 100vh; /* Full viewport height */
+}
+
+main {
+  flex: auto;
+}
+
+a {
+  text-decoration: none;
+}
 
 h1 {
   font-size: 40px;
