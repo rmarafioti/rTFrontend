@@ -1,0 +1,50 @@
+.navbar, .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(246, 239, 230);
+  padding: 1rem 0rem 2rem 0rem;
+  border-bottom: 2px solid rgb(187, 192, 196);
+}
+
+.footer {
+  justify-content: center;
+  border-bottom: none;
+  border-top: 2px solid rgb(187, 192, 196);
+}
+
+.title {
+  color: rgb(36, 37, 38);
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin-right: 2rem;
+}
+
+.menuItem a {
+  font-size: 20px;
+  color: rgb(92, 95, 98);
+  padding: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menuItem :hover {
+  color: black;
+}
+
+@media (max-width: 768px) {
+ 
+  .title {
+    font-size: 20px;
+  }
+  .footerTitle {
+    font-size: 16px;
+  }
+}
+
+

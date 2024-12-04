@@ -1,32 +1,8 @@
 .pageSetup {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 1rem 1rem 0rem 1rem;
-  }
-
-  .paymentMessage {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  #footer, #navbar {
-    color: white;
-    background-color: black;
-    width: 100vw;
-  }
-
-
-
- 
-
-
-  
-
-
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 1rem 2rem 1rem;
+}
