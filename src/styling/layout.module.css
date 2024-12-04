@@ -27,14 +27,18 @@
 
 .menuItem a {
   font-size: 20px;
-  color: rgb(92, 95, 98);
-  padding: 1rem;
+  color: rgb(36, 37, 38);
+  padding: .5rem;
   text-decoration: none;
   cursor: pointer;
+  transition: border 0.25s;
+  transition: box-shadow 0.25s;
 }
 
 .menuItem :hover {
   color: black;
+  border: 2px solid rgb(36, 37, 38);
+  box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
 }
 
 @media (max-width: 768px) {
