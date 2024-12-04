@@ -1,5 +1,6 @@
 import { useGetMemberQuery } from "../../../features/members/membersSlice";
 
+import styles from "../../../styling/memberDashboard.module.css";
 export default function MemberNotificationsCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
 
@@ -16,19 +17,19 @@ export default function MemberNotificationsCard() {
     );
 
   return (
-    <section>
-      <h3>Payment Notifications:</h3>
+    <section className={styles.dashboardSection}>
+      <h2 className={styles.sectionHeaders}>Payment Notifications:</h2>
       {paidDrops?.length ? (
         paidDrops.map((paidDrop) => (
-          <div key={paidDrop.id}>
-            <h4>Payment Received:</h4>
+          <div key={paidDrop.id} className={styles.noticeSection}>
             <p>
-              ${paidDrop.amount} from {paidDrop.payee} on{" "}
               {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
                 timeZone: "UTC",
-              })}
+              })}{" "}
+              - Payment of ${paidDrop.amount} Recieved
             </p>
-            <p>{paidDrop.paidMessage || "No message provided"}</p>
+            <p>From {paidDrop.payee}</p>
+            <p>{paidDrop.paidMessage || "*No payment message provided*"}</p>
 
             {/* Map over the drops associated with this paidDrop */}
             <h5>Paid for Drops on:</h5>
