@@ -65,8 +65,8 @@ export default function TeamMembersCard() {
   };
 
   return (
-    <section>
-      <h2>Your Team Members:</h2>
+    <section className={styles.dashboardSection}>
+      <h2 className={styles.subHeaders}>Team Members:</h2>
       {owner?.ownerBusiness?.length ? (
         owner.ownerBusiness.map((business) => (
           <div className={styles.teamMembersSection} key={business.id}>
@@ -87,7 +87,7 @@ export default function TeamMembersCard() {
                   return (
                     <li key={member.id}>
                       <p className={styles.teamMemberName}>
-                        {member.memberName}
+                        {member.memberName} :
                       </p>
                       <div className={styles.unpaidDrops}>
                         {unpaidDrops.length > 0 ? (
@@ -103,7 +103,7 @@ export default function TeamMembersCard() {
                             </Link>
                           ))
                         ) : (
-                          <p>No unpaid drops</p>
+                          <p>*No unpaid drops*</p>
                         )}
                       </div>
                       {!allPaid && (
@@ -147,7 +147,7 @@ export default function TeamMembersCard() {
                   );
                 })
               ) : (
-                <p>No team members for this business.</p>
+                <p>*No team members for this business*</p>
               )}
             </ul>
           </div>

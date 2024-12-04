@@ -10,8 +10,8 @@ export default function MemberArchivesCard() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <section>
-      <h2>Team Member Archives</h2>
+    <section className={styles.dashboardSection}>
+      <h2 className={styles.sectionHeaders}>Drop Archives:</h2>
       <div className={styles.archivesSection}>
         {owner?.ownerBusiness?.length ? (
           <ul>

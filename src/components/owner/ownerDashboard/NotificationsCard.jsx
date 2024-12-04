@@ -59,8 +59,8 @@ export default function NotificationsCard() {
   };
 
   return (
-    <section>
-      <h2>Payment Notices</h2>
+    <section className={styles.dashboardSection}>
+      <h2 className={styles.sectionHeaders}>Payment Notifications:</h2>
       <div className={styles.noticeSection}>
         {payNotices?.length ? (
           payNotices.map((notice) => (
@@ -94,7 +94,7 @@ export default function NotificationsCard() {
             </div>
           ))
         ) : (
-          <p>No payment notices found</p>
+          <p>*No payment notices found*</p>
         )}
       </div>
     </section>
