@@ -10,9 +10,6 @@
   font-weight: 400;
   font-style: normal;
 
-  font-variation-settings: "slnt" 0, "wdth" 100, "GRAD" 0, "XOPQ" 96, "XTRA" 468,
-    "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -62,10 +59,12 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  transition: box-shadow 0.25s;
+  width: 300px;
 }
 button:hover {
-  color: white;
-  background-color: rgb(36, 37, 38);
+  border: 2px solid rgb(36, 37, 38);
+  box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
 }
 button:focus,
 button:focus-visible {
