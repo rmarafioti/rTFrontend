@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useGetOwnerQuery } from "./ownerSlice";
 
+import styles from "../../styling/droparchives.module.css";
+
 export default function OwnerMembersArchice() {
   const { memberId } = useParams();
   const { data: owner, error, isLoading } = useGetOwnerQuery(memberId);
@@ -22,19 +24,19 @@ export default function OwnerMembersArchice() {
 
   return (
     <article className="pageSetup">
-      <h2>Archived Drops for {member.memberName}</h2>
+      <h1 className={styles.header}>{member.memberName}'s Archived Drops:</h1>
       {archivedDrops?.length ? (
-        <ul>
+        <ul className={styles.drops}>
           {archivedDrops.map((drop) => (
-            <li key={drop.id}>
-              <Link to={`/ownermemberdrop/${drop.id}`}>
+            <Link className={styles.date} to={`/ownermemberdrop/${drop.id}`}>
+              <li key={drop.id} className={styles.link}>
                 {new Date(drop.date).toLocaleDateString("en-US")}
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
       ) : (
-        <p>No archived drops found</p>
+        <p>*No archived drops found*</p>
       )}
     </article>
   );

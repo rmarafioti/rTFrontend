@@ -1,6 +1,7 @@
 import { useGetMemberQuery } from "../../../features/members/membersSlice";
 
 import styles from "../../../styling/dashboards.module.css";
+
 export default function MemberNotificationsCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
 

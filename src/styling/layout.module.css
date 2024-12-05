@@ -25,18 +25,24 @@
   margin-right: 2rem;
 }
 
-.menuItem a {
+.menuItem a, .menuItemOne a {
   font-size: 20px;
   color: rgb(36, 37, 38);
   padding: .5rem;
   margin-right: 1rem;
   text-decoration: none;
   cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: -5px 5px 0px 1px transparent;
   transition: border 0.25s;
   transition: box-shadow 0.25s;
 }
 
-.menuItem :hover {
+.menuItemOne a {
+  margin-right: 3rem;
+}
+
+.menuItem :hover, .menuItemOne :hover {
   color: black;
   border: 2px solid rgb(36, 37, 38);
   box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
