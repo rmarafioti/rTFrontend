@@ -6,7 +6,7 @@ import {
   useMemberDeleteDropMutation,
 } from "../../../features/members/membersSlice";
 
-import styles from "../../../styling/memberDashboard.module.css";
+import styles from "../../../styling/dashboards.module.css";
 
 export default function PayNoticeCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
@@ -92,8 +92,8 @@ export default function PayNoticeCard() {
   };
 
   return (
-    <section>
-      <h3>Current Drops:</h3>
+    <section className={styles.dashboardSection}>
+      <h2 className={styles.subHeaders}>Current Drops:</h2>
       <div className={styles.memberDrops}>
         {unpaidDrops?.length ? (
           unpaidDrops.map((drop) => (
@@ -109,11 +109,11 @@ export default function PayNoticeCard() {
             </div>
           ))
         ) : (
-          <p>All your drops are paid up to date</p>
+          <p>*All your drops are paid up to date*</p>
         )}
+        <p>Owed to You: {businessOwesTotal}</p>
+        <p>You Owe: {memberOwesTotal}</p>
       </div>
-      <p>Owed to You: {businessOwesTotal}</p>
-      <p>You Owe: {memberOwesTotal}</p>
 
       {/* Render payment notification section if the member owes the business */}
       {memberOwesTotal > 0 && (

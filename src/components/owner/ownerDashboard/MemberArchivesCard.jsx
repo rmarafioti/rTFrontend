@@ -1,7 +1,7 @@
 import { useGetOwnerQuery } from "../../../features/owner/ownerSlice";
 import { Link } from "react-router-dom";
 
-import styles from "../../../styling/ownerdashboard.module.css";
+import styles from "../../../styling/dashboards.module.css";
 
 export default function MemberArchivesCard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();
@@ -10,8 +10,8 @@ export default function MemberArchivesCard() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <section>
-      <h2>Team Member Archives</h2>
+    <section className={styles.dashboardSection}>
+      <h2 className={styles.sectionHeaders}>Drop Archives:</h2>
       <div className={styles.archivesSection}>
         {owner?.ownerBusiness?.length ? (
           <ul>

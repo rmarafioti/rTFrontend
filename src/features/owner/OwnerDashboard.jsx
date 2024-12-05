@@ -4,7 +4,7 @@ import MemberArchivesCard from "../../components/owner/ownerDashboard/MemberArch
 import { useGetOwnerQuery } from "./ownerSlice";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/ownerdashboard.module.css";
+import styles from "../../styling/dashboards.module.css";
 
 export default function OwnerDashboard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();
@@ -14,11 +14,11 @@ export default function OwnerDashboard() {
 
   return (
     <article className="pageSetup">
-      <h1>Welcome, {owner?.ownerName}</h1>
       <section className={styles.takeHomeTotalSection}>
+        <h1 className={styles.header}>Welcome, {owner?.ownerName}</h1>
         <p className={styles.takeHomeKey}>
           {/*assuming an owner has only one business we only need to fetch the index of the sole business created rather than mapping*/}
-          Take Home Total for {owner?.ownerBusiness?.[0]?.businessName}:{" "}
+          {owner?.ownerBusiness?.[0]?.businessName}'s Take Home Total :{" "}
         </p>
         <p className={styles.takeHomeValue}>${owner?.takeHomeTotal}</p>
       </section>

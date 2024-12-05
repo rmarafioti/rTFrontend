@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useOwnerGetDropQuery } from "./ownerSlice";
 import { Link } from "react-router-dom";
 
+import styles from "../../styling/dropdetails.module.css";
+
 export default function OwnerMemberDrop() {
   const { dropId } = useParams();
   const { data: drop, error, isLoading } = useOwnerGetDropQuery(dropId);
@@ -12,28 +14,37 @@ export default function OwnerMemberDrop() {
 
   return (
     <article className="pageSetup">
-      <h1>Member Drop</h1>
-      <p>
-        Team Member individual drop by id including a list of services rendered
-        for that day
-      </p>
-      <h2>Drop Details</h2>
-      <p>
-        Date:{" "}
-        {new Date(drop.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
-      </p>
-      <p>Total: ${drop.total}</p>
-      <h2>Drop Services:</h2>
+      <div className={styles.headerSection}>
+        <h1 className={styles.header}>Drop Details</h1>
+        <p className={styles.date}>
+          {new Date(drop.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
+        </p>
+        <p className={styles.total}>Total: ${drop.total}</p>
+        {drop.memberOwes !== 0 && (
+          <p className={styles.oweAmounts}>Owed to You: ${drop.memberOwes}</p>
+        )}
+        {drop.businessOwes !== 0 && (
+          <p className={styles.oweAmounts}>You Owe: ${drop.businessOwes}</p>
+        )}
+        <p className={styles.oweAmounts}>
+          {drop.paid === true ? "*PAID*" : "*NOT PAID*"}
+        </p>
+      </div>
+      <h2>Services:</h2>
       {drop.service.map((service) => (
-        <div key={service.id}>
-          <h3>{service.description}</h3>
-          <p>Cash: {service.cash}</p>
-          <p>Credit: {service.credit}</p>
-          <p>Deposit: {service.deposit}</p>
-          <p>Gift Certificate: {service.giftCertAmount}</p>
+        <div className={styles.service} key={service.id}>
+          <h3 className={styles.description}>{service.description}</h3>
+          {service.cash !== 0 && <p>Cash: ${service.cash}</p>}
+          {service.credit !== 0 && <p>Credit: ${service.credit}</p>}
+          {service.deposit !== 0 && <p>Deposit: ${service.deposit}</p>}
+          {service.giftCertAmount !== 0 && (
+            <p>Gift Certificate: ${service.giftCertAmount}</p>
+          )}
         </div>
       ))}
-      <Link to={`/ownerdashboard`}>Back to Dashboard</Link>
+      <Link className={styles.link} to={`/ownerdashboard`}>
+        Back to Dashboard
+      </Link>
     </article>
   );
 }

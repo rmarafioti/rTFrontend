@@ -13,7 +13,7 @@ export default function AuthFormOwner() {
 
   // Handles swapping between login and register
   const [isLogin, setIsLogin] = useState(true);
-  const authAction = isLogin ? "Login" : "Register";
+  const authAction = isLogin ? "Owner Login" : "Owner Register";
   const altCopy = isLogin
     ? "Need an account? Register here."
     : "Already have an account? Login here.";
@@ -50,8 +50,10 @@ export default function AuthFormOwner() {
 
   return (
     <article className="pageSetup">
-      <h1>Owner Portal</h1>
-      <h2>{authAction}</h2>
+      <h1>{authAction}</h1>
+      <a onClick={() => setIsLogin(!isLogin)} className={styles.altCopy}>
+        {altCopy}
+      </a>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
           <label className={styles.labelName}>Full Name</label>
@@ -90,7 +92,7 @@ export default function AuthFormOwner() {
           {loginLoading || registerLoading ? "Please wait..." : authAction}
         </button>
       </form>
-      <a onClick={() => setIsLogin(!isLogin)}>{altCopy}</a>
+
       {(loginLoading || registerLoading) && <p>Please wait...</p>}
       {loginError && (
         <p role="alert">{loginError.data?.message || "Login failed"}</p>

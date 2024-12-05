@@ -34,14 +34,21 @@ export default function Navbar() {
         {token ? (
           <>
             {ownerToken && (
-              <li className={styles.menuItem}>
-                <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
-              </li>
+              <ul className={styles.menu}>
+                <li className={styles.menuItemOne}>
+                  <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
+                </li>
+              </ul>
             )}
             {memberToken && (
-              <li className={styles.menuItem}>
-                <NavLink to="/memberdashboard">Member Dashboard</NavLink>
-              </li>
+              <ul className={styles.menu}>
+                <li className={styles.menuItemOne}>
+                  <NavLink to="/memberdashboard">Member Dashboard</NavLink>
+                </li>
+                <li className={styles.menuItem}>
+                  <NavLink to="/memberarchive">Archives</NavLink>
+                </li>
+              </ul>
             )}
             <li className={styles.menuItem}>
               <a className={styles.menuItem} onClick={handleLogout}>
