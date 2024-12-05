@@ -3,7 +3,7 @@ import {
   useOwnerPayDropsMutation,
 } from "../../../features/owner/ownerSlice";
 
-import styles from "../../../styling/ownerdashboard.module.css";
+import styles from "../../../styling/dashboards.module.css";
 
 export default function NotificationsCard() {
   const [confirmPayment] = useOwnerPayDropsMutation();

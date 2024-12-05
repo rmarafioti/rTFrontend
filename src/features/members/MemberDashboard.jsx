@@ -5,7 +5,7 @@ import PayNoticeCard from "../../components/member/memberDashboard/PayNoticeCard
 import MemberNotificationsCard from "../../components/member/memberDashboard/MemberNotificationsCard";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/memberDashboard.module.css";
+import styles from "../../styling/dashboards.module.css";
 
 export default function MemberDashboard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
@@ -69,7 +69,7 @@ export default function MemberDashboard() {
       <PayNoticeCard />
       <MemberNotificationsCard />
       <Link to={`/memberarchive`} className={styles.link}>
-        Your Archived Drops
+        Archived Drops
       </Link>
     </article>
   );

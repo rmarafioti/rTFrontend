@@ -1,7 +1,7 @@
 import { useGetOwnerQuery } from "../../../features/owner/ownerSlice";
 import { Link } from "react-router-dom";
 
-import styles from "../../../styling/ownerdashboard.module.css";
+import styles from "../../../styling/dashboards.module.css";
 
 export default function MemberArchivesCard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();

@@ -6,6 +6,8 @@
   font-weight: 500;
   background-color: #f9f9f9;
   cursor: pointer;
+  border-left: 2px solid rgb(187, 192, 196);
+  border-bottom: 2px solid rgb(187, 192, 196);
   transition: border-color 0.25s;
   transition: box-shadow 0.25s;
   width: 400px;

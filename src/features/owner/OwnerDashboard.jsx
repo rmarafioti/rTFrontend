@@ -4,7 +4,7 @@ import MemberArchivesCard from "../../components/owner/ownerDashboard/MemberArch
 import { useGetOwnerQuery } from "./ownerSlice";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/ownerdashboard.module.css";
+import styles from "../../styling/dashboards.module.css";
 
 export default function OwnerDashboard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();
