@@ -34,12 +34,9 @@ export default function Navbar() {
         {token ? (
           <>
             {ownerToken && (
-              <ul>
+              <ul className={styles.menu}>
                 <li className={styles.menuItemOne}>
                   <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
-                </li>
-                <li className={styles.menuItem}>
-                  <NavLink to="/ownermembersarchive">Archives</NavLink>
                 </li>
               </ul>
             )}
