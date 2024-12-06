@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLinkMemberToBusinessMutation } from "./membersSlice";
-import styles from "../../styling/onboardForms.module.css";
+
+import styles from "../../styling/onboard.module.css";
 
 export default function MemberOnboard() {
   const [linkBusiness, { isLoading, isSuccess, isError, error }] =
@@ -23,11 +24,11 @@ export default function MemberOnboard() {
 
   return (
     <article className="pageSetup">
-      <h1 className={styles.header}>Submit your business info</h1>
-      <form className={styles.loginForm} onSubmit={handleSubmit}>
+      <h1>Submit your business info</h1>
+      <form className={styles.onboardForm} onSubmit={handleSubmit}>
         <label className={styles.labelName}>Business Name:</label>
         <input
-          className={styles.formInput}
+          className={styles.onboardFormInput}
           type="text"
           value={businessName}
           onChange={(e) => setBusinessName(e.target.value)}
@@ -35,22 +36,17 @@ export default function MemberOnboard() {
         />
         <label className={styles.labelName}>Business Code:</label>
         <input
-          className={styles.formInput}
+          className={styles.onboardFormInput}
           type="password"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           required
         />
-        <button className={styles.formSubmit} disabled={isLoading}>
+        <button className={styles.linkBizButton} disabled={isLoading}>
           {isLoading ? "Connecting..." : "Connect to Business"}
         </button>
-        {isSuccess && (
-          <p className={styles.successMessage}>
-            Successfully linked to business!
-          </p>
-        )}
         {isError && (
-          <p className={styles.errorMessage}>
+          <p>
             Error linking to business:{" "}
             {error?.data?.message || "An error occurred"}
           </p>

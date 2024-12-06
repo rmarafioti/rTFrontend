@@ -6,26 +6,29 @@
   align-items: center;
 }
 
+.dashboardSectionNotifications {
+  border: 1px solid rgb(187, 192, 196);
+}
+
 .teamMembersSection,
 .noticeSection,
 .archivesSection {
-  margin: 0rem 0rem 1rem 0rem;
+  margin: 0rem 0rem 0rem 0rem;
   padding: 0.5rem;
   border: 1px solid rgb(187, 192, 196);
   width: 460px;
 }
 
-.archivesSection {
+.archivesSection, .noticeSection {
   border: none;
 }
 
+.noticeSection {
+  border-bottom: 1px solid rgb(187, 192, 196);
+}
+
 .takeHomeTotalSection {
-  background-color: #f9f9f9;
-  border: 1px solid transparent;
-  padding: 1rem;
   margin-bottom: 2rem;
-  border: 2px solid rgb(187, 192, 196);
-  box-shadow: -5px 5px 0px 1px rgb(187, 192, 196);
 }
 
 .header {
@@ -35,15 +38,20 @@
   font-weight: 500;
 }
 
-.subHeaders {
+.subHeaders, .subHeadersNotice {
   color:  rgb(36, 37, 38);
-  font-size: 30px;
+  font-size: 24px;
   background-color: #f9f9f9;
   padding: .5rem 1rem .5rem 1rem;
   width: 460px;
   margin: 0rem;
   border: 1px solid rgb(187, 192, 196);
   border-bottom: none;
+}
+
+.subHeadersNotice {
+  border: none;
+  border-bottom: 1px solid rgb(187, 192, 196);
 }
 
 .takeHomeKey, .takeHomeValue {
@@ -54,7 +62,11 @@
 
 .createDrop {
   font-size: 20px;
-  border: 2px solid rgb(187, 192, 196);
+  background-color: antiquewhite;
+  border-top: 2px solid rgb(187, 192, 196);
+  border-right: 2px solid rgb(187, 192, 196);
+  border-bottom: 2px solid rgb(36, 37, 38);
+  border-left: 2px solid rgb(36, 37, 38);
   width: 460px;
   margin-bottom: 2rem;
 }
@@ -69,12 +81,64 @@
 }
 
 .memberDrop {
-  margin: .5rem;
+  color: rgb(36, 37, 38);
+  border: 1px solid rgb(187, 192, 196);
+  font-size: 20px;
+  padding: .2rem;
+  margin: .5rem 2rem;
+  width: 200px;
+  transition: border-color 0.25s;
+  transition: box-shadow 0.25s;
+}
+
+.memberDrop:hover {
+  border: 2px solid rgb(36, 37, 38);
+  box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
+}
+
+.currentDrop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteDrop {
+  text-align: center;
+  padding: .2rem;
+  width: 50px;
+}
+
+.totals {
+font-size: 18px;
+
+}
+
+.paymentNotice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .5rem 0rem 1rem 0rem;;
+}
+
+.paymentMethodLabel {
+  font-size: 22px;
+  margin-bottom: 1rem;
+}
+
+.paymentNoticeButton {
+  color: rgb(36, 37, 38);
+  width: 90%;
+}
+
+.paidDatesSection {
+  padding: .5rem;
+  background-color: #f9f9f9;
 }
 
 .paidDates {
 list-style-type: none;
-padding-bottom: .5rem;
+padding: .5rem;
 }
 
 .balances {
@@ -120,6 +184,7 @@ padding-bottom: .5rem;
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid rgb(187, 192, 196);
+  width: 90%;
 }
 
 /* Notification Card Section */

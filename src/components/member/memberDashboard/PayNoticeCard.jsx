@@ -97,54 +97,66 @@ export default function PayNoticeCard() {
       <div className={styles.memberDrops}>
         {unpaidDrops?.length ? (
           unpaidDrops.map((drop) => (
-            <div key={drop.id}>
+            <div key={drop.id} className={styles.currentDrop}>
               <Link className={styles.memberDrop} to={`/memberdrop/${drop.id}`}>
                 {new Date(drop.date).toLocaleDateString("en-US", {
                   timeZone: "UTC",
                 })}
               </Link>
-              <button onClick={() => submitDeleteDrop(drop.id)}>
-                Delete Drop
+              <button
+                onClick={() => submitDeleteDrop(drop.id)}
+                className={styles.deleteDrop}
+              >
+                X
               </button>
             </div>
           ))
         ) : (
           <p>*All your drops are paid up to date*</p>
         )}
-        <p>Owed to You: {businessOwesTotal}</p>
-        <p>You Owe: {memberOwesTotal}</p>
-      </div>
+        {businessTotal !== 0 && (
+          <p className={styles.totals}>Owed to You: {businessOwesTotal}</p>
+        )}
+        {memberOwesTotal !== 0 && (
+          <p className={styles.totals}>You Owe: {memberOwesTotal}</p>
+        )}
 
-      {/* Render payment notification section if the member owes the business */}
-      {memberOwesTotal > 0 && (
-        <div>
-          {hasPendingNotice ? (
-            <p>Notice sent! Confirmation of payment pending.</p>
-          ) : (
-            <>
-              <h4>Send Payment Notice</h4>
-              <label>Payment Method:</label>
-              <select
-                value={paidMessages[member.id] || ""}
-                onChange={(e) => handleMessageChange(member.id, e.target.value)}
-              >
-                <option value="">Select Payment Method</option>
-                {paymentOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <button
-                onClick={() => sendPaymentNotice(member.id)}
-                disabled={isLoading || !paidMessages[member.id]?.trim()}
-              >
-                {isLoading ? "Sending..." : "Send Payment Notice"}
-              </button>
-            </>
-          )}
-        </div>
-      )}
+        {/* Render payment notification section if the member owes the business */}
+        {memberOwesTotal > 0 && (
+          <div className={styles.paymentNotice}>
+            {hasPendingNotice ? (
+              <p>Notice sent! Confirmation of payment pending.</p>
+            ) : (
+              <>
+                {/*<label className={styles.paymentMethodLabel}>
+                  Payment Method:
+                </label>*/}
+                <select
+                  value={paidMessages[member.id] || ""}
+                  onChange={(e) =>
+                    handleMessageChange(member.id, e.target.value)
+                  }
+                  className={styles.paymentMethod}
+                >
+                  <option value="">Select Payment Method</option>
+                  {paymentOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  onClick={() => sendPaymentNotice(member.id)}
+                  disabled={isLoading || !paidMessages[member.id]?.trim()}
+                  className={styles.paymentNoticeButton}
+                >
+                  {isLoading ? "Sending..." : "Send Payment Notice"}
+                </button>
+              </>
+            )}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

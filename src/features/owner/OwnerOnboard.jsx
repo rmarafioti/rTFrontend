@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetOwnerQuery, useCreateBusinessMutation } from "./ownerSlice";
-import styles from "../../styling/onboardForms.module.css";
+
+import styles from "../../styling/onboard.module.css";
 
 export default function OwnerOnboard() {
   const {
@@ -38,11 +39,11 @@ export default function OwnerOnboard() {
 
   return (
     <article className="pageSetup">
-      <h1 className={styles.header}>Enter your business information</h1>
-      <form className={styles.loginForm} onSubmit={businessSubmit}>
+      <h1>Enter your business information</h1>
+      <form className={styles.onboardForm} onSubmit={businessSubmit}>
         <label className={styles.labelName}>Business Name:</label>
         <input
-          className={styles.formInput}
+          className={styles.onboardFormInput}
           type="text"
           value={businessName}
           onChange={(e) => setBusinessName(e.target.value)}
@@ -50,14 +51,14 @@ export default function OwnerOnboard() {
         />
         <label className={styles.labelName}>Business Code:</label>
         <input
-          className={styles.formInput}
+          className={styles.onboardFormInput}
           type="password"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           required
         />
         <button
-          className={styles.formSubmit}
+          className={styles.createBiz}
           disabled={isLoading || ownerLoading}
         >
           {isLoading ? "Creating..." : "Create Business"}
