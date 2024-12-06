@@ -35,19 +35,20 @@ export default function Navbar() {
           <>
             {ownerToken && (
               <ul className={styles.menu}>
-                <li className={styles.menuItemOne}>
+                <li className={styles.menuItem}>
                   <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
                 </li>
               </ul>
             )}
             {memberToken && (
               <ul className={styles.menu}>
-                <li className={styles.menuItemOne}>
+                <li className={styles.menuItem}>
                   <NavLink to="/memberdashboard">Member Dashboard</NavLink>
                 </li>
                 <li className={styles.menuItem}>
                   <NavLink to="/memberarchive">Archives</NavLink>
                 </li>
+                <li className={styles.menuAccount}>Account</li>
               </ul>
             )}
             <li className={styles.menuItem}>

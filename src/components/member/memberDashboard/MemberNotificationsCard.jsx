@@ -18,35 +18,40 @@ export default function MemberNotificationsCard() {
     );
 
   return (
-    <section className={styles.dashboardSection}>
-      <h2 className={styles.sectionHeaders}>Payment Notifications:</h2>
+    <section className={styles.dashboardSectionNotifications}>
+      <h2 className={styles.subHeadersNotice}>Payment Notifications:</h2>
       {paidDrops?.length ? (
-        paidDrops.map((paidDrop) => (
-          <div key={paidDrop.id} className={styles.noticeSection}>
-            <p>
-              {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
-                timeZone: "UTC",
-              })}{" "}
-              - Payment of ${paidDrop.amount} from {paidDrop.payee}
-            </p>
-            {/*<p>From {paidDrop.payee}</p>*/}
-            <p>{paidDrop.paidMessage || "*No payment message provided*"}</p>
+        paidDrops
+          .reverse()
+          .slice(0, 3)
+          .map((paidDrop) => (
+            <div key={paidDrop.id} className={styles.noticeSection}>
+              <p>
+                {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
+                  timeZone: "UTC",
+                })}{" "}
+                - Payment of ${paidDrop.amount} from {paidDrop.payee}
+              </p>
+              {/*<p>From {paidDrop.payee}</p>*/}
+              <p>{paidDrop.paidMessage || "*No payment message provided*"}</p>
 
-            {/* Map over the drops associated with this paidDrop */}
-            <h5>Paid for Drops on:</h5>
-            <ul className={styles.paidDates}>
-              {member.drop
-                ?.filter((drop) => drop.paidDrop?.id === paidDrop.id)
-                .map((drop) => (
-                  <li key={drop.id}>
-                    {new Date(drop.date).toLocaleDateString("en-US", {
-                      timeZone: "UTC",
-                    })}
-                  </li>
-                ))}
-            </ul>
-          </div>
-        ))
+              {/* Map over the drops associated with this paidDrop */}
+              <div className={styles.paidDatesSection}>
+                <h5>Paid for Drops on:</h5>
+                <ul className={styles.paidDates}>
+                  {member.drop
+                    ?.filter((drop) => drop.paidDrop?.id === paidDrop.id)
+                    .map((drop) => (
+                      <li key={drop.id}>
+                        {new Date(drop.date).toLocaleDateString("en-US", {
+                          timeZone: "UTC",
+                        })}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
+          ))
       ) : (
         <p>No payment notifications yet.</p>
       )}

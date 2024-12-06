@@ -111,8 +111,8 @@ export default function PayNoticeCard() {
         ) : (
           <p>*All your drops are paid up to date*</p>
         )}
-        <p>Owed to You: {businessOwesTotal}</p>
-        <p>You Owe: {memberOwesTotal}</p>
+        {businessTotal !== 0 && <p>Owed to You: {businessOwesTotal}</p>}
+        {memberOwesTotal !== 0 && <p>You Owe: {memberOwesTotal}</p>}
       </div>
 
       {/* Render payment notification section if the member owes the business */}
