@@ -38,6 +38,9 @@ export default function Navbar() {
                 <li className={styles.menuItem}>
                   <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
                 </li>
+                <li className={styles.menuItem}>
+                  <NavLink to="/ownermembersarchives">Archives</NavLink>
+                </li>
               </ul>
             )}
             {memberToken && (

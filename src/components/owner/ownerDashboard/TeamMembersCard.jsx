@@ -69,7 +69,7 @@ export default function TeamMembersCard() {
       <h2 className={styles.subHeaders}>Team Members:</h2>
       {owner?.ownerBusiness?.length ? (
         owner.ownerBusiness.map((business) => (
-          <div className={styles.teamMembersSection} key={business.id}>
+          <div className={styles.memberDrops} key={business.id}>
             <ul className={styles.teamMember}>
               {business.businessMember?.length ? (
                 business.businessMember.map((member) => {
@@ -85,17 +85,18 @@ export default function TeamMembersCard() {
                   const payAmount = member.totalOwe > 0 ? 0 : unpaidTotal;
 
                   return (
+                    /* this li need to felx column*/
                     <li key={member.id}>
                       <p className={styles.teamMemberName}>
                         {member.memberName} :
                       </p>
-                      <div className={styles.unpaidDrops}>
+                      <div className={styles.memberCurrentDrop}>
                         {unpaidDrops.length > 0 ? (
                           unpaidDrops.map((drop) => (
                             <Link
                               to={`/ownermemberdrop/${drop.id}`}
                               key={drop.id}
-                              className={styles.unpaidDrop}
+                              className={styles.memberDrop}
                             >
                               {new Date(drop.date).toLocaleDateString("en-US", {
                                 timeZone: "UTC",
@@ -108,22 +109,23 @@ export default function TeamMembersCard() {
                       </div>
                       {!allPaid && (
                         <>
-                          <p className={styles.balances}>
-                            Team Member Owes: ${member.totalOwe}
-                          </p>
-                          <p className={styles.balances}>
-                            Balance to Pay: ${payAmount}
-                          </p>
+                          {member.totalOwe !== 0 && (
+                            <p className={styles.totals}>
+                              Team Member Owes: ${member.totalOwe}
+                            </p>
+                          )}
+                          {payAmount !== 0 && (
+                            <p className={styles.totals}>
+                              Balance to Pay: ${payAmount}
+                            </p>
+                          )}
                         </>
                       )}
 
                       {/* Only show payment options and button if the 'Pay' is greater than 0 or not all paid*/}
                       {member.totalOwe > 0 ||
                         (!allPaid && (
-                          <div className={styles.paymentSection}>
-                            <label className={styles.paymentTitle}>
-                              Payment Method:
-                            </label>
+                          <div className={styles.paymentNotice}>
                             <select
                               value={paidMessages[member.id] || ""}
                               onChange={(e) =>
@@ -138,7 +140,10 @@ export default function TeamMembersCard() {
                                 </option>
                               ))}
                             </select>
-                            <button onClick={() => handlePayout(member)}>
+                            <button
+                              onClick={() => handlePayout(member)}
+                              className={styles.paymentNoticeButton}
+                            >
                               Payout Team Member
                             </button>
                           </div>

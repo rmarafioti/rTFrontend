@@ -24,7 +24,7 @@ export default function OwnerDashboard() {
       </section>
       <TeamMembersCard />
       <NotificationsCard />
-      <MemberArchivesCard />
+      {/*<MemberArchivesCard />*/}
     </article>
   );
 }
