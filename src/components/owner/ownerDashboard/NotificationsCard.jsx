@@ -60,43 +60,42 @@ export default function NotificationsCard() {
 
   return (
     <section className={styles.dashboardSection}>
-      <h2 className={styles.sectionHeaders}>Payment Notifications:</h2>
-      <div className={styles.noticeSection}>
-        {payNotices?.length ? (
-          payNotices.map((notice) => (
-            <div key={notice.id}>
-              <div className={styles.paymentMessage}>
-                <p>{new Date(notice.paidDate).toLocaleDateString("en-US")}:</p>
-                <h4>{notice.payee}</h4>
-                <p>
-                  {notice.paidMessage || "No message provided"} ${notice.amount}
-                </p>
-              </div>
-              <h5>Paid for Drops on:</h5>
-              <ul>
-                {notice.drops.map((drop) => (
-                  <li key={drop.id}>
-                    {new Date(drop.date).toLocaleDateString("en-US")}
-                  </li>
-                ))}
-              </ul>
-              {/* Check if the drop has been paid */}
-              {notice.drops.every((drop) => drop.paidDrop) ? (
-                <p>Payment Confirmed</p>
-              ) : (
-                <button
-                  onClick={() => handleConfirmPayment(notice)}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Processing..." : "Confirm Payment"}
-                </button>
-              )}
+      <h2 className={styles.subHeaders}>Payment Notifications:</h2>
+
+      {payNotices?.length ? (
+        payNotices.map((notice) => (
+          <div key={notice.id} className={styles.currentDrop}>
+            <div>
+              <p>{new Date(notice.paidDate).toLocaleDateString("en-US")}:</p>
+              <h4>{notice.payee}</h4>
+              <p>
+                {notice.paidMessage || "No message provided"} ${notice.amount}
+              </p>
             </div>
-          ))
-        ) : (
-          <p>*No payment notices found*</p>
-        )}
-      </div>
+            <h5>Paid for Drops on:</h5>
+            <ul>
+              {notice.drops.map((drop) => (
+                <li key={drop.id}>
+                  {new Date(drop.date).toLocaleDateString("en-US")}
+                </li>
+              ))}
+            </ul>
+            {/* Check if the drop has been paid */}
+            {notice.drops.every((drop) => drop.paidDrop) ? (
+              <p>Payment Confirmed</p>
+            ) : (
+              <button
+                onClick={() => handleConfirmPayment(notice)}
+                disabled={isLoading}
+              >
+                {isLoading ? "Processing..." : "Confirm Payment"}
+              </button>
+            )}
+          </div>
+        ))
+      ) : (
+        <p className={styles.noPayNotice}>*No payment notices found*</p>
+      )}
     </section>
   );
 }

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <article className="pageSetup">
       <div className={styles.header}>
-        <h1>Welcome to Right Track Bookkeeping</h1>
+        <h1>Right Track Bookkeeping.</h1>
         <p className={styles.subHeader}>
           An app for small business owners and independent workers to track
           funds and streamline bookkeeping

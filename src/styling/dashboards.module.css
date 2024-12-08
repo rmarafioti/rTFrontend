@@ -82,11 +82,13 @@
 
 .memberDrop {
   color: rgb(36, 37, 38);
-  border: 1px solid rgb(187, 192, 196);
+  border: 2px solid rgb(187, 192, 196);
   font-size: 20px;
   padding: .2rem;
   margin: .5rem 2rem;
   width: 200px;
+  
+  box-shadow: -5px 5px 0px 1px transparent;
   transition: border-color 0.25s;
   transition: box-shadow 0.25s;
 }
@@ -96,11 +98,16 @@
   box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
 }
 
-.currentDrop {
+.currentDrop, .memberCurrentDrop {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.memberCurrentDrop {
+  display: flex;
+  flex-direction: column;
 }
 
 .deleteDrop {
@@ -138,13 +145,6 @@ font-size: 18px;
 .paidDates {
 list-style-type: none;
 padding: .5rem;
-}
-
-.balances {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-  Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 22px;
-  font-weight: 500;
 }
 
 .teamMemberName {
@@ -194,6 +194,15 @@ padding: .5rem;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.noPayNotice {
+  margin: 0;
+  padding: .5rem;
+  border-bottom: 1px solid rgb(187, 192, 196);
+  border-left: 1px solid rgb(187, 192, 196);
+  border-right: 1px solid rgb(187, 192, 196);
+  width: 100%;
 }
 
 /* Members Archive Section */

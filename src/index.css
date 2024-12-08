@@ -59,7 +59,10 @@ button {
   background-color: #f9f9f9;
   border-left: 2px solid rgb(187, 192, 196);
   border-bottom: 2px solid rgb(187, 192, 196);
+  border-right:  2px solid transparent;
+  border-top:  2px solid transparent;
   cursor: pointer;
+  box-shadow: -5px 5px 0px 1px transparent;
   transition: border-color 0.25s;
   transition: box-shadow 0.25s;
   width: 300px;
