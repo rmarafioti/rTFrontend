@@ -26,12 +26,21 @@ export default function MemberNotificationsCard() {
           .slice(0, 3)
           .map((paidDrop) => (
             <div key={paidDrop.id} className={styles.noticeSection}>
-              <p>
-                {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
-                  timeZone: "UTC",
-                })}{" "}
-                - Payment of ${paidDrop.amount} from {paidDrop.payee}
-              </p>
+              <div className={styles.datePayment}>
+                <p
+                  className={`${styles.payeeColor} ${
+                    paidDrop.payee === member.memberName
+                      ? styles.blue
+                      : styles.yellow
+                  }`}
+                ></p>
+                <p>
+                  {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
+                    timeZone: "UTC",
+                  })}{" "}
+                  - Payment of ${paidDrop.amount} from {paidDrop.payee}
+                </p>
+              </div>
               {/*<p>From {paidDrop.payee}</p>*/}
               <p>{paidDrop.paidMessage || "*No payment message provided*"}</p>
 

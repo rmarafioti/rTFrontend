@@ -168,6 +168,30 @@ padding: .5rem;
   padding: 0.5rem;
 }
 
+.datePayment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payeeColor {
+  font-weight: bold;
+  padding: .5rem;
+  margin-bottom: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+.blue {
+  color: white;
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
 .paymentSection {
   margin: 1rem 0rem 1rem 0rem;
   border-top: 1px solid rgb(187, 192, 196);
@@ -203,6 +227,12 @@ padding: .5rem;
   border-left: 1px solid rgb(187, 192, 196);
   border-right: 1px solid rgb(187, 192, 196);
   width: 100%;
+}
+
+.paymentConfirm {
+  background-color: lightgreen;
+  padding: .5rem;
+  margin: 0;
 }
 
 /* Members Archive Section */
