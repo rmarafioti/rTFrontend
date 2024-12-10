@@ -64,6 +64,12 @@ export default function MemberNotificationsCard() {
       ) : (
         <p>No payment notifications yet.</p>
       )}
+      <div className={styles.paymentKey}>
+        <p>owner payment:</p>
+        <p className={styles.payeeColor} id={styles.blue}></p>
+        <p>your payment:</p>
+        <p className={styles.payeeColor} id={styles.yellow}></p>
+      </div>
     </section>
   );
 }
