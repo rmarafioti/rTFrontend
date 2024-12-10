@@ -1,10 +1,5 @@
 .header {
-    background-color: #f9f9f9;
-    border: 1px solid transparent;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border: 2px solid rgb(187, 192, 196);
-    box-shadow: -5px 5px 0px 1px rgb(187, 192, 196);
+    margin-bottom: 1rem;
   }
 
 .drops {
@@ -12,19 +7,22 @@
 }
 
 .link {
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    margin: 1rem;
-    font-size: 20px;
-    font-weight: 500;
-    color: rgb(36, 37, 38);
-    background-color: #f9f9f9;
-    border-left: 2px solid rgb(187, 192, 196);
-    border-bottom: 2px solid rgb(187, 192, 196);
-    cursor: pointer;
-    transition: border-color 0.25s;
-    transition: box-shadow 0.25s;
-    width: 300px;
+  border: 1px solid transparent;
+  margin: 1rem;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  border-left: 2px solid rgb(187, 192, 196);
+  border-bottom: 2px solid rgb(187, 192, 196);
+  border-right:  2px solid transparent;
+  border-top:  2px solid transparent;
+  cursor: pointer;
+  box-shadow: -5px 5px 0px 1px transparent;
+  transition: border-color 0.25s;
+  transition: box-shadow 0.25s;
+  width: 300px;
   }
   .link:hover {
     border: 2px solid rgb(36, 37, 38);
@@ -33,4 +31,9 @@
 
   .date {
     color: rgb(36, 37, 38);
+  }
+
+  .pageControls {
+    margin: 2rem .5rem 0rem .5rem;
+    width: 150px;
   }

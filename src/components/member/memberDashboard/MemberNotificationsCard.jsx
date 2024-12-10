@@ -19,21 +19,33 @@ export default function MemberNotificationsCard() {
 
   return (
     <section className={styles.dashboardSectionNotifications}>
-      <h2 className={styles.subHeadersNotice}>Payment Notifications:</h2>
+      <h2 className={styles.subHeadersNotice}>Recent Payments:</h2>
       {paidDrops?.length ? (
         paidDrops
           .reverse()
           .slice(0, 3)
           .map((paidDrop) => (
             <div key={paidDrop.id} className={styles.noticeSection}>
-              <p>
-                {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
-                  timeZone: "UTC",
-                })}{" "}
-                - Payment of ${paidDrop.amount} from {paidDrop.payee}
-              </p>
+              <div className={styles.datePayment}>
+                <p
+                  className={`${styles.payeeColor} ${
+                    paidDrop.payee === member.memberName
+                      ? styles.blue
+                      : styles.yellow
+                  }`}
+                ></p>
+                <p>
+                  {new Date(paidDrop.paidDate).toLocaleDateString("en-US", {
+                    timeZone: "UTC",
+                  })}{" "}
+                  - Payment of ${paidDrop.amount} from {paidDrop.payee}
+                </p>
+              </div>
               {/*<p>From {paidDrop.payee}</p>*/}
-              <p>{paidDrop.paidMessage || "*No payment message provided*"}</p>
+              <p>
+                Method of Payment:{" "}
+                {paidDrop.paidMessage || "*No method provided*"}
+              </p>
 
               {/* Map over the drops associated with this paidDrop */}
               <div className={styles.paidDatesSection}>
@@ -55,6 +67,12 @@ export default function MemberNotificationsCard() {
       ) : (
         <p>No payment notifications yet.</p>
       )}
+      <div className={styles.paymentKey}>
+        <p>owner payment:</p>
+        <p className={styles.payeeColor} id={styles.blue}></p>
+        <p>your payment:</p>
+        <p className={styles.payeeColor} id={styles.yellow}></p>
+      </div>
     </section>
   );
 }

@@ -8,6 +8,7 @@
 
 .dashboardSectionNotifications {
   border: 1px solid rgb(187, 192, 196);
+  margin-bottom: 1rem;
 }
 
 .teamMembersSection,
@@ -168,6 +169,33 @@ padding: .5rem;
   padding: 0.5rem;
 }
 
+.datePayment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payeeColor {
+  padding: .5rem;
+  width: 10px;
+  height: 10px;
+}
+
+.paymentKey {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blue, #blue {
+  background-color: blue;
+}
+
+.yellow, #yellow {
+  background-color: yellow;
+}
+
 .paymentSection {
   margin: 1rem 0rem 1rem 0rem;
   border-top: 1px solid rgb(187, 192, 196);
@@ -205,6 +233,12 @@ padding: .5rem;
   width: 100%;
 }
 
+.paymentConfirm {
+  background-color: lightgreen;
+  padding: .5rem;
+  margin: 0;
+}
+
 /* Members Archive Section */
 
 .archiveName {
@@ -213,7 +247,6 @@ padding: .5rem;
 }
 
 .link {
-  border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 20px;
   font-weight: 500;
@@ -221,6 +254,9 @@ padding: .5rem;
   background-color: #f9f9f9;
   border-left: 2px solid rgb(187, 192, 196);
   border-bottom: 2px solid rgb(187, 192, 196);
+  border-right:  2px solid transparent;
+  border-top:  2px solid transparent;
+  box-shadow: -5px 5px 0px 1px transparent;
   cursor: pointer;
   transition: border-color 0.25s;
   transition: box-shadow 0.25s;
@@ -229,4 +265,11 @@ padding: .5rem;
 .link:hover {
   border: 2px solid rgb(36, 37, 38);
   box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
+}
+
+/* Payment notifications pages */
+
+.pageControls {
+  margin: 2rem .5rem 0rem .5rem;
+  width: 150px;
 }

@@ -1,7 +1,7 @@
 import { useGetOwnerQuery } from "../owner/ownerSlice";
 import { Link } from "react-router-dom";
 
-import styles from "../../styling/dashboards.module.css";
+import styles from "../../styling/droparchives.module.css";
 
 export default function OwnerMembersArchives() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();
@@ -10,28 +10,27 @@ export default function OwnerMembersArchives() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <section className={styles.dashboardSection}>
-      <h2 className={styles.sectionHeaders}>Drop Archives:</h2>
-      <div className={styles.archivesSection}>
-        {owner?.ownerBusiness?.length ? (
-          <ul>
-            {owner.ownerBusiness.map((business) =>
-              business.businessMember?.map((member) => (
-                <li className={styles.archiveName} key={member.id}>
-                  <Link
-                    className={styles.link}
-                    to={`/ownermembersarchive/${member.id}`}
-                  >
-                    {member.memberName}
-                  </Link>
+    <section className="pageSetup">
+      <h1 className={styles.header}>Drop Archives:</h1>
+
+      {owner?.ownerBusiness?.length ? (
+        <ul className={styles.drops}>
+          {owner.ownerBusiness.map((business) =>
+            business.businessMember?.map((member) => (
+              <Link
+                className={styles.date}
+                to={`/ownermembersarchive/${member.id}`}
+              >
+                <li className={styles.link} key={member.id}>
+                  {member.memberName}
                 </li>
-              ))
-            )}
-          </ul>
-        ) : (
-          <p>No Members Found</p>
-        )}
-      </div>
+              </Link>
+            ))
+          )}
+        </ul>
+      ) : (
+        <p>No Members Found</p>
+      )}
     </section>
   );
 }

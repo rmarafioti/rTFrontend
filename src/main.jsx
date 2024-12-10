@@ -21,6 +21,7 @@ import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
 import MemberArchive from "./features/members/MemberArchive";
 import MemberDrop from "./features/members/MemberDrop";
+import MemberNotifications from "./features/members/MemberNotifications";
 
 import "./index.css";
 
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: "/membercreatedrop/", element: <MemberCreateDrop /> },
       { path: "/memberarchive/", element: <MemberArchive /> },
       { path: "/memberdrop/:dropId", element: <MemberDrop /> },
+      { path: "/membernotifications/", element: <MemberNotifications /> },
     ],
   },
 ]);

@@ -19,16 +19,26 @@ export default function OwnerMemberDrop() {
         <p className={styles.date}>
           {new Date(drop.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
         </p>
-        <p className={styles.total}>Total: ${drop.total}</p>
-        {drop.memberOwes !== 0 && (
-          <p className={styles.oweAmounts}>Owed to You: ${drop.memberOwes}</p>
-        )}
-        {drop.businessOwes !== 0 && (
-          <p className={styles.oweAmounts}>You Owe: ${drop.businessOwes}</p>
-        )}
-        <p className={styles.oweAmounts}>
-          {drop.paid === true ? "*PAID*" : "*NOT PAID*"}
-        </p>
+        <div className={styles.dropDetails}>
+          <p className={styles.total}>Total: ${drop.total}</p>
+          {drop.memberOwes !== 0 && (
+            <p className={styles.oweAmounts}>Owed to You: ${drop.memberOwes}</p>
+          )}
+          {drop.businessOwes !== 0 && (
+            <p className={styles.oweAmounts}>You Owe: ${drop.businessOwes}</p>
+          )}
+          <p
+            className={`${styles.oweAmounts} ${
+              drop.paid ? styles.paid : styles.notPaid
+            }`}
+          >
+            {drop.paid
+              ? `*PAID* on ${new Date(
+                  drop.paidDrop?.paidDate
+                ).toLocaleDateString("en-US", { timeZone: "UTC" })}`
+              : "*NOT PAID*"}
+          </p>
+        </div>
       </div>
       <h2>Services:</h2>
       {drop.service.map((service) => (

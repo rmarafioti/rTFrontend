@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGetMemberQuery, useMemberCreateDropMutation } from "./membersSlice";
 import PayNoticeCard from "../../components/member/memberDashboard/PayNoticeCard";
 import MemberNotificationsCard from "../../components/member/memberDashboard/MemberNotificationsCard";
@@ -67,6 +68,9 @@ export default function MemberDashboard() {
       </button>
       <PayNoticeCard />
       <MemberNotificationsCard />
+      <Link to="/membernotifications/" className={styles.link}>
+        View all payments
+      </Link>
     </article>
   );
 }

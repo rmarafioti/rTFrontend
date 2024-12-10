@@ -51,6 +51,9 @@ export default function Navbar() {
                 <li className={styles.menuItem}>
                   <NavLink to="/memberarchive">Archives</NavLink>
                 </li>
+                <li className={styles.menuItem}>
+                  <NavLink to="/membernotifications">Payments</NavLink>
+                </li>
                 <li className={styles.menuAccount}>Account</li>
               </ul>
             )}
