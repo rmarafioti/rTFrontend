@@ -32,7 +32,11 @@ export default function OwnerMemberDrop() {
               drop.paid ? styles.paid : styles.notPaid
             }`}
           >
-            {drop.paid === true ? "*PAID*" : "*NOT PAID*"}
+            {drop.paid
+              ? `*PAID* on ${new Date(
+                  drop.paidDrop?.paidDate
+                ).toLocaleDateString("en-US", { timeZone: "UTC" })}`
+              : "*NOT PAID*"}
           </p>
         </div>
       </div>
