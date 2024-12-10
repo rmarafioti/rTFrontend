@@ -68,7 +68,9 @@ export default function MemberDashboard() {
       </button>
       <PayNoticeCard />
       <MemberNotificationsCard />
-      <Link to="/membernotifications/">View all notifications</Link>
+      <Link to="/membernotifications/" className={styles.link}>
+        View all notifications
+      </Link>
     </article>
   );
 }

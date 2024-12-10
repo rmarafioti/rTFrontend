@@ -19,7 +19,7 @@ export default function MemberNotificationsCard() {
 
   return (
     <section className={styles.dashboardSectionNotifications}>
-      <h2 className={styles.subHeadersNotice}>Payment Notifications:</h2>
+      <h2 className={styles.subHeadersNotice}>Recent Notifications:</h2>
       {paidDrops?.length ? (
         paidDrops
           .reverse()

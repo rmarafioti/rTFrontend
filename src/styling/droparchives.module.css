@@ -32,3 +32,8 @@
   .date {
     color: rgb(36, 37, 38);
   }
+
+  .pageControls {
+    margin: 2rem .5rem 0rem .5rem;
+    width: 150px;
+  }
