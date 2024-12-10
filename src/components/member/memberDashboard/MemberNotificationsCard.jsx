@@ -19,7 +19,7 @@ export default function MemberNotificationsCard() {
 
   return (
     <section className={styles.dashboardSectionNotifications}>
-      <h2 className={styles.subHeadersNotice}>Recent Notifications:</h2>
+      <h2 className={styles.subHeadersNotice}>Recent Payments:</h2>
       {paidDrops?.length ? (
         paidDrops
           .reverse()
@@ -42,7 +42,10 @@ export default function MemberNotificationsCard() {
                 </p>
               </div>
               {/*<p>From {paidDrop.payee}</p>*/}
-              <p>{paidDrop.paidMessage || "*No payment message provided*"}</p>
+              <p>
+                Method of Payment:{" "}
+                {paidDrop.paidMessage || "*No method provided*"}
+              </p>
 
               {/* Map over the drops associated with this paidDrop */}
               <div className={styles.paidDatesSection}>
