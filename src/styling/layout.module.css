@@ -23,20 +23,47 @@
   display: flex;
   align-items: center;
   list-style: none;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 .menuItem a, .menuAccount {
   font-size: 20px;
   color: rgb(36, 37, 38);
   padding: .5rem;
-  margin-right: 1rem;
+  margin-right: 3rem;
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
   box-shadow: -5px 5px 0px 1px transparent;
   transition: border 0.25s;
   transition: box-shadow 0.25s;
+}
+
+.menuAccount {
+  position: relative;
+ 
+}
+
+.subCategory {
+  position: absolute;
+  display: none;
+  background-color: white;
+  margin-top: .5rem;
+  margin-left: -10rem;
+  padding: .5rem;
+  list-style-type: none;
+  width: 100vw;
+  height: auto;
+  z-index: 10;
+}
+
+.menuAccount:hover .subCategory,
+.subCategory:hover {
+  display: block;
+  color: black;
+  background-color: white;
+  border: 2px solid rgb(36, 37, 38);
+  /*box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);*/
 }
 
 

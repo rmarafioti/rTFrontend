@@ -5,6 +5,7 @@ import {
   logoutMember,
   selectMemberToken,
 } from "../features/auth/authMemberSlice";
+import { useGetOwnerQuery } from "../features/owner/ownerSlice";
 
 import styles from "../styling/layout.module.css";
 
@@ -27,6 +28,42 @@ export default function Navbar() {
     navigate("/");
   };
 
+  const { data: owner, error, isLoading } = useGetOwnerQuery();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  function TeamMembersCard() {
+    return (
+      <>
+        {owner?.ownerBusiness?.length ? (
+          owner.ownerBusiness.map((business) => (
+            <div key={business.id}>
+              <ul className={styles.teamMember}>
+                {business.businessMember?.length ? (
+                  business.businessMember.map((member) => (
+                    <li key={member.id}>
+                      <p className={styles.teamMemberName}>
+                        {member.memberName}
+                      </p>
+                      <p>Percentage: {member.percentage}</p>
+                      <p>Take Home Total: {member.takeHomeTotal}</p>
+                      <p> {member.memberName} Archive</p>
+                    </li>
+                  ))
+                ) : (
+                  <li>No team members found</li>
+                )}
+              </ul>
+            </div>
+          ))
+        ) : (
+          <p>No businesses found</p>
+        )}
+      </>
+    );
+  }
+
   return (
     <nav className={styles.navbar}>
       <h1 className={styles.title}>Right Track Bookkeeping</h1>
@@ -34,14 +71,29 @@ export default function Navbar() {
         {token ? (
           <>
             {ownerToken && (
-              <ul className={styles.menu}>
-                <li className={styles.menuItem}>
-                  <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
-                </li>
-                <li className={styles.menuItem}>
-                  <NavLink to="/ownermembersarchives">Archives</NavLink>
-                </li>
-              </ul>
+              <div>
+                <ul className={styles.menu}>
+                  <li className={styles.menuItem}>
+                    <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
+                  </li>
+                  <li className={styles.menuItem}>
+                    <NavLink to="/ownermembersarchives">Archives</NavLink>
+                  </li>
+                  <li className={styles.menuAccount}>
+                    Account
+                    <ul className={styles.subCategory}>
+                      <li>
+                        business: {owner?.ownerBusiness?.[0]?.businessName}
+                      </li>
+                      <li>team members:</li>
+                      <TeamMembersCard />
+                      <a className={styles.menuItem} onClick={handleLogout}>
+                        Log Out
+                      </a>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             )}
             {memberToken && (
               <ul className={styles.menu}>
@@ -54,14 +106,23 @@ export default function Navbar() {
                 <li className={styles.menuItem}>
                   <NavLink to="/membernotifications">Payments</NavLink>
                 </li>
-                <li className={styles.menuAccount}>Account</li>
+                <li className={styles.menuAccount}>
+                  Account
+                  <ul className={styles.subCategory}>
+                    <li>business:</li>
+                    <li>team members:</li>
+                    <a className={styles.menuItem} onClick={handleLogout}>
+                      Log Out
+                    </a>
+                  </ul>
+                </li>
               </ul>
             )}
-            <li className={styles.menuItem}>
+            {/*<li className={styles.menuItem}>
               <a className={styles.menuItem} onClick={handleLogout}>
                 Log Out
               </a>
-            </li>
+            </li>*/}
           </>
         ) : (
           <li className={styles.menuItem}>
