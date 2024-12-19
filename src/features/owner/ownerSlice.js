@@ -22,6 +22,16 @@ const ownerApi = api.injectEndpoints({
       invalidatesTags: ["Owner"],
     }),
 
+    //owner updates a team members comission percentage
+    updatePercentage: builder.mutation({
+      query: ({ memberId, percentage }) => ({
+        url: `owner/updatepercentage`,
+        method: "PATCH",
+        body: { memberId, percentage },
+      }),
+      invalidatesTags: ["Owner", "Member"],
+    }),
+
     // owner get members drops by id
     ownerGetDrop: builder.query({
       query: (dropId) => ({
@@ -52,6 +62,7 @@ const ownerApi = api.injectEndpoints({
 export const {
   useGetOwnerQuery,
   useOwnerGetDropQuery,
+  useUpdatePercentageMutation,
   useCreateBusinessMutation,
   useOwnerPayDropsMutation,
 } = ownerApi;

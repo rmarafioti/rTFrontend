@@ -66,7 +66,7 @@ export default function TeamMembersCard() {
 
   return (
     <section className={styles.dashboardSection}>
-      <h2 className={styles.subHeaders}>Team Members:</h2>
+      <h2 className={styles.subHeaders}>Unpaid Services:</h2>
       {owner?.ownerBusiness?.length ? (
         owner.ownerBusiness.map((business) => (
           <div className={styles.memberDrops} key={business.id}>

@@ -42,14 +42,16 @@ export default function Navbar() {
               <ul className={styles.teamMember}>
                 {business.businessMember?.length ? (
                   business.businessMember.map((member) => (
-                    <li key={member.id}>
-                      <p className={styles.teamMemberName}>
-                        {member.memberName}
-                      </p>
-                      <p>Percentage: {member.percentage}</p>
+                    <NavLink to={`ownermemberprofile/${member.id}`}>
+                      <li key={member.id}>
+                        <p className={styles.teamMemberName}>
+                          {member.memberName}
+                        </p>
+                        {/*<p>Percentage: {member.percentage}</p>
                       <p>Take Home Total: {member.takeHomeTotal}</p>
-                      <p> {member.memberName} Archive</p>
-                    </li>
+                      <p> {member.memberName} Archive</p>*/}
+                      </li>
+                    </NavLink>
                   ))
                 ) : (
                   <li>No team members found</li>
