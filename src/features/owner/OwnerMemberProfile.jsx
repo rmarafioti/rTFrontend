@@ -21,9 +21,10 @@ export default function OwnerMemberProfile() {
 
   // Find the member directly
   const member = owner?.ownerBusiness
-    ?.map((business) => business.businessMember)
-    ?.flat()
-    ?.find((m) => m.id === parseInt(memberId));
+    ?.find((business) =>
+      business.businessMember.some((member) => member.id === +memberId)
+    )
+    ?.businessMember.find((member) => member.id === +memberId);
 
   if (!member) {
     return <p>Member not found</p>;
@@ -40,7 +41,7 @@ export default function OwnerMemberProfile() {
     try {
       await updatePercentage({
         memberId: +memberId,
-        percentage: +percentageValue,
+        percentage: percentageValue,
       }).unwrap();
 
       console.log(`Updated percentage for member with ID: ${memberId}`);
@@ -62,7 +63,7 @@ export default function OwnerMemberProfile() {
         <div>
           <select
             value={percentageValue}
-            onChange={(e) => setPercentageValue(e.target.value)}
+            onChange={(e) => setPercentageValue(+e.target.value)}
           >
             <option value="">Select Percentage</option>
             {percentageValues.map((value) => (
