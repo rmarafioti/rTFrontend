@@ -110,7 +110,8 @@ export default function Navbar() {
                   Account
                   <ul className={styles.subCategory}>
                     <li>business:</li>
-                    <li>team members:</li>
+                    <li>total:</li>
+                    <li>archive:</li>
                     <a className={styles.menuItem} onClick={handleLogout}>
                       Log Out
                     </a>
