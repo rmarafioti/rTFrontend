@@ -34,12 +34,12 @@ const ownerApi = api.injectEndpoints({
 
     // owner get member drops dorted by month and year
     ownerGetDrops: builder.query({
-      query: ({memberId}) => ({
+      query: ({ memberId }) => ({
         url: `/ower/drops/${year}/${month}/${memberId}`,
         method: "GET",
       }),
       providesTags: ["Owner"],
-    })
+    }),
 
     // owner get members drops by id
     ownerGetDrop: builder.query({
