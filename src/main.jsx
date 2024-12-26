@@ -14,6 +14,7 @@ import OwnerOnboard from "./features/owner/OwnerOnboard";
 import OwnerDashboard from "./features/owner/OwnerDashboard";
 import OwnerMembersArchive from "./features/owner/OwnerMembersArchive";
 import OwnerMembersArchives from "./features/owner/OwnerMembersArchives";
+import OwnerMemberArchiveMonth from "./features/owner/OwnerMemberArchiveMonth";
 import OwnerMemberDrop from "./features/owner/OwnerMemberDrop";
 import OwnerMemberProfile from "./features/owner/OwnerMemberProfile";
 //member features
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/ownermembersarchives/",
         element: <OwnerMembersArchives />,
+      },
+      {
+        path: "/ownermemberarchivemonth/:year/:month/:memberId",
+        element: <OwnerMemberArchiveMonth />,
       },
       { path: "/ownermemberdrop/:dropId", element: <OwnerMemberDrop /> },
       {

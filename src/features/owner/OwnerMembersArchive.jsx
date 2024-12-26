@@ -1,38 +1,68 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useGetOwnerQuery } from "./ownerSlice";
+import { useOwnerGetDropsQuery } from "./ownerSlice";
 
 import styles from "../../styling/droparchives.module.css";
 
-export default function OwnerMembersArchice() {
+export default function OwnerMembersArchive() {
   const { memberId } = useParams();
-  const { data: owner, error, isLoading } = useGetOwnerQuery(memberId);
-  const [currentPage, setCurrentPage] = useState(1);
-  const notificationsPerPage = 5;
+  const year = new Date().getFullYear(); // Default to the current year
+
+  const { data, error, isLoading } = useOwnerGetDropsQuery({ memberId, year });
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Find the member directly
-  const member = owner?.ownerBusiness
-    ?.map((business) => business.businessMember)
-    ?.flat()
-    ?.find((m) => m.id === parseInt(memberId));
+  const drops = data?.drops || [];
 
-  if (!member) {
-    return <p>Member not found</p>;
-  }
+  // Group drops by month
+  const dropsByMonth = drops.reduce((acc, drop) => {
+    const date = new Date(drop.date);
+    const month = date.getMonth() + 1; // 1-based month
+    const monthName = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+    }).format(date);
 
-  const archivedDrops = member.drop?.filter((drop) => drop.paid);
+    if (!acc[month]) {
+      acc[month] = {
+        monthName,
+        drops: [],
+      };
+    }
+
+    acc[month].drops.push(drop);
+    return acc;
+  }, {});
 
   //calculate pagination
-  const lastIndex = currentPage * notificationsPerPage;
+  /*const lastIndex = currentPage * notificationsPerPage;
   const firstIndex = lastIndex - notificationsPerPage;
-  const currentNotifications = archivedDrops.slice(firstIndex, lastIndex);
+  const currentNotifications = archivedDrops.slice(firstIndex, lastIndex);*/
 
   return (
     <article className="pageSetup">
-      <h1 className={styles.header}>{member.memberName}'s Archived Drops:</h1>
+      <h1 className={styles.header}>
+        {data?.member}'s Archived Drops for {year}:
+      </h1>
+      {Object.keys(dropsByMonth).length > 0 ? (
+        <ul className={styles.months}>
+          {Object.entries(dropsByMonth).map(([month, { monthName }]) => (
+            <li key={month} className={styles.month}>
+              <Link
+                to={`/ownermemberarchivemonth/${year}/${month}/${memberId}`}
+              >
+                {monthName} {year}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>*No drops found for this year*</p>
+      )}
+
+      {/*<h1 className={styles.header}>
+        {data?.member}'s Archived Drops for {data?.month} {data?.year}:
+      </h1>
       {currentNotifications?.length ? (
         <ul className={styles.drops}>
           {currentNotifications.map((drop) => (
@@ -45,9 +75,10 @@ export default function OwnerMembersArchice() {
         </ul>
       ) : (
         <p>*No archived drops found*</p>
-      )}
+      )}*/}
+
       {/* pagination controls */}
-      {archivedDrops.length > notificationsPerPage && (
+      {/*{archivedDrops.length > notificationsPerPage && (
         <div>
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -78,7 +109,7 @@ export default function OwnerMembersArchice() {
             Next
           </button>
         </div>
-      )}
+      )}*/}
     </article>
   );
 }
