@@ -13,6 +13,7 @@ const authOwnerApi = api.injectEndpoints({
         body: credentials,
       }),
       transformErrorResponse: (response) => response.data,
+      invalidatesTags: ["Owner"],
     }),
     loginOwner: builder.mutation({
       query: (credentials) => ({
@@ -21,6 +22,7 @@ const authOwnerApi = api.injectEndpoints({
         body: credentials,
       }),
       transformErrorResponse: (response) => response.data,
+      invalidatesTags: ["Owner"],
     }),
   }),
 });

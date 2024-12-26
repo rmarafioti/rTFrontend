@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutOwner, selectOwnerToken } from "../features/auth/authOwnerSlice";
@@ -5,6 +6,7 @@ import {
   logoutMember,
   selectMemberToken,
 } from "../features/auth/authMemberSlice";
+import { useGetOwnerQuery } from "../features/owner/ownerSlice";
 
 import styles from "../styling/layout.module.css";
 
@@ -27,21 +29,78 @@ export default function Navbar() {
     navigate("/");
   };
 
-  return (
-    <nav className={styles.navbar}>
-      <h1 className={styles.title}>Right Track Bookkeeping</h1>
-      <ul className={styles.menu}>
-        {token ? (
-          <>
-            {ownerToken && (
-              <ul className={styles.menu}>
-                <li className={styles.menuItem}>
-                  <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
-                </li>
-                <li className={styles.menuItem}>
-                  <NavLink to="/ownermembersarchives">Archives</NavLink>
-                </li>
+  // Only make the request if an ownerToken is present
+  const {
+    data: owner,
+    error,
+    isLoading,
+  } = useGetOwnerQuery(undefined, {
+    skip: !ownerToken, // Skip the query if ownerToken is not present
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  function TeamMembersCard() {
+    return (
+      <>
+        {owner?.ownerBusiness?.length ? (
+          owner.ownerBusiness.map((business) => (
+            <div key={business.id}>
+              <ul className={styles.teamMember}>
+                {business.businessMember?.length ? (
+                  business.businessMember.map((member) => (
+                    <NavLink to={`ownermemberprofile/${member.id}`}>
+                      <li key={member.id}>
+                        <p className={styles.teamMemberName}>
+                          {member.memberName}
+                        </p>
+                      </li>
+                    </NavLink>
+                  ))
+                ) : (
+                  <li>No team members found</li>
+                )}
               </ul>
+            </div>
+          ))
+        ) : (
+          <p>No businesses found</p>
+        )}
+      </>
+    );
+  }
+
+  return (
+    <>
+      {token && (
+        <nav className={styles.navbar}>
+          <h1 className={styles.title}>Right Track Bookkeeping</h1>
+          <ul className={styles.menu}>
+            {ownerToken && (
+              <div>
+                <ul className={styles.menu}>
+                  <li className={styles.menuItem}>
+                    <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
+                  </li>
+                  <li className={styles.menuItem}>
+                    <NavLink to="/ownermembersarchives">Archives</NavLink>
+                  </li>
+                  <li className={styles.menuAccount}>
+                    Account
+                    <ul className={styles.subCategory}>
+                      <li>
+                        business: {owner?.ownerBusiness?.[0]?.businessName}
+                      </li>
+                      <li>team members:</li>
+                      <TeamMembersCard />
+                      <a className={styles.menuItem} onClick={handleLogout}>
+                        Log Out
+                      </a>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             )}
             {memberToken && (
               <ul className={styles.menu}>
@@ -54,21 +113,22 @@ export default function Navbar() {
                 <li className={styles.menuItem}>
                   <NavLink to="/membernotifications">Payments</NavLink>
                 </li>
-                <li className={styles.menuAccount}>Account</li>
+                <li className={styles.menuAccount}>
+                  Account
+                  <ul className={styles.subCategory}>
+                    <li>business:</li>
+                    <li>total:</li>
+                    <li>archive:</li>
+                    <a className={styles.menuItem} onClick={handleLogout}>
+                      Log Out
+                    </a>
+                  </ul>
+                </li>
               </ul>
             )}
-            <li className={styles.menuItem}>
-              <a className={styles.menuItem} onClick={handleLogout}>
-                Log Out
-              </a>
-            </li>
-          </>
-        ) : (
-          <li className={styles.menuItem}>
-            <NavLink to="/">Log In</NavLink>
-          </li>
-        )}
-      </ul>
-    </nav>
+          </ul>
+        </nav>
+      )}
+    </>
   );
 }

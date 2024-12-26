@@ -14,6 +14,7 @@ const authMemberApi = api.injectEndpoints({
         body: credentials,
       }),
       transformErrorResponse: (response) => response.data,
+      invalidatesTags: ["Member"],
     }),
     loginMember: builder.mutation({
       query: (credentials) => ({
@@ -22,6 +23,7 @@ const authMemberApi = api.injectEndpoints({
         body: credentials,
       }),
       transformErrorResponse: (response) => response.data,
+      invalidatesTags: ["Member"],
     }),
   }),
 });

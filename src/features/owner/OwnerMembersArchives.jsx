@@ -1,4 +1,5 @@
 import { useGetOwnerQuery } from "../owner/ownerSlice";
+import { useOwnerGetDropsQuery } from "./ownerSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/droparchives.module.css";
