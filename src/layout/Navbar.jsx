@@ -28,7 +28,14 @@ export default function Navbar() {
     navigate("/");
   };
 
-  const { data: owner, error, isLoading } = useGetOwnerQuery();
+  // Only make the request if an ownerToken is present
+  const {
+    data: owner,
+    error,
+    isLoading,
+  } = useGetOwnerQuery(undefined, {
+    skip: !ownerToken, // Skip the query if ownerToken is not present
+  });
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -47,9 +54,6 @@ export default function Navbar() {
                         <p className={styles.teamMemberName}>
                           {member.memberName}
                         </p>
-                        {/*<p>Percentage: {member.percentage}</p>
-                      <p>Take Home Total: {member.takeHomeTotal}</p>
-                      <p> {member.memberName} Archive</p>*/}
                       </li>
                     </NavLink>
                   ))
@@ -67,11 +71,11 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={styles.navbar}>
-      <h1 className={styles.title}>Right Track Bookkeeping</h1>
-      <ul className={styles.menu}>
-        {token ? (
-          <>
+    <>
+      {token && (
+        <nav className={styles.navbar}>
+          <h1 className={styles.title}>Right Track Bookkeeping</h1>
+          <ul className={styles.menu}>
             {ownerToken && (
               <div>
                 <ul className={styles.menu}>
@@ -121,18 +125,9 @@ export default function Navbar() {
                 </li>
               </ul>
             )}
-            {/*<li className={styles.menuItem}>
-              <a className={styles.menuItem} onClick={handleLogout}>
-                Log Out
-              </a>
-            </li>*/}
-          </>
-        ) : (
-          <li className={styles.menuItem}>
-            <NavLink to="/">Log In</NavLink>
-          </li>
-        )}
-      </ul>
-    </nav>
+          </ul>
+        </nav>
+      )}
+    </>
   );
 }
