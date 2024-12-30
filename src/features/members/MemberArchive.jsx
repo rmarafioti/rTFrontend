@@ -1,18 +1,39 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMemberGetPaidDropsQuery } from "./membersSlice";
+import { useMemberGetDropsQuery } from "./membersSlice";
 
 import styles from "../../styling/droparchives.module.css";
 
 export default function MemberArchive() {
-  const { data: paidDrops, error, isLoading } = useMemberGetPaidDropsQuery();
-  const [currentPage, setCurrentPage] = useState(1);
-  const notificationsPerPage = 5;
+  const year = new Date().getFullYear(); // Default to the current year
+  const { data, error, isLoading } = useMemberGetDropsQuery(year);
+
+  const drops = data?.drops || [];
+
+  // Group drops by month
+  const dropsByMonth = drops.reduce((acc, drop) => {
+    const date = new Date(drop.date);
+    const month = date.getMonth() + 1; // 1-based month
+    const monthName = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+    }).format(date);
+
+    if (!acc[month]) {
+      acc[month] = {
+        monthName,
+        drops: [],
+      };
+    }
+
+    acc[month].drops.push(drop);
+    return acc;
+  }, {});
+  /*const [currentPage, setCurrentPage] = useState(1);
+  const notificationsPerPage = 5;*/
 
   //calculate pagination
-  const lastIndex = currentPage * notificationsPerPage;
+  /*const lastIndex = currentPage * notificationsPerPage;
   const firstIndex = lastIndex - notificationsPerPage;
-  const currentNotifications = paidDrops?.slice(firstIndex, lastIndex);
+  const currentNotifications = paidDrops?.slice(firstIndex, lastIndex);*/
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -20,21 +41,21 @@ export default function MemberArchive() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Your Archived Drops</h1>
-      {currentNotifications?.length ? (
-        <ul className={styles.drops}>
-          {currentNotifications.map((drop) => (
-            <Link className={styles.date} to={`/memberdrop/${drop.id}`}>
-              <li key={drop.id} className={styles.link}>
-                {new Date(drop.date).toLocaleDateString("en-US")}
-              </li>
-            </Link>
+      {Object.keys(dropsByMonth).length > 0 ? (
+        <ul className={styles.months}>
+          {Object.entries(dropsByMonth).map(([month, { monthName }]) => (
+            <li key={month} className={styles.month}>
+              <Link to={`/memberarchivemonth/${year}/${month}`}>
+                {monthName} {year}
+              </Link>
+            </li>
           ))}
         </ul>
       ) : (
-        <p>*No archived drops found*</p>
+        <p>*No drops found for this year*</p>
       )}
       {/* pagination controls */}
-      {paidDrops.length > notificationsPerPage && (
+      {/*{paidDrops.length > notificationsPerPage && (
         <div>
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -64,7 +85,7 @@ export default function MemberArchive() {
             Next
           </button>
         </div>
-      )}
+      )}*/}
     </article>
   );
 }

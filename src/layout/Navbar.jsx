@@ -40,12 +40,8 @@ export default function Navbar() {
   });
 
   // Only make the request if an ownerToken is present
-  const {
-    data: member,
-    /*error,
-      isLoading,*/
-  } = useGetMemberQuery(undefined, {
-    skip: !memberToken, // Skip the query if ownerToken is not present
+  const { data: member } = useGetMemberQuery(undefined, {
+    skip: !memberToken, // Skip the query if memberToken is not present
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -126,8 +122,8 @@ export default function Navbar() {
                 <li className={styles.menuAccount}>
                   Account
                   <ul className={styles.subCategory}>
-                    <li>business: {member.business?.businessName}</li>
-                    <li>total:{member.takeHomeTotal}</li>
+                    <li>business: {member?.business?.businessName}</li>
+                    <li>total: {member?.takeHomeTotal}</li>
                     <li>
                       <Link to="memberarchive">Archive</Link>
                     </li>

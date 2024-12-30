@@ -31,28 +31,6 @@ export default function MemberDashboard() {
     }
   };
 
-  function MemberCard() {
-    return (
-      <section>
-        {/*<p>Your are a member of the {member.business?.businessName} team</p>
-        <p>Your Business Code: {member.business?.code}</p>*
-        <p>Your Team Members:</p>
-        {member?.business?.businessMember?.length > 0 ? (
-          member.business.businessMember.map((businessMember) => (
-            <div key={businessMember.id}>
-              <p>{businessMember.memberName}</p>
-              create a message model so members can send messages back and forth
-        <button>Send Message</button>
-            </div>
-          ))
-        ) : (
-          <p>You have no team members yet</p>
-        )}
-        {/*<p>Percentage: {member.percentage} / 40</p>*/}
-      </section>
-    );
-  }
-
   return (
     <article className="pageSetup">
       <section className={styles.takeHomeTotalSection}>
