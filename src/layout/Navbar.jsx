@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutOwner, selectOwnerToken } from "../features/auth/authOwnerSlice";
@@ -7,6 +7,7 @@ import {
   selectMemberToken,
 } from "../features/auth/authMemberSlice";
 import { useGetOwnerQuery } from "../features/owner/ownerSlice";
+import { useGetMemberQuery } from "../features/members/membersSlice";
 
 import styles from "../styling/layout.module.css";
 
@@ -36,6 +37,11 @@ export default function Navbar() {
     isLoading,
   } = useGetOwnerQuery(undefined, {
     skip: !ownerToken, // Skip the query if ownerToken is not present
+  });
+
+  // Only make the request if an ownerToken is present
+  const { data: member } = useGetMemberQuery(undefined, {
+    skip: !memberToken, // Skip the query if memberToken is not present
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -116,9 +122,11 @@ export default function Navbar() {
                 <li className={styles.menuAccount}>
                   Account
                   <ul className={styles.subCategory}>
-                    <li>business:</li>
-                    <li>total:</li>
-                    <li>archive:</li>
+                    <li>business: {member?.business?.businessName}</li>
+                    <li>total: {member?.takeHomeTotal}</li>
+                    <li>
+                      <Link to="memberarchive">Archive</Link>
+                    </li>
                     <a className={styles.menuItem} onClick={handleLogout}>
                       Log Out
                     </a>

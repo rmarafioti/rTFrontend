@@ -1,19 +1,16 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useOwnerGetDropsQuery } from "./ownerSlice";
+import { useMemberGetDropsQuery } from "./membersSlice";
 import styles from "../../styling/droparchives.module.css";
 
-export default function OwnerMemberArchiveMonth() {
-  const { year, month, memberId } = useParams();
+export default function MemberArchiveMonth() {
+  const { year, month } = useParams();
 
-  const { data, error, isLoading } = useOwnerGetDropsQuery({
-    memberId,
-    year,
-  });
+  const { data: member, error, isLoading } = useMemberGetDropsQuery(year);
   const [currentPage, setCurrentPage] = useState(1);
   const notificationsPerPage = 5;
 
-  const drops = data?.drops || [];
+  const drops = member?.drops || [];
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -40,14 +37,14 @@ export default function OwnerMemberArchiveMonth() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
-        {data?.member}'s Drops for {monthName} {year}:
+        Drops for {monthName} {year}:
       </h1>
       {currentNotifications?.length ? (
         <ul className={styles.drops}>
           {currentNotifications.map((drop) => (
             <Link
               className={styles.date}
-              to={`/ownermemberdrop/${drop.id}`}
+              to={`/memberdrop/${drop.id}`}
               key={drop.id}
             >
               <li className={styles.link}>

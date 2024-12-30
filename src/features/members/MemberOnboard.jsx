@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGetBusinessQuery } from "../buisness/businessSlice";
 import { useLinkMemberToBusinessMutation } from "./membersSlice";
 
 import styles from "../../styling/onboard.module.css";
 
 export default function MemberOnboard() {
+  const {
+    data: businesses,
+    isLoading: isBusinessesLoading,
+    isError: isBusinessesError,
+  } = useGetBusinessQuery();
   const [linkBusiness, { isLoading, isSuccess, isError, error }] =
     useLinkMemberToBusinessMutation();
   const navigate = useNavigate();
@@ -26,14 +32,28 @@ export default function MemberOnboard() {
     <article className="pageSetup">
       <h1>Submit your business info</h1>
       <form className={styles.onboardForm} onSubmit={handleSubmit}>
-        <label className={styles.labelName}>Business Name:</label>
-        <input
-          className={styles.onboardFormInput}
-          type="text"
-          value={businessName}
-          onChange={(e) => setBusinessName(e.target.value)}
-          required
-        />
+        <label className={styles.labelName}>Select a Business:</label>
+        {isBusinessesLoading ? (
+          <p>Loading business...</p>
+        ) : isBusinessesError ? (
+          <p>Error loading businesses</p>
+        ) : (
+          <select
+            className={styles.onboardFormInput}
+            value={businessName}
+            onChange={(e) => setBusinessName(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              -- Select a business --
+            </option>
+            {businesses.map((business) => (
+              <option key={business.id} value={business.name}>
+                {business?.businessName}
+              </option>
+            ))}
+          </select>
+        )}
         <label className={styles.labelName}>Business Code:</label>
         <input
           className={styles.onboardFormInput}

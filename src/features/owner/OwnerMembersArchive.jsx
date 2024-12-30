@@ -34,11 +34,6 @@ export default function OwnerMembersArchive() {
     return acc;
   }, {});
 
-  //calculate pagination
-  /*const lastIndex = currentPage * notificationsPerPage;
-  const firstIndex = lastIndex - notificationsPerPage;
-  const currentNotifications = archivedDrops.slice(firstIndex, lastIndex);*/
-
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
@@ -59,57 +54,6 @@ export default function OwnerMembersArchive() {
       ) : (
         <p>*No drops found for this year*</p>
       )}
-
-      {/*<h1 className={styles.header}>
-        {data?.member}'s Archived Drops for {data?.month} {data?.year}:
-      </h1>
-      {currentNotifications?.length ? (
-        <ul className={styles.drops}>
-          {currentNotifications.map((drop) => (
-            <Link className={styles.date} to={`/ownermemberdrop/${drop.id}`}>
-              <li key={drop.id} className={styles.link}>
-                {new Date(drop.date).toLocaleDateString("en-US")}
-              </li>
-            </Link>
-          ))}
-        </ul>
-      ) : (
-        <p>*No archived drops found*</p>
-      )}*/}
-
-      {/* pagination controls */}
-      {/*{archivedDrops.length > notificationsPerPage && (
-        <div>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={styles.pageControls}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of{" "}
-            {Math.ceil(archivedDrops.length / notificationsPerPage)}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) =>
-                Math.min(
-                  prev + 1,
-                  Math.ceil(archivedDrops.length / notificationsPerPage)
-                )
-              )
-            }
-            disabled={
-              currentPage ==
-              Math.ceil(archivedDrops.length / notificationsPerPage)
-            }
-            className={styles.pageControls}
-          >
-            Next
-          </button>
-        </div>
-      )}*/}
     </article>
   );
 }

@@ -62,6 +62,15 @@ const memberApi = api.injectEndpoints({
       invalidatesTags: ["Member"],
     }),
 
+    // member get all drops by year
+    memberGetDrops: builder.query({
+      query: (year) => ({
+        url: `/member/dropsMonth/${year}`,
+        method: "GET",
+      }),
+      providesTags: ["Member"],
+    }),
+
     // member get drop by id
     memberGetDrop: builder.query({
       query: (dropId) => ({
@@ -133,6 +142,7 @@ const memberApi = api.injectEndpoints({
 
 export const {
   useGetMemberQuery,
+  useMemberGetDropsQuery,
   useMemberGetDropQuery,
   useMemberGetPaidDropsQuery,
   useLinkMemberToBusinessMutation,
