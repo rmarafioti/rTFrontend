@@ -4,20 +4,18 @@
   align-items: center;
   color: var(--black);
   font-weight: normal;
-  
   padding: 1rem 0rem 2rem 0rem;
-  border-bottom: 2px solid rgb(187, 192, 196);
+  border-bottom: 2px solid var( --secondaryTurquoise);
 }
 
 .footer {
   justify-content: center;
   border-bottom: none;
   padding: 1rem 1rem;
-  border-top: 2px solid rgb(187, 192, 196);
+  border-top: 2px solid var(--secondaryTurquoise);
 }
 
 .footerTitle {
-  
   font-weight: normal ;
 }
 
@@ -49,7 +47,6 @@
 
 .menuAccount {
   position: relative;
- 
 }
 
 .subCategory {
