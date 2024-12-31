@@ -2,7 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(246, 239, 230);
+  color: var(--black);
+  font-weight: normal;
+  
   padding: 1rem 0rem 2rem 0rem;
   border-bottom: 2px solid rgb(187, 192, 196);
 }
@@ -10,7 +12,13 @@
 .footer {
   justify-content: center;
   border-bottom: none;
+  padding: 1rem 1rem;
   border-top: 2px solid rgb(187, 192, 196);
+}
+
+.footerTitle {
+  
+  font-weight: normal ;
 }
 
 .title {
