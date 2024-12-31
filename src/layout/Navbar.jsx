@@ -168,16 +168,6 @@ export default function Navbar() {
                   </li>
                   <HamMenu />
                 </ul>
-                <section
-                  className={styles.hamMenuContainer}
-                  onClick={toggleMenu}
-                >
-                  <div
-                    className={`${styles.menuButtonBurger} ${
-                      menuOpen ? styles.open : ""
-                    }`}
-                  ></div>
-                </section>
               </div>
             )}
             {memberToken && (
