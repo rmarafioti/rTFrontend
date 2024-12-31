@@ -1,5 +1,6 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutOwner, selectOwnerToken } from "../features/auth/authOwnerSlice";
 import {
@@ -30,6 +31,19 @@ export default function Navbar() {
     navigate("/");
   };
 
+  // Functionality to open and close ham menu
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  // Collapse menu when user routes to another path via ham menu
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   // Only make the request if an ownerToken is present
   const {
     data: owner,
@@ -46,6 +60,53 @@ export default function Navbar() {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+
+  function MenuMember() {
+    return (
+      <menu className={`${styles.menuMember} ${menuOpen ? styles.active : ""}`}>
+        <ul className={styles.hamMenuSection}>
+          <li>
+            <p className={styles.hamMenuItem} id={styles.staticInfo}>
+              business: {member?.business?.businessName}
+            </p>
+          </li>
+          <li className={styles.hamMenuItem} id={styles.staticInfo}>
+            total: {member?.takeHomeTotal}
+          </li>
+          <li className={styles.hamMenuItem}>
+            <NavLink to="/memberdashboard">Member Dashboard</NavLink>
+          </li>
+          <li className={styles.hamMenuItem}>
+            <NavLink to="/memberarchive">Archives</NavLink>
+          </li>
+          <li className={styles.hamMenuItem}>
+            <NavLink to="/membernotifications">Payments</NavLink>
+          </li>
+          <li className={styles.hamMenuItem}>
+            <Link to="memberarchive">Archive</Link>
+          </li>
+          <li className={styles.hamMenuItem}>
+            <a id={styles.logout} onClick={handleLogout}>
+              Log Out
+            </a>
+          </li>
+        </ul>
+      </menu>
+    );
+  }
+
+  function HamMenu() {
+    return (
+      <section className={styles.hamMenuContainer} onClick={toggleMenu}>
+        <div
+          className={`${styles.menuButtonBurger} ${
+            menuOpen ? styles.open : ""
+          }`}
+        ></div>
+        {memberToken && <MenuMember />}
+      </section>
+    );
+  }
 
   function TeamMembersCard() {
     return (
@@ -105,7 +166,18 @@ export default function Navbar() {
                       </a>
                     </ul>
                   </li>
+                  <HamMenu />
                 </ul>
+                <section
+                  className={styles.hamMenuContainer}
+                  onClick={toggleMenu}
+                >
+                  <div
+                    className={`${styles.menuButtonBurger} ${
+                      menuOpen ? styles.open : ""
+                    }`}
+                  ></div>
+                </section>
               </div>
             )}
             {memberToken && (
@@ -122,16 +194,22 @@ export default function Navbar() {
                 <li className={styles.menuAccount}>
                   Account
                   <ul className={styles.subCategory}>
-                    <li>business: {member?.business?.businessName}</li>
-                    <li>total: {member?.takeHomeTotal}</li>
-                    <li>
-                      <Link to="memberarchive">Archive</Link>
+                    <li className={styles.subItem} id={styles.firstListItem}>
+                      business: {member?.business?.businessName}
                     </li>
-                    <a className={styles.menuItem} onClick={handleLogout}>
+                    <li className={styles.subItem}>
+                      total: {member?.takeHomeTotal}
+                    </li>
+                    <a
+                      className={styles.subItem}
+                      id={styles.logout}
+                      onClick={handleLogout}
+                    >
                       Log Out
                     </a>
                   </ul>
                 </li>
+                <HamMenu />
               </ul>
             )}
           </ul>
