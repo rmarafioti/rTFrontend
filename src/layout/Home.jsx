@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-
 import styles from "../styling/home.module.css";
 
 export default function Home() {
   return (
     <article className="pageSetup">
-      <div className={styles.header}>
-        <h1>Right Track Bookkeeping.</h1>
+      <div className={styles.hero}>
+        <h1 className={styles.header}>Right Track Bookkeeping.</h1>
         <p className={styles.subHeader}>
           An app for small business owners and independent workers to track
-          funds and streamline bookkeeping
+          funds and streamline bookkeeping.
         </p>
       </div>
       <p className={styles.loginStatement}>Are you a business owner?</p>

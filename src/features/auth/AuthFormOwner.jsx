@@ -50,13 +50,13 @@ export default function AuthFormOwner() {
 
   return (
     <article className="pageSetup">
-      <h1>{authAction}</h1>
+      <h1 className={styles.header}>{authAction}</h1>
       <a onClick={() => setIsLogin(!isLogin)} className={styles.altCopy}>
         {altCopy}
       </a>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Full Name</label>
+          <label className={styles.labelName}>Full Name:</label>
           <input
             className={styles.loginFormInput}
             type="text"
@@ -66,7 +66,7 @@ export default function AuthFormOwner() {
           />
         </div>
         <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Username</label>
+          <label className={styles.labelName}>Username:</label>
           <input
             className={styles.loginFormInput}
             type="text"
@@ -76,7 +76,7 @@ export default function AuthFormOwner() {
           />
         </div>
         <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Password</label>
+          <label className={styles.labelName}>Password:</label>
           <input
             className={styles.loginFormInput}
             type="password"

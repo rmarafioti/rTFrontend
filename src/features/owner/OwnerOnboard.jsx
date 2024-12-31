@@ -39,7 +39,7 @@ export default function OwnerOnboard() {
 
   return (
     <article className="pageSetup">
-      <h1>Enter your business information</h1>
+      <h1 className={styles.header}>Enter your business information</h1>
       <form className={styles.onboardForm} onSubmit={businessSubmit}>
         <label className={styles.labelName}>Business Name:</label>
         <input

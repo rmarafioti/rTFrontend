@@ -30,7 +30,7 @@ export default function MemberOnboard() {
 
   return (
     <article className="pageSetup">
-      <h1>Submit your business info</h1>
+      <h1 className={styles.header}>Submit your business info</h1>
       <form className={styles.onboardForm} onSubmit={handleSubmit}>
         <label className={styles.labelName}>Select a Business:</label>
         {isBusinessesLoading ? (
