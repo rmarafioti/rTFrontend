@@ -61,6 +61,7 @@ export default function Navbar() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  // Mobile menu for member
   function MenuMember() {
     return (
       <menu className={`${styles.menuMember} ${menuOpen ? styles.active : ""}`}>
@@ -77,13 +78,10 @@ export default function Navbar() {
             <NavLink to="/memberdashboard">Member Dashboard</NavLink>
           </li>
           <li className={styles.hamMenuItem}>
-            <NavLink to="/memberarchive">Archives</NavLink>
+            <NavLink to="/memberarchive">Archive</NavLink>
           </li>
           <li className={styles.hamMenuItem}>
             <NavLink to="/membernotifications">Payments</NavLink>
-          </li>
-          <li className={styles.hamMenuItem}>
-            <Link to="memberarchive">Archive</Link>
           </li>
           <li className={styles.hamMenuItem}>
             <a id={styles.logout} onClick={handleLogout}>
@@ -95,30 +93,21 @@ export default function Navbar() {
     );
   }
 
-  function HamMenu() {
-    return (
-      <section className={styles.hamMenuContainer} onClick={toggleMenu}>
-        <div
-          className={`${styles.menuButtonBurger} ${
-            menuOpen ? styles.open : ""
-          }`}
-        ></div>
-        {memberToken && <MenuMember />}
-      </section>
-    );
-  }
-
+  // Map through all the team members linked to the business
   function TeamMembersCard() {
     return (
       <>
         {owner?.ownerBusiness?.length ? (
           owner.ownerBusiness.map((business) => (
             <div key={business.id}>
-              <ul className={styles.teamMember}>
+              <ul>
                 {business.businessMember?.length ? (
                   business.businessMember.map((member) => (
-                    <NavLink to={`ownermemberprofile/${member.id}`}>
-                      <li key={member.id}>
+                    <NavLink
+                      className={styles.teamMemberLink}
+                      to={`ownermemberprofile/${member.id}`}
+                    >
+                      <li className={styles.teamMember} key={member.id}>
                         <p className={styles.teamMemberName}>
                           {member.memberName}
                         </p>
@@ -138,12 +127,59 @@ export default function Navbar() {
     );
   }
 
+  // Mobile menu for owner
+  function MenuOwner() {
+    return (
+      <menu className={`${styles.menuOwner} ${menuOpen ? styles.active : ""}`}>
+        <ul className={styles.hamMenuSection}>
+          <li>
+            <p className={styles.hamMenuItem} id={styles.staticInfo}>
+              business: {owner?.ownerBusiness?.[0]?.businessName}
+            </p>
+          </li>
+          <li className={styles.hamMenuItem} id={styles.staticInfo}>
+            total: {owner?.takeHomeTotal}
+          </li>
+          <li className={styles.hamMenuItem}>
+            <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
+          </li>
+          <li className={styles.hamMenuItem}>Team Members:</li>
+          <TeamMembersCard />
+          <li className={styles.hamMenuItem}>
+            <NavLink to="/ownermembersarchives">Archives</NavLink>
+          </li>
+          <li className={styles.hamMenuItem} id={styles.staticInfo}>
+            <a className={styles.logout} onClick={handleLogout}>
+              Log Out
+            </a>
+          </li>
+        </ul>
+      </menu>
+    );
+  }
+
+  // Hamburger menu
+  function HamMenu() {
+    return (
+      <section className={styles.hamMenuContainer} onClick={toggleMenu}>
+        <div
+          className={`${styles.menuButtonBurger} ${
+            menuOpen ? styles.open : ""
+          }`}
+        ></div>
+        {memberToken && <MenuMember />}
+        {ownerToken && <MenuOwner />}
+      </section>
+    );
+  }
+
   return (
     <>
       {token && (
         <nav className={styles.navbar}>
           <h1 className={styles.title}>Right Track Bookkeeping</h1>
           <ul className={styles.menu}>
+            {/* Owner menu desktop */}
             {ownerToken && (
               <div>
                 <ul className={styles.menu}>
@@ -156,12 +192,16 @@ export default function Navbar() {
                   <li className={styles.menuAccount}>
                     Account
                     <ul className={styles.subCategory}>
-                      <li>
+                      <li className={styles.subItem} id={styles.firstListItem}>
                         business: {owner?.ownerBusiness?.[0]?.businessName}
                       </li>
-                      <li>team members:</li>
+                      <li className={styles.subItem}>team members:</li>
                       <TeamMembersCard />
-                      <a className={styles.menuItem} onClick={handleLogout}>
+                      <a
+                        className={styles.subItem}
+                        id={styles.logout}
+                        onClick={handleLogout}
+                      >
                         Log Out
                       </a>
                     </ul>
@@ -170,6 +210,7 @@ export default function Navbar() {
                 </ul>
               </div>
             )}
+            {/* Member menu desktop */}
             {memberToken && (
               <ul className={styles.menu}>
                 <li className={styles.menuItem}>
