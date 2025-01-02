@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useOwnerGetDropQuery } from "./ownerSlice";
+import { useGetDropsQuery } from "../buisness/businessSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/dropdetails.module.css";
 
 export default function OwnerMemberDrop() {
   const { dropId } = useParams();
-  const { data: drop, error, isLoading } = useOwnerGetDropQuery(dropId);
+  const { data: drop, error, isLoading } = useGetDropsQuery(dropId);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading drop data</p>;

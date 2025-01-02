@@ -137,7 +137,9 @@ export default function AuthFormOwner() {
           className={styles.authAction}
           disabled={loginLoading || registerLoading}
         >
-          {loginLoading || registerLoading ? "Please wait..." : authAction}
+          {loginLoading || registerLoading || createBusinessLoading
+            ? "Please wait..."
+            : authAction}
         </button>
       </form>
 
@@ -148,6 +150,12 @@ export default function AuthFormOwner() {
       {registerError && (
         <p role="alert">
           {registerError.data?.message || "Registration failed"}
+        </p>
+      )}
+      {createBusinessError && (
+        <p role="alert">
+          {createBusinessError.data?.message ||
+            "Failure create business for owner"}
         </p>
       )}
     </article>

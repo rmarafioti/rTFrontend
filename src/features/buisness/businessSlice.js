@@ -11,7 +11,24 @@ const businessApi = api.injectEndpoints({
       }),
       providesTags: ["Business"],
     }),
+    //fetch drop data
+    getDrops: builder.query({
+      query: (dropId) => ({
+        url: `/business/drops/${dropId}`,
+        method: "GET",
+      }),
+      providesTags: ["Business"],
+    }),
+    //fetch drop data by year
+    getDropsMonth: builder.query({
+      query: (year) => ({
+        url: `/business/drops/${year}`,
+        method: "GET",
+      }),
+      providesTags: ["Business"],
+    }),
   }),
 });
 
-export const { useGetBusinessQuery } = businessApi;
+export const { useGetBusinessQuery, useGetDropsQuery, useGetDropsMonthQuery } =
+  businessApi;
