@@ -24,7 +24,7 @@ export default function AuthFormOwner() {
   const [password, setPassword] = useState("");
   const [ownerName, setOwnerName] = useState("");
 
-  //form fields for registration
+  // Form fields for registration
   const [businessName, setBusinessName] = useState("");
   const [code, setCode] = useState("");
 
@@ -33,9 +33,11 @@ export default function AuthFormOwner() {
     useLoginOwnerMutation();
   const [register, { isLoading: registerLoading, error: registerError }] =
     useRegisterOwnerMutation();
-  // additional form sunmission for registration
-  const [createBusiness, { isLoading: createBusinessLoading }] =
-    useCreateBusinessMutation();
+  // Additional form sunmission for registration
+  const [
+    createBusiness,
+    { isLoading: createBusinessLoading, error: createBusinessError },
+  ] = useCreateBusinessMutation();
 
   /** Send the requested authentication action to the API */
   const attemptAuth = async (evt) => {

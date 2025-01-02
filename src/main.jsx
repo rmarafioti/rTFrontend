@@ -10,7 +10,6 @@ import Home from "./layout/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
 //owner features
-import OwnerOnboard from "./features/owner/OwnerOnboard";
 import OwnerDashboard from "./features/owner/OwnerDashboard";
 import OwnerMembersArchive from "./features/owner/OwnerMembersArchive";
 import OwnerMembersArchives from "./features/owner/OwnerMembersArchives";
@@ -18,7 +17,6 @@ import OwnerMemberArchiveMonth from "./features/owner/OwnerMemberArchiveMonth";
 import OwnerMemberDrop from "./features/owner/OwnerMemberDrop";
 import OwnerMemberProfile from "./features/owner/OwnerMemberProfile";
 //member features
-import MemberOnboard from "./features/members/MemberOnboard";
 import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
 import MemberArchive from "./features/members/MemberArchive";
@@ -35,7 +33,6 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
-      { path: "/owneronboard/", element: <OwnerOnboard /> },
       { path: "/ownerdashboard/", element: <OwnerDashboard /> },
       {
         path: "/ownermembersarchive/:memberId",
@@ -55,7 +52,6 @@ const router = createBrowserRouter([
         element: <OwnerMemberProfile />,
       },
       { path: "/authmember", element: <AuthFormMember /> },
-      { path: "/memberonboard/", element: <MemberOnboard /> },
       { path: "/memberdashboard/", element: <MemberDashboard /> },
       { path: "/membercreatedrop/", element: <MemberCreateDrop /> },
       { path: "/memberarchive/", element: <MemberArchive /> },
