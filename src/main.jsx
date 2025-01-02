@@ -9,19 +9,19 @@ import Home from "./layout/Home";
 //authentication
 import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
+//business features
+import Drop from "./features/buisness/Drop";
 //owner features
 import OwnerDashboard from "./features/owner/OwnerDashboard";
 import OwnerMembersArchive from "./features/owner/OwnerMembersArchive";
 import OwnerMembersArchives from "./features/owner/OwnerMembersArchives";
 import OwnerMemberArchiveMonth from "./features/owner/OwnerMemberArchiveMonth";
-import OwnerMemberDrop from "./features/owner/OwnerMemberDrop";
 import OwnerMemberProfile from "./features/owner/OwnerMemberProfile";
 //member features
 import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
 import MemberArchive from "./features/members/MemberArchive";
 import MemberArchiveMonth from "./features/members/MemberArchiveMonth";
-import MemberDrop from "./features/members/MemberDrop";
 import MemberNotifications from "./features/members/MemberNotifications";
 
 import "./index.css";
@@ -46,7 +46,6 @@ const router = createBrowserRouter([
         path: "/ownermemberarchivemonth/:year/:month/:memberId",
         element: <OwnerMemberArchiveMonth />,
       },
-      { path: "/ownermemberdrop/:dropId", element: <OwnerMemberDrop /> },
       {
         path: "/ownermemberprofile/:memberId",
         element: <OwnerMemberProfile />,
@@ -59,8 +58,8 @@ const router = createBrowserRouter([
         path: "/memberarchivemonth/:year/:month",
         element: <MemberArchiveMonth />,
       },
-      { path: "/memberdrop/:dropId", element: <MemberDrop /> },
       { path: "/membernotifications/", element: <MemberNotifications /> },
+      { path: "/drop/:dropId", element: <Drop /> },
     ],
   },
 ]);

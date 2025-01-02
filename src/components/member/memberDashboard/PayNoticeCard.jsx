@@ -98,7 +98,7 @@ export default function PayNoticeCard() {
         {unpaidDrops?.length ? (
           unpaidDrops.map((drop) => (
             <div key={drop.id} className={styles.currentDrop}>
-              <Link className={styles.memberDrop} to={`/memberdrop/${drop.id}`}>
+              <Link className={styles.memberDrop} to={`/drop/${drop.id}`}>
                 {new Date(drop.date).toLocaleDateString("en-US", {
                   timeZone: "UTC",
                 })}

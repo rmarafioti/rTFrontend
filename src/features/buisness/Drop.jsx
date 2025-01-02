@@ -1,13 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectMemberToken } from "../auth/authMemberSlice";
+import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { useParams } from "react-router-dom";
 import { useGetDropsQuery } from "../buisness/businessSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/dropdetails.module.css";
 
-export default function OwnerMemberDrop() {
+export default function Drop() {
   const { dropId } = useParams();
   const { data: drop, error, isLoading } = useGetDropsQuery(dropId);
+
+  // Retrieve tokens to determine role
+  const ownerToken = useSelector(selectOwnerToken);
+  const memberToken = useSelector(selectMemberToken);
+
+  // Determine the user's role based on token presence
+  const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading drop data</p>;
@@ -22,19 +32,21 @@ export default function OwnerMemberDrop() {
         <div className={styles.dropDetails}>
           <p className={styles.total}>Total: ${drop.total}</p>
           {drop.memberOwes !== 0 && (
-            <p className={styles.oweAmounts}>Owed to You: ${drop.memberOwes}</p>
+            <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
           )}
           {drop.businessOwes !== 0 && (
-            <p className={styles.oweAmounts}>You Owe: ${drop.businessOwes}</p>
+            <p className={styles.oweAmounts}>
+              Owed to You: ${drop.businessOwes}
+            </p>
           )}
           <p
             className={`${styles.oweAmounts} ${
               drop.paid ? styles.paid : styles.notPaid
             }`}
           >
-            {drop.paid
+            {drop.paid && drop.paidDrop?.paidDate
               ? `*PAID* on ${new Date(
-                  drop.paidDrop?.paidDate
+                  drop.paidDrop.paidDate
                 ).toLocaleDateString("en-US", { timeZone: "UTC" })}`
               : "*NOT PAID*"}
           </p>
@@ -52,7 +64,11 @@ export default function OwnerMemberDrop() {
           )}
         </div>
       ))}
-      <Link className={styles.link} to={`/ownerdashboard`}>
+
+      <Link
+        className={styles.link}
+        to={role === "owner" ? `/ownerdashboard` : `/memberdashboard`}
+      >
         Back to Dashboard
       </Link>
     </article>

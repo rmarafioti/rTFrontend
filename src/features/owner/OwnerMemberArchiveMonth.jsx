@@ -45,11 +45,7 @@ export default function OwnerMemberArchiveMonth() {
       {currentNotifications?.length ? (
         <ul className={styles.drops}>
           {currentNotifications.map((drop) => (
-            <Link
-              className={styles.date}
-              to={`/ownermemberdrop/${drop.id}`}
-              key={drop.id}
-            >
+            <Link className={styles.date} to={`/drop/${drop.id}`} key={drop.id}>
               <li className={styles.link}>
                 {new Date(drop.date).toLocaleDateString("en-US")}
               </li>
