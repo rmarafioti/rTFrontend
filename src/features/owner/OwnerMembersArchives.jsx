@@ -12,7 +12,6 @@ export default function OwnerMembersArchives() {
   return (
     <section className="pageSetup">
       <h1 className={styles.header}>Drop Archives:</h1>
-
       {owner?.ownerBusiness?.length ? (
         <ul className={styles.drops}>
           {owner.ownerBusiness.map((business) =>
