@@ -58,11 +58,36 @@
   cursor: pointer;
 }
 
+/* registration form */
+
+.onboardForm {
+  background-color: var(--secondaryTurquoise);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+.labelName {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.onboardFormInput {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-size: 20px;
+  font-weight: 400;
+  border: 1px solid black;
+  width: 480px;
+}
+
 @media (max-width: 586px) {
   .loginForm,
   .loginInputSection,
   .loginFormInput,
-  .authAction {
+  .authAction, .register {
     width: 100%;
   }
   .header {

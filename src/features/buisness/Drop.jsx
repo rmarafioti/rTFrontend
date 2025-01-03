@@ -1,13 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectMemberToken } from "../auth/authMemberSlice";
+import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { useParams } from "react-router-dom";
-import { useMemberGetDropQuery } from "./membersSlice";
+import { useGetDropsQuery } from "../buisness/businessSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/dropdetails.module.css";
 
-export default function MemberDrop() {
+export default function Drop() {
   const { dropId } = useParams();
-  const { data: drop, error, isLoading } = useMemberGetDropQuery(dropId);
+  const { data: drop, error, isLoading } = useGetDropsQuery(dropId);
+
+  // Retrieve tokens to determine role
+  const ownerToken = useSelector(selectOwnerToken);
+  const memberToken = useSelector(selectMemberToken);
+
+  // Determine the user's role based on token presence
+  const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading drop data</p>;
@@ -54,7 +64,11 @@ export default function MemberDrop() {
           )}
         </div>
       ))}
-      <Link className={styles.link} to={`/memberdashboard`}>
+
+      <Link
+        className={styles.link}
+        to={role === "owner" ? `/ownerdashboard` : `/memberdashboard`}
+      >
         Back to Dashboard
       </Link>
     </article>

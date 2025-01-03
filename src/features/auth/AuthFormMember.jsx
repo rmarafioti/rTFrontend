@@ -4,11 +4,18 @@ import {
   useLoginMemberMutation,
   useRegisterMemberMutation,
 } from "./authMemberSlice";
+import { useGetBusinessQuery } from "../buisness/businessSlice";
+import { useLinkMemberToBusinessMutation } from "../members/membersSlice";
 
 import styles from "./authforms.module.css";
 
 // This form allows users to register or log in.
 export default function AuthFormMember() {
+  const {
+    data: businesses,
+    isLoading: isBusinessesLoading,
+    isError: isBusinessesError,
+  } = useGetBusinessQuery();
   const navigate = useNavigate();
 
   // Handles swapping between login and register
@@ -23,11 +30,20 @@ export default function AuthFormMember() {
   const [password, setPassword] = useState("");
   const [memberName, setMemberName] = useState("");
 
+  // Form fields for registration
+  const [businessName, setBusinessName] = useState("");
+  const [code, setCode] = useState("");
+
   // Form submission
   const [login, { isLoading: loginLoading, error: loginError }] =
     useLoginMemberMutation();
   const [register, { isLoading: registerLoading, error: registerError }] =
     useRegisterMemberMutation();
+  // Additional form submission for registration
+  const [
+    linkBusiness,
+    { isLoading: linkToBusinessLoading, error: linkToBusinessError },
+  ] = useLinkMemberToBusinessMutation();
 
   /** Send the requested authentication action to the API */
   const attemptAuth = async (evt) => {
@@ -40,11 +56,22 @@ export default function AuthFormMember() {
     // `unwrap` will throw an error if there is one
     // so we can use a try/catch to handle it.
     try {
-      await authMethod(credentials).unwrap();
+      const authResponse = await authMethod(credentials).unwrap();
       //set login naviagtion to proper paths
-      isLogin ? navigate("/memberdashboard/") : navigate("/memberonboard/");
+
+      if (!isLogin) {
+        // If registering, create a business after successful registration
+        const memberId = authResponse.id;
+        await linkBusiness({
+          businessName,
+          code,
+          memberId,
+        }).unwrap();
+      }
+
+      navigate("/memberdashboard/");
     } catch (err) {
-      console.error(err);
+      console.error("Authentication or linking to business failed:", err);
     }
   };
 
@@ -85,6 +112,46 @@ export default function AuthFormMember() {
             autoComplete="current-password"
           />
         </div>
+        {/* Only show these fields if registering */}
+        {!isLogin && (
+          <section className={styles.register}>
+            <div className={styles.loginInputSection}>
+              <label className={styles.labelName}>Business:</label>
+              {isBusinessesLoading ? (
+                <p>Loading business...</p>
+              ) : isBusinessesError ? (
+                <p>Error loading businesses</p>
+              ) : (
+                <select
+                  className={styles.loginFormInput}
+                  value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
+                  required
+                >
+                  <option value="" disabled>
+                    -- Select a business --
+                  </option>
+                  {businesses.map((business) => (
+                    <option key={business.id} value={business.name}>
+                      {business?.businessName}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+            <div className={styles.loginInputSection}>
+              <label className={styles.labelName}>Code:</label>
+              <input
+                className={styles.loginFormInput}
+                type="password"
+                value={code}
+                placeholder="Enter your owner provided business code"
+                onChange={(e) => setCode(e.target.value)}
+                required
+              />
+            </div>
+          </section>
+        )}
         <button
           className={styles.authAction}
           disabled={loginLoading || registerLoading}
@@ -92,13 +159,21 @@ export default function AuthFormMember() {
           {loginLoading || registerLoading ? "Please wait..." : authAction}
         </button>
       </form>
-      {(loginLoading || registerLoading) && <p>Please wait...</p>}
+      {(loginLoading || registerLoading || linkToBusinessLoading) && (
+        <p>Please wait...</p>
+      )}
       {loginError && (
         <p role="alert">{loginError.data?.message || "Login failed"}</p>
       )}
       {registerError && (
         <p role="alert">
           {registerError.data?.message || "Registration failed"}
+        </p>
+      )}
+      {linkToBusinessError && (
+        <p role="alert">
+          {linkToBusinessError.data?.message ||
+            "Failure to connect to business"}
         </p>
       )}
     </article>

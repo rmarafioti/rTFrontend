@@ -100,7 +100,7 @@ export default function TeamMembersCard() {
                     <div className={styles.memberCurrentDrop}>
                       {unpaidDrops.map((drop) => (
                         <Link
-                          to={`/ownermemberdrop/${drop.id}`}
+                          to={`/drop/${drop.id}`}
                           key={drop.id}
                           className={styles.memberDrop}
                         >

@@ -77,7 +77,7 @@
   padding-top: 1rem;
 }
 .subItem {
-  margin: 1rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 0rem 0rem;
   padding: 0rem 1rem 1rem 1rem;
   border-bottom: 2px solid var(--secondaryTurquoise);
 }
@@ -87,9 +87,28 @@
 }
 
 #logout {
+  font-weight: bold;
   border-bottom: none;
   padding: 1rem;
+  margin-bottom: 0rem;
+}
+
+.teamMember {
+  list-style-type: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding: 1rem;
+  padding-left: 4rem;
   margin-bottom: 1rem;
+  border-bottom: 2px solid lightgray;
+}
+
+.teamMemberLink {
+  color: var(--black);
+}
+
+.teamMemberName {
+  font-size: 18px;
 }
 
 .menuAccount:hover .subCategory,
@@ -109,7 +128,7 @@
   box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
 }
 
-.menuMember {
+.menuMember, .menuOwner {
   display: none;
 }
 
@@ -195,7 +214,7 @@
     transform: rotate(45deg) translate(0, 0);
     top: 0;
   }
-  .menuMember {
+  .menuMember, .menuOwner {
     position: absolute;
     top: 0;
     right: 0;
@@ -204,13 +223,11 @@
     background-color: antiquewhite;
     
     z-index: 13;
-    transition: height 0.3s ease, margin-top 0.3s ease;
   }
-  .menuMember.active {
-   
+  .menuMember.active, .menuOwner.active {
     display: flex;
     margin-top: 3.5rem;
-    height: 100vh;
+    height: 120vh;
     flex-direction: column;
   }
 
@@ -228,15 +245,33 @@
   }
 
   #staticInfo {
-    background-color: var(--secondaryTurquoise);
+    background-color:rgb(243, 239, 234); 
     text-align: center;
     padding-left: 0rem;
     border-bottom: 2px solid var(--black);
   }
 
-  #logout {
-   
+  .teamMember {
+    list-style-type: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 1rem;
+    margin: 0rem;
+    padding-left: 4rem;
+    border-bottom: 2px solid lightgray;
+  }
+
+  .teamMemberLink {
+    color: var(--black);
+  }
+
+  .teamMemberName {
+    font-size: 18px;
+  }
+
+  .logout {
+   font-weight: bold;
     padding: 0rem;
-    margin-bottom: 1rem;
+   
   }
 }
