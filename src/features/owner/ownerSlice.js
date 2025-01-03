@@ -32,7 +32,7 @@ const ownerApi = api.injectEndpoints({
       invalidatesTags: ["Owner", "Member"],
     }),
 
-    // owner get member drops dorted by month and year
+    // owner get member drops sorted by month and year
     ownerGetDrops: builder.query({
       query: ({ memberId, year }) => ({
         url: `/owner/drops/${year}/${memberId}`,

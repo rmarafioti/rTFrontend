@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -15,9 +17,6 @@ export default function Archive() {
 
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  console.log("Role:", role);
-  console.log("Member ID:", memberId);
-
   const { data, isLoading, error, refetch } = useGetAllDropsQuery(
     role === "owner" ? memberId : null // Pass memberId only for owners
   );
@@ -32,14 +31,15 @@ export default function Archive() {
   }
 
   const drops = data?.drops || [];
+  const memberName = drops.length > 0 ? drops[0].member?.memberName : null;
+
+  dayjs.extend(utc);
 
   const dropsByYearAndMonth = drops.reduce((acc, drop) => {
-    const date = new Date(drop.date);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const monthName = new Intl.DateTimeFormat("en-US", {
-      month: "long",
-    }).format(date);
+    const date = dayjs(drop.date).utc(); // Use dayjs to ensure UTC handling
+    const year = date.year();
+    const month = date.month() + 1; // 0-based month in dayjs, so add 1
+    const monthName = date.format("MMMM"); // Full month name
 
     if (!acc[year]) acc[year] = {};
     if (!acc[year][month]) acc[year][month] = { monthName, drops: [] };
@@ -55,28 +55,18 @@ export default function Archive() {
     <article className="pageSetup">
       <h1 className={styles.header}>
         {role === "owner" && memberId
-          ? `Archived Drops for Team Member ${memberId}`
+          ? `${memberName}'s Archives`
           : "Your Archived Drops"}
       </h1>
       {Object.keys(dropsByYearAndMonth).length > 0 ? (
         Object.entries(dropsByYearAndMonth).map(([year, months]) => (
           <div key={year}>
-            <h2>{year}</h2>
             <ul className={styles.months}>
-              {Object.entries(months).map(([month, { monthName, drops }]) => (
+              {Object.entries(months).map(([month, { monthName }]) => (
                 <li key={month} className={styles.month}>
-                  <h3>
+                  <Link to={`/archivemonth/${year}/${month}`}>
                     {monthName} {year}
-                  </h3>
-                  <ul>
-                    {drops.map((drop) => (
-                      <li key={drop.id} className={styles.drop}>
-                        <Link to={`/drop/${drop.id}`}>
-                          {new Date(drop.date).toLocaleDateString("en-US")}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  </Link>
                 </li>
               ))}
             </ul>

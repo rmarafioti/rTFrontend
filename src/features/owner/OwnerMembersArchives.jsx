@@ -17,11 +17,11 @@ export default function OwnerMembersArchives() {
         <ul className={styles.drops}>
           {owner.ownerBusiness.map((business) =>
             business.businessMember?.map((member) => (
-              <Link className={styles.date} to={`/archive/${member.id}`}>
-                <li className={styles.link} key={member.id}>
+              <li className={styles.link} key={member.id}>
+                <Link className={styles.linkName} to={`/archive/${member.id}`}>
                   {member.memberName}
-                </li>
-              </Link>
+                </Link>
+              </li>
             ))
           )}
         </ul>

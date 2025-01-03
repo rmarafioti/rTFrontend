@@ -12,15 +12,14 @@ import AuthFormMember from "./features/auth/AuthFormMember";
 //business features
 import Drop from "./features/buisness/Drop";
 import Archive from "./features/buisness/Archive";
+import ArchiveMonth from "./features/buisness/ArchiveMonth";
 //owner features
 import OwnerDashboard from "./features/owner/OwnerDashboard";
 import OwnerMembersArchives from "./features/owner/OwnerMembersArchives";
-import OwnerMemberArchiveMonth from "./features/owner/OwnerMemberArchiveMonth";
 import OwnerMemberProfile from "./features/owner/OwnerMemberProfile";
 //member features
 import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
-import MemberArchiveMonth from "./features/members/MemberArchiveMonth";
 import MemberNotifications from "./features/members/MemberNotifications";
 
 import "./index.css";
@@ -38,23 +37,20 @@ const router = createBrowserRouter([
         element: <OwnerMembersArchives />,
       },
       {
-        path: "/ownermemberarchivemonth/:year/:month/:memberId",
-        element: <OwnerMemberArchiveMonth />,
-      },
-      {
         path: "/ownermemberprofile/:memberId",
         element: <OwnerMemberProfile />,
       },
       { path: "/authmember", element: <AuthFormMember /> },
       { path: "/memberdashboard/", element: <MemberDashboard /> },
       { path: "/membercreatedrop/", element: <MemberCreateDrop /> },
-      {
-        path: "/memberarchivemonth/:year/:month",
-        element: <MemberArchiveMonth />,
-      },
+
       { path: "/membernotifications/", element: <MemberNotifications /> },
       { path: "/drop/:dropId", element: <Drop /> },
       { path: "/archive/:memberId?", element: <Archive /> },
+      {
+        path: "archivemonth/:memberId?/:year/:month",
+        element: <ArchiveMonth />,
+      },
     ],
   },
 ]);
