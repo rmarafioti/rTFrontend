@@ -11,16 +11,15 @@ import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
 //business features
 import Drop from "./features/buisness/Drop";
+import Archive from "./features/buisness/Archive";
 //owner features
 import OwnerDashboard from "./features/owner/OwnerDashboard";
-import OwnerMembersArchive from "./features/owner/OwnerMembersArchive";
 import OwnerMembersArchives from "./features/owner/OwnerMembersArchives";
 import OwnerMemberArchiveMonth from "./features/owner/OwnerMemberArchiveMonth";
 import OwnerMemberProfile from "./features/owner/OwnerMemberProfile";
 //member features
 import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
-import MemberArchive from "./features/members/MemberArchive";
 import MemberArchiveMonth from "./features/members/MemberArchiveMonth";
 import MemberNotifications from "./features/members/MemberNotifications";
 
@@ -34,10 +33,6 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/authowner", element: <AuthFormOwner /> },
       { path: "/ownerdashboard/", element: <OwnerDashboard /> },
-      {
-        path: "/ownermembersarchive/:memberId",
-        element: <OwnerMembersArchive />,
-      },
       {
         path: "/ownermembersarchives/",
         element: <OwnerMembersArchives />,
@@ -53,13 +48,13 @@ const router = createBrowserRouter([
       { path: "/authmember", element: <AuthFormMember /> },
       { path: "/memberdashboard/", element: <MemberDashboard /> },
       { path: "/membercreatedrop/", element: <MemberCreateDrop /> },
-      { path: "/memberarchive/", element: <MemberArchive /> },
       {
         path: "/memberarchivemonth/:year/:month",
         element: <MemberArchiveMonth />,
       },
       { path: "/membernotifications/", element: <MemberNotifications /> },
       { path: "/drop/:dropId", element: <Drop /> },
+      { path: "/archive/:memberId?", element: <Archive /> },
     ],
   },
 ]);

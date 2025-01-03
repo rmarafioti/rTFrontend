@@ -1,5 +1,4 @@
 import { useGetOwnerQuery } from "../owner/ownerSlice";
-import { useOwnerGetDropsQuery } from "./ownerSlice";
 import { Link } from "react-router-dom";
 
 import styles from "../../styling/droparchives.module.css";
@@ -18,10 +17,7 @@ export default function OwnerMembersArchives() {
         <ul className={styles.drops}>
           {owner.ownerBusiness.map((business) =>
             business.businessMember?.map((member) => (
-              <Link
-                className={styles.date}
-                to={`/ownermembersarchive/${member.id}`}
-              >
+              <Link className={styles.date} to={`/archive/${member.id}`}>
                 <li className={styles.link} key={member.id}>
                   {member.memberName}
                 </li>

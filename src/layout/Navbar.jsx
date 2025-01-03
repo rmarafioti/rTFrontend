@@ -77,7 +77,7 @@ export default function Navbar() {
             <NavLink to="/memberdashboard">Member Dashboard</NavLink>
           </li>
           <li className={styles.hamMenuItem}>
-            <NavLink to="/memberarchive">Archive</NavLink>
+            <NavLink to="/archive">Archive</NavLink>
           </li>
           <li className={styles.hamMenuItem}>
             <NavLink to="/membernotifications">Payments</NavLink>
@@ -216,7 +216,7 @@ export default function Navbar() {
                   <NavLink to="/memberdashboard">Member Dashboard</NavLink>
                 </li>
                 <li className={styles.menuItem}>
-                  <NavLink to="/memberarchive">Archives</NavLink>
+                  <NavLink to="/archive">Archives</NavLink>
                 </li>
                 <li className={styles.menuItem}>
                   <NavLink to="/membernotifications">Payments</NavLink>
