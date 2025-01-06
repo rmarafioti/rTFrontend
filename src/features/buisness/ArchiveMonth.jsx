@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { selectMemberToken } from "../auth/authMemberSlice";
 import { useGetMemberDropsQuery } from "../owner/ownerSlice";
+import { useGetAllDropsQuery } from "../members/membersSlice";
 
 import styles from "../../styling/droparchives.module.css";
 
@@ -18,43 +19,55 @@ export default function ArchiveMonth() {
 
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  // Use the query to fetch the specific member's drops for the given month and year
-  const { data, isLoading, error } = useGetMemberDropsQuery({
-    memberId,
-    year,
-    month,
+  // For owners: fetch specific member's drops based on memberId, year, and month
+  const {
+    data: memberDropsData,
+    isLoading: memberDropsIsLoading,
+    error: memberDropsError,
+  } = useGetMemberDropsQuery(
+    { memberId, year, month },
+    { skip: role !== "owner" || !memberId }
+  );
+
+  // For logged-in members: fetch their own drops for the given month and year
+  const {
+    data: memberData,
+    isLoading: memberIsLoading,
+    error: memberError,
+  } = useGetAllDropsQuery(undefined, {
+    skip: role !== "member",
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const dropsPerPage = 5; // Number of drops per page
-
-  // Error handling
-  if (!role) {
-    return <p>Error: Unable to determine user role. Please log in again.</p>;
-  }
+  const isLoading = memberIsLoading || memberDropsIsLoading;
+  const error = memberError || memberDropsError;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const drops = data?.drops || [];
-  const memberName = data?.memberDetails?.memberName || "Unknown Member";
+  const drops =
+    role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
-  // Pagination Logic
-  const lastIndex = currentPage * dropsPerPage;
-  const firstIndex = lastIndex - dropsPerPage;
-  const currentDrops = drops.slice(firstIndex, lastIndex);
+  // Filter drops to only show those for the given month
+  const filteredDrops = drops.filter((drop) => {
+    const dropDate = dayjs.utc(drop.date); // Ensure we're working with UTC
+    const dropYear = dropDate.year(); // Get the year of the drop
+    const dropMonth = dropDate.month() + 1; // Get the month (1-based index)
 
-  const totalPages = Math.ceil(drops.length / dropsPerPage);
+    // Compare the year and month with the selected year and month
+    return dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10);
+  });
 
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
-        {role === "owner" ? `${memberName}'s Archives` : "Your Archived Drops"}
+        {role === "owner"
+          ? `${memberDropsData?.memberDetails?.memberName}'s`
+          : "Your"}{" "}
+        Archived Drops
       </h1>
-
-      {currentDrops.length > 0 ? (
+      {filteredDrops.length > 0 ? (
         <ul className={styles.drops}>
-          {currentDrops.map((drop) => (
+          {filteredDrops.map((drop) => (
             <Link className={styles.date} to={`/drop/${drop.id}`} key={drop.id}>
               <li className={styles.link}>
                 {dayjs.utc(drop.date).format("MMM D, YYYY")}
@@ -64,31 +77,6 @@ export default function ArchiveMonth() {
         </ul>
       ) : (
         <p>No drops found for this month</p>
-      )}
-
-      {/* Pagination Controls */}
-      {drops.length > dropsPerPage && (
-        <div className={styles.pagination}>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={styles.pageControls}
-          >
-            Previous
-          </button>
-          <span className={styles.pageInfo}>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className={styles.pageControls}
-          >
-            Next
-          </button>
-        </div>
       )}
     </article>
   );

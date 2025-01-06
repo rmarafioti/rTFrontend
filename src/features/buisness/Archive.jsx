@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectMemberToken } from "../auth/authMemberSlice";
 import { selectOwnerToken } from "../auth/authOwnerSlice";
-import { useGetDropsByMemberIdQuery } from "./businessSlice"; // For fetching member-specific drops
-import { useGetAllDropsQuery } from "./businessSlice"; // For fetching all drops for the logged-in member
+import { useGetDropsByMemberIdQuery } from "./businessSlice"; // For owners
+import { useGetAllDropsQuery } from "../members/membersSlice"; // For logged-in members
 
 import styles from "../../styling/droparchives.module.css";
 
@@ -20,18 +19,44 @@ export default function Archive() {
 
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  const { data, isLoading, error } = useGetDropsByMemberIdQuery(memberId, {
-    skip: !memberId || role !== "owner", // Skip for members or if memberId is not available
+  // Fetch drops for a specific member (only for owners)
+  const {
+    data: memberDropsData,
+    isLoading: memberDropsIsLoading,
+    error: memberDropsError,
+  } = useGetDropsByMemberIdQuery(memberId, {
+    skip: !memberId || role !== "owner", // Skip if not an owner or memberId is not available
   });
+
+  // Fetch drops for the logged-in member (if no memberId in the URL)
+  const {
+    data: memberData,
+    isLoading: memberIsLoading,
+    error: memberError,
+  } = useGetAllDropsQuery(undefined, {
+    skip: role !== "member", // Skip if not a member
+  });
+
+  console.log("Fetched drops:", memberData);
+
+  const isLoading = memberIsLoading || memberDropsIsLoading;
+  const error = memberError || memberDropsError;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const drops = data?.drops || [];
-  const memberName = data?.memberDetails?.memberName || "Unknown Member"; // Use memberDetails from backend
+  // Set drops based on whether memberId is available (for owners) or use logged-in member's drops
+  const drops =
+    role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
+
+  // Get the member name (owner's member name or the logged-in member's name)
+  const memberName = memberId
+    ? memberDropsData?.memberDetails?.memberName || "Unknown Member"
+    : memberData?.memberDetails?.memberName || "Your Name";
 
   dayjs.extend(utc);
 
+  // Group drops by year and month
   const dropsByYearAndMonth = (drops || []).reduce((acc, drop) => {
     const date = dayjs(drop.date).utc();
     const year = date.year();
@@ -52,6 +77,7 @@ export default function Archive() {
           ? `${memberName}'s Archives`
           : "Your Archived Drops"}
       </h1>
+
       {Object.keys(dropsByYearAndMonth).length > 0 ? (
         Object.entries(dropsByYearAndMonth).map(([year, months]) => (
           <div key={year}>
