@@ -34,9 +34,6 @@ export default function NotificationsCard() {
   const handleConfirmPayment = async (notice) => {
     try {
       const dropIds = notice.drops.map((drop) => drop.id);
-
-      console.log("Attempting to confirm payment for drop IDs:", dropIds);
-
       const memberId = notice.drops[0]?.member_id;
 
       if (!memberId) {
@@ -51,8 +48,6 @@ export default function NotificationsCard() {
         dropIds,
         memberId,
       }).unwrap();
-
-      console.log("Payment confirmed for notice ID:", notice.id);
     } catch (error) {
       console.error("Error confirming payment:", error);
     }
@@ -61,7 +56,6 @@ export default function NotificationsCard() {
   return (
     <section className={styles.dashboardSectionNotifications}>
       <h2 className={styles.subHeadersNotice}>Payment Notifications:</h2>
-
       {payNotices?.length ? (
         payNotices.map((notice) => (
           <div key={notice.id} className={styles.noticeSection}>
@@ -70,7 +64,6 @@ export default function NotificationsCard() {
                 {new Date(notice.paidDate).toLocaleDateString("en-US")} -Payment
                 of ${notice.amount} from {notice.payee}
               </p>
-
               <p>{notice.paidMessage || "No message provided"}</p>
             </div>
             <div className={styles.paidDatesSection}>

@@ -15,7 +15,6 @@ export default function MemberDashboard() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  //creates a new drop when button is clicked
   const dropCreateSubmit = async (e) => {
     e.preventDefault();
     try {

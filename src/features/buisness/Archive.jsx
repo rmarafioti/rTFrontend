@@ -10,16 +10,19 @@ import { useGetAllDropsQuery } from "../members/membersSlice"; // For logged-in 
 
 import styles from "../../styling/droparchives.module.css";
 
-export default function Archive() {
-  const { memberId } = useParams(); // Get memberId from URL
-  console.log("Received memberId:", memberId); // Log memberId value
+dayjs.extend(utc);
 
+export default function Archive() {
+  const { memberId } = useParams();
+
+  // This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
+  // Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  // Fetch drops for a specific member (only for owners)
+  // For owners: fetch specific member's drops based on memberId, year, and month
   const {
     data: memberDropsData,
     isLoading: memberDropsIsLoading,
@@ -28,7 +31,7 @@ export default function Archive() {
     skip: !memberId || role !== "owner", // Skip if not an owner or memberId is not available
   });
 
-  // Fetch drops for the logged-in member (if no memberId in the URL)
+  // For logged-in members: fetch their own drops for the given month and year
   const {
     data: memberData,
     isLoading: memberIsLoading,
@@ -37,24 +40,20 @@ export default function Archive() {
     skip: role !== "member", // Skip if not a member
   });
 
-  console.log("Fetched drops:", memberData);
-
   const isLoading = memberIsLoading || memberDropsIsLoading;
   const error = memberError || memberDropsError;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Set drops based on whether memberId is available (for owners) or use logged-in member's drops
+  // Define the data that we are using by the role of the logged in user
   const drops =
     role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
-  // Get the member name (owner's member name or the logged-in member's name)
+  // Fetch the team mebers name in the owner is logged in
   const memberName = memberId
     ? memberDropsData?.memberDetails?.memberName || "Unknown Member"
-    : memberData?.memberDetails?.memberName || "Your Name";
-
-  dayjs.extend(utc);
+    : "";
 
   // Group drops by year and month
   const dropsByYearAndMonth = (drops || []).reduce((acc, drop) => {
@@ -77,7 +76,6 @@ export default function Archive() {
           ? `${memberName}'s Archives`
           : "Your Archived Drops"}
       </h1>
-
       {Object.keys(dropsByYearAndMonth).length > 0 ? (
         Object.entries(dropsByYearAndMonth).map(([year, months]) => (
           <div key={year}>

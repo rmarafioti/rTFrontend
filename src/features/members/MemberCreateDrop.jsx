@@ -7,8 +7,6 @@ export default function MemberCreateDrop() {
   const location = useLocation();
   const dropId = location.state?.dropId;
 
-  console.log("Received dropId in MemberCreateDrop:", dropId);
-
   return (
     <article className="pageSetup">
       <h2>Enter your daily drop</h2>

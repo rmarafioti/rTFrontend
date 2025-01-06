@@ -21,7 +21,7 @@ export default function MemberNotifications() {
         self.findIndex((pd) => pd.id === value.id) === index
     );
 
-  //calculate pagination
+  // Calculate pagination
   const lastIndex = currentPage * notificationsPerPage;
   const firstIndex = lastIndex - notificationsPerPage;
   const currentNotifications = paidDrops.slice(firstIndex, lastIndex);
@@ -53,7 +53,6 @@ export default function MemberNotifications() {
                 Method of payment:{" "}
                 {paidDrop.paidMessage || "*No payment message provided*"}
               </p>
-
               {/* Map over the drops associated with the payment */}
               <div className={styles.paidDatesSection}>
                 <h5>Paid for Drops on:</h5>

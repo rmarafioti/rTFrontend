@@ -14,12 +14,15 @@ import styles from "../../styling/droparchives.module.css";
 dayjs.extend(utc);
 
 export default function ArchiveMonth() {
-  const { memberId, year, month } = useParams(); // Get memberId, year, and month from URL
+  const { memberId, year, month } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const notificationsPerPage = 5;
+
+  // This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
-  const [currentPage, setCurrentPage] = useState(1);
-  const notificationsPerPage = 5; // Number of drops per page
 
+  // Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
   // For owners: fetch specific member's drops based on memberId, year, and month
@@ -47,34 +50,30 @@ export default function ArchiveMonth() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Set drops based on whether memberId is available (for owners) or use logged-in member's drops
+  // Define the data that we are using by the role of the logged in user
   const drops =
     role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
   // Filter drops to only show those for the given month
   const filteredDrops = drops.filter((drop) => {
-    const dropDate = dayjs.utc(drop.date); // Ensure we're working with UTC
-    const dropYear = dropDate.year(); // Get the year of the drop
-    const dropMonth = dropDate.month() + 1; // Get the month (1-based index)
-
+    const dropDate = dayjs.utc(drop.date);
+    const dropYear = dropDate.year();
+    const dropMonth = dropDate.month() + 1;
     // Compare the year and month with the selected year and month
     return dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10);
   });
 
-  // Pagination Logic
+  // Calculate pagination
   const lastIndex = currentPage * notificationsPerPage;
   const firstIndex = lastIndex - notificationsPerPage;
   const currentDrops = filteredDrops.slice(firstIndex, lastIndex);
-
-  const totalPages = Math.ceil(filteredDrops.length / notificationsPerPage);
 
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
         {role === "owner"
           ? `${memberDropsData?.memberDetails?.memberName}'s`
-          : "Your"}{" "}
-        Archived Drops
+          : "Month's Drops"}
       </h1>
       {currentDrops.length > 0 ? (
         <ul className={styles.drops}>

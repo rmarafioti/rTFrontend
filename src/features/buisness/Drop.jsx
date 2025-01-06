@@ -12,11 +12,11 @@ export default function Drop() {
   const { dropId } = useParams();
   const { data: drop, error, isLoading } = useGetDropsQuery(dropId);
 
-  // Retrieve tokens to determine role
+  // This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
-  // Determine the user's role based on token presence
+  // Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
   if (isLoading) return <p>Loading...</p>;
@@ -64,7 +64,6 @@ export default function Drop() {
           )}
         </div>
       ))}
-
       <Link
         className={styles.link}
         to={role === "owner" ? `/ownerdashboard` : `/memberdashboard`}
