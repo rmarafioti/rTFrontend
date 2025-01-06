@@ -75,7 +75,7 @@ export default function OwnerMemberProfile() {
           <button onClick={handlePercentage}>Update Percentage</button>
         </div>
         <p>Take Home Total: {member.takeHomeTotal}</p>
-        <Link to={`/ownermembersarchive/${memberId}`}>
+        <Link to={`/archive/${memberId}`}>
           <p> {member.memberName} Archive</p>
         </Link>
       </li>
