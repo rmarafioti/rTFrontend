@@ -16,7 +16,6 @@ export default function OwnerDashboard() {
       <section className={styles.takeHomeTotalSection}>
         <h1 className={styles.header}>Welcome, {owner?.ownerName}</h1>
         <p className={styles.takeHomeKey}>
-          {/*assuming an owner has only one business we only need to fetch the index of the sole business created rather than mapping*/}
           {owner?.ownerBusiness?.[0]?.businessName}'s Take Home Total :{" "}
         </p>
         <p className={styles.takeHomeValue}>${owner?.takeHomeTotal}</p>
