@@ -21,16 +21,27 @@ const businessApi = api.injectEndpoints({
     }),
     //fetch drop data by year
     getAllDrops: builder.query({
+      query: () => ({
+        url: `/business/alldrops`,
+        method: "GET",
+      }),
+      providesTags: ["Business"],
+    }),
+    getDropsByMemberId: builder.query({
       query: (memberId) => ({
-        url: memberId ? `/business/alldrops/${memberId}` : `/business/alldrops`,
+        url: `/business/memberdrops/${memberId}`,
         method: "GET",
       }),
       providesTags: (result, error, memberId) => [
-        { type: "Business", id: memberId || "ALL" }, // Unique tag for each member
+        { type: "MemberDrops", id: memberId },
       ],
     }),
   }),
 });
 
-export const { useGetBusinessQuery, useGetDropsQuery, useGetAllDropsQuery } =
-  businessApi;
+export const {
+  useGetBusinessQuery,
+  useGetDropsQuery,
+  useGetAllDropsQuery,
+  useGetDropsByMemberIdQuery,
+} = businessApi;

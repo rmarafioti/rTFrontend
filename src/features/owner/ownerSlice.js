@@ -12,10 +12,17 @@ const ownerApi = api.injectEndpoints({
       providesTags: ["Owner"],
     }),
 
+    getMemberDrops: builder.query({
+      query: ({ memberId, year, month }) => ({
+        url: `owner/memberdrops/${memberId}/${year}/${month}`,
+      }),
+      providesTags: ["Owner"],
+    }),
+
     //owner creates a buisness as part of the register onboarding process
     createBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
-        url: `/owner/business`,
+        url: `owner/business`,
         method: "POST",
         body: { businessName, code },
       }),
@@ -72,6 +79,7 @@ export const {
   useGetOwnerQuery,
   useOwnerGetDropsQuery,
   useOwnerGetDropQuery,
+  useGetMemberDropsQuery,
   useUpdatePercentageMutation,
   useCreateBusinessMutation,
   useOwnerPayDropsMutation,

@@ -1,12 +1,11 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { selectMemberToken } from "../auth/authMemberSlice";
-import { useGetMemberDropsQuery } from "../owner/ownerSlice";
-
+import { selectOwnerToken } from "../auth/authOwnerSlice";
+import { useGetAllDropsQuery } from "../buisness/businessSlice";
 import styles from "../../styling/droparchives.module.css";
 
 dayjs.extend(utc);
@@ -18,17 +17,13 @@ export default function ArchiveMonth() {
 
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  // Use the query to fetch the specific member's drops for the given month and year
-  const { data, isLoading, error } = useGetMemberDropsQuery({
-    memberId,
-    year,
-    month,
-  });
+  // Fetch drops for the selected member (filtered by memberId)
+  const { data, isLoading, error } = useGetAllDropsQuery(memberId);
 
+  // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const dropsPerPage = 5; // Number of drops per page
 
-  // Error handling
   if (!role) {
     return <p>Error: Unable to determine user role. Please log in again.</p>;
   }
@@ -36,15 +31,26 @@ export default function ArchiveMonth() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  // Filter drops by the provided year and month
   const drops = data?.drops || [];
-  const memberName = data?.memberDetails?.memberName || "Unknown Member";
+  const memberName =
+    data?.memberDetails?.memberName ||
+    (drops.length > 0 ? drops[0].member?.memberName : "Unknown Member");
+
+  const filteredDrops = drops.filter((drop) => {
+    const dropDate = dayjs.utc(drop.date);
+    return (
+      dropDate.year() === parseInt(year, 10) &&
+      dropDate.month() + 1 === parseInt(month, 10) // month is 0-based
+    );
+  });
 
   // Pagination Logic
   const lastIndex = currentPage * dropsPerPage;
   const firstIndex = lastIndex - dropsPerPage;
-  const currentDrops = drops.slice(firstIndex, lastIndex);
+  const currentDrops = filteredDrops.slice(firstIndex, lastIndex);
 
-  const totalPages = Math.ceil(drops.length / dropsPerPage);
+  const totalPages = Math.ceil(filteredDrops.length / dropsPerPage);
 
   return (
     <article className="pageSetup">
@@ -67,7 +73,7 @@ export default function ArchiveMonth() {
       )}
 
       {/* Pagination Controls */}
-      {drops.length > dropsPerPage && (
+      {filteredDrops.length > dropsPerPage && (
         <div className={styles.pagination}>
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
