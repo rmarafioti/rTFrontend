@@ -16,6 +16,8 @@ export default function ArchiveMonth() {
   const { memberId, year, month } = useParams(); // Get memberId, year, and month from URL
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
+  const [currentPage, setCurrentPage] = useState(1);
+  const notificationsPerPage = 5; // Number of drops per page
 
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
@@ -44,6 +46,7 @@ export default function ArchiveMonth() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  // Set drops based on whether memberId is available (for owners) or use logged-in member's drops
   const drops =
     role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
@@ -57,6 +60,13 @@ export default function ArchiveMonth() {
     return dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10);
   });
 
+  // Pagination Logic
+  const lastIndex = currentPage * notificationsPerPage;
+  const firstIndex = lastIndex - notificationsPerPage;
+  const currentDrops = filteredDrops.slice(firstIndex, lastIndex);
+
+  const totalPages = Math.ceil(filteredDrops.length / notificationsPerPage);
+
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
@@ -65,9 +75,9 @@ export default function ArchiveMonth() {
           : "Your"}{" "}
         Archived Drops
       </h1>
-      {filteredDrops.length > 0 ? (
+      {currentDrops.length > 0 ? (
         <ul className={styles.drops}>
-          {filteredDrops.map((drop) => (
+          {currentDrops.map((drop) => (
             <Link className={styles.date} to={`/drop/${drop.id}`} key={drop.id}>
               <li className={styles.link}>
                 {dayjs.utc(drop.date).format("MMM D, YYYY")}
@@ -77,6 +87,30 @@ export default function ArchiveMonth() {
         </ul>
       ) : (
         <p>No drops found for this month</p>
+      )}
+      {/* Pagination Controls */}
+      {filteredDrops.length > notificationsPerPage && (
+        <div>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className={styles.pageControls}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className={styles.pageControls}
+          >
+            Next
+          </button>
+        </div>
       )}
     </article>
   );
