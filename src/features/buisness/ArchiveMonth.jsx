@@ -7,6 +7,7 @@ import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { selectMemberToken } from "../auth/authMemberSlice";
 import { useGetMemberDropsQuery } from "../owner/ownerSlice";
 import { useGetAllDropsQuery } from "../members/membersSlice";
+import Pagination from "../../components/Pagination";
 
 import styles from "../../styling/droparchives.module.css";
 
@@ -88,30 +89,12 @@ export default function ArchiveMonth() {
       ) : (
         <p>No drops found for this month</p>
       )}
-      {/* Pagination Controls */}
-      {filteredDrops.length > notificationsPerPage && (
-        <div>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={styles.pageControls}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className={styles.pageControls}
-          >
-            Next
-          </button>
-        </div>
-      )}
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItems={filteredDrops.length}
+        itemsPerPage={notificationsPerPage}
+      />
     </article>
   );
 }
