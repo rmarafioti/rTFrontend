@@ -10,8 +10,6 @@ export default function OwnerMemberProfile() {
   const { memberId } = useParams();
   const { data: owner, error, isLoading } = useGetOwnerQuery();
   const [updatePercentage] = useUpdatePercentageMutation();
-
-  //state to manage percentage values
   const [percentageValue, setPercentageValue] = useState("");
 
   const percentageValues = [50, 55, 60, 65, 70, 75, 80, 85, 90, 100];
@@ -25,7 +23,6 @@ export default function OwnerMemberProfile() {
       business.businessMember.some((member) => member.id === +memberId)
     )
     ?.businessMember.find((member) => member.id === +memberId);
-
   if (!member) {
     return <p>Member not found</p>;
   }
@@ -37,16 +34,11 @@ export default function OwnerMemberProfile() {
       console.error("Please select a percentage value");
       return;
     }
-    console.log("Payload being sent to the backend:", { memberId, percentage });
     try {
       await updatePercentage({
         memberId: +memberId,
         percentage: percentageValue,
       }).unwrap();
-
-      console.log(`Updated percentage for member with ID: ${memberId}`);
-
-      //clear pertcentage value
       setPercentageValue("");
     } catch (error) {
       console.error("Error updating member percentage:", error);
@@ -75,7 +67,7 @@ export default function OwnerMemberProfile() {
           <button onClick={handlePercentage}>Update Percentage</button>
         </div>
         <p>Take Home Total: {member.takeHomeTotal}</p>
-        <Link to={`/ownermembersarchive/${memberId}`}>
+        <Link to={`/archive/${memberId}`}>
           <p> {member.memberName} Archive</p>
         </Link>
       </li>

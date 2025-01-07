@@ -10,8 +10,6 @@ import styles from "../../../styling/dashboards.module.css";
 export default function TeamMembersCard() {
   const [confirmPayment] = useOwnerPayDropsMutation();
   const { data: owner, error, isLoading } = useGetOwnerQuery();
-
-  // State to manage payment messages for each member
   const [paidMessages, setPaidMessages] = useState({});
 
   const paymentOptions = [
@@ -25,7 +23,6 @@ export default function TeamMembersCard() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Handle message change for a specific member
   const handleMessageChange = (memberId, message) => {
     setPaidMessages((prev) => ({
       ...prev,
@@ -35,24 +32,21 @@ export default function TeamMembersCard() {
 
   // Handle payout for a specific member
   const handlePayout = async (member) => {
-    const message = paidMessages[member.id] || ""; // Get the payment message for the member
-    const unpaidDrops = member.drop?.filter((drop) => !drop.paid); // Get unpaid drops for the member
-    const dropIds = unpaidDrops.map((drop) => drop.id); // Extract drop IDs from unpaid drops
+    const message = paidMessages[member.id] || "";
+    const unpaidDrops = member.drop?.filter((drop) => !drop.paid);
+    const dropIds = unpaidDrops.map((drop) => drop.id);
     const amount = unpaidDrops.reduce(
       (total, drop) => total + drop.memberCut,
       0
-    ); // Calculate the total amount
-
+    );
     try {
       await confirmPayment({
-        payee: owner.ownerName, // Member's name as the payee
-        paidMessage: message, // Message entered by the owner
-        amount, // Total amount to pay
-        dropIds, // List of unpaid drop IDs
+        payee: owner.ownerName,
+        paidMessage: message,
+        amount,
+        dropIds,
         memberId: member.id,
       }).unwrap();
-
-      console.log(`Paid out drops for member with ID: ${member.id}`);
 
       // Clear the message for the current member after successful payment
       setPaidMessages((prev) => ({

@@ -12,10 +12,17 @@ const ownerApi = api.injectEndpoints({
       providesTags: ["Owner"],
     }),
 
+    getMemberDrops: builder.query({
+      query: ({ memberId, year, month }) => ({
+        url: `owner/memberdrops/${memberId}/${year}/${month}`,
+      }),
+      providesTags: ["Owner"],
+    }),
+
     //owner creates a buisness as part of the register onboarding process
     createBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
-        url: `/owner/business`,
+        url: `owner/business`,
         method: "POST",
         body: { businessName, code },
       }),
@@ -30,24 +37,6 @@ const ownerApi = api.injectEndpoints({
         body: { memberId, percentage },
       }),
       invalidatesTags: ["Owner", "Member"],
-    }),
-
-    // owner get member drops sorted by month and year
-    ownerGetDrops: builder.query({
-      query: ({ memberId, year }) => ({
-        url: `/owner/drops/${year}/${memberId}`,
-        method: "GET",
-      }),
-      providesTags: ["Owner"],
-    }),
-
-    // owner get members drops by id
-    ownerGetDrop: builder.query({
-      query: (dropId) => ({
-        url: `/owner/drops/${dropId}`,
-        method: "GET",
-      }),
-      providesTags: ["Owner"],
     }),
 
     //owner posts a drop paid
@@ -70,8 +59,7 @@ const ownerApi = api.injectEndpoints({
 
 export const {
   useGetOwnerQuery,
-  useOwnerGetDropsQuery,
-  useOwnerGetDropQuery,
+  useGetMemberDropsQuery,
   useUpdatePercentageMutation,
   useCreateBusinessMutation,
   useOwnerPayDropsMutation,

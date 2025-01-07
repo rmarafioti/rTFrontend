@@ -1,45 +1,66 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectMemberToken } from "../auth/authMemberSlice";
 import { selectOwnerToken } from "../auth/authOwnerSlice";
-import { useGetAllDropsQuery } from "../buisness/businessSlice";
+import { useGetDropsByMemberIdQuery } from "./businessSlice"; // For owners
+import { useGetAllDropsQuery } from "../members/membersSlice"; // For logged-in members
 
 import styles from "../../styling/droparchives.module.css";
 
+dayjs.extend(utc);
+
 export default function Archive() {
-  const { memberId } = useParams(); // Get memberId from URL
+  const { memberId } = useParams();
+
+  // This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
+  // Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  const { data, isLoading, error, refetch } = useGetAllDropsQuery(
-    role === "owner" ? memberId : null // Pass memberId only for owners
-  );
+  // For owners: fetch specific member's drops based on memberId, year, and month
+  const {
+    data: memberDropsData,
+    isLoading: memberDropsIsLoading,
+    error: memberDropsError,
+  } = useGetDropsByMemberIdQuery(memberId, {
+    skip: !memberId || role !== "owner", // Skip if not an owner or memberId is not available
+  });
 
-  // Refetch when role or memberId changes
-  useEffect(() => {
-    refetch();
-  }, [role, memberId, refetch]);
+  // For logged-in members: fetch their own drops for the given month and year
+  const {
+    data: memberData,
+    isLoading: memberIsLoading,
+    error: memberError,
+  } = useGetAllDropsQuery(undefined, {
+    skip: role !== "member", // Skip if not a member
+  });
 
-  if (!role) {
-    return <p>Error: Unable to determine user role. Please log in again.</p>;
-  }
+  const isLoading = memberIsLoading || memberDropsIsLoading;
+  const error = memberError || memberDropsError;
 
-  const drops = data?.drops || [];
-  const memberName = drops.length > 0 ? drops[0].member?.memberName : null;
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-  dayjs.extend(utc);
+  // Define the data that we are using by the role of the logged in user
+  const drops =
+    role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
-  const dropsByYearAndMonth = drops.reduce((acc, drop) => {
-    const date = dayjs(drop.date).utc(); // Use dayjs to ensure UTC handling
+  // Fetch the team mebers name in the owner is logged in
+  const memberName = memberId
+    ? memberDropsData?.memberDetails?.memberName || "Unknown Member"
+    : "";
+
+  // Group drops by year and month
+  const dropsByYearAndMonth = (drops || []).reduce((acc, drop) => {
+    const date = dayjs(drop.date).utc();
     const year = date.year();
-    const month = date.month() + 1; // 0-based month in dayjs, so add 1
-    const monthName = date.format("MMMM"); // Full month name
+    const month = date.month() + 1;
+    const monthName = date.format("MMMM");
 
     if (!acc[year]) acc[year] = {};
     if (!acc[year][month]) acc[year][month] = { monthName, drops: [] };
@@ -47,9 +68,6 @@ export default function Archive() {
     acc[year][month].drops.push(drop);
     return acc;
   }, {});
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <article className="pageSetup">
@@ -64,7 +82,11 @@ export default function Archive() {
             <ul className={styles.months}>
               {Object.entries(months).map(([month, { monthName }]) => (
                 <li key={month} className={styles.month}>
-                  <Link to={`/archivemonth/${year}/${month}`}>
+                  <Link
+                    to={`/archivemonth/${
+                      memberId || memberToken.id
+                    }/${year}/${month}`}
+                  >
                     {monthName} {year}
                   </Link>
                 </li>
@@ -73,7 +95,7 @@ export default function Archive() {
           </div>
         ))
       ) : (
-        <p>*No drops found*</p>
+        <p>No drops found for this member</p>
       )}
     </article>
   );

@@ -60,6 +60,8 @@ export default function Navbar() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const memberId = member?.id;
+
   // Mobile menu for member
   function MenuMember() {
     return (
@@ -77,7 +79,7 @@ export default function Navbar() {
             <NavLink to="/memberdashboard">Member Dashboard</NavLink>
           </li>
           <li className={styles.hamMenuItem}>
-            <NavLink to="/archive">Archive</NavLink>
+            <NavLink to={`/archive/${memberId}`}>Archive</NavLink>
           </li>
           <li className={styles.hamMenuItem}>
             <NavLink to="/membernotifications">Payments</NavLink>
@@ -216,7 +218,7 @@ export default function Navbar() {
                   <NavLink to="/memberdashboard">Member Dashboard</NavLink>
                 </li>
                 <li className={styles.menuItem}>
-                  <NavLink to="/archive">Archives</NavLink>
+                  <NavLink to={`/archive/${memberId}`}>Archives</NavLink>
                 </li>
                 <li className={styles.menuItem}>
                   <NavLink to="/membernotifications">Payments</NavLink>

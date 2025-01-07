@@ -46,9 +46,9 @@ const router = createBrowserRouter([
 
       { path: "/membernotifications/", element: <MemberNotifications /> },
       { path: "/drop/:dropId", element: <Drop /> },
-      { path: "/archive/:memberId?", element: <Archive /> },
+      { path: "/archive/:memberId", element: <Archive /> },
       {
-        path: "archivemonth/:memberId?/:year/:month",
+        path: "archivemonth/:memberId/:year/:month",
         element: <ArchiveMonth />,
       },
     ],

@@ -1,67 +1,80 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectMemberToken } from "../auth/authMemberSlice";
 import { selectOwnerToken } from "../auth/authOwnerSlice";
-import { useGetAllDropsQuery } from "../buisness/businessSlice";
+import { selectMemberToken } from "../auth/authMemberSlice";
+import { useGetMemberDropsQuery } from "../owner/ownerSlice";
+import { useGetAllDropsQuery } from "../members/membersSlice";
+import Pagination from "../../components/Pagination";
 
 import styles from "../../styling/droparchives.module.css";
 
 dayjs.extend(utc);
 
 export default function ArchiveMonth() {
-  const { memberId, year, month } = useParams(); // Get memberId, year, and month from URL
+  const { memberId, year, month } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const notificationsPerPage = 5;
+
+  // This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
+  // Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  const { data, isLoading, error, refetch } = useGetAllDropsQuery(
-    role === "owner" ? memberId : null // Pass memberId only for owners
+  // For owners: fetch specific member's drops based on memberId, year, and month
+  const {
+    data: memberDropsData,
+    isLoading: memberDropsIsLoading,
+    error: memberDropsError,
+  } = useGetMemberDropsQuery(
+    { memberId, year, month },
+    { skip: role !== "owner" || !memberId }
   );
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const dropsPerPage = 5; // Number of drops per page
+  // For logged-in members: fetch their own drops for the given month and year
+  const {
+    data: memberData,
+    isLoading: memberIsLoading,
+    error: memberError,
+  } = useGetAllDropsQuery(undefined, {
+    skip: role !== "member",
+  });
 
-  useEffect(() => {
-    refetch();
-  }, [role, memberId, refetch]);
-
-  if (!role) {
-    return <p>Error: Unable to determine user role. Please log in again.</p>;
-  }
+  const isLoading = memberIsLoading || memberDropsIsLoading;
+  const error = memberError || memberDropsError;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const drops = data?.drops || [];
-  const memberName = drops.length > 0 ? drops[0].member?.memberName : null;
+  // Define the data that we are using by the role of the logged in user
+  const drops =
+    role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
-  // Filter drops by the provided year and month
+  // Filter drops to only show those for the given month
   const filteredDrops = drops.filter((drop) => {
     const dropDate = dayjs.utc(drop.date);
-    return (
-      dropDate.year() === parseInt(year, 10) &&
-      dropDate.month() + 1 === parseInt(month, 10) // month is 0-based
-    );
+    const dropYear = dropDate.year();
+    const dropMonth = dropDate.month() + 1;
+    // Compare the year and month with the selected year and month
+    return dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10);
   });
 
-  // Pagination Logic
-  const lastIndex = currentPage * dropsPerPage;
-  const firstIndex = lastIndex - dropsPerPage;
+  // Calculate pagination
+  const lastIndex = currentPage * notificationsPerPage;
+  const firstIndex = lastIndex - notificationsPerPage;
   const currentDrops = filteredDrops.slice(firstIndex, lastIndex);
-
-  const totalPages = Math.ceil(filteredDrops.length / dropsPerPage);
 
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
-        {role === "owner" ? `${memberName}'s Archives` : "Your Archived Drops"}
+        {role === "owner"
+          ? `${memberDropsData?.memberDetails?.memberName}'s Drops`
+          : "Month's Drops"}
       </h1>
-
       {currentDrops.length > 0 ? (
         <ul className={styles.drops}>
           {currentDrops.map((drop) => (
@@ -75,30 +88,15 @@ export default function ArchiveMonth() {
       ) : (
         <p>No drops found for this month</p>
       )}
-
-      {/* Pagination Controls */}
-      {filteredDrops.length > dropsPerPage && (
-        <div className={styles.pagination}>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={styles.pageControls}
-          >
-            Previous
-          </button>
-          <span className={styles.pageInfo}>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className={styles.pageControls}
-          >
-            Next
-          </button>
-        </div>
+      {filteredDrops.length < 5 ? (
+        " "
+      ) : (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalItems={filteredDrops.length}
+          itemsPerPage={notificationsPerPage}
+        />
       )}
     </article>
   );

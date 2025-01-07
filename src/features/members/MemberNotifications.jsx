@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useGetMemberQuery } from "./membersSlice";
+import Pagination from "../../components/Pagination";
 
 import styles from "../../styling/dashboards.module.css";
 
 export default function MemberNotifications() {
   const { data: member, error, isLoading } = useGetMemberQuery();
   const [currentPage, setCurrentPage] = useState(1);
-  const notificationsPerPage = 5;
+  const notificationsPerPage = 3;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Extract all unique paidDrops from the member's drops
+  // Get all drops where paid is true
   const paidDrops = member.drop
     ?.filter((drop) => drop.paidDrop)
     .map((drop) => drop.paidDrop)
@@ -20,7 +21,7 @@ export default function MemberNotifications() {
         self.findIndex((pd) => pd.id === value.id) === index
     );
 
-  //calculate pagination
+  // Calculate pagination
   const lastIndex = currentPage * notificationsPerPage;
   const firstIndex = lastIndex - notificationsPerPage;
   const currentNotifications = paidDrops.slice(firstIndex, lastIndex);
@@ -47,13 +48,12 @@ export default function MemberNotifications() {
                   - Payment of ${paidDrop.amount} from {paidDrop.payee}
                 </p>
               </div>
-              {/*<p>From {paidDrop.payee}</p>*/}
+
               <p>
                 Method of payment:{" "}
                 {paidDrop.paidMessage || "*No payment message provided*"}
               </p>
-
-              {/* Map over the drops associated with this paidDrop */}
+              {/* Map over the drops associated with the payment */}
               <div className={styles.paidDatesSection}>
                 <h5>Paid for Drops on:</h5>
                 <ul className={styles.paidDates}>
@@ -80,37 +80,15 @@ export default function MemberNotifications() {
           <p className={styles.payeeColor} id={styles.yellow}></p>
         </div>
       </section>
-      {/* pagination controls */}
-      {paidDrops.length > notificationsPerPage && (
-        <div>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={styles.pageControls}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of{" "}
-            {Math.ceil(paidDrops.length / notificationsPerPage)}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) =>
-                Math.min(
-                  prev + 1,
-                  Math.ceil(paidDrops.length / notificationsPerPage)
-                )
-              )
-            }
-            disabled={
-              currentPage == Math.ceil(paidDrops.length / notificationsPerPage)
-            }
-            className={styles.pageControls}
-          >
-            Next
-          </button>
-        </div>
+      {paidDrops.length < 3 ? (
+        " "
+      ) : (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalItems={paidDrops.length}
+          itemsPerPage={notificationsPerPage}
+        />
       )}
     </article>
   );

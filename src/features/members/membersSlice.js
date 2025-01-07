@@ -62,31 +62,13 @@ const memberApi = api.injectEndpoints({
       invalidatesTags: ["Member"],
     }),
 
-    // member get all drops by year
-    memberGetDrops: builder.query({
-      query: (year) => ({
-        url: `/member/dropsMonth/${year}`,
-        method: "GET",
-      }),
-      providesTags: ["Member"],
-    }),
-
-    // member get drop by id
-    memberGetDrop: builder.query({
-      query: (dropId) => ({
-        url: `/member/drops/${dropId}`,
-        method: "GET",
-      }),
-      providesTags: ["Member"],
-    }),
-
-    // member gets all paid drops
-    memberGetPaidDrops: builder.query({
+    // Member-specific query
+    getAllDrops: builder.query({
       query: () => ({
-        url: `/member/getpaiddrops`,
+        url: `/member/memberdrops`, // Route to fetch member's drops
         method: "GET",
       }),
-      providesTags: ["Member"],
+      providesTags: ["Member"], // Invalidate and cache data based on 'Member'
     }),
 
     // member update a drop
@@ -142,9 +124,7 @@ const memberApi = api.injectEndpoints({
 
 export const {
   useGetMemberQuery,
-  useMemberGetDropsQuery,
-  useMemberGetDropQuery,
-  useMemberGetPaidDropsQuery,
+  useGetAllDropsQuery,
   useLinkMemberToBusinessMutation,
   useMemberCreateDropMutation,
   useMemberCreateServiceMutation,

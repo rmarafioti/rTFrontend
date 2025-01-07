@@ -26,14 +26,11 @@ export default function PayNoticeCard() {
     .filter((drop) => !drop.paid)
     .reduce((total, drop) => total + drop.memberOwes, 0);
 
-  // Business owes total is the business totol for the unpaid drops - member toatl which is there daily take home in cash
-
   const businessOwesTotal = memberTotal > 0 ? 0 : businessTotal - memberTotal;
 
-  // if business owes total is greater than 0 than member owes total should be 0 else it is the accumulation of member total
+  // We don't want to see a members owes total if the business owes total is greater than 0
   const memberOwesTotal = businessOwesTotal > 0 ? 0 : memberTotal;
 
-  // State to manage payment messages for each member
   const [paidMessages, setPaidMessages] = useState({});
 
   const paymentOptions = [
@@ -44,7 +41,6 @@ export default function PayNoticeCard() {
     "Other",
   ];
 
-  // Handle message change for a specific member
   const handleMessageChange = (memberId, message) => {
     setPaidMessages((prev) => ({
       ...prev,
@@ -54,13 +50,12 @@ export default function PayNoticeCard() {
 
   const unpaidDrops = member.drop?.filter((drop) => !drop.paid);
 
-  // Check if there's already a `paidNotice` for these unpaid drops
+  // Check if there is a `paidNotice` for these unpaid drops
   const hasPendingNotice = unpaidDrops.some((drop) => drop.paidNotice);
 
   // Collect the IDs of unpaid drops
   const unpaidDropIds = unpaidDrops?.map((drop) => drop.id) || [];
 
-  // send a paymnet notice
   const sendPaymentNotice = async (memberId) => {
     const message = paidMessages[memberId] || "";
     if (unpaidDropIds.length === 0) {
@@ -80,12 +75,10 @@ export default function PayNoticeCard() {
     }
   };
 
-  // send delete drop
   const submitDeleteDrop = async (dropId) => {
     console.log("Deleting drop with ID:", dropId);
     try {
       await deleteDrop(dropId).unwrap();
-      console.log("Successfully deleted drop with ID: ${dropId}");
     } catch (error) {
       console.error("Error deleting drop with ID ${dropId}:", error);
     }
@@ -128,9 +121,6 @@ export default function PayNoticeCard() {
               <p>Notice sent! Confirmation of payment pending.</p>
             ) : (
               <>
-                {/*<label className={styles.paymentMethodLabel}>
-                  Payment Method:
-                </label>*/}
                 <select
                   value={paidMessages[member.id] || ""}
                   onChange={(e) =>
