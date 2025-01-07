@@ -80,12 +80,16 @@ export default function MemberNotifications() {
           <p className={styles.payeeColor} id={styles.yellow}></p>
         </div>
       </section>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalItems={paidDrops.length}
-        itemsPerPage={notificationsPerPage}
-      />
+      {paidDrops.length < 3 ? (
+        " "
+      ) : (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalItems={paidDrops.length}
+          itemsPerPage={notificationsPerPage}
+        />
+      )}
     </article>
   );
 }

@@ -72,7 +72,7 @@ export default function ArchiveMonth() {
     <article className="pageSetup">
       <h1 className={styles.header}>
         {role === "owner"
-          ? `${memberDropsData?.memberDetails?.memberName}'s`
+          ? `${memberDropsData?.memberDetails?.memberName}'s Drops`
           : "Month's Drops"}
       </h1>
       {currentDrops.length > 0 ? (
@@ -88,12 +88,16 @@ export default function ArchiveMonth() {
       ) : (
         <p>No drops found for this month</p>
       )}
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalItems={filteredDrops.length}
-        itemsPerPage={notificationsPerPage}
-      />
+      {filteredDrops.length < 5 ? (
+        " "
+      ) : (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalItems={filteredDrops.length}
+          itemsPerPage={notificationsPerPage}
+        />
+      )}
     </article>
   );
 }
