@@ -5,7 +5,7 @@ import {
 } from "../../../features/owner/ownerSlice";
 import { Link } from "react-router-dom";
 
-import styles from "../../../styling/teammemberscard.module.css";
+import styles from "../../../styling/owner/teammemberscard.module.css";
 
 export default function TeamMembersCard() {
   const [confirmPayment] = useOwnerPayDropsMutation();
