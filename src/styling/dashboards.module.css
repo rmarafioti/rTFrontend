@@ -42,6 +42,7 @@
 }
 .takeHomeValue {
   background-color: #b5e6e1;
+  padding: .5rem;
 }
 
 /* Member Dashboard additional styles */
@@ -57,7 +58,7 @@
   margin-bottom: 2rem;
 }
 
-.currentDrop/*, .memberCurrentDrop*/ {
+.currentDrop {
   display: flex;
   flex-direction: row;
   justify-content: center;

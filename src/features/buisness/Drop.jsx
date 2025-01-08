@@ -4,8 +4,8 @@ import { selectMemberToken } from "../auth/authMemberSlice";
 import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { useParams } from "react-router-dom";
 import { useGetDropsQuery } from "../buisness/businessSlice";
-import { Link } from "react-router-dom";
 
+import "../../styling/mainStyles.css";
 import styles from "../../styling/dropdetails.module.css";
 
 export default function Drop() {
@@ -25,7 +25,7 @@ export default function Drop() {
   return (
     <article className="pageSetup">
       <div className={styles.headerSection}>
-        <h1 className={styles.header}>Drop Details</h1>
+        <h1 className={styles.header}>Drop Details.</h1>
         <p className={styles.date}>
           {new Date(drop.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
         </p>
@@ -52,24 +52,20 @@ export default function Drop() {
           </p>
         </div>
       </div>
-      <h2>Services:</h2>
+      <h2 className={styles.subHeadersNotice}>Services:</h2>
       {drop.service.map((service) => (
-        <div className={styles.service} key={service.id}>
+        <section className={styles.serviceSection}>
           <h3 className={styles.description}>{service.description}</h3>
-          {service.cash !== 0 && <p>Cash: ${service.cash}</p>}
-          {service.credit !== 0 && <p>Credit: ${service.credit}</p>}
-          {service.deposit !== 0 && <p>Deposit: ${service.deposit}</p>}
-          {service.giftCertAmount !== 0 && (
-            <p>Gift Certificate: ${service.giftCertAmount}</p>
-          )}
-        </div>
+          <div className={styles.service} key={service.id}>
+            {service.cash !== 0 && <p>Cash: ${service.cash}</p>}
+            {service.credit !== 0 && <p>Credit: ${service.credit}</p>}
+            {service.deposit !== 0 && <p>Deposit: ${service.deposit}</p>}
+            {service.giftCertAmount !== 0 && (
+              <p>Gift Certificate: ${service.giftCertAmount}</p>
+            )}
+          </div>
+        </section>
       ))}
-      <Link
-        className={styles.link}
-        to={role === "owner" ? `/ownerdashboard` : `/memberdashboard`}
-      >
-        Back to Dashboard
-      </Link>
     </article>
   );
 }

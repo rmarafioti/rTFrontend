@@ -88,7 +88,7 @@ export default function ArchiveMonth() {
       ) : (
         <p>No drops found for this month</p>
       )}
-      {filteredDrops.length < 5 ? (
+      {filteredDrops.length <= 5 ? (
         " "
       ) : (
         <Pagination
