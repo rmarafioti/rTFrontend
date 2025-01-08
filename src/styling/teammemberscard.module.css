@@ -103,3 +103,12 @@
       .noServicesMessage {
         font-weight: normal;
       }
+
+      @media (max-width: 768px) {
+        .dashboardSection, .subHeaders, .noServicesMessage, .memberDrops {
+          width: 100%
+        }
+        .memberDrop {
+          width: 90%;
+        }
+      }

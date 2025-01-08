@@ -179,3 +179,12 @@
   margin: 2rem .5rem 0rem .5rem;
   width: 150px;
 }
+
+@media (max-width: 768px) {
+  .takeHomeTotalSection, .takeHomeKey, .takeHomeValue {
+    width: 100%;
+  }
+  .header {
+    font-size: 44px;
+  }
+}

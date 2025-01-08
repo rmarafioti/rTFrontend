@@ -1,15 +1,15 @@
 .dashboardSectionNotifications {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
 
-  .subHeadersNotice {
-    color: var(--black);
-    font-size: 44px;
-    font-weight: 600;
-  }
+.subHeadersNotice {
+  color: var(--black);
+  font-size: 44px;
+  font-weight: 600;
+}
 
 .noticeSection {
   margin: 0rem 0rem 0rem 0rem;
@@ -29,49 +29,58 @@
 }
 
 .payDate {
-    padding: .5rem 0rem .5rem 0rem;
-    background-color: var(--white);
+  padding: 0.5rem 0rem 0.5rem 0rem;
+  background-color: var(--white);
+}
+
+.paidMessage {
+  border-top: 1px solid rgb(187, 192, 196);
+  padding: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.paidMessage {
+  font-weight: 600;
+  background-color: var(--secondaryTurquoise);
+  border-bottom: 1px solid rgb(187, 192, 196);
+}
+
+.paidDatesSection {
+  background-color: none;
+}
+
+.paidDates {
+  list-style-type: none;
+  padding: 0rem;
+  background-color: #b5e6e1;
+}
+
+.paidDate {
+  border-bottom: 1px solid rgb(187, 192, 196);
+  padding: 0.5rem;
+}
+
+.noPayNotice {
+  margin: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgb(187, 192, 196);
+  border-left: 1px solid rgb(187, 192, 196);
+  border-right: 1px solid rgb(187, 192, 196);
+  width: 100%;
+}
+
+.paymentConfirm {
+  color: var(--white);
+  font-weight: bold;
+  background-color: var(--primaryBlue);
+  padding: 0.5rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .dashboardSectionNotifications, .noticeSection {
+    width: 100%;
   }
-
-  .paidMessage {
-    border-top: 1px solid rgb(187, 192, 196);;
-      padding: .5rem 0rem .5rem 0rem;
-    }
-    
-    .paidMessage {
-      font-weight: 600;
-      background-color: var(--secondaryTurquoise);
-      border-bottom: 1px solid rgb(187, 192, 196);
-    }
-
-    .paidDatesSection {
-        background-color: none;
-      }
-
-      .paidDates {
-        list-style-type: none;
-        padding: 0rem;
-        background-color: #b5e6e1;
-        }
-        
-        .paidDate {
-          border-bottom: 1px solid rgb(187, 192, 196);
-          padding: .5rem;
-        }
-
-        .noPayNotice {
-            margin: 0;
-            padding: .5rem;
-            border-bottom: 1px solid rgb(187, 192, 196);
-            border-left: 1px solid rgb(187, 192, 196);
-            border-right: 1px solid rgb(187, 192, 196);
-            width: 100%;
-          }
-
-          .paymentConfirm {
-            color: var(--white);
-            font-weight: bold;
-            background-color: var(--primaryBlue);
-            padding: .5rem;
-            margin: 0;
-          }
+  .subHeadersNotice {
+    font-size: 30px;
+  }
+}

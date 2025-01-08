@@ -74,7 +74,7 @@ button:focus-visible {
 }
 
 @media (max-width: 768px) {
-  .button {
+  .button, .layout {
     width: 100%;
   }
 }
