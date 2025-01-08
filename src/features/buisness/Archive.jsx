@@ -8,7 +8,7 @@ import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { useGetDropsByMemberIdQuery } from "./businessSlice"; // For owners
 import { useGetAllDropsQuery } from "../members/membersSlice"; // For logged-in members
 
-import styles from "../../styling/droparchives.module.css";
+import styles from "../../styling/business/archive.module.css";
 
 dayjs.extend(utc);
 

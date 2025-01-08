@@ -1,0 +1,112 @@
+.header {
+    color: var(--accentGold);
+    font-size: 72px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px black;
+    text-shadow: -5px 5px 0px black;
+    margin-bottom: 1rem;
+  }
+  
+  .memberCard {
+    display: flex;
+    flex-direction: column;
+  margin-bottom: 1rem;
+    width: 600px;
+    border: 1px solid rgb(187, 192, 196);
+  border-left: none;
+  }
+  
+  .memberItem {
+    font-size: 24px;
+    display: flex;
+  }
+  
+  .item {
+    border-bottom: 1px solid rgb(187, 192, 196);
+    border-left: 1px solid rgb(187, 192, 196);
+    padding: .5rem;
+    align-self: flex-start;
+    width: 100%;
+    background-color: #b5e6e1;
+  }
+  
+  #itemKey {
+    background-color: #b5e6e1;
+  }
+  
+  .takeHome {
+    color: var(--black);
+    font-weight: 600;
+    font-size: 24px;
+    background-color: var(--white);
+    padding: .5rem;
+    width: 100%;
+    border-left: 1px solid rgb(187, 192, 196);
+  }
+  
+  .archiveLink {
+    margin-top: 1rem;
+    color: var(--black);
+    padding: .5rem;
+    background-color: #b5e6e1;
+    border:  2px solid transparent;
+    border-left: 2px solid var(--primaryBlue);
+    border-bottom: 2px solid var(--primaryBlue);
+    box-shadow: -5px 5px 0px 1px transparent;
+    transition: border-color 0.25s;
+    transition: box-shadow 0.25s;
+    width: 300px;
+  }
+  
+  .linkName {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  .archiveLink:hover {
+    color: var(--black);
+    padding: .5rem;
+    background-color: var(--white);
+    border: 2px solid black;
+    box-shadow: -5px 5px 0px 1px black;
+  }
+  
+  .subHeader {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+  
+  .updatePercent {
+    display: flex;
+    flex-direction: column;
+    margin: .5rem 0rem 1rem 0rem;
+    width: 300px;
+  }
+  
+  .select {
+    border: 1px solid var(--black);
+    font-size: 18px;
+    margin: .5rem 0rem 1rem 0rem;
+    padding: .5rem;
+  }
+  
+  .percentButton {
+    align-self: center;
+  }
+  
+  @media (max-width: 768px) {
+    .archiveLink, .updatePercent {
+      width: 90%;
+    }
+    .memberCard, .percentButton {
+      width: 100%;
+    }
+    .header {
+      font-size: 44px;
+    }
+    .subHeader {
+      font-size: 24px;
+    }
+  }
+  

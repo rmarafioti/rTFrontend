@@ -2,7 +2,7 @@ import { useGetOwnerQuery } from "../owner/ownerSlice";
 import { Link } from "react-router-dom";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/droparchives.module.css";
+import styles from "../../styling/owner/ownermembersarchives.module.css";
 
 export default function OwnerMembersArchives() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();

@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { selectMemberToken } from "../auth/authMemberSlice";
 import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { useParams } from "react-router-dom";
-import { useGetDropsQuery } from "../buisness/businessSlice";
+import { useGetDropsQuery } from "./businessSlice";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/dropdetails.module.css";
+import styles from "../../styling/business/dropdetails.module.css";
 
 export default function Drop() {
   const { dropId } = useParams();

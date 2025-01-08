@@ -9,7 +9,7 @@ import { useGetMemberDropsQuery } from "../owner/ownerSlice";
 import { useGetAllDropsQuery } from "../members/membersSlice";
 import Pagination from "../../components/Pagination";
 
-import styles from "../../styling/droparchives.module.css";
+import styles from "../../styling/business/archivemonth.module.css";
 
 dayjs.extend(utc);
 

@@ -3,7 +3,7 @@ import NotificationsCard from "../../components/owner/ownerDashboard/Notificatio
 import { useGetOwnerQuery } from "./ownerSlice";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/dashboards.module.css";
+import styles from "../../styling/owner/ownerdashboard.module.css";
 
 export default function OwnerDashboard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();

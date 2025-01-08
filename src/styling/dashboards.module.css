@@ -12,12 +12,7 @@
   border: none;
 }
 
-.takeHomeTotalSection {
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 
 .header {
   color: var(--accentGold);
@@ -28,22 +23,7 @@
   margin-bottom: 1rem;
 }
 
-.takeHomeKey, .takeHomeValue {
-  font-size: 24px;
-  border: 1px solid rgb(187, 192, 196);
-  width: 460px;
-}
 
-.takeHomeKey {
-  font-weight: 600;
-  padding: .5rem;
-  border-bottom: none;
-  background-color:var(--white);
-}
-.takeHomeValue {
-  background-color: #b5e6e1;
-  padding: .5rem;
-}
 
 /* Member Dashboard additional styles */
 
@@ -181,11 +161,3 @@
   width: 150px;
 }
 
-@media (max-width: 768px) {
-  .takeHomeTotalSection, .takeHomeKey, .takeHomeValue {
-    width: 100%;
-  }
-  .header {
-    font-size: 44px;
-  }
-}

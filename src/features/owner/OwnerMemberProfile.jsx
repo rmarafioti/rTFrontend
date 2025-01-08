@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useGetOwnerQuery } from "./ownerSlice";
 import { useUpdatePercentageMutation } from "./ownerSlice";
 
-import styles from "../../styling/layout.module.css";
+import styles from "../../styling/owner/ownermemberprofile.module.css";
 
 export default function OwnerMemberProfile() {
   const { memberId } = useParams();

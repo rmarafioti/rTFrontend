@@ -1,0 +1,41 @@
+.takeHomeTotalSection {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    color: var(--accentGold);
+    font-size: 72px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px black;
+    text-shadow: -5px 5px 0px black;
+    margin-bottom: 1rem;
+  }
+
+  .takeHomeKey, .takeHomeValue {
+    font-size: 24px;
+    border: 1px solid rgb(187, 192, 196);
+    width: 460px;
+  }
+  
+  .takeHomeKey {
+    font-weight: 600;
+    padding: .5rem;
+    border-bottom: none;
+    background-color:var(--white);
+  }
+  .takeHomeValue {
+    background-color: #b5e6e1;
+    padding: .5rem;
+  }
+
+  @media (max-width: 768px) {
+    .takeHomeTotalSection, .takeHomeKey, .takeHomeValue {
+      width: 100%;
+    }
+    .header {
+      font-size: 44px;
+    }
+  }
