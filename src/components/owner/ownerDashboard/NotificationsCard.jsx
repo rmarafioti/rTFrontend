@@ -3,7 +3,9 @@ import {
   useOwnerPayDropsMutation,
 } from "../../../features/owner/ownerSlice";
 
-import styles from "../../../styling/dashboards.module.css";
+/*import styles from "../../../styling/dashboards.module.css";*/
+
+import styles from "../../../styling/notificationscard.module.css";
 
 export default function NotificationsCard() {
   const [confirmPayment] = useOwnerPayDropsMutation();
@@ -60,18 +62,19 @@ export default function NotificationsCard() {
         payNotices.map((notice) => (
           <div key={notice.id} className={styles.noticeSection}>
             <div>
-              <p>
-                {new Date(notice.paidDate).toLocaleDateString("en-US")} -Payment
-                of ${notice.amount} from {notice.payee}
+              <p className={styles.payDate}>
+                <b>*</b> {new Date(notice.paidDate).toLocaleDateString("en-US")}{" "}
+                -Payment of ${notice.amount} from {notice.payee}
               </p>
-              <p>{notice.paidMessage || "No message provided"}</p>
+              <p className={styles.paidMessage}>
+                {notice.paidMessage || "No message provided"} for Drops On:
+              </p>
             </div>
             <div className={styles.paidDatesSection}>
-              <h5>Paid for Drops on:</h5>
               <ul className={styles.paidDates}>
                 {notice.drops.map((drop) => (
-                  <li key={drop.id}>
-                    {new Date(drop.date).toLocaleDateString("en-US")}
+                  <li className={styles.paidDate} key={drop.id}>
+                    <b>*</b> {new Date(drop.date).toLocaleDateString("en-US")}
                   </li>
                 ))}
               </ul>
