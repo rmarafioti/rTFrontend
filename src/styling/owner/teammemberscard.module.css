@@ -1,34 +1,39 @@
 .dashboardSection {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: left;
+     border: 1px solid rgb(187, 192, 196);
+     padding: 1rem;
+     background-color: #e8f2ea;
+     margin-bottom: 2rem;
   }
 
-  .subHeaders, .noServicesMessage {
-    color:  var(--black);
+  .subHeaders/*, .noServicesMessage*/ {
+    color:  var(--primaryBlue);
     font-size: 24px;
     font-weight: 600;
-    background-color: #f9f9f9;
-    padding: .5rem 1rem .5rem 1rem;
+    /*background-color: #f9f9f9;*/
+    padding-bottom: 1rem;
     width: 460px;
     margin: 0rem;
-    border: 1px solid rgb(187, 192, 196);
-    border-bottom: none;
+    border-bottom: 1px solid rgb(187, 192, 196);
+    /*border-bottom: none;*/
   }
 
   .memberDrops {
     display: flex;
     flex-direction: column;
+   
     margin: 0rem 0rem 1rem 0rem;
     border: 1px solid rgb(187, 192, 196);
     width: 460px;
   }
 
   .unpaidSection {
+  
     padding-top: .5rem;
     list-style-type: none;
-    background-color: var( --secondaryTurquoise);
+    /*background-color: var( --secondaryTurquoise);*/
   }
 
   .teamMemberName {
@@ -94,9 +99,10 @@
       }
 
       .noServicesMessage {
-        background-color: #b5e6e1;
-        border: 1px solid rgb(187, 192, 196);
-        margin-bottom: 1rem;
+        /*background-color: #b5e6e1;*/
+        /*border: 1px solid rgb(187, 192, 196);*/
+        /*margin-bottom: 1rem;*/
+        padding-top: 1rem;
         font-size: 20px;
       }
 
@@ -107,6 +113,9 @@
       @media (max-width: 768px) {
         .dashboardSection, .subHeaders, .noServicesMessage, .memberDrops {
           width: 100%
+        }
+        .dashboardSection {
+          width: 90%;
         }
         .memberDrop {
           width: 90%;
