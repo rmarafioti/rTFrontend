@@ -11,23 +11,25 @@ export default function OwnerMembersArchives() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <section className="pageSetup">
+    <article className="pageSetup">
       <h1 className={styles.header}>Drop Archives:</h1>
-      {owner?.ownerBusiness?.length ? (
-        <ul className={styles.drops}>
-          {owner.ownerBusiness.map((business) =>
-            business.businessMember?.map((member) => (
-              <Link className={styles.linkName} to={`/archive/${member.id}`}>
-                <li className={styles.link} key={member.id}>
-                  {member.memberName}
-                </li>
-              </Link>
-            ))
-          )}
-        </ul>
-      ) : (
-        <p>No Members Found</p>
-      )}
-    </section>
+      <section className={styles.dropSection}>
+        {owner?.ownerBusiness?.length ? (
+          <ul className={styles.drops}>
+            {owner.ownerBusiness.map((business) =>
+              business.businessMember?.map((member) => (
+                <Link className={styles.linkName} to={`/archive/${member.id}`}>
+                  <li className={styles.link} key={member.id}>
+                    {member.memberName}
+                  </li>
+                </Link>
+              ))
+            )}
+          </ul>
+        ) : (
+          <p>No Members Found</p>
+        )}
+      </section>
+    </article>
   );
 }

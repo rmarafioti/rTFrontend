@@ -19,9 +19,7 @@
 }
 
 .noticeSection {
-  /*padding: 0rem;*/
   margin: 0rem 0rem 1rem 0rem;
-  /*border: 1px solid rgb(187, 192, 196);*/
 }
 
 .payDate {
@@ -29,7 +27,6 @@
   font-weight: 600;
   padding: 0.5rem;
   text-align: center;
-  /*background-color: var(--white);*/
 }
 
 .paidMessage {
@@ -38,10 +35,6 @@
   background-color: #b5e6e1;
   border-bottom: 1px solid rgb(187, 192, 196);
 }
-
-/*.paidDatesSection {
-  background-color: none;
-}*/
 
 .paidDates {
   list-style-type: none;
