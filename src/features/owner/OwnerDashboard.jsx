@@ -20,8 +20,10 @@ export default function OwnerDashboard() {
         </p>
         <p className={styles.takeHomeValue}>${owner?.takeHomeTotal}</p>
       </section>
-      <TeamMembersCard />
-      <NotificationsCard />
+      <section className={styles.dashboardSections}>
+        <TeamMembersCard />
+        <NotificationsCard />
+      </section>
     </article>
   );
 }

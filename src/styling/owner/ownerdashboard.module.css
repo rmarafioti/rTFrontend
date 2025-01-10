@@ -32,8 +32,15 @@
     padding: .5rem;*/
   }
 
+  .dashboardSections {
+    display: flex;
+  }
+
   @media (max-width: 768px) {
-    .takeHomeTotalSection, .takeHomeKey, .takeHomeValue {
+    .dashboardSections {
+      flex-direction: column;
+    }
+    .takeHomeTotalSection, .takeHomeKey, .takeHomeValue, .dashboardSections {
       width: 100%;
     }
     .header {

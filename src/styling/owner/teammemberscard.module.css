@@ -5,19 +5,16 @@
      border: 1px solid rgb(187, 192, 196);
      padding: 1rem;
      background-color: #e8f2ea;
-     margin-bottom: 2rem;
+     margin: 0rem 1rem 2rem 1rem;
   }
 
-  .subHeaders/*, .noServicesMessage*/ {
+  .subHeaders {
     color:  var(--primaryBlue);
     font-size: 24px;
     font-weight: 600;
-    /*background-color: #f9f9f9;*/
     padding-bottom: 1rem;
     width: 460px;
-    margin: 0rem;
     border-bottom: 1px solid rgb(187, 192, 196);
-    /*border-bottom: none;*/
   }
 
   .memberDrops {
@@ -111,7 +108,7 @@
       }
 
       @media (max-width: 768px) {
-        .dashboardSection, .subHeaders, .noServicesMessage, .memberDrops {
+        .subHeaders, .noServicesMessage, .memberDrops {
           width: 100%
         }
         .dashboardSection {
