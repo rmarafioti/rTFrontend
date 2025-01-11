@@ -10,75 +10,78 @@
 .dropSection {
   margin-bottom: 2rem;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: #e8f2ea;
-  border: 1px solid rgb(187, 192, 196);
-}
-
-.date, .subHeadersNotice {
-  color: var(--black);
-  font-size: 22px;
-  font-weight: 600;
-  padding-left: 1rem;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  flex-direction: row;
 }
 
 .dropDetails {
+  margin: 1rem;
+  flex-direction: column;
+  display: flex;
+    width: 460px;
+    background-color:  #e8f2ea;
+    border: 1px solid rgb(187, 192, 196);
+  }
 
-padding-bottom: .5rem;
-flex-direction: column;
-align-items: flex-start;
-display: flex;
-  width: 460px;
-  background-color:  #b5e6e1;
+.date, .subHeadersNotice {
+  color: var(--primaryBlue);
+  padding: 1rem 0rem 1rem 0rem;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0rem 1rem 0rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgb(187, 192, 196);
 }
 
 .serviceSection {
-  border: 1px solid rgb(187, 192, 196);
+  /*border-bottom: 1px solid rgb(187, 192, 196);*/
   width: 460px;
-  margin-bottom: 2rem;
 }
 
- .description, .total, .oweAmounts {
+ .description, .total, .oweAmounts, .service {
   color:  var(--black);
   font-size: 20px;
-  font-weight: 600;
-  text-align: left;
-  /*background-color:var(--white);*/
-  padding-left: 1rem;
-}
-
-.total {
-  padding-top: .5rem;
-}
-
-.oweAmounts {
   font-weight: normal;
-  /*background-color: var(--secondaryTurquoise)*/
+  text-align: left;
+  background-color: #b5e6e1;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+  border-bottom: 1px solid rgb(187, 192, 196);
 }
 
-.paid {
- margin-bottom: .5rem;
+.total, .description {
+  background-color: transparent;
+  font-size: 22px;
+  font-weight: 600;
+  padding-top: .5rem;
+  border-bottom: none;
+}
 
+.oweAmounts, .service {
+ border-bottom: none;
+}
+
+.service, .description {
+  margin: 0rem;
+}
+
+.paid, .notPaid {
+ padding: 0.5rem;
   color: white;
-  width: 300px;
- 
-  background-color: var(--primaryBlue);
+  font-weight: bold;
+ text-align: center;
+ margin-bottom: 1rem;
+  background-color: rgb(74, 87, 89);
 }
 
 .notPaid {
-
-  color: white;
   background-color: var(--accentGold);
-  width: 300px;
 }
 
-.service {
-    background-color: #b5e6e1;
-    padding: .5rem;
-    font-size: 20px;
+.serviceContainer {
+  border-bottom: 1px solid rgb(187, 192, 196);
+  margin: 0rem 1rem 0rem 1rem;
+  padding-bottom: 1rem;
 }
 
   @media (max-width: 768px) {

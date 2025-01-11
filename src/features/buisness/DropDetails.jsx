@@ -26,10 +26,13 @@ export default function Drop() {
     <article className="pageSetup">
       <h1 className={styles.header}>Drop Details.</h1>
       <div className={styles.dropSection}>
-        <p className={styles.date}>
-          {new Date(drop.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
-        </p>
         <div className={styles.dropDetails}>
+          <p className={styles.date}>
+            {new Date(drop.date).toLocaleDateString("en-US", {
+              timeZone: "UTC",
+            })}
+            :
+          </p>
           <p className={styles.total}>Total: ${drop.total}</p>
           {drop.memberOwes !== 0 && (
             <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
@@ -45,27 +48,31 @@ export default function Drop() {
             }`}
           >
             {drop.paid && drop.paidDrop?.paidDate
-              ? `*PAID* on ${new Date(
-                  drop.paidDrop.paidDate
-                ).toLocaleDateString("en-US", { timeZone: "UTC" })}`
+              ? `Paid on ${new Date(drop.paidDrop.paidDate).toLocaleDateString(
+                  "en-US",
+                  { timeZone: "UTC" }
+                )}`
               : "*NOT PAID*"}
           </p>
         </div>
-
-        <h2 className={styles.subHeadersNotice}>Services:</h2>
-        {drop.service.map((service) => (
-          <section className={styles.serviceSection}>
-            <h3 className={styles.description}>{service.description}</h3>
-            <div className={styles.service} key={service.id}>
-              {service.cash !== 0 && <p>Cash: ${service.cash}</p>}
-              {service.credit !== 0 && <p>Credit: ${service.credit}</p>}
-              {service.deposit !== 0 && <p>Deposit: ${service.deposit}</p>}
-              {service.giftCertAmount !== 0 && (
-                <p>Gift Certificate: ${service.giftCertAmount}</p>
-              )}
-            </div>
-          </section>
-        ))}
+        <div className={styles.dropDetails}>
+          <h2 className={styles.subHeadersNotice}>Services:</h2>
+          {drop.service.map((service) => (
+            <section className={styles.serviceSection}>
+              <h3 className={styles.description}>- {service.description}</h3>
+              <section className={styles.serviceContainer}>
+                <div className={styles.service} key={service.id}>
+                  {service.cash !== 0 && <p>Cash: ${service.cash}</p>}
+                  {service.credit !== 0 && <p>Credit: ${service.credit}</p>}
+                  {service.deposit !== 0 && <p>Deposit: ${service.deposit}</p>}
+                  {service.giftCertAmount !== 0 && (
+                    <p>Gift Certificate: ${service.giftCertAmount}</p>
+                  )}
+                </div>
+              </section>
+            </section>
+          ))}
+        </div>
       </div>
     </article>
   );
