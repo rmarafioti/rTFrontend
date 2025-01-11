@@ -5,7 +5,7 @@ import {
 } from "../../../features/owner/ownerSlice";
 import { Link } from "react-router-dom";
 
-import styles from "../../../styling/dashboards.module.css";
+import styles from "../../../styling/owner/teammemberscard.module.css";
 
 export default function TeamMembersCard() {
   const [confirmPayment] = useOwnerPayDropsMutation();
@@ -87,7 +87,7 @@ export default function TeamMembersCard() {
                 const payAmount = member.totalOwe > 0 ? 0 : unpaidTotal;
 
                 return (
-                  <li key={member.id}>
+                  <li className={styles.unpaidSection} key={member.id}>
                     <p className={styles.teamMemberName}>
                       {member.memberName} :
                     </p>
@@ -111,7 +111,7 @@ export default function TeamMembersCard() {
                     )}
                     {payAmount !== 0 && (
                       <p className={styles.totals}>
-                        Balance to Pay: ${payAmount}
+                        Total Balance to Pay: ${payAmount}
                       </p>
                     )}
                     {/* Only show payment options and button if the 'Pay' is greater than 0 or not all paid*/}
@@ -145,7 +145,9 @@ export default function TeamMembersCard() {
             </div>
           ))
         ) : (
-          <p>No unpaid services at this time.</p>
+          <p className={styles.noServicesMessage}>
+            *No unpaid services at this time*
+          </p>
         )
       ) : (
         <p>No businesses found.</p>

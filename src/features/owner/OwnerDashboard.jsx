@@ -3,7 +3,7 @@ import NotificationsCard from "../../components/owner/ownerDashboard/Notificatio
 import { useGetOwnerQuery } from "./ownerSlice";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/dashboards.module.css";
+import styles from "../../styling/owner/ownerdashboard.module.css";
 
 export default function OwnerDashboard() {
   const { data: owner, error, isLoading } = useGetOwnerQuery();
@@ -16,12 +16,14 @@ export default function OwnerDashboard() {
       <section className={styles.takeHomeTotalSection}>
         <h1 className={styles.header}>Welcome, {owner?.ownerName}</h1>
         <p className={styles.takeHomeKey}>
-          {owner?.ownerBusiness?.[0]?.businessName}'s Take Home Total :{" "}
+          {owner?.ownerBusiness?.[0]?.businessName}'s Total :{" "}
         </p>
         <p className={styles.takeHomeValue}>${owner?.takeHomeTotal}</p>
       </section>
-      <TeamMembersCard />
-      <NotificationsCard />
+      <section className={styles.dashboardSections}>
+        <TeamMembersCard />
+        <NotificationsCard />
+      </section>
     </article>
   );
 }

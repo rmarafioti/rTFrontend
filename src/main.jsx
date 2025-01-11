@@ -10,7 +10,7 @@ import Home from "./layout/Home";
 import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
 //business features
-import Drop from "./features/buisness/Drop";
+import DropDetails from "./features/buisness/DropDetails";
 import Archive from "./features/buisness/Archive";
 import ArchiveMonth from "./features/buisness/ArchiveMonth";
 //owner features
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       { path: "/membercreatedrop/", element: <MemberCreateDrop /> },
 
       { path: "/membernotifications/", element: <MemberNotifications /> },
-      { path: "/drop/:dropId", element: <Drop /> },
+      { path: "/drop/:dropId", element: <DropDetails /> },
       { path: "/archive/:memberId", element: <Archive /> },
       {
         path: "archivemonth/:memberId/:year/:month",

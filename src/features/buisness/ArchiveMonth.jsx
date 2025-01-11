@@ -9,7 +9,7 @@ import { useGetMemberDropsQuery } from "../owner/ownerSlice";
 import { useGetAllDropsQuery } from "../members/membersSlice";
 import Pagination from "../../components/Pagination";
 
-import styles from "../../styling/droparchives.module.css";
+import styles from "../../styling/business/archivemonth.module.css";
 
 dayjs.extend(utc);
 
@@ -88,7 +88,7 @@ export default function ArchiveMonth() {
       ) : (
         <p>No drops found for this month</p>
       )}
-      {filteredDrops.length < 5 ? (
+      {filteredDrops.length <= 5 ? (
         " "
       ) : (
         <Pagination

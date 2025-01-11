@@ -1,0 +1,124 @@
+.header {
+    color: var(--accentGold);
+    font-size: 72px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px black;
+    text-shadow: -5px 5px 0px black;
+  }
+
+  .takeHome {
+    font-size: 38px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .memberProfileSection {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .memberCard {
+    display: flex;
+    flex-direction: column;
+  margin: 1rem;
+  padding-bottom: 2rem;
+    width: 460px;
+    border: 1px solid rgb(187, 192, 196);
+    background-color:  #e8f2ea;
+  }
+
+  .percent {
+    color: var(--primaryBlue);
+    font-size: 24px;
+    font-weight: 600;
+    padding: 1rem;
+    padding-left: 0rem;
+    margin: 0rem 1rem 0rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgb(187, 192, 196);
+  }
+  
+  .item {
+    border-bottom: 1px solid rgb(187, 192, 196);
+    border-left: 1px solid rgb(187, 192, 196);
+    padding: .5rem;
+    align-self: flex-start;
+    width: 100%;
+  }
+  
+  #itemKey {
+    background-color: #b5e6e1;
+  }
+  
+  .archiveLink {
+    color: rgb(36, 37, 38);
+    background-color:var(--white);
+    border: 2px solid rgb(187, 192, 196);
+    font-size: 18px;
+    padding: 0.2rem;
+    margin-top: 1rem;
+    margin: 1rem;
+    width: 90%;
+    align-self: flex-start;
+  text-align: center;
+  
+    transition: border-color 0.25s;
+    align-self: center;
+  }
+  
+  .linkName {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  .archiveLink:hover {
+    border: 2px solid rgb(36, 37, 38);
+  }
+  
+  .subHeader {
+    font-size: 20px;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    text-align: left;
+    font-weight: 500;
+  }
+  
+  .updatePercent {
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 1rem 0rem 1rem;
+  
+  }
+  
+  .select {
+    border: 1px solid var(--black);
+    font-size: 18px;
+    margin: .5rem 0rem 1rem 0rem;
+    padding: .5rem;
+  }
+  
+  .percentButton {
+    align-self: center;
+    color: rgb(36, 37, 38);
+    padding: .2rem;
+   width: 100%;
+    border: 2px solid rgb(187, 192, 196);
+  }
+  
+  @media (max-width: 768px) {
+    .memberProfileSection {
+      flex-direction: column;
+      width: 100%
+    }
+    .memberCard {
+      width: 90%;
+    }
+    .header {
+      font-size: 44px;
+    }
+    .takeHome {
+      font-size: 24px;
+    }
+  }
+  

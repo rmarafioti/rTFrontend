@@ -8,7 +8,7 @@ import { selectOwnerToken } from "../auth/authOwnerSlice";
 import { useGetDropsByMemberIdQuery } from "./businessSlice"; // For owners
 import { useGetAllDropsQuery } from "../members/membersSlice"; // For logged-in members
 
-import styles from "../../styling/droparchives.module.css";
+import styles from "../../styling/business/archive.module.css";
 
 dayjs.extend(utc);
 
@@ -81,15 +81,16 @@ export default function Archive() {
           <div key={year}>
             <ul className={styles.months}>
               {Object.entries(months).map(([month, { monthName }]) => (
-                <li key={month} className={styles.month}>
-                  <Link
-                    to={`/archivemonth/${
-                      memberId || memberToken.id
-                    }/${year}/${month}`}
-                  >
+                <Link
+                  className={styles.linkName}
+                  to={`/archivemonth/${
+                    memberId || memberToken.id
+                  }/${year}/${month}`}
+                >
+                  <li key={month} className={styles.link}>
                     {monthName} {year}
-                  </Link>
-                </li>
+                  </li>
+                </Link>
               ))}
             </ul>
           </div>

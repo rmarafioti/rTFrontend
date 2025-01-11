@@ -74,13 +74,13 @@ button:focus-visible {
 }
 
 @media (max-width: 768px) {
-  .button {
+  .button, .layout {
     width: 100%;
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    background-color: rgb(243, 230, 219);
+    background-color: #d7f4db;
   }
 }
