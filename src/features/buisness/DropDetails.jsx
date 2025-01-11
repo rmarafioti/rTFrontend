@@ -25,14 +25,14 @@ export default function Drop() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Drop Details.</h1>
+      <p className={styles.date}>
+        {new Date(drop.date).toLocaleDateString("en-US", {
+          timeZone: "UTC",
+        })}
+        :
+      </p>
       <div className={styles.dropSection}>
         <div className={styles.dropDetails}>
-          <p className={styles.date}>
-            {new Date(drop.date).toLocaleDateString("en-US", {
-              timeZone: "UTC",
-            })}
-            :
-          </p>
           <p className={styles.total}>Total: ${drop.total}</p>
           {drop.memberOwes !== 0 && (
             <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
@@ -56,7 +56,7 @@ export default function Drop() {
           </p>
         </div>
         <div className={styles.dropDetails}>
-          <h2 className={styles.subHeadersNotice}>Services:</h2>
+          <p className={styles.subHeadersNotice}>Services:</p>
           {drop.service.map((service) => (
             <section className={styles.serviceSection}>
               <h3 className={styles.description}>- {service.description}</h3>

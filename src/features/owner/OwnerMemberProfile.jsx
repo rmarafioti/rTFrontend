@@ -47,43 +47,37 @@ export default function OwnerMemberProfile() {
 
   return (
     <article className="pageSetup">
-      <h1 className={styles.header}>Member Profile</h1>
-      <section className={styles.memberCard} key={member.id}>
-        <div className={styles.memberItem}>
-          <p className={styles.item}>Name:</p>
-          <p className={styles.item}> {member.memberName}</p>
-        </div>
-
-        <div className={styles.memberItem}>
-          <p className={styles.item}>Percentage:</p>
-          <p className={styles.item}>{member.percentage}</p>
-        </div>
-        <p className={styles.takeHome}>
-          Take Home Total: {member.takeHomeTotal}
-        </p>
-      </section>
-
-      <Link className={styles.archiveLink} to={`/archive/${memberId}`}>
-        <p className={styles.linkName}>Archive</p>
-      </Link>
-
-      <h2 className={styles.subHeader}>Update Member Percentage</h2>
-      <section className={styles.updatePercent}>
-        <select
-          className={styles.select}
-          value={percentageValue}
-          onChange={(e) => setPercentageValue(+e.target.value)}
-        >
-          <option value="">Select Percentage</option>
-          {percentageValues.map((value) => (
-            <option key={value} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-        <button className={styles.percentButton} onClick={handlePercentage}>
-          Update Percentage
-        </button>
+      <h1 className={styles.header}> {member.memberName}</h1>
+      <p className={styles.takeHome}>Take Home Total: {member.takeHomeTotal}</p>
+      <section className={styles.memberProfileSection}>
+        <section className={styles.memberCard} key={member.id}>
+          <p className={styles.percent}>
+            Current Percentage: {member.percentage}
+          </p>
+          <h2 className={styles.subHeader}>Update Member Percentage</h2>
+          <section className={styles.updatePercent}>
+            <select
+              className={styles.select}
+              value={percentageValue}
+              onChange={(e) => setPercentageValue(+e.target.value)}
+            >
+              <option value="">Select Percentage</option>
+              {percentageValues.map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+            <button className={styles.percentButton} onClick={handlePercentage}>
+              Update Percentage
+            </button>
+          </section>
+        </section>
+        <section className={styles.memberCard}>
+          <Link className={styles.archiveLink} to={`/archive/${memberId}`}>
+            <p className={styles.linkName}>Archive</p>
+          </Link>
+        </section>
       </section>
     </article>
   );

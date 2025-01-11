@@ -16,13 +16,15 @@
 .dropDetails {
   margin: 1rem;
   flex-direction: column;
+ 
   display: flex;
-    width: 460px;
-    background-color:  #e8f2ea;
-    border: 1px solid rgb(187, 192, 196);
-  }
+  width: 460px;
+  background-color: #e8f2ea;
+  border: 1px solid rgb(187, 192, 196);
+}
 
-.date, .subHeadersNotice {
+
+.total, .subHeadersNotice {
   color: var(--primaryBlue);
   padding: 1rem 0rem 1rem 0rem;
   font-size: 22px;
@@ -32,13 +34,26 @@
   border-bottom: 1px solid rgb(187, 192, 196);
 }
 
-.serviceSection {
-  /*border-bottom: 1px solid rgb(187, 192, 196);*/
-  width: 460px;
+.total {
+  margin-bottom: 1rem;
 }
 
- .description, .total, .oweAmounts, .service {
-  color:  var(--black);
+.date {
+  color: var(--black);
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.serviceSection {
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.description,
+/*.total,*/
+.oweAmounts,
+.service {
+  color: var(--black);
   font-size: 20px;
   font-weight: normal;
   text-align: left;
@@ -49,28 +64,37 @@
   border-bottom: 1px solid rgb(187, 192, 196);
 }
 
-.total, .description {
+/*.total,*/
+.description {
   background-color: transparent;
   font-size: 22px;
   font-weight: 600;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   border-bottom: none;
 }
 
-.oweAmounts, .service {
- border-bottom: none;
+.oweAmounts,
+.service {
+  border-bottom: none;
 }
 
-.service, .description {
+
+.service {
   margin: 0rem;
 }
 
-.paid, .notPaid {
- padding: 0.5rem;
+.service,
+.description {
+  margin: 0rem;
+}
+
+.paid,
+.notPaid {
+  padding: 0.5rem;
   color: white;
   font-weight: bold;
- text-align: center;
- margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
   background-color: rgb(74, 87, 89);
 }
 
@@ -80,18 +104,30 @@
 
 .serviceContainer {
   border-bottom: 1px solid rgb(187, 192, 196);
-  margin: 0rem 1rem 0rem 1rem;
+
   padding-bottom: 1rem;
 }
 
-  @media (max-width: 768px) {
-    .headerSection, .serviceSection, .dropDetails {
-      width: 100%
-    }
-    .header {
-      font-size: 50px;
-    }
-    .subHeadersNotice, .date {
-      font-size: 30px;
-    }
+@media (max-width: 768px) {
+  .headerSection,
+  .serviceSection,
+  .dropDetails, .serviceSection {
+    width: 100%;
   }
+  .dropSection {
+    flex-direction: column;
+    width: 100%;
+  }
+  .dropDetails, .serviceSection {
+    width: 90%;
+  }
+  .serviceSection {
+    margin-bottom: 2rem;
+  }
+  .header {
+    font-size: 50px;
+  }
+  .subHeadersNotice {
+    font-size: 24px;
+  }
+}
