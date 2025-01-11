@@ -26,6 +26,8 @@
   font-size: 18px;
   font-weight: 600;
   padding: 0.5rem;
+  color: var(--white);
+  background-color: rgb(74, 87, 89);
   text-align: center;
 }
 
@@ -57,11 +59,11 @@
 }
 
 .paymentConfirm {
-  color: var(--white);
-  font-weight: bold;
+  color: var(--black);
+  font-weight: 600;
   text-align: center;
   background-color: var(--secondaryTurquoise);
-  background-color: rgb(74, 87, 89);
+  /*background-color: rgb(74, 87, 89);*/
   padding: 0.5rem;
   margin: 0;
 }
