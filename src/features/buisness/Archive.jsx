@@ -12,6 +12,7 @@ import styles from "../../styling/business/archive.module.css";
 
 dayjs.extend(utc);
 
+//delete owner functionality from this file
 export default function Archive() {
   const { memberId } = useParams();
 

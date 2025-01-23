@@ -74,7 +74,7 @@ export default function OwnerMemberProfile() {
           </section>
         </section>
         <section className={styles.memberCard}>
-          <Link className={styles.archiveLink} to={`/archive/${memberId}`}>
+          <Link className={styles.archiveLink} to={"/ownermembersarchives"}>
             <p className={styles.linkName}>Archive</p>
           </Link>
         </section>
