@@ -11,35 +11,72 @@
     margin-bottom: 2rem;
   }
 
+  .monthTotal, .memberTotal, .businessTotal {
+    background-color: rgb(74, 87, 89);
+    color: var(--white);
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    margin-top: 2rem;
+    border: 1px solid rgb(187, 192, 196);
+    border-bottom: none;
+    width: 800px;
+  }
+
+  .memberTotal, .businessTotal {
+    background-color:var(--white);
+    color: var(--primaryBlue);
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 0rem;
+  }
+
   .drops {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
     list-style-type: none;
+    max-height: 450px;
+    width: 800px;
+    flex-wrap: wrap;
+  
+    padding: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color:  #b5e6e1;
+    border: 1px solid rgb(187, 192, 196);
   }
 
   .date {
     color: rgb(36, 37, 38);
+    background-color: #e8f2ea;
+    border: 1px solid transparent;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    border-bottom: 1px solid rgb(187, 192, 196);
+   
+  }
+  .date:hover {
+    /*background-color: var(--secondaryTurquoise);*/
+    border: 1px solid rgb(36, 37, 38);
   }
 
   .link {
     border: 1px solid transparent;
-    margin: 1rem;
     padding: 0.6em 1.2em;
     font-size: 1em;
     font-weight: 500;
-    font-family: inherit;
-    background-color: #f9f9f9;
-    border-left: 2px solid rgb(187, 192, 196);
-    border-bottom: 2px solid rgb(187, 192, 196);
-    border-right: 2px solid transparent;
-    border-top: 2px solid transparent;
+    /*background-color: #f9f9f9;*/
+    /*border-left: 2px solid rgb(187, 192, 196);*/
+    /*border-bottom: 2px solid rgb(187, 192, 196);*/
+    /*border-right: 2px solid transparent;
+    border-top: 2px solid transparent;*/
     cursor: pointer;
     box-shadow: -5px 5px 0px 1px transparent;
     transition: border-color 0.25s;
     transition: box-shadow 0.25s;
     width: 300px;
-  }
-  .link:hover {
-    border: 2px solid rgb(36, 37, 38);
-    box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
   }
 
   @media (max-width: 768px) {

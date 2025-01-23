@@ -1,5 +1,3 @@
-
-
 .header {
   color: var(--accentGold);
   font-size: 70px;
@@ -22,42 +20,67 @@
   padding: 1rem 0rem 2rem 0rem;
   /*background-color: #e8f2ea;*/
   /*border: 1px solid rgb(187, 192, 196);*/
-  width: 1000px
+  width: 1000px;
 }
 
 .memberCard {
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background-color: #e8f2ea;
+  border: 1px solid rgb(187, 192, 196);
   margin: 1rem;
   width: 300px;
   min-height: 300px;
 }
 
-.linkName {
-  color: var(--black);
+.memberName {
+  background-color: var(--white);
+  color: var(--primaryBlue);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-bottom: 1px solid rgb(187, 192, 196);
+  width: 100%;
 }
 
-.link {
+.monthsContainer {
+  display: flex;
+  width: 100%;
+}
+
+.months {
+  width: 100%;
+}
+
+.linkName {
+  color: var(--black);
+  border-bottom: 1px solid rgb(187, 192, 196);
+}
+
+.link, .noDrops {
   border: 1px solid transparent;
   /*margin: 1rem;*/
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 16px;
   font-weight: 500;
   font-family: inherit;
   list-style-type: none;
-  background-color: var(--white);
- 
-  border: 1px solid rgb(187, 192, 196);
- 
+
+  border-bottom: 1px solid rgb(187, 192, 196);
+
   cursor: pointer;
   box-shadow: -5px 5px 0px 1px transparent;
   transition: border-color 0.25s;
   transition: background-color 0.25s;
-
-  width: 300px;
 }
 .link:hover {
   background-color: #b5e6e1;
   border: 1px solid rgb(36, 37, 38);
+}
+
+.noDrops {
+  border-bottom: none;
 }
 
 @media (max-width: 768px) {

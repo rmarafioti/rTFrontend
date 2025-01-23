@@ -46,10 +46,12 @@ export default function OwnerMembersArchives() {
         <ul className={styles.drops}>
           {membersWithDrops.map(({ member, dropsByYearAndMonth }) => (
             <li key={member?.id || "unknown"} className={styles.memberCard}>
-              <h2>{member?.memberName || "Unknown Member"}</h2>
+              <h2 className={styles.memberName}>
+                {member?.memberName || "Unknown Member"}
+              </h2>
               {Object.keys(dropsByYearAndMonth).length > 0 ? (
                 Object.entries(dropsByYearAndMonth).map(([year, months]) => (
-                  <div key={year}>
+                  <div className={styles.monthsContainer} key={year}>
                     <ul className={styles.months}>
                       {Object.entries(months).map(
                         ([monthNumber, { monthName }]) => (
@@ -70,7 +72,7 @@ export default function OwnerMembersArchives() {
                   </div>
                 ))
               ) : (
-                <p>No drops found</p>
+                <p className={styles.noDrops}>No drops found</p>
               )}
             </li>
           ))}
