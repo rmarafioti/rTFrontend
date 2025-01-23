@@ -50,7 +50,7 @@ export default function Archive() {
   const drops =
     role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
-  // Fetch the team mebers name in the owner is logged in
+  // Fetch the team mebers name if the owner is logged in
   const memberName = memberId
     ? memberDropsData?.memberDetails?.memberName || "Unknown Member"
     : "";

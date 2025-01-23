@@ -19,10 +19,17 @@
   justify-content: space-evenly;
   list-style-type: none;
   flex-wrap: wrap;
-  padding: 2rem 0rem 2rem 0rem;
-  background-color: #e8f2ea;
-  border: 1px solid rgb(187, 192, 196);
-  width: 800px
+  padding: 1rem 0rem 2rem 0rem;
+  /*background-color: #e8f2ea;*/
+  /*border: 1px solid rgb(187, 192, 196);*/
+  width: 1000px
+}
+
+.memberCard {
+  background-color: red;
+  margin: 1rem;
+  width: 300px;
+  min-height: 300px;
 }
 
 .linkName {
@@ -31,11 +38,12 @@
 
 .link {
   border: 1px solid transparent;
-  margin: 1rem;
+  /*margin: 1rem;*/
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  list-style-type: none;
   background-color: var(--white);
  
   border: 1px solid rgb(187, 192, 196);
