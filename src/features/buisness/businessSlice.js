@@ -19,21 +19,7 @@ const businessApi = api.injectEndpoints({
       }),
       providesTags: ["Business"],
     }),
-
-    getDropsByMemberId: builder.query({
-      query: (memberId) => ({
-        url: `/business/memberdrops/${memberId}`,
-        method: "GET",
-      }),
-      providesTags: (result, error, memberId) => [
-        { type: "MemberDrops", id: memberId },
-      ],
-    }),
   }),
 });
 
-export const {
-  useGetBusinessQuery,
-  useGetDropsQuery,
-  useGetDropsByMemberIdQuery, // move this to owner slice
-} = businessApi;
+export const { useGetBusinessQuery, useGetDropsQuery } = businessApi;

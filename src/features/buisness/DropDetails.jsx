@@ -29,18 +29,25 @@ export default function Drop() {
         {new Date(drop.date).toLocaleDateString("en-US", {
           timeZone: "UTC",
         })}
-        :
       </p>
       <div className={styles.dropSection}>
         <div className={styles.dropDetails}>
           <p className={styles.total}>Total: ${drop.total}</p>
-          {drop.memberOwes !== 0 && (
-            <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
-          )}
-          {drop.businessOwes !== 0 && (
-            <p className={styles.oweAmounts}>
-              Owed to You: ${drop.businessOwes}
-            </p>
+          <p>Drop created by {drop.member.memberName}</p>
+          {role === "owner" ? (
+            <>
+              <p className={styles.oweAmounts}>You Owe: ${drop.businessOwes}</p>
+              <p className={styles.oweAmounts}>
+                Owed to You: ${drop.memberOwes}
+              </p>
+            </>
+          ) : (
+            <>
+              <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
+              <p className={styles.oweAmounts}>
+                Owed to You: ${drop.businessOwes}
+              </p>
+            </>
           )}
           <p
             className={`${styles.oweAmounts} ${
