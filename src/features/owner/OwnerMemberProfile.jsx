@@ -12,7 +12,7 @@ export default function OwnerMemberProfile() {
   const [updatePercentage] = useUpdatePercentageMutation();
   const [percentageValue, setPercentageValue] = useState("");
 
-  const percentageValues = [50, 55, 60, 65, 70, 75, 80, 85, 90, 100];
+  const percentageValues = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
