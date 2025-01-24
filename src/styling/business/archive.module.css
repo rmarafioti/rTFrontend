@@ -47,6 +47,13 @@
 .pageControls {
   margin: 2rem 0.5rem 0rem 0.5rem;
   width: 150px;
+  border: none;
+  box-shadow: none;
+}
+
+.pageControls:hover {
+  border: none;
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {
