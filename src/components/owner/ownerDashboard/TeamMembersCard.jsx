@@ -35,10 +35,20 @@ export default function TeamMembersCard() {
     const message = paidMessages[member.id] || "";
     const unpaidDrops = member.drop?.filter((drop) => !drop.paid);
     const dropIds = unpaidDrops.map((drop) => drop.id);
-    const amount = unpaidDrops.reduce(
-      (total, drop) => total + drop.memberCut,
+    // Sum of `businessOwes` for unpaid drops
+    const businessOwesSum = unpaidDrops.reduce(
+      (total, drop) => total + drop.businessOwes,
       0
     );
+
+    // Sum of `memberOwes` for unpaid drops
+    const memberOwesSum = unpaidDrops.reduce(
+      (total, drop) => total + drop.memberOwes,
+      0
+    );
+
+    // Calculate the final amount (memberCut minus total businessOwes)
+    const amount = businessOwesSum - memberOwesSum;
     try {
       await confirmPayment({
         payee: owner.ownerName,
@@ -77,14 +87,21 @@ export default function TeamMembersCard() {
                 if (!unpaidDrops || unpaidDrops.length === 0) {
                   return null;
                 }
-
-                // Calculate the total amount of unpaid drops
-                const unpaidTotal = unpaidDrops.reduce(
-                  (total, drop) => total + drop.memberCut,
+                // Calculate the total amount of unpaid drops for memberOwes
+                const unpaidTotalMemberOwes = unpaidDrops.reduce(
+                  (total, drop) => total + drop.memberOwes,
                   0
                 );
 
-                const payAmount = member.totalOwe > 0 ? 0 : unpaidTotal;
+                // Subtract the total of businessOwes from the result
+                const totalBusinessOwes = unpaidDrops.reduce(
+                  (total, drop) => total + drop.businessOwes,
+                  0
+                );
+
+                const unpaidTotal = totalBusinessOwes - unpaidTotalMemberOwes;
+
+                const payAmount = unpaidTotal;
 
                 return (
                   <li className={styles.unpaidSection} key={member.id}>
@@ -104,7 +121,9 @@ export default function TeamMembersCard() {
                         </Link>
                       ))}
                     </div>
-                    {member.totalOwe !== 0 && (
+                    {member.totalOwe < payAmount ? (
+                      ""
+                    ) : (
                       <p className={styles.totals}>
                         Team Member Owes: ${member.totalOwe}
                       </p>

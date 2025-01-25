@@ -34,7 +34,7 @@ export default function MemberNotifications() {
   return (
     <article className="pageSetup">
       <section className={styles.dashboardSectionNotifications}>
-        <h2 className={styles.subHeadersNotice}>Payments:</h2>
+        <h2 className={styles.subHeadersNotice}>Recent Payments:</h2>
         {currentNotifications?.length ? (
           currentNotifications.map((paidDrop) => (
             <div key={paidDrop.id} className={styles.noticeSection}>
@@ -79,10 +79,10 @@ export default function MemberNotifications() {
           <p>No payment notifications yet.</p>
         )}
         <div className={styles.paymentKey}>
-          <p>your payment:</p>
-          <p className={styles.payeeColor} id={styles.blue}></p>
           <p>owner payment:</p>
           <p className={styles.payeeColor} id={styles.yellow}></p>
+          <p>your payment:</p>
+          <p className={styles.payeeColor} id={styles.blue}></p>
         </div>
       </section>
       {paidDrops.length < 3 ? (

@@ -41,7 +41,6 @@ export default function MemberNotificationsCard() {
                   - Payment of ${paidDrop.amount} from {paidDrop.payee}
                 </p>
               </div>
-              {/*<p>From {paidDrop.payee}</p>*/}
               <p>
                 Method of Payment:{" "}
                 {paidDrop.paidMessage || "*No method provided*"}
@@ -69,9 +68,9 @@ export default function MemberNotificationsCard() {
       )}
       <div className={styles.paymentKey}>
         <p>owner payment:</p>
-        <p className={styles.payeeColor} id={styles.blue}></p>
-        <p>your payment:</p>
         <p className={styles.payeeColor} id={styles.yellow}></p>
+        <p>your payment:</p>
+        <p className={styles.payeeColor} id={styles.blue}></p>
       </div>
     </section>
   );
