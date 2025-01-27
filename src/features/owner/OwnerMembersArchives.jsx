@@ -42,7 +42,6 @@ export default function OwnerMembersArchives() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Drop Archives:</h1>
-
       <ul className={styles.drops}>
         {membersWithDrops.map(({ member, dropsByYearAndMonth }) => (
           <li key={member?.id || "unknown"} className={styles.memberCard}>

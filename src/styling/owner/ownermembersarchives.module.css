@@ -97,7 +97,8 @@
     width: 100%;
   }
   .memberCard {
-    margin-top: 0rem;
-    width: 90%;
+    margin: 0rem;
+    margin-bottom: 1rem;
+    width: 100%;
   }
 }
