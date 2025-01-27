@@ -78,12 +78,10 @@ export default function MemberNotifications() {
         ) : (
           <p>No payment notifications yet.</p>
         )}
-        <div className={styles.paymentKey}>
-          <p>owner payment:</p>
-          <p className={styles.payeeColor} id={styles.yellow}></p>
-          <p>your payment:</p>
-          <p className={styles.payeeColor} id={styles.blue}></p>
-        </div>
+        <p className={styles.paymentName}>owner payment:</p>
+        <p className={styles.payeeColor} id={styles.yellow}></p>
+        <p>your payment:</p>
+        <p className={styles.payeeColor} id={styles.blue}></p>
       </section>
       {paidDrops.length < 3 ? (
         " "

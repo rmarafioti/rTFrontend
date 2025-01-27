@@ -7,7 +7,10 @@ import {
   selectMemberToken,
 } from "../features/auth/authMemberSlice";
 import { useGetOwnerQuery } from "../features/owner/ownerSlice";
-import { useGetMemberQuery } from "../features/members/membersSlice";
+import {
+  useGetMemberQuery,
+  useMemberCreateDropMutation,
+} from "../features/members/membersSlice";
 
 import styles from "../styling/layout.module.css";
 
@@ -56,11 +59,27 @@ export default function Navbar() {
   const { data: member } = useGetMemberQuery(undefined, {
     skip: !memberToken, // Skip the query if memberToken is not present
   });
+  const [createDrop] = useMemberCreateDropMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const memberId = member?.id;
+
+  const dropCreateSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newDrop = await createDrop().unwrap();
+
+      if (newDrop?.id) {
+        navigate("/membercreatedrop", { state: { dropId: newDrop.id } });
+      } else {
+        console.error("Failed to create drop: Missing drop ID");
+      }
+    } catch (err) {
+      console.error("Failed to create drop:", err);
+    }
+  };
 
   // Mobile menu for member
   function MenuMember() {
@@ -227,10 +246,17 @@ export default function Navbar() {
                   Account
                   <ul className={styles.subCategory}>
                     <li className={styles.subItem} id={styles.firstListItem}>
-                      business: {member?.business?.businessName}
+                      Business: {member?.business?.businessName}
                     </li>
                     <li className={styles.subItem}>
-                      total: {member?.takeHomeTotal}
+                      Total Profits: {member?.takeHomeTotal}
+                    </li>
+                    <li
+                      className={styles.subItem}
+                      id={styles.createDrop}
+                      onClick={dropCreateSubmit}
+                    >
+                      Create A Drop
                     </li>
                     <li
                       className={styles.subItem}

@@ -64,5 +64,8 @@
       .header {
         font-size: 44px;
       }
+      .createDrop {
+        width: 90%;
+      }
   }
 

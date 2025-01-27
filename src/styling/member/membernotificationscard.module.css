@@ -28,8 +28,9 @@
     font-size: 18px;
     font-weight: 600;
     padding: 0.5rem;
-    color: var(--white);
-    background-color: rgb(74, 87, 89);
+    color: var(--black);
+    background-color: var(--secondaryTurquoise);
+    border-bottom: 1px solid rgb(74, 87, 89);
     text-align: center;
   }
 
@@ -60,16 +61,25 @@
   
   .paymentKey {
     display: flex;
-    justify-content: center;
-    align-items: center;;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
   }
+
+  .paymentName {
+    margin-right: 2rem;
+  }
+
+ 
   
   .blue, #blue {
     background-color: blue;
+    border: 1px solid var(--black);
   }
   
   .yellow, #yellow {
     background-color: yellow;
+    border: 1px solid var(--black);
   }
 
   .link {
@@ -85,4 +95,13 @@
 
   .link:hover {
     border: 1px solid var(--black);
+  }
+
+  @media (max-width: 1227px) {
+    .dashboardSectionNotifications {
+      width: 100%;
+    }
+    .link {
+      width: 100%;
+    }
   }
