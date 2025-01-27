@@ -14,6 +14,8 @@
   }
 
   .totalSection {
+    display: flex;
+    justify-content: center;
     background-color: #e8f2ea;
     border: 1px solid rgb(187, 192, 196);
     border-bottom: none;
@@ -32,12 +34,15 @@
     display: flex;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1227px) {
     .dashboardSections {
       flex-direction: column;
     }
-    .takeHomeTotalSection, .takeHomeKey, .takeHomeValue, .dashboardSections {
+    .takeHomeTotalSection, .takeHomeKey, .takeHomeValue, .dashboardSections, .totalSection {
       width: 100%;
+    }
+    .takeHome {
+      font-size: 24px;
     }
     .header {
       font-size: 44px;

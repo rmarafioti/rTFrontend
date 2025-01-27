@@ -1,92 +1,99 @@
 .header {
-    color: var(--accentGold);
-    font-size: 70px;
-    font-weight: bold;
-    line-height: 30px;
+  color: var(--accentGold);
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 30px;
+  z-index: 11;
+
+  -webkit-text-stroke: 2px black;
+  text-shadow: -5px 5px 0px black;
+  margin: 2rem 0rem 2rem 0rem;
+}
+
+.monthSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #e8f2ea;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  border: 1px solid rgb(187, 192, 196);
+  width: 800px;
+}
+
+.monthTotal,
+.memberTotal,
+.businessTotal {
+  background-color: #e8f2ea;
+  color: var(--primaryBlue);
+  text-align: left;
+  font-size: 28px;
+  font-weight: 600;
+  padding: 1rem;
+
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.memberTotal,
+.businessTotal {
+  background-color: var(--secondaryTurquoise);
+  color: var(--black);
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0rem 1rem 0rem 1rem;
+  border-bottom: 1px solid rgb(74, 87, 89);
+}
+
+.drops {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  text-align: left;
+  list-style-type: none;
+  max-height: 450px;
+  width: 100%;
+  flex-wrap: wrap;
+
+  padding: 0rem 1rem 0rem 1rem;
+  background-color: #e8f2ea;
+}
+
+.date {
+  color: rgb(36, 37, 38);
+  background-color: #b5e6e1;
+  border: 1px solid rgb(187, 192, 196);
+}
+.date:hover {
+  border: 1px solid rgb(36, 37, 38);
+}
+
+.link {
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: -5px 5px 0px 1px transparent;
+  transition: border-color 0.25s;
+  transition: box-shadow 0.25s;
+  width: 300px;
+}
+
+@media (max-width: 1227px) {
+  .header {
+    font-size: 50px;
+    line-height: 55px;
     z-index: 11;
-  
-    -webkit-text-stroke: 2px black;
-    text-shadow: -5px 5px 0px black;
-    margin: 2rem 0rem 2rem 0rem
-  }
 
-  .monthSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #e8f2ea;
-    margin-top: 2rem;
-    padding-bottom: 2rem;
-    border: 1px solid rgb(187, 192, 196);
-    width: 800px;
-  }
-
-  .monthTotal, .memberTotal, .businessTotal {
-    background-color:  #e8f2ea;
-    color: var(--primaryBlue);
-    text-align: left;
-    font-size: 28px;
-    font-weight: 600;
-    padding: 1rem;
-  
-    margin: 0rem 1rem 0rem 1rem;
-  }
-
-  .memberTotal, .businessTotal {
-    background-color: var(--secondaryTurquoise);
-    color: var(--black);
-    font-size: 20px;
-    font-weight: 500;
-    margin: 0rem 1rem 0rem 1rem;
-    border-bottom: 1px solid rgb(74, 87, 89);
-  }
-
-  .drops {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-    text-align: left;
-    list-style-type: none;
-    max-height: 450px;
+    margin-top: 0rem;
     width: 100%;
-    flex-wrap: wrap;
-  
-    padding: 0rem 1rem 0rem 1rem;
-    background-color:  #e8f2ea;
   }
-
-  .date {
-    color: rgb(36, 37, 38);
-    background-color: #b5e6e1;
-    border: 1px solid rgb(187, 192, 196);
-    border-bottom: 1px solid rgb(187, 192, 196);
-   
+  .monthSection {
+    margin-top: 0rem;
+    width: 100%;
   }
-  .date:hover {
-    border: 1px solid rgb(36, 37, 38);
+  .drops {
+    max-height: none;
   }
-
-  .link {
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: -5px 5px 0px 1px transparent;
-    transition: border-color 0.25s;
-    transition: box-shadow 0.25s;
-    width: 300px;
-  }
-
-  @media (max-width: 768px) {
-    .header {
-      font-size: 50px;
-      line-height: 55px;
-      z-index: 11;
-  
-      margin-top: 0rem;
-      width: 100%;
-    }
-  }
-
+}

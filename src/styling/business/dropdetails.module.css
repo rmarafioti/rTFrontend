@@ -11,8 +11,7 @@
   background-color: #e8f2ea;
   border: 1px solid rgb(187, 192, 196);
   border-bottom: none;
-
-width: 920px;
+  width: 920px;
 }
 
 .date {
@@ -33,7 +32,6 @@ width: 920px;
 .dropDetails {
   margin: 0rem;
   flex-direction: column;
- 
   display: flex;
   width: 460px;
   background-color: #e8f2ea;
@@ -45,8 +43,8 @@ width: 920px;
   border-right: none;
 }
 
-
-.total, .subHeadersNotice {
+.total,
+.subHeadersNotice {
   color: var(--primaryBlue);
   padding: 1rem 0rem 1rem 0rem;
   font-size: 22px;
@@ -69,13 +67,11 @@ width: 920px;
   font-weight: normal;
   text-align: left;
   background-color: #b5e6e1;
-  padding: 0.5rem;
-  padding-left: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   margin: 0rem 1rem 0rem 1rem;
   border-bottom: 1px solid rgb(187, 192, 196);
 }
 
-/*.total,*/
 .description {
   background-color: transparent;
   font-size: 22px;
@@ -107,23 +103,24 @@ width: 920px;
   background-color: var(--accentGold);
 }
 
-/*.serviceContainer {
-  border-bottom: 1px solid rgb(187, 192, 196);
-
-  padding-bottom: 1rem;
-}*/
-
-@media (max-width: 768px) {
+@media (max-width: 1227px) {
   .headerSection,
   .serviceSection,
-  .dropDetails, .serviceSection {
+  .dropDetails,
+  .serviceSection,
+  .dropSection,
+  .dateSection,
+  #serviceDetails {
     width: 100%;
   }
   .dropSection {
     flex-direction: column;
     width: 100%;
   }
-  .dropDetails, .serviceSection {
+  #serviceDetails {
+    border-right: 1px solid rgb(187, 192, 196);
+  }
+  .serviceSection {
     width: 90%;
   }
   .serviceSection {

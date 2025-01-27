@@ -13,15 +13,14 @@ export default function OwnerDashboard() {
 
   return (
     <article className="pageSetup">
-      <section className={styles.takeHomeTotalSection}>
-        <h1 className={styles.header}>Welcome, {owner?.ownerName}</h1>
-        <section className={styles.totalSection}>
-          <p className={styles.takeHome}>
-            {owner?.ownerBusiness?.[0]?.businessName}'s Total : $
-            {owner?.takeHomeTotal}
-          </p>
-        </section>
+      <h1 className={styles.header}>Welcome, {owner?.ownerName}</h1>
+      <section className={styles.totalSection}>
+        <p className={styles.takeHome}>
+          {owner?.ownerBusiness?.[0]?.businessName}'s Total : $
+          {owner?.takeHomeTotal}
+        </p>
       </section>
+
       <section className={styles.dashboardSections}>
         <TeamMembersCard />
         <NotificationsCard />
