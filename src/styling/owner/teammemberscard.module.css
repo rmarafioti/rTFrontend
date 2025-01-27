@@ -102,14 +102,16 @@ text-align: center;
   font-weight: normal;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1227px) {
   .subHeaders,
   .noServicesMessage,
   .memberDrops {
     width: 100%;
   }
   .dashboardSection {
-    width: 90%;
+    width: 100%;
+    margin-bottom: 0rem;
+    border-right: 1px solid rgb(187, 192, 196);
   }
   .memberDrop {
     width: 90%;
