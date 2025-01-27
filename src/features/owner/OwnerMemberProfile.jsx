@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
@@ -5,6 +7,8 @@ import { useGetOwnerQuery } from "./ownerSlice";
 import { useUpdatePercentageMutation } from "./ownerSlice";
 
 import styles from "../../styling/owner/ownermemberprofile.module.css";
+
+dayjs.extend(utc);
 
 export default function OwnerMemberProfile() {
   const { memberId } = useParams();
@@ -27,9 +31,37 @@ export default function OwnerMemberProfile() {
     return <p>Member not found</p>;
   }
 
+  // Ensure member.drops is an array
+  const drops = member?.drop || [];
+
+  // Map through owner businesses and members to group drops by year and month
+  const dropsByYearAndMonth = drops.reduce((acc, drop) => {
+    const dropDate = dayjs(drop.date).utc();
+    const year = dropDate.year();
+    const month = dropDate.month() + 1;
+    const monthName = dropDate.format("MMMM");
+
+    // Ensure memberCut is a valid number
+    const memberCut = Number(drop.memberCut) || 0;
+
+    if (!acc[year]) acc[year] = {};
+    if (!acc[year][month]) {
+      acc[year][month] = { monthName, month, drops: [], totalMemberCut: 0 };
+    }
+
+    // Add the drop to the corresponding year and month
+    acc[year][month].drops.push(drop);
+
+    // Accumulate the total memberCut for the month
+    acc[year][month].totalMemberCut += drop?.memberCut || 0;
+
+    return acc;
+  }, {});
+
+  console.log(dropsByYearAndMonth);
+
   // Handle update percentage
   const handlePercentage = async () => {
-    const percentage = percentageValue[memberId];
     if (!percentageValue) {
       console.error("Please select a percentage value");
       return;
@@ -48,7 +80,11 @@ export default function OwnerMemberProfile() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}> {member.memberName}</h1>
-      <p className={styles.takeHome}>Take Home Total: {member.takeHomeTotal}</p>
+      <section className={styles.takeHomeSection}>
+        <p className={styles.takeHome}>
+          Take Home Total: {member.takeHomeTotal}
+        </p>
+      </section>
       <section className={styles.memberProfileSection}>
         <section className={styles.memberCard} key={member.id}>
           <p className={styles.percent}>
@@ -73,7 +109,21 @@ export default function OwnerMemberProfile() {
             </button>
           </section>
         </section>
-        <section className={styles.memberCard}>
+        <section className={styles.memberCard} id={styles.monthTotalsSection}>
+          {Object.entries(dropsByYearAndMonth).map(([year, months]) => (
+            <div key={year}>
+              {Object.values(months).map(
+                ({ monthName, month, totalMemberCut }) => (
+                  <div key={month}>
+                    <p className={styles.monthTotals}>
+                      {monthName} {year} -{" "}
+                      {`Total: $${totalMemberCut.toFixed(2)}`}
+                    </p>
+                  </div>
+                )
+              )}
+            </div>
+          ))}
           <Link className={styles.archiveLink} to={"/ownermembersarchives"}>
             <p className={styles.linkName}>Archive</p>
           </Link>

@@ -16,7 +16,7 @@ dayjs.extend(utc);
 export default function ArchiveMonth() {
   const { memberId, year, month } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const notificationsPerPage = 20;
+  const notificationsPerPage = 18;
 
   // This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
@@ -87,25 +87,33 @@ export default function ArchiveMonth() {
           ? `${memberDropsData?.memberDetails?.memberName}'s Drops`
           : "Month's Drops"}
       </h1>
-      <h2 className={styles.monthTotal}>Month Total: {monthTotal}</h2>
-      <p className={styles.memberTotal}>
-        {memberDropsData?.memberDetails?.memberName}'s Total: {memberTotal}
-      </p>
-      <p className={styles.businessTotal}>Business's Total: {businessTotal}</p>
-      {currentDrops.length > 0 ? (
-        <ul className={styles.drops}>
-          {currentDrops.map((drop) => (
-            <Link className={styles.date} to={`/drop/${drop.id}`} key={drop.id}>
-              <li className={styles.link}>
-                {dayjs.utc(drop.date).format("MMM D, YYYY")}
-              </li>
-            </Link>
-          ))}
-        </ul>
-      ) : (
-        <p>No drops found for this month</p>
-      )}
-      {filteredDrops.length <= 20 ? (
+      <section className={styles.monthSection}>
+        <h2 className={styles.monthTotal}>Month Total: {monthTotal}</h2>
+        <p className={styles.memberTotal}>
+          {memberDropsData?.memberDetails?.memberName}'s Total: {memberTotal}
+        </p>
+        <p className={styles.businessTotal}>
+          Business's Total: {businessTotal}
+        </p>
+        {currentDrops.length > 0 ? (
+          <ul className={styles.drops}>
+            {currentDrops.map((drop) => (
+              <Link
+                className={styles.date}
+                to={`/drop/${drop.id}`}
+                key={drop.id}
+              >
+                <li className={styles.link}>
+                  {dayjs.utc(drop.date).format("MMM D, YYYY")}
+                </li>
+              </Link>
+            ))}
+          </ul>
+        ) : (
+          <p>No drops found for this month</p>
+        )}
+      </section>
+      {filteredDrops.length <= 18 ? (
         " "
       ) : (
         <Pagination

@@ -7,6 +7,23 @@
   margin-bottom: 1rem;
 }
 
+.dateSection {
+  background-color: #e8f2ea;
+  border: 1px solid rgb(187, 192, 196);
+  border-bottom: none;
+
+width: 920px;
+}
+
+.date {
+  color: var(--primaryBlue);
+  font-size: 32px;
+  font-weight: 600;
+  padding: 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+  border-bottom: 1px solid rgb(187, 192, 196);
+}
+
 .dropSection {
   margin-bottom: 2rem;
   display: flex;
@@ -14,13 +31,18 @@
 }
 
 .dropDetails {
-  margin: 1rem;
+  margin: 0rem;
   flex-direction: column;
  
   display: flex;
   width: 460px;
   background-color: #e8f2ea;
   border: 1px solid rgb(187, 192, 196);
+  border-top: none;
+}
+
+#serviceDetails {
+  border-right: none;
 }
 
 
@@ -34,23 +56,12 @@
   border-bottom: 1px solid rgb(187, 192, 196);
 }
 
-.total {
-  margin-bottom: 1rem;
-}
-
-.date {
-  color: var(--black);
-  font-size: 38px;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
 .serviceSection {
   margin: 0rem 1rem 0rem 1rem;
 }
 
 .description,
-/*.total,*/
+.dropCreate,
 .oweAmounts,
 .service {
   color: var(--black);
@@ -73,14 +84,8 @@
   border-bottom: none;
 }
 
-.oweAmounts,
 .service {
   border-bottom: none;
-}
-
-
-.service {
-  margin: 0rem;
 }
 
 .service,
@@ -102,11 +107,11 @@
   background-color: var(--accentGold);
 }
 
-.serviceContainer {
+/*.serviceContainer {
   border-bottom: 1px solid rgb(187, 192, 196);
 
   padding-bottom: 1rem;
-}
+}*/
 
 @media (max-width: 768px) {
   .headerSection,

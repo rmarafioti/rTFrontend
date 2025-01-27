@@ -6,26 +6,39 @@
     text-shadow: -5px 5px 0px black;
   }
 
+  .takeHomeSection {
+  background-color: #e8f2ea;
+  border: 1px solid rgb(187, 192, 196);
+  border-bottom: none;
+  width: 920px;
+  }
+
   .takeHome {
-    font-size: 38px;
+    color: var(--primaryBlue);
+    font-size: 32px;
     font-weight: 600;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    border-bottom: 1px solid rgb(187, 192, 196);
   }
 
   .memberProfileSection {
-    margin-bottom: 2rem;
     display: flex;
     flex-direction: row;
   }
   
   .memberCard {
-    display: flex;
     flex-direction: column;
-  margin: 1rem;
-  padding-bottom: 2rem;
+    display: flex;
     width: 460px;
+    padding: 1rem;
+    background-color: #e8f2ea;
     border: 1px solid rgb(187, 192, 196);
-    background-color:  #e8f2ea;
+    border-top: none;
+  }
+
+  #monthTotalsSection {
+    padding-top: 1rem;
   }
 
   .percent {
@@ -33,22 +46,10 @@
     font-size: 24px;
     font-weight: 600;
     padding: 1rem;
-    padding-left: 0rem;
-    margin: 0rem 1rem 0rem 1rem;
+    padding-left: 1rem;
+    padding-top: 0rem;
     text-align: left;
     border-bottom: 1px solid rgb(187, 192, 196);
-  }
-  
-  .item {
-    border-bottom: 1px solid rgb(187, 192, 196);
-    border-left: 1px solid rgb(187, 192, 196);
-    padding: .5rem;
-    align-self: flex-start;
-    width: 100%;
-  }
-  
-  #itemKey {
-    background-color: #b5e6e1;
   }
   
   .archiveLink {
@@ -59,7 +60,7 @@
     padding: 0.2rem;
     margin-top: 1rem;
     margin: 1rem;
-    width: 90%;
+    width: 100%;
     align-self: flex-start;
   text-align: center;
   
@@ -87,7 +88,7 @@
   .updatePercent {
     display: flex;
     flex-direction: column;
-    margin: 0rem 1rem 0rem 1rem;
+    margin: 0rem 0rem 2rem 0rem;
   
   }
   
@@ -101,9 +102,19 @@
   .percentButton {
     align-self: center;
     color: rgb(36, 37, 38);
-    padding: .2rem;
    width: 100%;
     border: 2px solid rgb(187, 192, 196);
+  }
+
+  .monthTotals {
+    color: var(--black);
+    font-size: 20px;
+    font-weight: normal;
+    text-align: left;
+    background-color: #b5e6e1;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid rgb(187, 192, 196);
   }
   
   @media (max-width: 768px) {

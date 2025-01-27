@@ -8,7 +8,7 @@
   -webkit-text-stroke: 2px black;
   text-shadow: -5px 5px 0px black;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .drops {
@@ -18,8 +18,6 @@
   list-style-type: none;
   flex-wrap: wrap;
   padding: 1rem 0rem 2rem 0rem;
-  /*background-color: #e8f2ea;*/
-  /*border: 1px solid rgb(187, 192, 196);*/
   width: 1000px;
 }
 
@@ -35,22 +33,27 @@
 }
 
 .memberName {
-  background-color: var(--white);
+  /*background-color: var(--white);*/
   color: var(--primaryBlue);
   font-size: 20px;
   font-weight: 600;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+margin-left: 1rem;
+margin-right: 1rem;
+margin-top: .5rem;
+  padding: .5rem ;
   border-bottom: 1px solid rgb(187, 192, 196);
-  width: 100%;
+ 
 }
 
 .monthsContainer {
   display: flex;
-  width: 100%;
 }
 
 .months {
-  width: 100%;
+  background-color:  #b5e6e1;
+  margin-left: 1rem;
+margin-right: 1rem;
+width: 100%;
 }
 
 .linkName {
@@ -81,6 +84,7 @@
 
 .noDrops {
   border-bottom: none;
+  cursor: default;
 }
 
 @media (max-width: 768px) {

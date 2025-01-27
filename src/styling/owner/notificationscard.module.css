@@ -5,7 +5,8 @@
    border: 1px solid rgb(187, 192, 196);
    padding: 1rem;
    background-color: #e8f2ea;
-   margin: 0rem 1rem 2rem 1rem;
+   margin: 0rem 0rem 2rem 0rem;
+   width: 460px;
 }
 
 .subHeadersNotice {
@@ -13,7 +14,6 @@
   font-size: 24px;
   font-weight: 600;
   padding-bottom: 1rem;
-  width: 460px;
   border-bottom: 1px solid rgb(187, 192, 196);
   /*margin-bottom: 0rem;*/
 }
