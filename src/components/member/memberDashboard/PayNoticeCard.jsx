@@ -26,7 +26,8 @@ export default function PayNoticeCard() {
     .filter((drop) => !drop.paid)
     .reduce((total, drop) => total + drop.memberOwes, 0);
 
-  const businessOwesTotal = memberTotal > 0 ? 0 : businessTotal - memberTotal;
+  const businessOwesTotal =
+    /*memberTotal > 0 ? 0 :*/ businessTotal - memberTotal;
 
   // We don't want to see a members owes total if the business owes total is greater than 0
   const memberOwesTotal = businessOwesTotal > 0 ? 0 : memberTotal;

@@ -12,14 +12,19 @@ export default function MemberNotifications() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Get all drops where paid is true
+  // Get the last 6 unique payments, only considering the first drop per payment
   const paidDrops = member.drop
-    ?.filter((drop) => drop.paidDrop)
-    .map((drop) => drop.paidDrop)
-    .filter(
-      (value, index, self) =>
-        self.findIndex((pd) => pd.id === value.id) === index
-    );
+    ?.filter((drop) => drop.paidDrop) // Filter drops with a valid paidDrop
+    .reduce((uniquePayments, drop) => {
+      // Only keep the first instance of each payment (by paidDrop.id)
+      if (!uniquePayments.some((pd) => pd.paidDrop.id === drop.paidDrop.id)) {
+        uniquePayments.push(drop);
+      }
+      return uniquePayments;
+    }, [])
+    .slice(-6)
+    .reverse()
+    .map((drop) => drop.paidDrop);
 
   // Calculate pagination
   const lastIndex = currentPage * notificationsPerPage;
@@ -29,7 +34,7 @@ export default function MemberNotifications() {
   return (
     <article className="pageSetup">
       <section className={styles.dashboardSectionNotifications}>
-        <h2 className={styles.subHeadersNotice}>Payments:</h2>
+        <h2 className={styles.subHeadersNotice}>Recent Payments:</h2>
         {currentNotifications?.length ? (
           currentNotifications.map((paidDrop) => (
             <div key={paidDrop.id} className={styles.noticeSection}>
@@ -74,10 +79,10 @@ export default function MemberNotifications() {
           <p>No payment notifications yet.</p>
         )}
         <div className={styles.paymentKey}>
-          <p>your payment:</p>
-          <p className={styles.payeeColor} id={styles.blue}></p>
           <p>owner payment:</p>
           <p className={styles.payeeColor} id={styles.yellow}></p>
+          <p>your payment:</p>
+          <p className={styles.payeeColor} id={styles.blue}></p>
         </div>
       </section>
       {paidDrops.length < 3 ? (
