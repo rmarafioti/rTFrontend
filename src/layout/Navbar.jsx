@@ -97,6 +97,9 @@ export default function Navbar() {
           <li className={styles.hamMenuItem}>
             <NavLink to="/memberdashboard">Member Dashboard</NavLink>
           </li>
+          <li className={styles.hamMenuItem} onClick={dropCreateSubmit}>
+            Create A Drop
+          </li>
           <li className={styles.hamMenuItem}>
             <NavLink to={`/archive/${memberId}`}>Archive</NavLink>
           </li>

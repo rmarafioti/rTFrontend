@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useGetMemberQuery } from "./membersSlice";
 import Pagination from "../../components/Pagination";
 
-import styles from "../../styling/dashboards.module.css";
+import styles from "../../styling/member/membernotifications.module.css";
 
 export default function MemberNotifications() {
   const { data: member, error, isLoading } = useGetMemberQuery();
@@ -33,8 +33,15 @@ export default function MemberNotifications() {
 
   return (
     <article className="pageSetup">
+      <h1 className={styles.header}>Payments.</h1>
       <section className={styles.dashboardSectionNotifications}>
-        <h2 className={styles.subHeadersNotice}>Recent Payments:</h2>
+        <div className={styles.paymentKeySection}>
+          <p className={styles.paymentName}>owner payment:</p>
+          <p className={styles.payeeColor} id={styles.yellow}></p>
+
+          <p className={styles.paymentName}>your payment:</p>
+          <p className={styles.payeeColor} id={styles.blue}></p>
+        </div>
         {currentNotifications?.length ? (
           currentNotifications.map((paidDrop) => (
             <div key={paidDrop.id} className={styles.noticeSection}>
@@ -53,19 +60,18 @@ export default function MemberNotifications() {
                   - Payment of ${paidDrop.amount} from {paidDrop.payee}
                 </p>
               </div>
-
-              <p>
-                Method of payment:{" "}
-                {paidDrop.paidMessage || "*No payment message provided*"}
-              </p>
-              {/* Map over the drops associated with the payment */}
-              <div className={styles.paidDatesSection}>
-                <h5>Paid for Drops on:</h5>
+              {/* Map over the drops associated with this paidDrop */}
+              <div className={styles.paidDates}>
+                <p className={styles.paidMessage}>
+                  {" "}
+                  {paidDrop.paidMessage || "*No method provided*"} for Drops on:
+                </p>
                 <ul className={styles.paidDates}>
                   {member.drop
                     ?.filter((drop) => drop.paidDrop?.id === paidDrop.id)
                     .map((drop) => (
-                      <li key={drop.id}>
+                      <li className={styles.paidDate} key={drop.id}>
+                        *
                         {new Date(drop.date).toLocaleDateString("en-US", {
                           timeZone: "UTC",
                         })}
@@ -78,10 +84,6 @@ export default function MemberNotifications() {
         ) : (
           <p>No payment notifications yet.</p>
         )}
-        <p className={styles.paymentName}>owner payment:</p>
-        <p className={styles.payeeColor} id={styles.yellow}></p>
-        <p>your payment:</p>
-        <p className={styles.payeeColor} id={styles.blue}></p>
       </section>
       {paidDrops.length < 3 ? (
         " "
