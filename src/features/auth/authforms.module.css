@@ -83,7 +83,7 @@
   width: 480px;
 }
 
-@media (max-width: 586px) {
+@media (max-width: 1227px) {
   .loginForm,
   .loginInputSection,
   .loginFormInput,
@@ -93,6 +93,7 @@
   .header {
     font-size: 50px;
     line-height: 55px;
+    margin: 0rem .5rem 0rem .5rem;
     z-index: 11;
   }
   .loginInputSection {

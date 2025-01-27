@@ -1,0 +1,88 @@
+.dashboardSectionNotifications {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 1px solid rgb(187, 192, 196);
+    padding: 1rem;
+    background-color: #e8f2ea;
+    margin: 0rem 0rem 2rem 0rem;
+    width: 460px;
+  }
+
+  .subHeadersNotice {
+    color: var(--primaryBlue);
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(187, 192, 196);
+  }
+
+  .noticeSection {
+    margin: 0rem 0rem 1rem 0rem;
+  }
+
+  .datePayment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0.5rem;
+    color: var(--white);
+    background-color: rgb(74, 87, 89);
+    text-align: center;
+  }
+
+  .paidMessage {
+    font-weight: 500;
+    padding: 0.5rem;
+    background-color: #b5e6e1;
+    border-bottom: 1px solid rgb(187, 192, 196);
+  }
+
+  .paidDates {
+    list-style-type: none;
+    padding: 0rem;
+    background-color: #b5e6e1;
+  }
+
+  .paidDate {
+    border-bottom: 1px solid rgb(187, 192, 196);
+    padding: 0.5rem;
+  }
+
+  .payeeColor {
+    padding: .5rem;
+    width: 10px;
+    height: 10px;
+    margin-right: .5rem
+  }
+  
+  .paymentKey {
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+  }
+  
+  .blue, #blue {
+    background-color: blue;
+  }
+  
+  .yellow, #yellow {
+    background-color: yellow;
+  }
+
+  .link {
+    align-self: center;
+    text-align: center;
+    color: var(--black);
+    padding: .5rem;
+    background-color: #b5e6e1;
+    margin: 1rem;
+    border: 1px solid transparent;
+    width: 300px;
+  }
+
+  .link:hover {
+    border: 1px solid var(--black);
+  }

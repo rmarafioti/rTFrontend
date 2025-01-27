@@ -84,12 +84,12 @@ export default function Navbar() {
           <li className={styles.hamMenuItem}>
             <NavLink to="/membernotifications">Payments</NavLink>
           </li>
-          <li className={styles.hamMenuItem}>
-            <a id={styles.logout} onClick={handleLogout}>
-              Log Out
-            </a>
-          </li>
         </ul>
+        <li className={styles.hamMenuItem} id={styles.logoutContainer}>
+          <a className={styles.logout} onClick={handleLogout}>
+            Log Out
+          </a>
+        </li>
       </menu>
     );
   }
@@ -232,13 +232,13 @@ export default function Navbar() {
                     <li className={styles.subItem}>
                       total: {member?.takeHomeTotal}
                     </li>
-                    <a
+                    <li
                       className={styles.subItem}
                       id={styles.logout}
                       onClick={handleLogout}
                     >
                       Log Out
-                    </a>
+                    </li>
                   </ul>
                 </li>
                 <HamMenu />

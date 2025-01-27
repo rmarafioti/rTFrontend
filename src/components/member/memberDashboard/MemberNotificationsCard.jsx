@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { useGetMemberQuery } from "../../../features/members/membersSlice";
 
-import styles from "../../../styling/dashboards.module.css";
+import styles from "../../../styling/member/membernotificationscard.module.css";
 
 export default function MemberNotificationsCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
@@ -41,19 +42,18 @@ export default function MemberNotificationsCard() {
                   - Payment of ${paidDrop.amount} from {paidDrop.payee}
                 </p>
               </div>
-              <p>
-                Method of Payment:{" "}
-                {paidDrop.paidMessage || "*No method provided*"}
-              </p>
-
               {/* Map over the drops associated with this paidDrop */}
-              <div className={styles.paidDatesSection}>
-                <h5>Paid for Drops on:</h5>
+              <div className={styles.paidDates}>
+                <p className={styles.paidMessage}>
+                  {" "}
+                  {paidDrop.paidMessage || "*No method provided*"} for Drops on:
+                </p>
                 <ul className={styles.paidDates}>
                   {member.drop
                     ?.filter((drop) => drop.paidDrop?.id === paidDrop.id)
                     .map((drop) => (
-                      <li key={drop.id}>
+                      <li className={styles.paidDate} key={drop.id}>
+                        *
                         {new Date(drop.date).toLocaleDateString("en-US", {
                           timeZone: "UTC",
                         })}
@@ -72,6 +72,9 @@ export default function MemberNotificationsCard() {
         <p>your payment:</p>
         <p className={styles.payeeColor} id={styles.blue}></p>
       </div>
+      <Link to="/membernotifications/" className={styles.link}>
+        View all payments
+      </Link>
     </section>
   );
 }

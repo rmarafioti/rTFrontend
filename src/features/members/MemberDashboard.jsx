@@ -5,7 +5,7 @@ import PayNoticeCard from "../../components/member/memberDashboard/PayNoticeCard
 import MemberNotificationsCard from "../../components/member/memberDashboard/MemberNotificationsCard";
 
 import "../../styling/mainStyles.css";
-import styles from "../../styling/dashboards.module.css";
+import styles from "../../styling/member/memberdashboard.module.css";
 
 export default function MemberDashboard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
@@ -34,19 +34,20 @@ export default function MemberDashboard() {
     <article className="pageSetup">
       <section className={styles.takeHomeTotalSection}>
         <h1 className={styles.header}>Welcome, {member.memberName}</h1>
-        <p className={styles.takeHomeKey}>Take Home Total to Date: </p>
-        <p className={styles.takeHomeValue}>
-          ${member.drop.reduce((total, drop) => total + drop.memberCut, 0)}
-        </p>
+        <section className={styles.totalSection}>
+          <p className={styles.takeHome}>
+            Take Home Total to Date: $
+            {member.drop.reduce((total, drop) => total + drop.memberCut, 0)}
+          </p>
+          <button onClick={dropCreateSubmit} className={styles.createDrop}>
+            Create a drop
+          </button>
+        </section>
       </section>
-      <button onClick={dropCreateSubmit} className={styles.createDrop}>
-        Create a drop
-      </button>
-      <PayNoticeCard />
-      <MemberNotificationsCard />
-      <Link to="/membernotifications/" className={styles.link}>
-        View all payments
-      </Link>
+      <section className={styles.dashboardSections}>
+        <PayNoticeCard />
+        <MemberNotificationsCard />
+      </section>
     </article>
   );
 }

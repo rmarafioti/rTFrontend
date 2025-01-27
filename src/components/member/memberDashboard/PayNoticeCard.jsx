@@ -6,7 +6,7 @@ import {
   useMemberDeleteDropMutation,
 } from "../../../features/members/membersSlice";
 
-import styles from "../../../styling/dashboards.module.css";
+import styles from "../../../styling/member/paynoticecard.module.css";
 
 export default function PayNoticeCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
