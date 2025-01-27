@@ -42,42 +42,41 @@ export default function OwnerMembersArchives() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>Drop Archives:</h1>
-      <section className={styles.dropSection}>
-        <ul className={styles.drops}>
-          {membersWithDrops.map(({ member, dropsByYearAndMonth }) => (
-            <li key={member?.id || "unknown"} className={styles.memberCard}>
-              <h2 className={styles.memberName}>
-                {member?.memberName || "Unknown Member"}
-              </h2>
-              {Object.keys(dropsByYearAndMonth).length > 0 ? (
-                Object.entries(dropsByYearAndMonth).map(([year, months]) => (
-                  <div className={styles.monthsContainer} key={year}>
-                    <ul className={styles.months}>
-                      {Object.entries(months).map(
-                        ([monthNumber, { monthName }]) => (
-                          <Link
-                            key={monthNumber}
-                            to={`/archivemonth/${
-                              member?.id || "unknown"
-                            }/${year}/${monthNumber}`}
-                            className={styles.linkName}
-                          >
-                            <li className={styles.link}>
-                              {monthName} {year}
-                            </li>
-                          </Link>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                ))
-              ) : (
-                <p className={styles.noDrops}>No drops found</p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
+
+      <ul className={styles.drops}>
+        {membersWithDrops.map(({ member, dropsByYearAndMonth }) => (
+          <li key={member?.id || "unknown"} className={styles.memberCard}>
+            <h2 className={styles.memberName}>
+              {member?.memberName || "Unknown Member"}
+            </h2>
+            {Object.keys(dropsByYearAndMonth).length > 0 ? (
+              Object.entries(dropsByYearAndMonth).map(([year, months]) => (
+                <div className={styles.monthsContainer} key={year}>
+                  <ul className={styles.months}>
+                    {Object.entries(months).map(
+                      ([monthNumber, { monthName }]) => (
+                        <Link
+                          key={monthNumber}
+                          to={`/archivemonth/${
+                            member?.id || "unknown"
+                          }/${year}/${monthNumber}`}
+                          className={styles.linkName}
+                        >
+                          <li className={styles.link}>
+                            {monthName} {year}
+                          </li>
+                        </Link>
+                      )
+                    )}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p className={styles.noDrops}>No drops found</p>
+            )}
+          </li>
+        ))}
+      </ul>
     </article>
   );
 }
