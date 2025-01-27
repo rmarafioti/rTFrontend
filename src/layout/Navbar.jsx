@@ -100,26 +100,24 @@ export default function Navbar() {
       <>
         {owner?.ownerBusiness?.length ? (
           owner.ownerBusiness.map((business) => (
-            <div key={business.id}>
-              <ul>
-                {business.businessMember?.length ? (
-                  business.businessMember.map((member) => (
-                    <NavLink
-                      className={styles.teamMemberLink}
-                      to={`ownermemberprofile/${member.id}`}
-                    >
-                      <li className={styles.teamMember} key={member.id}>
-                        <p className={styles.teamMemberName}>
-                          {member.memberName}
-                        </p>
-                      </li>
-                    </NavLink>
-                  ))
-                ) : (
-                  <li>No team members found</li>
-                )}
-              </ul>
-            </div>
+            <ul className={styles.teamMembersList}>
+              {business.businessMember?.length ? (
+                business.businessMember.map((member) => (
+                  <NavLink
+                    className={styles.teamMemberLink}
+                    to={`ownermemberprofile/${member.id}`}
+                  >
+                    <li className={styles.teamMember} key={member.id}>
+                      <p className={styles.teamMemberName}>
+                        {member.memberName}
+                      </p>
+                    </li>
+                  </NavLink>
+                ))
+              ) : (
+                <li>No team members found</li>
+              )}
+            </ul>
           ))
         ) : (
           <p>No businesses found</p>
@@ -135,26 +133,28 @@ export default function Navbar() {
         <ul className={styles.hamMenuSection}>
           <li>
             <p className={styles.hamMenuItem} id={styles.staticInfo}>
-              business: {owner?.ownerBusiness?.[0]?.businessName}
+              Business: {owner?.ownerBusiness?.[0]?.businessName}
             </p>
           </li>
           <li className={styles.hamMenuItem} id={styles.staticInfo}>
-            total: {owner?.takeHomeTotal}
+            Total: {owner?.takeHomeTotal}
           </li>
+          <li className={styles.hamMenuItem} id={styles.teamMembers}>
+            Team Members:
+          </li>
+          <TeamMembersCard />
           <li className={styles.hamMenuItem}>
             <NavLink to="/ownerdashboard">Owner Dashboard</NavLink>
           </li>
-          <li className={styles.hamMenuItem}>Team Members:</li>
-          <TeamMembersCard />
           <li className={styles.hamMenuItem}>
             <NavLink to="/ownermembersarchives">Archives</NavLink>
           </li>
-          <li className={styles.hamMenuItem} id={styles.staticInfo}>
-            <a className={styles.logout} onClick={handleLogout}>
-              Log Out
-            </a>
-          </li>
         </ul>
+        <li className={styles.hamMenuItem} id={styles.logoutContainer}>
+          <a className={styles.logout} onClick={handleLogout}>
+            Log Out
+          </a>
+        </li>
       </menu>
     );
   }
@@ -193,18 +193,18 @@ export default function Navbar() {
                   <li className={styles.menuAccount}>
                     Account
                     <ul className={styles.subCategory}>
-                      <li className={styles.subItem} id={styles.firstListItem}>
+                      <li className={styles.subItem}>
                         business: {owner?.ownerBusiness?.[0]?.businessName}
                       </li>
                       <li className={styles.subItem}>team members:</li>
                       <TeamMembersCard />
-                      <a
+                      <li
                         className={styles.subItem}
                         id={styles.logout}
                         onClick={handleLogout}
                       >
                         Log Out
-                      </a>
+                      </li>
                     </ul>
                   </li>
                   <HamMenu />

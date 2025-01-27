@@ -67,31 +67,26 @@
   background-color: white;
   margin-top: 0.5rem;
   margin-left: -10rem;
-  padding-bottom: 1rem;
   list-style-type: none;
   width: 100vw;
+  height: auto;
   z-index: 10;
 }
 
-#firstListItem {
-  margin-top: 0rem;
-  padding-top: 1rem;
-}
+
 .subItem {
   margin: 1rem 0rem 0rem 0rem;
   padding: 0rem 1rem 1rem 1rem;
   border-bottom: 2px solid var(--secondaryTurquoise);
 }
 
-#lastListItem {
-  margin-bottom: 5rem;
-}
-
 #logout {
+  padding-top: 1rem;
   font-weight: bold;
+  color: var(--white);
+  background-color: rgb(74, 87, 89);
   border-bottom: none;
-  padding: 1rem;
-  margin-bottom: 0rem;
+  margin: 0rem;
 }
 
 .teamMember {
@@ -100,8 +95,11 @@
   text-underline-offset: 4px;
   padding: 1rem;
   padding-left: 4rem;
-  margin-bottom: 1rem;
   border-bottom: 2px solid lightgray;
+}
+
+.teamMember:hover {
+  background-color: var(--accentGold);
 }
 
 .teamMemberLink {
@@ -221,7 +219,7 @@
     right: 0;
     padding: 0rem;
     width: 100vw;
-    background-color: antiquewhite;
+    background-color: #f9f9f9;
     
     z-index: 13;
   }
@@ -235,9 +233,12 @@
   .hamMenuItem {
     border-right: none;
     font-size: 20px;
-    font-weight: normal;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
     padding: 1rem 0rem 1rem 1rem;
-    border-bottom: 2px solid var(--secondaryTurquoise);
+    background-color:var(--secondaryTurquoise); 
+    border-bottom: 1px solid rgb(74, 87, 89);
     width: 100%;
   }
 
@@ -245,11 +246,15 @@
     color: var(--black);
   }
 
-  #staticInfo {
-    background-color:rgb(243, 239, 234); 
+  #staticInfo, #teamMembers {
+    background-color:#e8f2ea; 
+    color: var(--black);
+    font-size: 22px;
+    font-weight: normal;
+    text-decoration: none;
     text-align: center;
     padding-left: 0rem;
-    border-bottom: 2px solid var(--black);
+    border-bottom: 1px solid var(--black);
   }
 
   .teamMember {
@@ -259,7 +264,12 @@
     padding: 1rem;
     margin: 0rem;
     padding-left: 4rem;
-    border-bottom: 2px solid lightgray;
+    background-color:  #b5e6e1;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .teamMember:hover {
+    background-color: #b5e6e1;
   }
 
   .teamMemberLink {
@@ -269,11 +279,18 @@
   .teamMemberName {
     font-size: 18px;
   }
-
+  #logoutContainer {
+    background-color: rgb(74, 87, 89);
+    text-align: center;
+    text-decoration: none;
+  }
+#logoutContainer a{
+  color: var(--white);
+}
   .logout {
    font-weight: bold;
     padding: 0rem;
-   
+    font-size: 26px;
   }
 }
 
