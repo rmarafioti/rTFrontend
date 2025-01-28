@@ -65,10 +65,10 @@ const memberApi = api.injectEndpoints({
     // Member-specific query
     getAllDrops: builder.query({
       query: () => ({
-        url: `/member/memberdrops`, // Route to fetch member's drops
+        url: `/member/memberdrops`,
         method: "GET",
       }),
-      providesTags: ["Member"], // Invalidate and cache data based on 'Member'
+      providesTags: ["Member"], // Cache and invalidate based on 'Member'
     }),
 
     // member update a drop
