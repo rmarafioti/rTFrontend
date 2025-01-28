@@ -4,11 +4,6 @@
    align-items: center;
   }
 
-  .labelName {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
   .serviceFormInput {
     margin: .5rem;
     padding: .5rem;

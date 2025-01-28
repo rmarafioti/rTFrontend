@@ -1,0 +1,77 @@
+.dashboardSection {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: 1px solid rgb(187, 192, 196);
+  padding: 1rem;
+  background-color: #e8f2ea;
+  margin: 0rem 0rem 2rem 0rem;
+  width: 460px;
+  border-right: none;
+}
+
+.subHeaders {
+  color: var(--primaryBlue);
+  font-size: 24px;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-bottom: 1px solid rgb(187, 192, 196);
+}
+
+.memberDrops {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  width: 460px;
+}
+
+.currentDrop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.memberDrop {
+  color: rgb(36, 37, 38);
+  background-color: #b5e6e1;
+  border: 2px solid transparent;
+  font-size: 18px;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  width: 250px;
+  align-self: flex-start;
+  text-align: center;
+
+  transition: border-color 0.25s;
+}
+
+.memberDrop:hover {
+  border: 2px solid var(--black);
+}
+
+.deleteDrop {
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  padding: 0rem;
+}
+
+.totals {
+  padding-left: 1.5rem;
+  font-size: 18px;
+}
+
+@media (max-width: 1227px) {
+  .dashboardSection {
+    width: 100%;
+    margin-bottom: 0rem;
+    border-bottom: none;
+  }
+  .memberDrops {
+    width: 100%;
+  }
+}

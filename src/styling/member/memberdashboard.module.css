@@ -15,11 +15,28 @@
 
   .totalSection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     background-color: #e8f2ea;
     border: 1px solid rgb(187, 192, 196);
     border-bottom: none;
     width: 920px;
+  }
+
+  .createDrop {
+    align-self: center;
+    margin-bottom: 2rem;
+    border: 2px solid transparent;
+    color: var(--white);
+    background-color: rgb(74, 87, 89);
+    transition: background-color 0.25s;
+    transition: color 0.25s;
+    width: 400px
+  }
+
+  .createDrop:hover {
+    color: var(--black);
+    background-color: var(--secondaryTurquoise);
   }
 
   .takeHome {
@@ -36,15 +53,19 @@
 
   @media (max-width: 1227px) {
     .dashboardSections {
-      flex-direction: column;
-    }
-    .takeHomeTotalSection, .dashboardSections, .totalSection {
-      width: 100%;
-    }
-    .takeHome {
-      font-size: 24px;
-    }
-    .header {
-      font-size: 44px;
-    }
+        flex-direction: column;
+      }
+      .takeHomeTotalSection, .dashboardSections, .totalSection {
+        width: 100%;
+      }
+      .takeHome {
+        font-size: 24px;
+      }
+      .header {
+        font-size: 44px;
+      }
+      .createDrop {
+        width: 90%;
+      }
   }
+

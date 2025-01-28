@@ -1,0 +1,137 @@
+.dashboardSectionNotifications {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 1px solid rgb(187, 192, 196);
+    padding: 1rem;
+    padding-top: 0rem;
+    background-color: #e8f2ea;
+    margin: 0rem 0rem 2rem 0rem;
+    width: 800px;
+  }
+
+  .header {
+    color: var(--accentGold);
+    font-size: 72px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px black;
+    text-shadow: -5px 5px 0px black;
+    margin-bottom: 1rem;
+  }
+
+  .subHeadersNotice {
+    color: var(--primaryBlue);
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(187, 192, 196);
+  }
+
+  .noticeSection {
+    margin: 0rem 0rem 1rem 0rem;
+  }
+
+  .datePayment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0.5rem;
+    color: var(--black);
+    background-color: var(--secondaryTurquoise);
+    border-bottom: 1px solid rgb(74, 87, 89);
+    text-align: center;
+  }
+
+  .paidMessage {
+    font-weight: 500;
+    padding: 0.5rem;
+    background-color: #b5e6e1;
+    border-bottom: 1px solid rgb(187, 192, 196);
+  }
+
+  .paidDates {
+    list-style-type: none;
+    padding: 0rem;
+    background-color: #b5e6e1;
+  }
+
+  .paidDate {
+    border-bottom: 1px solid rgb(187, 192, 196);
+    padding: 0.5rem;
+  }
+
+  .paymentKeySection {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    width: 400px;
+  }
+
+  .payeeColor {
+    padding: .5rem;
+    width: 10px;
+    height: 10px;
+    margin-right: .5rem
+  }
+  
+  .paymentKey {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+
+  .paymentName {
+    margin-right: .5rem;
+  }
+
+ 
+  
+  .blue, #blue {
+    background-color: blue;
+    border: 1px solid var(--black);
+  }
+  
+  .yellow, #yellow {
+    background-color: yellow;
+    border: 1px solid var(--black);
+  }
+
+  .link {
+    align-self: center;
+    text-align: center;
+    color: var(--black);
+    padding: .5rem;
+    background-color: #b5e6e1;
+    margin: 1rem;
+    border: 1px solid transparent;
+    width: 300px;
+  }
+
+  .link:hover {
+    border: 1px solid var(--black);
+  }
+
+  @media (max-width: 1227px) {
+    .header {
+        font-size: 44px;
+      }
+    .dashboardSectionNotifications, .paymentKeySection {
+      width: 100%;
+    }
+    .paymentKeySection {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+    }
+    .paymentName {
+        margin-right: .2rem;
+      }
+    .link {
+      width: 100%;
+    }
+  }

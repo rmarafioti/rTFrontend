@@ -7,7 +7,6 @@
   background-color: #e8f2ea;
   margin: 0rem 0rem 2rem 0rem;
   width: 460px;
-  border-right: none;
 }
 
 .subHeaders {
@@ -15,7 +14,6 @@
   font-size: 24px;
   font-weight: 600;
   padding-bottom: 1rem;
-  width: 460px;
   border-bottom: 1px solid rgb(187, 192, 196);
 }
 
@@ -24,8 +22,6 @@
   flex-direction: column;
   padding-bottom: 1rem;
   margin: 0rem 0rem 1rem 0rem;
-  
-  width: 460px;
 }
 
 .unpaidSection {
@@ -35,7 +31,6 @@
 }
 
 .teamMemberName {
-  padding-left: 1.5rem;
   font-size: 22px;
   font-weight: 600;
 }
@@ -43,8 +38,7 @@
 .memberCurrentDrop {
   display: flex;
   flex-direction: column;
-  padding-left: 1rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .memberDrop {
@@ -56,10 +50,8 @@
   margin: 0.5rem;
   width: 250px;
   align-self: flex-start;
-text-align: center;
-
+  text-align: center;
   transition: border-color 0.25s;
- 
 }
 
 .memberDrop:hover {
@@ -67,7 +59,7 @@ text-align: center;
 }
 
 .totals {
-  padding-left: 1.5rem;
+  padding-left: .5rem;
   font-size: 18px;
 }
 
@@ -75,22 +67,23 @@ text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem 0rem 1rem 0rem;
+  margin-top: .5rem;
 }
 
 .paymentMethod {
   font-size: 16px;
-  padding: .5rem;
+  padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid rgb(187, 192, 196);
-  width: 90%;
+  width: 100%;
 }
 
 .paymentNoticeButton {
   color: rgb(36, 37, 38);
-  padding: .2rem;
+  padding: 0.2rem;
   width: 90%;
   border: 2px solid rgb(187, 192, 196);
+  width: 100%;
 }
 
 .noServicesMessage {
