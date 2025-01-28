@@ -11,7 +11,6 @@ import AuthFormOwner from "./features/auth/AuthFormOwner";
 import AuthFormMember from "./features/auth/AuthFormMember";
 //business features
 import DropDetails from "./features/buisness/DropDetails";
-import Archive from "./features/buisness/Archive";
 import ArchiveMonth from "./features/buisness/ArchiveMonth";
 //owner features
 import OwnerDashboard from "./features/owner/OwnerDashboard";
@@ -21,6 +20,7 @@ import OwnerMemberProfile from "./features/owner/OwnerMemberProfile";
 import MemberDashboard from "./features/members/MemberDashboard";
 import MemberCreateDrop from "./features/members/MemberCreateDrop";
 import MemberNotifications from "./features/members/MemberNotifications";
+import Archive from "./features/members/Archive";
 
 import "./index.css";
 

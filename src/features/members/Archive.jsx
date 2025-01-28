@@ -2,9 +2,9 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGetAllDropsQuery } from "../members/membersSlice";
+import { useGetAllDropsQuery } from "./membersSlice";
 
-import styles from "../../styling/business/archive.module.css";
+import styles from "../../styling/member/archive.module.css";
 
 dayjs.extend(utc);
 
@@ -35,7 +35,7 @@ export default function Archive() {
       <h1 className={styles.header}>Your Archived Drops</h1>
       {Object.keys(dropsByYearAndMonth).length > 0 ? (
         Object.entries(dropsByYearAndMonth).map(([year, months]) => (
-          <div key={year}>
+          <div className={styles.monthsSection} key={year}>
             <ul className={styles.months}>
               {Object.entries(months).map(([month, { monthName }]) => (
                 <Link

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styling/business/archive.module.css";
+import styles from "../styling/member/archive.module.css";
 
 export default function Pagination({
   currentPage,
