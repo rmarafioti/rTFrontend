@@ -1,4 +1,4 @@
-.dropForm {
+/*.dropForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@
 
 .totalsSection {
   margin-bottom: 4rem;
-}
+}*/
 
 .totalServices,
 .dropTotal,

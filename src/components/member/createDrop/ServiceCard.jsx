@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import styles from "../../../styling/serviceCard.module.css";
+
+import styles from "../../../styling/member/createdrop.module.css";
 
 export default function ServiceCard({ addedService, setAddedService }) {
   const [formValues, setFormValues] = useState({
@@ -40,8 +41,8 @@ export default function ServiceCard({ addedService, setAddedService }) {
   };
 
   return (
-    <article className="pageSetup">
-      <h1>Service</h1>
+    <article className={styles.servicePage}>
+      <h1 className={styles.subHeader}>Add Services.</h1>
       <section className={styles.serviceForm}>
         <label className={styles.labelName}>Description:</label>
         <input

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Drop from "../../components/member/createDrop/Drop";
 
-import "../../styling/mainStyles.css";
+import styles from "../../styling/member/createdrop.module.css";
 
 export default function MemberCreateDrop() {
   const location = useLocation();
@@ -9,7 +9,7 @@ export default function MemberCreateDrop() {
 
   return (
     <article className="pageSetup">
-      <h2>Enter your daily drop</h2>
+      <h2 className={styles.header}>Enter your daily drop.</h2>
       <Drop dropId={dropId} />
     </article>
   );

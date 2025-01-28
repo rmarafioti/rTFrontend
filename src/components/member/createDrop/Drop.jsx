@@ -7,7 +7,7 @@ import {
   useMemberUpdateDropMutation,
   useMemberUpdateInfoMutation,
 } from "../../../features/members/membersSlice";
-import styles from "../../../styling/drop.module.css";
+import styles from "../../../styling/member/createdrop.module.css";
 
 export default function Drop({ dropId }) {
   console.log("Received dropId in Drop:", dropId);
@@ -105,8 +105,7 @@ export default function Drop({ dropId }) {
   };
 
   return (
-    <article className="pageSetup">
-      <p>Enter your daily drop</p>
+    <article className={styles.dropPage}>
       <form className={styles.dropForm}>
         <label className={styles.labelName}>Date:</label>
         <input

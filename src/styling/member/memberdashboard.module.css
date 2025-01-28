@@ -36,7 +36,7 @@
 
   .createDrop:hover {
     color: var(--black);
-    background-color: var(--accentGold);
+    background-color: var(--secondaryTurquoise);
   }
 
   .takeHome {
