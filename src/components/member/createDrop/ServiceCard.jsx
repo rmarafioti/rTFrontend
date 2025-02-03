@@ -61,7 +61,7 @@ export default function ServiceCard({ addedService, setAddedService }) {
       </button>
       <div
         className={styles.modal}
-        style={{ display: modalOpen ? "flex" : "none" }} // Hides without unmounting
+        style={{ display: modalOpen ? "flex" : "none" }}
       >
         <section className={styles.serviceForm}>
           <div

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import {
   useGetMemberQuery,
+  useMemberCreateDropMutation,
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
   useMemberUpdateInfoMutation,
@@ -10,7 +11,7 @@ import {
 import styles from "../../../styling/member/createdrop.module.css";
 
 export default function Drop({ dropId }) {
-  console.log("Received dropId in Drop:", dropId);
+  const [createDrop] = useMemberCreateDropMutation();
 
   const { data: member } = useGetMemberQuery();
   const memberId = member?.id;
@@ -61,6 +62,15 @@ export default function Drop({ dropId }) {
   // Submit all services to the backend
   const submitServices = async () => {
     try {
+      const newDrop = await createDrop().unwrap();
+
+      if (!newDrop?.id) {
+        console.error("Drop creation failed");
+        return;
+      }
+
+      const dropId = newDrop.id;
+
       for (const service of addedService) {
         const serviceData = {
           ...service,

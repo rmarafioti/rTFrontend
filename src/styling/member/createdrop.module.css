@@ -50,7 +50,15 @@
   box-shadow: none;
 }
 
-.serviceFormButton:hover,
+.serviceFormButton {
+border: none;
+}
+
+.serviceFormButton:hover {
+  box-shadow: none;
+  border: none;
+}
+
 .addServiceButton:hover {
   background-color: var(--white);
   box-shadow: none;
