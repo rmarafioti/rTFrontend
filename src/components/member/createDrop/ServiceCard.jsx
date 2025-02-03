@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { IoClose } from "react-icons/io5";
-
 import styles from "../../../styling/member/createdrop.module.css";
 
 export default function ServiceCard({ addedService, setAddedService }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [formValues, setFormValues] = useState({
     description: "",
     cash: "",
@@ -14,18 +14,28 @@ export default function ServiceCard({ addedService, setAddedService }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: ["cash", "credit", "deposit", "giftCertAmount"].includes(name)
-        ? parseFloat(value) || 0
-        : value,
-    });
+
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  // Adds the service to the local state but does not submit to the server
   const addServiceToLocalList = (e) => {
     e.preventDefault();
-    setAddedService([...addedService, formValues]);
+
+    const formattedService = {
+      ...formValues,
+      cash: formValues.cash ? parseFloat(formValues.cash) || 0 : 0,
+      credit: formValues.credit ? parseFloat(formValues.credit) || 0 : 0,
+      deposit: formValues.deposit ? parseFloat(formValues.deposit) || 0 : 0,
+      giftCertAmount: formValues.giftCertAmount
+        ? parseFloat(formValues.giftCertAmount) || 0
+        : 0,
+    };
+
+    setAddedService([...addedService, formattedService]);
+
     setFormValues({
       description: "",
       cash: "",
@@ -33,122 +43,138 @@ export default function ServiceCard({ addedService, setAddedService }) {
       deposit: "",
       giftCertAmount: "",
     });
+
+    setModalOpen(false);
   };
 
   const removeService = (index) => {
-    const newAddedServices = addedService.filter((_, i) => i !== index);
-    setAddedService(newAddedServices);
+    setAddedService(addedService.filter((_, i) => i !== index));
   };
 
   return (
     <article className={styles.servicePage}>
-      {/*<h1 className={styles.subHeader}>Add Services.</h1>*/}
-      <section className={styles.serviceForm}>
-        <label className={styles.labelName}>Description:</label>
-        <input
-          className={styles.serviceFormInput}
-          type="text"
-          name="description"
-          value={formValues.description}
-          onChange={handleInputChange}
-          required
-        />
-        <div className={styles.serviceFormSection}>
-          <label className={styles.labelName}>Cash:</label>
-          <input
-            className={styles.serviceFormInput}
-            type="number"
-            name="cash"
-            step="0.01"
-            min="0"
-            value={formValues.cash}
-            onChange={handleInputChange}
-          />
-          <label className={styles.labelName}>Credit:</label>
-          <input
-            className={styles.serviceFormInput}
-            type="number"
-            name="credit"
-            step="0.01"
-            min="0"
-            value={formValues.credit}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={styles.serviceFormSection}>
-          <label className={styles.labelName}>Deposit:</label>
-          <input
-            className={styles.serviceFormInput}
-            type="number"
-            name="deposit"
-            step="0.01"
-            min="0"
-            value={formValues.deposit}
-            onChange={handleInputChange}
-          />
-          <label className={styles.labelName}>Gift Certificate:</label>
-          <input
-            className={styles.serviceFormInput}
-            type="number"
-            name="giftCertAmount"
-            step="0.01"
-            min="0"
-            value={formValues.giftCertAmount}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button
-          className={styles.serviceFormButton}
-          onClick={addServiceToLocalList}
-        >
-          Submit Service
-        </button>
-      </section>
+      <button
+        className={styles.addServiceButton}
+        onClick={() => setModalOpen(true)}
+      >
+        Add Service
+      </button>
+      <div
+        className={styles.modal}
+        style={{ display: modalOpen ? "flex" : "none" }} // Hides without unmounting
+      >
+        <section className={styles.serviceForm}>
+          <div onClick={() => setModalOpen(false)}>XXX</div>
+          <div className={styles.serviceFormSection}>
+            <label className={styles.labelName}>Description:</label>
+            <input
+              className={styles.serviceFormInput}
+              type="text"
+              name="description"
+              value={formValues.description}
+              onChange={handleInputChange}
+              required
+            />
 
+            <label className={styles.labelName}>Cash:</label>
+            <input
+              className={styles.serviceFormInput}
+              type="number"
+              name="cash"
+              step="0.01"
+              min="0"
+              value={formValues.cash}
+              onChange={handleInputChange}
+            />
+
+            <label className={styles.labelName}>Credit:</label>
+            <input
+              className={styles.serviceFormInput}
+              type="number"
+              name="credit"
+              step="0.01"
+              min="0"
+              value={formValues.credit}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className={styles.serviceFormSection}>
+            <label className={styles.labelName}>Deposit:</label>
+            <input
+              className={styles.serviceFormInput}
+              type="number"
+              name="deposit"
+              step="0.01"
+              min="0"
+              value={formValues.deposit}
+              onChange={handleInputChange}
+            />
+
+            <label className={styles.labelName}>Gift Certificate:</label>
+            <input
+              className={styles.serviceFormInput}
+              type="number"
+              name="giftCertAmount"
+              step="0.01"
+              min="0"
+              value={formValues.giftCertAmount}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <button
+            className={styles.serviceFormButton}
+            onClick={addServiceToLocalList}
+          >
+            Submit Service
+          </button>
+        </section>
+      </div>
       <section className={styles.addedServices}>
         <h2 className={styles.addedServiceHeader}>Services:</h2>
         <div className={styles.servicesAdded}>
           {addedService.map((service, index) => (
             <div className={styles.serviceAdded} key={index}>
-              <div
-                className={styles.serviceItemSection}
-                id={styles.serviceDescription}
-              >
-                <p className={styles.serviceItem}>Description:</p>
-                <p className={styles.serviceItem}> {service.description}</p>
+              <div className={styles.addedServiceItemSection}>
+                <p className={styles.addedserviceItem}>{service.description}</p>
               </div>
-              {service.cash !== "" && (
-                <div className={styles.serviceItemSection}>
-                  <p className={styles.serviceItem}>Cash:</p>
-                  <p className={styles.serviceItem}> ${service.cash}</p>
+
+              {service.cash > 0 && (
+                <div className={styles.addedServiceItemSection}>
+                  <p className={styles.addedserviceItem}>Cash:</p>
+                  <p className={styles.addedserviceItem}>${service.cash}</p>
                 </div>
               )}
-              {service.credit !== "" && (
-                <div className={styles.serviceItemSection}>
-                  <p className={styles.serviceItem}>Credit:</p>
-                  <p className={styles.serviceItem}> ${service.credit}</p>
+
+              {service.credit > 0 && (
+                <div className={styles.addedServiceItemSection}>
+                  <p className={styles.addedserviceItem}>Credit:</p>
+                  <p className={styles.addedserviceItem}>${service.credit}</p>
                 </div>
               )}
-              {service.deposit !== "" && (
-                <div className={styles.serviceItemSection}>
-                  <p className={styles.serviceItem}>Deposit:</p>
-                  <p className={styles.serviceItem}> ${service.deposit}</p>
+
+              {service.deposit > 0 && (
+                <div className={styles.addedServiceItemSection}>
+                  <p className={styles.addedserviceItem}>Deposit:</p>
+                  <p className={styles.addedserviceItem}>${service.deposit}</p>
                 </div>
               )}
-              {service.giftCertAmount !== "" && (
-                <div className={styles.serviceItemSection}>
-                  <p className={styles.serviceItem}>Gift Certificate:</p>
-                  <p className={styles.serviceItem}>
-                    {" "}
+
+              {service.giftCertAmount > 0 && (
+                <div className={styles.addedServiceItemSection}>
+                  <p className={styles.addedserviceItem}>Gift Certificate:</p>
+                  <p className={styles.addedserviceItem}>
                     ${service.giftCertAmount}
                   </p>
                 </div>
               )}
+
               <button
                 className={styles.deleteButton}
                 onClick={() => removeService(index)}
               >
-                Delete Service
+                Delete
               </button>
             </div>
           ))}
