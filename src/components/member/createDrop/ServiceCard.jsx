@@ -64,7 +64,12 @@ export default function ServiceCard({ addedService, setAddedService }) {
         style={{ display: modalOpen ? "flex" : "none" }} // Hides without unmounting
       >
         <section className={styles.serviceForm}>
-          <div onClick={() => setModalOpen(false)}>XXX</div>
+          <div
+            className={styles.modalClose}
+            onClick={() => setModalOpen(false)}
+          >
+            X
+          </div>
           <div className={styles.serviceFormSection}>
             <label className={styles.labelName}>Description:</label>
             <input

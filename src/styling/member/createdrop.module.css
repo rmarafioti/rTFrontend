@@ -7,53 +7,70 @@
 }
 
 .header {
-    color: var(--accentGold);
-    font-size: 72px;
-    font-weight: bold;
-    -webkit-text-stroke: 2px black;
-    text-shadow: -5px 5px 0px black;
-    margin-bottom: 1rem;
-  }
+  color: var(--accentGold);
+  font-size: 72px;
+  font-weight: bold;
+  -webkit-text-stroke: 2px black;
+  text-shadow: -5px 5px 0px black;
+  margin-bottom: 1rem;
+}
 
-  .dropForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0rem 1rem 0rem 1rem;
-  }
+.dropForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0rem 1rem 0rem 1rem;
+}
 
-  .dropFormInput, .serviceFormInput {
-    font-family: "Poppins", serif;
-    padding: .2rem 1rem .2rem 1rem;
-    font-size: 18px;
-    border: 1px solid black;
-    box-shadow: -5px 5px 0px 1px transparent;
-    transition: box-shadow 0.25s;
-    cursor: pointer;
-    width: 460px;
-  }
+.dropFormInput,
+.serviceFormInput {
+  font-family: "Poppins", serif;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  font-size: 18px;
+  border: 1px solid black;
+  box-shadow: -5px 5px 0px 1px transparent;
+  transition: box-shadow 0.25s;
+  cursor: pointer;
+  width: 460px;
+}
 
-  .serviceFormButton, .submitDropButton, .addServiceButton {
-    border: 2px solid black;
-    background-color: var(--white);
-    margin: 1rem 0rem 1rem 0rem;
-    width: 460px;
-  }
+.serviceFormButton,
+.submitDropButton,
+.addServiceButton {
+  border: 2px solid black;
+  background-color: var(--white);
+  margin: 1rem 0rem 1rem 0rem;
+  width: 460px;
+}
 
-  .serviceFormButton, .addServiceButton {
-    background-color: #e8f2ea;
-    border: 1px solid black;
-    box-shadow: none;
-  }
+.serviceFormButton,
+.addServiceButton {
+  background-color: #e8f2ea;
+  border: 1px solid black;
+  box-shadow: none;
+}
 
-  .serviceFormButton:hover, .addServiceButton:hover {
-    background-color: var(--white);
-    box-shadow: none;
-    border: 1px solid black;
-  }
-  .addServiceButton {
-    align-self: center;
-  }
+.serviceFormButton:hover,
+.addServiceButton:hover {
+  background-color: var(--white);
+  box-shadow: none;
+  border: 1px solid black;
+}
+.addServiceButton {
+  align-self: center;
+}
+
+.submitDropButton, .serviceFormButton {
+  color: var(--white);
+  background-color: rgb(74, 87, 89);
+  box-shadow: none;
+  border: none;
+}
+
+.submitDropButton:hover {
+  box-shadow: none;
+  border: none;
+}
 
 .dropTotal,
 .percentageTotals,
@@ -75,7 +92,9 @@
   width: 920px;
 }
 
-.totalServices, .totalDrop, .addedServices {
+.totalServices,
+.totalDrop,
+.addedServices {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,12 +102,15 @@
   background-color: #e8f2ea;
 }
 
-.totalServices, .totalDrop {
+.totalServices,
+.totalDrop {
   width: 460px;
 }
 
-.serviceTotalsHeader, .dropTotalsHeader, .addedServiceHeader {
- text-align: left;
+.serviceTotalsHeader,
+.dropTotalsHeader,
+.addedServiceHeader {
+  text-align: left;
   color: var(--primaryBlue);
   font-size: 32px;
   font-weight: 600;
@@ -98,8 +120,7 @@
 }
 
 .addedServiceHeader {
-  padding-bottom: 0rem;
-
+  padding-bottom: 1rem;
 }
 
 .servicesAdded {
@@ -110,29 +131,38 @@
   flex-wrap: wrap;
 }
 
-
 .serviceAdded {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 280px;
- margin: 1rem .5rem 1rem .5rem; 
+  margin: 1rem 0.5rem 1rem 0.5rem;
 }
 
-.deleteButton {
+.deleteButton, .modalClose {
   font-size: 18px;
-  padding: .2rem;
+  padding: 0.2rem;
   width: 100%;
   color: var(--white);
   background-color: rgb(105, 124, 127);
   border: none;
   box-shadow: none;
+  cursor: pointer;
+}
+
+.modalClose {
+  align-self: flex-end;
+  font-weight: bold;
+  border: 1px solid var(--black);
+  background-color: var(--secondaryTurquoise);
+  padding: .5rem 1rem .5rem 1rem;
+  width: auto;
 }
 
 .deleteButton:hover {
   background-color: rgb(74, 87, 89);
-border: none;
-box-shadow: none;
+  border: none;
+  box-shadow: none;
 }
 
 .dropTotalsHeader {
@@ -140,7 +170,10 @@ box-shadow: none;
   width: auto;
 }
 
-.serviceItemSection, .percentageTotals, .cutTotals, .addedServiceItemSection {
+.serviceItemSection,
+.percentageTotals,
+.cutTotals,
+.addedServiceItemSection {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -152,21 +185,23 @@ box-shadow: none;
 .addedServiceItemSection {
   background-color: var(--white);
   border: 1px solid rgb(187, 192, 196);
-  padding: .5rem;
+  padding: 0.5rem;
   width: 100%;
 }
 
-.serviceItem, .dropItem {
+.serviceItem,
+.dropItem {
   font-size: 18px;
   /*margin: 0rem 2rem 0rem 2rem;*/
- padding: .5rem 1rem .5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .dropItem {
   font-weight: 500;
 }
 
-#bottomServiceSection, #bottomCutTotals {
+#bottomServiceSection,
+#bottomCutTotals {
   margin-bottom: 2rem;
 }
 
@@ -190,39 +225,78 @@ box-shadow: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background-color: #e8f2ea;
   padding: 2rem;
 }
 
 .servicePage {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .subHeader {
-    align-self: flex-start;
-    color: var(--primaryBlue);
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+  align-self: flex-start;
+  color: var(--primaryBlue);
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.serviceFormSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelName {
+  align-self: flex-start;
+  color: var(--black);
+  font-size: 20px;
+  padding: 0.2rem;
+  padding-left: 0rem;
+  font-weight: 400;
+}
+
+#cashInput,
+#creditInput,
+#depositInput,
+#giftcertInput {
+  width: 460px;
+}
+
+@media (max-width: 1227px) {
+  .header {
+    font-size: 44px;
+    line-height: 55px;
+    z-index: 11;
+    padding: 0rem 1rem 0rem 1rem;
+    margin: 0rem 0rem 2rem 0rem;
+    width: 100%;
+  }
+  .servicePage,
+  .dropForm,
+  .dropPage,
+  .dropFormInput,
+  .totalsSection,
+  .totalDrop,
+  .totalServices,
+  .labelName,
+  .servicesAdded,
+  .addedServices, .serviceFormInput, .serviceFormButton, .serviceFormSection {
+    width: 100%;
   }
 
-  .serviceFormSection {
-    display: flex;
+  .submitDropButton,
+  .addServiceButton, .serviceForm  {
+    width: 90%;
+  }
+  .serviceForm {
+    padding: 1rem;
+  }
+  .totalsSection {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-
-  .labelName {
-    align-self: flex-start;
-    color: var(--black);
-    font-size: 20px;
-    padding: .2rem;
-    padding-left: 0rem;
-    font-weight: 400;
-  }
-
-  #cashInput, #creditInput, #depositInput, #giftcertInput {
-    width: 460px;
-  }
+}
