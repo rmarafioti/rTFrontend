@@ -11,10 +11,14 @@ dayjs.extend(utc);
 export default function Archive() {
   const { data: member, isLoading, error } = useGetAllDropsQuery();
 
+  console.log("Member Data:", member);
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const drops = member?.drops;
+  const drops = member?.drops || [];
+
+  // Extract member_id from the first drop
+  const memberId = drops[0]?.member_id;
 
   // Group drops by year and month
   const dropsByYearAndMonth = (drops || []).reduce((acc, drop) => {
@@ -40,7 +44,7 @@ export default function Archive() {
               {Object.entries(months).map(([month, { monthName }]) => (
                 <Link
                   className={styles.linkName}
-                  to={`/archivemonth/${member.id}/${year}/${month}`}
+                  to={`/archivemonth/${memberId}/${year}/${month}`}
                 >
                   <li key={month} className={styles.link}>
                     {monthName} {year}

@@ -12,7 +12,7 @@
 
    /* color treatment two */
    --primaryBlue: #0047ab;
-   --secondaryTurquoise: #40e0d0;
+   --secondaryTurquoise: rgb(64, 224, 208);
    --accentGold: #ffd700;
    --black: #333333;
    --white: #fafafa;

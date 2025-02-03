@@ -40,9 +40,12 @@ export default function ArchiveMonth() {
     data: memberData,
     isLoading: memberIsLoading,
     error: memberError,
-  } = useGetAllDropsQuery(undefined, {
-    skip: role !== "member",
-  });
+  } = useGetAllDropsQuery(
+    { year, month },
+    {
+      skip: role !== "member",
+    }
+  );
 
   const isLoading = memberIsLoading || memberDropsIsLoading;
   const error = memberError || memberDropsError;
@@ -68,12 +71,14 @@ export default function ArchiveMonth() {
 
   console.log("Filtered Drops:", filteredDrops);
 
-  const monthTotal = drops.reduce((acc, drop) => {
-    return acc + drop.total;
-  }, 0);
-
+  const monthTotal = filteredDrops.reduce((acc, drop) => acc + drop.total, 0);
   const memberTotal = monthTotal * 0.6;
   const businessTotal = monthTotal * 0.4;
+
+  const memberName =
+    role === "owner"
+      ? memberDropsData?.memberDetails?.memberName
+      : memberData?.drops[0]?.member?.memberName;
 
   // Calculate pagination
   const lastIndex = currentPage * notificationsPerPage;
@@ -83,14 +88,13 @@ export default function ArchiveMonth() {
   return (
     <article className="pageSetup">
       <h1 className={styles.header}>
-        {role === "owner"
-          ? `${memberDropsData?.memberDetails?.memberName}'s Drops`
-          : "Month's Drops"}
+        {role === "owner" ? `${memberName}'s Drops` : `Your Month's Drops`}
       </h1>
+
       <section className={styles.monthSection}>
         <h2 className={styles.monthTotal}>Month Total: {monthTotal}</h2>
         <p className={styles.memberTotal}>
-          {memberDropsData?.memberDetails?.memberName}'s Total: {memberTotal}
+          {memberName ? `${memberName}'s` : "Your"} Total: {memberTotal}
         </p>
         <p className={styles.businessTotal}>
           Business's Total: {businessTotal}

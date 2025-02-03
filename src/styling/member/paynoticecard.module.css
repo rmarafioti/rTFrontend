@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
-  width: 460px;
+  margin: 0rem 0rem 1rem 0rem;
 }
 
 .currentDrop {
@@ -65,13 +65,94 @@
   font-size: 18px;
 }
 
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(64, 224, 208, 0.8);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.modalContent {
+  text-align: center;
+  background-color: #e8f2ea;
+  padding: 2rem;
+  width: 460px;
+}
+
+.message {
+  font-size: 20px;
+  padding-bottom: 2rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0rem 4rem 0rem 4rem;
+}
+
+.modalButton {
+  width: 100px;
+}
+
+#no {
+  background-color: #e8f2ea;
+  box-shadow: none;
+  border: 1px solid var(--black)
+}
+#no:hover {
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  box-shadow: none;
+}
+#yes {
+  border: none;
+  box-shadow: none;
+  color: var(--white);
+  background-color: rgb(74, 87, 89);
+}
+
+.paymentNotice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: .5rem;
+}
+
+.paymentMethod {
+  font-size: 16px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgb(187, 192, 196);
+  width: 100%;
+}
+
+.paymentNoticeButton {
+  color: rgb(36, 37, 38);
+  padding: 0.2rem;
+  width: 90%;
+  border: 2px solid rgb(187, 192, 196);
+  width: 100%;
+}
+
+
+
 @media (max-width: 1227px) {
   .dashboardSection {
     width: 100%;
     margin-bottom: 0rem;
     border-bottom: none;
   }
-  .memberDrops {
+  .memberDrops, .modalContent {
     width: 100%;
+  }
+  .modalContent {
+    padding: 2rem 0rem 2rem 0rem;
   }
 }

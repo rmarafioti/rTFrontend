@@ -29,14 +29,17 @@
     border: 2px solid transparent;
     color: var(--white);
     background-color: rgb(74, 87, 89);
-    transition: background-color 0.25s;
-    transition: color 0.25s;
+    box-shadow: none;
+    padding: .5rem;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
     width: 400px
   }
 
   .createDrop:hover {
-    color: var(--black);
-    background-color: var(--secondaryTurquoise);
+   box-shadow: none;
+   border: none;
   }
 
   .takeHome {
