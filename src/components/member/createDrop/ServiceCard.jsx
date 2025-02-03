@@ -3,6 +3,7 @@ import styles from "../../../styling/member/createdrop.module.css";
 
 export default function ServiceCard({ addedService, setAddedService }) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formValues, setFormValues] = useState({
     description: "",
@@ -24,14 +25,31 @@ export default function ServiceCard({ addedService, setAddedService }) {
   const addServiceToLocalList = (e) => {
     e.preventDefault();
 
+    const cash = parseFloat(formValues.cash) || 0;
+    const credit = parseFloat(formValues.credit) || 0;
+    const deposit = parseFloat(formValues.deposit) || 0;
+    const giftCertAmount = parseFloat(formValues.giftCertAmount) || 0;
+
+    if (!formValues.description.trim()) {
+      setErrorMessage("Please enter a description for your drop.");
+      return;
+    }
+
+    if (cash === 0 && credit === 0 && deposit === 0 && giftCertAmount === 0) {
+      setErrorMessage(
+        "Please enter at least one form of payment for your service."
+      );
+      return;
+    }
+
+    setErrorMessage("");
+
     const formattedService = {
-      ...formValues,
-      cash: formValues.cash ? parseFloat(formValues.cash) || 0 : 0,
-      credit: formValues.credit ? parseFloat(formValues.credit) || 0 : 0,
-      deposit: formValues.deposit ? parseFloat(formValues.deposit) || 0 : 0,
-      giftCertAmount: formValues.giftCertAmount
-        ? parseFloat(formValues.giftCertAmount) || 0
-        : 0,
+      description: formValues.description,
+      cash,
+      credit,
+      deposit,
+      giftCertAmount,
     };
 
     setAddedService([...addedService, formattedService]);
@@ -134,55 +152,68 @@ export default function ServiceCard({ addedService, setAddedService }) {
           >
             Submit Service
           </button>
+          {errorMessage && (
+            <p className={styles.errorMessage}>{errorMessage}</p>
+          )}
         </section>
       </div>
       <section className={styles.addedServices}>
         <h2 className={styles.addedServiceHeader}>Services:</h2>
         <div className={styles.servicesAdded}>
-          {addedService.map((service, index) => (
-            <div className={styles.serviceAdded} key={index}>
-              <div className={styles.addedServiceItemSection}>
-                <p className={styles.addedserviceItem}>{service.description}</p>
-              </div>
-
-              {service.cash > 0 && (
+          {addedService.length > 0 ? (
+            addedService.map((service, index) => (
+              <div className={styles.serviceAdded} key={index}>
                 <div className={styles.addedServiceItemSection}>
-                  <p className={styles.addedserviceItem}>Cash:</p>
-                  <p className={styles.addedserviceItem}>${service.cash}</p>
-                </div>
-              )}
-
-              {service.credit > 0 && (
-                <div className={styles.addedServiceItemSection}>
-                  <p className={styles.addedserviceItem}>Credit:</p>
-                  <p className={styles.addedserviceItem}>${service.credit}</p>
-                </div>
-              )}
-
-              {service.deposit > 0 && (
-                <div className={styles.addedServiceItemSection}>
-                  <p className={styles.addedserviceItem}>Deposit:</p>
-                  <p className={styles.addedserviceItem}>${service.deposit}</p>
-                </div>
-              )}
-
-              {service.giftCertAmount > 0 && (
-                <div className={styles.addedServiceItemSection}>
-                  <p className={styles.addedserviceItem}>Gift Certificate:</p>
                   <p className={styles.addedserviceItem}>
-                    ${service.giftCertAmount}
+                    {service.description}
                   </p>
                 </div>
-              )}
 
-              <button
-                className={styles.deleteButton}
-                onClick={() => removeService(index)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+                {service.cash > 0 && (
+                  <div className={styles.addedServiceItemSection}>
+                    <p className={styles.addedserviceItem}>Cash:</p>
+                    <p className={styles.addedserviceItem}>${service.cash}</p>
+                  </div>
+                )}
+
+                {service.credit > 0 && (
+                  <div className={styles.addedServiceItemSection}>
+                    <p className={styles.addedserviceItem}>Credit:</p>
+                    <p className={styles.addedserviceItem}>${service.credit}</p>
+                  </div>
+                )}
+
+                {service.deposit > 0 && (
+                  <div className={styles.addedServiceItemSection}>
+                    <p className={styles.addedserviceItem}>Deposit:</p>
+                    <p className={styles.addedserviceItem}>
+                      ${service.deposit}
+                    </p>
+                  </div>
+                )}
+
+                {service.giftCertAmount > 0 && (
+                  <div className={styles.addedServiceItemSection}>
+                    <p className={styles.addedserviceItem}>Gift Certificate:</p>
+                    <p className={styles.addedserviceItem}>
+                      ${service.giftCertAmount}
+                    </p>
+                  </div>
+                )}
+
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => removeService(index)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))
+          ) : (
+            <p className={styles.noServicesMessage}>
+              *you have not added any services yet*
+            </p>
+          )}
         </div>
       </section>
     </article>

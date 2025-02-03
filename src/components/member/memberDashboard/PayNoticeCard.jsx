@@ -11,7 +11,56 @@ import styles from "../../../styling/member/paynoticecard.module.css";
 export default function PayNoticeCard() {
   const { data: member, error, isLoading } = useGetMemberQuery();
   const [payNotice] = useMemberPayNoticeMutation();
+  const [selectedDropId, setSelectedDropId] = useState(null);
   const [deleteDrop] = useMemberDeleteDropMutation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const submitDeleteDrop = async (dropId) => {
+    console.log("Deleting drop with ID:", dropId);
+    try {
+      await deleteDrop(dropId).unwrap();
+      closeModal();
+    } catch (error) {
+      console.error("Error deleting drop with ID ${dropId}:", error);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setSelectedDropId(null);
+  };
+
+  function DeleteModal({ dropId }) {
+    return (
+      <>
+        {isModalVisible && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <p className={styles.message}>
+                Are you sure you want to delete this drop?
+              </p>
+              <div className={styles.buttonContainer}>
+                <button
+                  className={styles.modalButton}
+                  id={styles.no}
+                  onClick={closeModal}
+                >
+                  No
+                </button>
+                <button
+                  className={styles.modalButton}
+                  id={styles.yes}
+                  onClick={() => submitDeleteDrop(dropId)}
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -76,15 +125,6 @@ export default function PayNoticeCard() {
     }
   };
 
-  const submitDeleteDrop = async (dropId) => {
-    console.log("Deleting drop with ID:", dropId);
-    try {
-      await deleteDrop(dropId).unwrap();
-    } catch (error) {
-      console.error("Error deleting drop with ID ${dropId}:", error);
-    }
-  };
-
   return (
     <section className={styles.dashboardSection}>
       <h2 className={styles.subHeaders}>Current Drops:</h2>
@@ -98,7 +138,10 @@ export default function PayNoticeCard() {
                 })}
               </Link>
               <button
-                onClick={() => submitDeleteDrop(drop.id)}
+                onClick={() => {
+                  setSelectedDropId(drop.id);
+                  setIsModalVisible(true);
+                }}
                 className={styles.deleteDrop}
               >
                 X
@@ -148,6 +191,7 @@ export default function PayNoticeCard() {
           </div>
         )}
       </div>
+      <DeleteModal dropId={selectedDropId} />
     </section>
   );
 }

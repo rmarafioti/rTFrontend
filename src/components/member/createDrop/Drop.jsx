@@ -18,6 +18,7 @@ export default function Drop({ dropId }) {
 
   const [addedService, setAddedService] = useState([]);
   const [date, setDate] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [createService] = useMemberCreateServiceMutation();
   const [updateDrop] = useMemberUpdateDropMutation();
   const [updateMemberInfo] = useMemberUpdateInfoMutation();
@@ -62,6 +63,11 @@ export default function Drop({ dropId }) {
   // Submit all services to the backend
   const submitServices = async () => {
     try {
+      if (!date.trim()) {
+        setErrorMessage("Please enter a date for your drop.");
+        return;
+      }
+
       const newDrop = await createDrop().unwrap();
 
       if (!newDrop?.id) {
@@ -189,6 +195,7 @@ export default function Drop({ dropId }) {
         <button className={styles.submitDropButton} onClick={submitServices}>
           Submit Daily Drop
         </button>
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       </article>
     </>
   );
