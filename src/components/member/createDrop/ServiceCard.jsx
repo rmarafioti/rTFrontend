@@ -42,7 +42,7 @@ export default function ServiceCard({ addedService, setAddedService }) {
 
   return (
     <article className={styles.servicePage}>
-      <h1 className={styles.subHeader}>Add Services.</h1>
+      {/*<h1 className={styles.subHeader}>Add Services.</h1>*/}
       <section className={styles.serviceForm}>
         <label className={styles.labelName}>Description:</label>
         <input
@@ -98,24 +98,58 @@ export default function ServiceCard({ addedService, setAddedService }) {
           />
         </div>
         <button
-          className={styles.serviceFormInput}
+          className={styles.serviceFormButton}
           onClick={addServiceToLocalList}
         >
-          Add Service
+          Submit Service
         </button>
       </section>
 
-      <section>
-        <h2>Services to be Added:</h2>
-        <div>
+      <section className={styles.addedServices}>
+        <h2 className={styles.addedServiceHeader}>Services:</h2>
+        <div className={styles.servicesAdded}>
           {addedService.map((service, index) => (
-            <div key={index}>
-              {service.description} - Cash: ${service.cash}, Credit: $
-              {service.credit}, Deposit: ${service.deposit}, Gift Certificate: $
-              {service.giftCertAmount}
-              <div onClick={() => removeService(index)}>
-                <IoClose />
+            <div className={styles.serviceAdded} key={index}>
+              <div
+                className={styles.serviceItemSection}
+                id={styles.serviceDescription}
+              >
+                <p className={styles.serviceItem}>Description:</p>
+                <p className={styles.serviceItem}> {service.description}</p>
               </div>
+              {service.cash !== "" && (
+                <div className={styles.serviceItemSection}>
+                  <p className={styles.serviceItem}>Cash:</p>
+                  <p className={styles.serviceItem}> ${service.cash}</p>
+                </div>
+              )}
+              {service.credit !== "" && (
+                <div className={styles.serviceItemSection}>
+                  <p className={styles.serviceItem}>Credit:</p>
+                  <p className={styles.serviceItem}> ${service.credit}</p>
+                </div>
+              )}
+              {service.deposit !== "" && (
+                <div className={styles.serviceItemSection}>
+                  <p className={styles.serviceItem}>Deposit:</p>
+                  <p className={styles.serviceItem}> ${service.deposit}</p>
+                </div>
+              )}
+              {service.giftCertAmount !== "" && (
+                <div className={styles.serviceItemSection}>
+                  <p className={styles.serviceItem}>Gift Certificate:</p>
+                  <p className={styles.serviceItem}>
+                    {" "}
+                    ${service.giftCertAmount}
+                  </p>
+                </div>
+              )}
+              <button
+                className={styles.deleteButton}
+                onClick={() => removeService(index)}
+              >
+                Delete Service
+              </button>
             </div>
           ))}
         </div>

@@ -107,7 +107,7 @@ export default function Drop({ dropId }) {
   return (
     <article className={styles.dropPage}>
       <form className={styles.dropForm}>
-        <label className={styles.labelName}>Date:</label>
+        <label className={styles.labelName}>Enter date of drop: </label>
         <input
           className={styles.dropFormInput}
           type="date"
@@ -116,6 +116,7 @@ export default function Drop({ dropId }) {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
+        <button className={styles.addServiceButton}>Add Service</button>
         <ServiceCard
           addedService={addedService}
           setAddedService={setAddedService}
@@ -124,29 +125,55 @@ export default function Drop({ dropId }) {
       </form>
       <section className={styles.totalsSection}>
         <div className={styles.totalServices}>
-          <h2>Service Totals:</h2>
-          <p>Cash: ${serviceTotals.cash}</p>
-          <p>Credit: ${serviceTotals.credit}</p>
-          <p>Deposit: ${serviceTotals.deposit}</p>
-          <p>Gift Certificate: ${serviceTotals.giftCertAmount}</p>
+          <h2 className={styles.serviceTotalsHeader}>Service Totals:</h2>
+          <div className={styles.serviceItemSection}>
+            <p className={styles.serviceItem}>Cash:</p>
+            <p className={styles.serviceItem}> ${serviceTotals.cash}</p>
+          </div>
+          <div className={styles.serviceItemSection}>
+            <p className={styles.serviceItem}>Credit:</p>
+            <p className={styles.serviceItem}> ${serviceTotals.credit}</p>
+          </div>
+          <div className={styles.serviceItemSection}>
+            <p className={styles.serviceItem}>Deposit:</p>
+            <p className={styles.serviceItem}> ${serviceTotals.deposit}</p>
+          </div>
+          <div
+            className={styles.serviceItemSection}
+            id={styles.bottomServiceSection}
+          >
+            <p className={styles.serviceItem}>Gift Certificate:</p>
+            <p className={styles.serviceItem}>
+              {" "}
+              ${serviceTotals.giftCertAmount}
+            </p>
+          </div>
         </div>
-        <div className={styles.dropTotal}>
-          <h2>Drop Total:</h2>
-          <p>${total}</p>
+        <div className={styles.totalDrop}>
+          <div className={styles.dropTotal}>
+            <p className={styles.dropTotalsHeader}>Drop Total:</p>
+            <p className={styles.dropTotalsHeader}>${total}</p>
+          </div>
+          <div className={styles.percentageTotals}>
+            <p className={styles.dropItem}>Your Total:</p>
+            <p className={styles.dropItem}>${memberCut}</p>
+          </div>
+          <div className={styles.percentageTotals}>
+            <p className={styles.dropItem}>Shop Total:</p>
+            <p className={styles.dropItem}>${businessCut}</p>
+          </div>
+          <div className={styles.cutTotals}>
+            <p className={styles.dropItem}>Shop Owes:</p>
+            <p className={styles.dropItem}>${businessOwes}</p>
+          </div>
+          <div className={styles.cutTotals} id={styles.bottomCutTotals}>
+            <p className={styles.dropItem}>You Owe The Shop:</p>
+            <p className={styles.dropItem}>${memberOwes}</p>
+          </div>
         </div>
-        <div className={styles.percentageTotals}>
-          <h2>Your Total:</h2>
-          <p>${memberCut}</p>
-          <h2>Shop Total:</h2>
-          <p>${businessCut}</p>
-        </div>
-        <div className={styles.cutTotals}>
-          <h2>Shop Owes:</h2>
-          <p>${businessOwes}</p>
-          <h2>You Owe The Shop:</h2>
-          <p>${memberOwes}</p>
-        </div>
-        <button onClick={submitServices}>Submit All Services</button>
+        <button className={styles.submitDropButton} onClick={submitServices}>
+          Submit Daily Drop
+        </button>
       </section>
     </article>
   );
