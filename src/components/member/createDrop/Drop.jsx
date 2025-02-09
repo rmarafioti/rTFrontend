@@ -6,7 +6,6 @@ import {
   useMemberCreateDropMutation,
   useMemberCreateServiceMutation,
   useMemberUpdateDropMutation,
-  useMemberUpdateInfoMutation,
 } from "../../../features/members/membersSlice";
 import styles from "../../../styling/member/createdrop.module.css";
 
@@ -21,7 +20,6 @@ export default function Drop({ dropId }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [createService] = useMemberCreateServiceMutation();
   const [updateDrop] = useMemberUpdateDropMutation();
-  const [updateMemberInfo] = useMemberUpdateInfoMutation();
   const navigate = useNavigate();
 
   const handleSetAddedService = useCallback((newServices) => {
@@ -92,12 +90,18 @@ export default function Drop({ dropId }) {
       // Now update the drop with calculated totals
       await updateDrop({
         dropId,
-        date: new Date(date).toISOString(), // assuming the current date; adjust as needed
+        date: new Date(date).toISOString(),
         total: total,
         memberCut: memberCut,
         businessCut: businessCut,
-        memberOwes: memberOwes,
-        businessOwes: businessOwes,
+        memberOwes: Math.max(
+          0,
+          businessCut - (serviceTotals.credit + serviceTotals.giftCertAmount)
+        ),
+        businessOwes: Math.max(
+          0,
+          memberCut - (serviceTotals.cash + serviceTotals.deposit)
+        ),
       }).unwrap();
 
       console.log("Sending update request with data:", {
@@ -106,13 +110,6 @@ export default function Drop({ dropId }) {
         memberOwes,
         businessOwes,
       });
-
-      await updateMemberInfo({
-        memberId,
-        memberCut,
-        memberOwes,
-        businessOwes,
-      }).unwrap();
 
       console.log("Member information updated successfully");
 

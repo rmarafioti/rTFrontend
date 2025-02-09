@@ -66,20 +66,17 @@ export default function PayNoticeCard() {
   if (error) return <p>Error: {error.message}</p>;
 
   // Calculate business total from unpaid drops
-  const businessTotal = member.drop
-    .filter((drop) => !drop.paid)
-    .reduce((total, drop) => total + drop.businessOwes, 0);
+  const businessTotal = member.totalOwed;
 
   // Calculate member total for unpaid drops
-  const memberTotal = member.drop
-    .filter((drop) => !drop.paid)
-    .reduce((total, drop) => total + drop.memberOwes, 0);
+  const memberTotal = member.totalOwe; // ✅ Directly use totalOwe from the member object
 
-  const businessOwesTotal =
-    /*memberTotal > 0 ? 0 :*/ businessTotal - memberTotal;
+  /*const businessOwesTotal =
+    memberTotal > 0 ? 0 : businessTotal - memberTotal;*/
 
   // We don't want to see a members owes total if the business owes total is greater than 0
-  const memberOwesTotal = businessOwesTotal > 0 ? 0 : memberTotal;
+  const memberOwesTotal =
+    member.totalOwed > 0 ? 0 : Math.max(0, member.totalOwe); // ✅ Correct logic
 
   const [paidMessages, setPaidMessages] = useState({});
 
@@ -151,12 +148,11 @@ export default function PayNoticeCard() {
         ) : (
           <p>*All your drops are paid up to date*</p>
         )}
-        {businessTotal !== 0 && (
-          <p className={styles.totals}>Owed to You: {businessOwesTotal}</p>
-        )}
-        {memberOwesTotal !== 0 && (
+        {member.totalOwed > 0 ? (
+          <p className={styles.totals}>Owed to You: {member.totalOwed}</p>
+        ) : memberOwesTotal > 0 ? (
           <p className={styles.totals}>You Owe: {memberOwesTotal}</p>
-        )}
+        ) : null}
 
         {/* Render payment notification section if the member owes the business */}
         {memberOwesTotal > 0 && (

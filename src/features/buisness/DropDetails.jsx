@@ -66,7 +66,11 @@ export default function Drop() {
             </>
           ) : (
             <>
-              <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
+              {drop.memberOwes > 0 ? (
+                <p className={styles.oweAmounts}>You Owe: ${drop.memberOwes}</p>
+              ) : (
+                ""
+              )}
               <p className={styles.oweAmounts}>
                 Owed to You: ${drop.businessOwes}
               </p>
