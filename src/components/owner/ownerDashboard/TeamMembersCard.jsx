@@ -124,7 +124,7 @@ export default function TeamMembersCard() {
                     {member.totalOwe < payAmount ? (
                       ""
                     ) : (
-                      <p className={styles.totals}>
+                      <p className={styles.totals} id={styles.teamMemberOwes}>
                         Team Member Owes: ${member.totalOwe}
                       </p>
                     )}
