@@ -64,14 +64,18 @@ export default function MemberNotificationsCard() {
             </div>
           ))
       ) : (
-        <p>No payment notifications yet.</p>
+        <p>*No payment notifications yet*</p>
       )}
-      <div className={styles.paymentKey}>
-        <p>owner payment:</p>
-        <p className={styles.payeeColor} id={styles.yellow}></p>
-        <p>your payment:</p>
-        <p className={styles.payeeColor} id={styles.blue}></p>
-      </div>
+      {paidDrops?.length ? (
+        <div className={styles.paymentKey}>
+          <p>owner payment:</p>
+          <p className={styles.payeeColor} id={styles.yellow}></p>
+          <p>your payment:</p>
+          <p className={styles.payeeColor} id={styles.blue}></p>
+        </div>
+      ) : (
+        ""
+      )}
       <Link to="/membernotifications/" className={styles.link}>
         View all payments
       </Link>

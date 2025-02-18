@@ -63,6 +63,10 @@
   font-size: 18px;
 }
 
+#teamMemberOwes {
+  margin-bottom: .5rem;
+}
+
 .paymentNotice {
   display: flex;
   flex-direction: column;

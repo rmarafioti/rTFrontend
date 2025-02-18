@@ -124,15 +124,16 @@ export default function TeamMembersCard() {
                     {member.totalOwe < payAmount ? (
                       ""
                     ) : (
-                      <p className={styles.totals}>
+                      <p className={styles.totals} id={styles.teamMemberOwes}>
                         Team Member Owes: ${member.totalOwe}
                       </p>
                     )}
-                    {payAmount !== 0 && (
-                      <p className={styles.totals}>
-                        Total Balance to Pay: ${payAmount}
-                      </p>
-                    )}
+                    {payAmount !== 0 ||
+                      (payAmount < 0 && (
+                        <p className={styles.totals}>
+                          Total Balance to Pay: ${payAmount}
+                        </p>
+                      ))}
                     {/* Only show payment options and button if the 'Pay' is greater than 0 or not all paid*/}
                     {payAmount > 0 && (
                       <div className={styles.paymentNotice}>
