@@ -10,14 +10,14 @@
   font-weight: 400;
   font-style: normal;
 
-   /* color treatment two */
-   --primaryBlue: #0047ab;
-   --secondaryTurquoise: rgb(64, 224, 208);
-   --accentGold: #ffd700;
-   --black: #333333;
-   --white: #fafafa;
+  /* color treatment two */
+  --primaryBlue: #0047ab;
+  --secondaryTurquoise: rgb(64, 224, 208);
+  --accentGold: #ffd700;
+  --black: #333333;
+  --white: #fafafa;
 
-   background-color: var(--white);
+  background-color: #d7f4db;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -49,15 +49,15 @@ h2 {
 }
 
 button {
-  padding: .5rem;
+  padding: 0.5rem;
   font-size: 18px;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--white);
   border-left: 2px solid var(--black);
   border-bottom: 2px solid var(--black);
-  border-right:  2px solid transparent;
-  border-top:  2px solid transparent;
+  border-right: 2px solid transparent;
+  border-top: 2px solid transparent;
   cursor: pointer;
   box-shadow: -5px 5px 0px 1px transparent;
   transition: border-color 0.25s;
@@ -74,13 +74,8 @@ button:focus-visible {
 }
 
 @media (max-width: 768px) {
-  .button, .layout {
+  .button,
+  .layout {
     width: 100%;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    background-color: #d7f4db;
   }
 }
