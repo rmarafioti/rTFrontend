@@ -11,6 +11,7 @@ const businessApi = api.injectEndpoints({
       }),
       providesTags: ["Business"],
     }),
+
     //fetch drop data
     getDrops: builder.query({
       query: (dropId) => ({

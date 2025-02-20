@@ -52,7 +52,7 @@ export default function Navbar() {
     skip: !ownerToken, // Skip the query if ownerToken is not present
   });
 
-  // Only make the request if an ownerToken is present
+  // Only make the request if an memberToken is present
   const { data: member } = useGetMemberQuery(undefined, {
     skip: !memberToken, // Skip the query if memberToken is not present
   });

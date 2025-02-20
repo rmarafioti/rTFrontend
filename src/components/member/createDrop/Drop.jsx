@@ -58,7 +58,7 @@ export default function Drop({ dropId }) {
     memberCut - (serviceTotals.cash + serviceTotals.deposit)
   );
 
-  // Submit all services to the backend
+  // Submit all services
   const submitServices = async () => {
     try {
       if (!date.trim()) {
@@ -104,17 +104,8 @@ export default function Drop({ dropId }) {
         ),
       }).unwrap();
 
-      console.log("Sending update request with data:", {
-        memberId,
-        memberCut,
-        memberOwes,
-        businessOwes,
-      });
-
-      console.log("Member information updated successfully");
-
       console.log("Drop updated successfully");
-      setAddedService([]); // Clear after submission
+      setAddedService([]);
       navigate("/memberdashboard");
     } catch (error) {
       console.error("Error adding services:", error);

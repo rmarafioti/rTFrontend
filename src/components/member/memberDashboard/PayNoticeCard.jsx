@@ -65,18 +65,9 @@ export default function PayNoticeCard() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Calculate business total from unpaid drops
-  const businessTotal = member.totalOwed;
-
-  // Calculate member total for unpaid drops
-  const memberTotal = member.totalOwe; // ✅ Directly use totalOwe from the member object
-
-  /*const businessOwesTotal =
-    memberTotal > 0 ? 0 : businessTotal - memberTotal;*/
-
   // We don't want to see a members owes total if the business owes total is greater than 0
   const memberOwesTotal =
-    member.totalOwed > 0 ? 0 : Math.max(0, member.totalOwe); // ✅ Correct logic
+    member.totalOwed > 0 ? 0 : Math.max(0, member.totalOwe);
 
   const [paidMessages, setPaidMessages] = useState({});
 
@@ -100,7 +91,7 @@ export default function PayNoticeCard() {
   // Check if there is a `paidNotice` for these unpaid drops
   const hasPendingNotice = unpaidDrops.some((drop) => drop.paidNotice);
 
-  // Collect the IDs of unpaid drops
+  // Collect the ids of unpaid drops
   const unpaidDropIds = unpaidDrops?.map((drop) => drop.id) || [];
 
   const sendPaymentNotice = async (memberId) => {

@@ -12,7 +12,7 @@ export default function NotificationsCard() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Extract payment notices using reduce
+  // Extract payment notices
   const payNotices = owner?.ownerBusiness?.reduce((acc, business) => {
     business.businessMember.forEach((member) => {
       member.drop.forEach((drop) => {

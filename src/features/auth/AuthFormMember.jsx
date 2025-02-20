@@ -60,7 +60,7 @@ export default function AuthFormMember() {
       //set login naviagtion to proper paths
 
       if (!isLogin) {
-        // If registering, create a business after successful registration
+        // If registering, link member to business after successful registration
         const memberId = authResponse.id;
         await linkBusiness({
           businessName,

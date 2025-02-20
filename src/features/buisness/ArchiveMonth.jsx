@@ -18,14 +18,14 @@ export default function ArchiveMonth() {
   const [currentPage, setCurrentPage] = useState(1);
   const notificationsPerPage = 18;
 
-  // This file is a shared feature between owner and team members so we need to check if token are present
+  //This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
-  // Then define the user's role based on token presence
+  //Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
-  // For owners: fetch specific member's drops based on memberId, year, and month
+  //For owners: fetch specific member's drops based on memberId, year, and month
   const {
     data: memberDropsData,
     isLoading: memberDropsIsLoading,
@@ -35,7 +35,7 @@ export default function ArchiveMonth() {
     { skip: role !== "owner" || !memberId }
   );
 
-  // For logged-in members: fetch their own drops for the given month and year
+  //For logged-in members: fetch their own drops for the given month and year
   const {
     data: memberData,
     isLoading: memberIsLoading,
@@ -65,7 +65,7 @@ export default function ArchiveMonth() {
 
     console.log("All Drops:", drops);
 
-    // Compare the year and month with the selected year and month
+    //Compare the year and month with the selected year and month
     return dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10);
   });
 
