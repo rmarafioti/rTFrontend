@@ -111,12 +111,12 @@
   .serviceSection,
   .dropSection,
   .dateSection,
-  #serviceDetails {
+  #serviceDetails,
+  .dropSection {
     width: 100%;
   }
   .dropSection {
     flex-direction: column;
-    width: 100%;
   }
   #serviceDetails {
     border-right: 1px solid rgb(187, 192, 196);

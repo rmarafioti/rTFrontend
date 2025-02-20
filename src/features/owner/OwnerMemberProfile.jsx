@@ -41,9 +41,6 @@ export default function OwnerMemberProfile() {
     const month = dropDate.month() + 1;
     const monthName = dropDate.format("MMMM");
 
-    // Ensure memberCut is a valid number
-    const memberCut = Number(drop.memberCut) || 0;
-
     if (!acc[year]) acc[year] = {};
     if (!acc[year][month]) {
       acc[year][month] = { monthName, month, drops: [], totalMemberCut: 0 };
@@ -58,7 +55,7 @@ export default function OwnerMemberProfile() {
     return acc;
   }, {});
 
-  console.log(dropsByYearAndMonth);
+  /*console.log(dropsByYearAndMonth);*/
 
   // Handle update percentage
   const handlePercentage = async () => {

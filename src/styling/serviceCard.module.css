@@ -1,37 +1,49 @@
 .serviceForm {
-    display: flex;
-    flex-direction: column;
-   align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .serviceFormInput {
-    margin: .5rem;
-    padding: .5rem;
-    font-size: 18px;
-    font-weight: bold;
-    border: 1px solid black;
-    width: 480px;
-  }
+.serviceFormInput {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+  width: 480px;
+}
 
+.serviceFormSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#cashInput,
+#creditInput,
+#depositInput,
+#giftcertInput {
+  width: 480px;
+}
+
+#addService:hover {
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+@media (max-width: 586px) {
+  .pageSetup,
+  #footer,
+  #navbar,
+  .serviceFormInput,
+  #cashInput,
+  #creditInput,
+  #depositInput,
+  #giftcertInput,
+  .serviceForm,
   .serviceFormSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
   }
-
-  #cashInput, #creditInput, #depositInput, #giftcertInput {
-    width: 480px;
-  }
-
-  #addService:hover {
-    color: white;
-    background-color: black;
-    cursor: pointer;
-  }
-
-  @media (max-width: 586px) {
-    .pageSetup, #footer, #navbar, .serviceFormInput, #cashInput, #creditInput, #depositInput, #giftcertInput, .serviceForm, .serviceFormSection {
-      width: 100%;
-    }
-  }
+}

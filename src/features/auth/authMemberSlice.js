@@ -6,7 +6,6 @@ const TOKEN_KEY = "memberToken";
 // Authentication member endpoints
 const authMemberApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // Member auth endpoints
     registerMember: builder.mutation({
       query: (credentials) => ({
         url: "/auth/member/register",

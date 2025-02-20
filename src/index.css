@@ -10,7 +10,6 @@
   font-weight: 400;
   font-style: normal;
 
-  /* color treatment two */
   --primaryBlue: #0047ab;
   --secondaryTurquoise: rgb(64, 224, 208);
   --accentGold: #ffd700;
@@ -29,7 +28,7 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  min-height: 100vh; /* Full viewport height */
+  min-height: 100vh;
 }
 
 main {

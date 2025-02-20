@@ -73,7 +73,6 @@
   z-index: 10;
 }
 
-
 .subItem {
   margin: 1rem 0rem 0rem 0rem;
   padding: 0rem 1rem 1rem 1rem;
@@ -129,7 +128,6 @@
   color: black;
   background-color: white;
   border: 2px solid rgb(36, 37, 38);
-  /*box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);*/
 }
 
 .menuItem :hover,
@@ -140,7 +138,8 @@
   box-shadow: -5px 5px 0px 1px rgb(36, 37, 38);
 }
 
-.menuMember, .menuOwner {
+.menuMember,
+.menuOwner {
   display: none;
 }
 
@@ -226,17 +225,19 @@
     transform: rotate(45deg) translate(0, 0);
     top: 0;
   }
-  .menuMember, .menuOwner {
+  .menuMember,
+  .menuOwner {
     position: absolute;
     top: 0;
     right: 0;
     padding: 0rem;
     width: 100vw;
     background-color: #f9f9f9;
-    
+
     z-index: 13;
   }
-  .menuMember.active, .menuOwner.active {
+  .menuMember.active,
+  .menuOwner.active {
     display: flex;
     margin-top: 3.5rem;
     height: 120vh;
@@ -250,7 +251,7 @@
     text-decoration: underline;
     text-underline-offset: 4px;
     padding: 1rem 0rem 1rem 1rem;
-    background-color:var(--secondaryTurquoise); 
+    background-color: var(--secondaryTurquoise);
     border-bottom: 1px solid rgb(74, 87, 89);
     width: 100%;
   }
@@ -259,8 +260,9 @@
     color: var(--black);
   }
 
-  #staticInfo, #teamMembers {
-    background-color:#e8f2ea; 
+  #staticInfo,
+  #teamMembers {
+    background-color: #e8f2ea;
     color: var(--black);
     font-size: 22px;
     font-weight: normal;
@@ -277,7 +279,7 @@
     padding: 1rem;
     margin: 0rem;
     padding-left: 4rem;
-    background-color:  #b5e6e1;
+    background-color: #b5e6e1;
     border-bottom: 1px solid var(--black);
   }
 
@@ -297,13 +299,12 @@
     text-align: center;
     text-decoration: none;
   }
-#logoutContainer a{
-  color: var(--white);
-}
+  #logoutContainer a {
+    color: var(--white);
+  }
   .logout {
-   font-weight: bold;
+    font-weight: bold;
     padding: 0rem;
     font-size: 26px;
   }
 }
-

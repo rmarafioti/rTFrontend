@@ -12,11 +12,11 @@ export default function Drop() {
   const { dropId } = useParams();
   const { data: drop, error, isLoading } = useGetDropsQuery(dropId);
 
-  // This file is a shared feature between owner and team members so we need to check if token are present
+  //This file is a shared feature between owner and team members so we need to check if token are present
   const ownerToken = useSelector(selectOwnerToken);
   const memberToken = useSelector(selectMemberToken);
 
-  // Then define the user's role based on token presence
+  //Then define the user's role based on token presence
   const role = ownerToken ? "owner" : memberToken ? "member" : null;
 
   if (isLoading) return <p>Loading...</p>;

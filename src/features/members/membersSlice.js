@@ -12,7 +12,7 @@ const memberApi = api.injectEndpoints({
       providesTags: ["Member"],
     }),
 
-    // link member to a business
+    //link member to a business
     linkMemberToBusiness: builder.mutation({
       query: ({ businessName, code }) => ({
         url: `/member/business`,
@@ -22,7 +22,7 @@ const memberApi = api.injectEndpoints({
       invalidatesTags: ["Member"],
     }),
 
-    // member create drop
+    //member create drop
     memberCreateDrop: builder.mutation({
       query: () => ({
         url: `/member/createdrop`,
@@ -31,7 +31,7 @@ const memberApi = api.injectEndpoints({
       invalidatesTags: ["Member"],
     }),
 
-    // member create a service
+    //member create a service
     memberCreateService: builder.mutation({
       query: ({
         dropId,
@@ -41,20 +41,20 @@ const memberApi = api.injectEndpoints({
         deposit,
         giftCertAmount,
       }) => ({
-        url: `/member/createservice/${dropId}`, // use dropId from the function call
+        url: `/member/createservice/${dropId}`,
         method: "POST",
         body: { description, cash, credit, deposit, giftCertAmount },
       }),
       invalidatesTags: ["Member"],
     }),
 
-    // Member-specific query
+    //member fetch all drops
     getAllDrops: builder.query({
       query: () => ({
         url: `/member/memberdrops`,
         method: "GET",
       }),
-      providesTags: ["Member"], // Cache and invalidate based on 'Member'
+      providesTags: ["Member"],
     }),
 
     // member update a drop

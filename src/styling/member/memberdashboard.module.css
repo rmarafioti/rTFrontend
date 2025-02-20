@@ -1,74 +1,75 @@
 .takeHomeTotalSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .header {
-    color: var(--accentGold);
-    font-size: 72px;
-    font-weight: bold;
-    -webkit-text-stroke: 2px black;
-    text-shadow: -5px 5px 0px black;
-    margin-bottom: 1rem;
-  }
+.header {
+  color: var(--accentGold);
+  font-size: 72px;
+  font-weight: bold;
+  -webkit-text-stroke: 2px black;
+  text-shadow: -5px 5px 0px black;
+  margin-bottom: 1rem;
+}
 
-  .totalSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #e8f2ea;
-    border: 1px solid rgb(187, 192, 196);
-    border-bottom: none;
-    width: 920px;
-  }
+.totalSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #e8f2ea;
+  border: 1px solid rgb(187, 192, 196);
+  border-bottom: none;
+  width: 920px;
+}
 
-  .createDrop {
-    align-self: center;
-    margin-bottom: 2rem;
-    border: 2px solid transparent;
-    color: var(--white);
-    background-color: rgb(74, 87, 89);
-    box-shadow: none;
-    padding: .5rem;
-    font-size: 18px;
-    font-weight: 500;
-    border: none;
-    width: 400px
-  }
+.createDrop {
+  align-self: center;
+  margin-bottom: 2rem;
+  border: 2px solid transparent;
+  color: var(--white);
+  background-color: rgb(74, 87, 89);
+  box-shadow: none;
+  padding: 0.5rem;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  width: 400px;
+}
 
-  .createDrop:hover {
-   box-shadow: none;
-   border: none;
-  }
+.createDrop:hover {
+  box-shadow: none;
+  border: none;
+}
 
-  .takeHome {
-    color: var(--primaryBlue);
-    font-size: 32px;
-    font-weight: 600;
-    padding: 1rem;
-    margin: 0rem 1rem 0rem 1rem;
-  }
+.takeHome {
+  color: var(--primaryBlue);
+  font-size: 32px;
+  font-weight: 600;
+  padding: 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
 
+.dashboardSections {
+  display: flex;
+}
+
+@media (max-width: 1227px) {
   .dashboardSections {
-    display: flex;
+    flex-direction: column;
   }
-
-  @media (max-width: 1227px) {
-    .dashboardSections {
-        flex-direction: column;
-      }
-      .takeHomeTotalSection, .dashboardSections, .totalSection {
-        width: 100%;
-      }
-      .takeHome {
-        font-size: 24px;
-      }
-      .header {
-        font-size: 44px;
-      }
-      .createDrop {
-        width: 90%;
-      }
+  .takeHomeTotalSection,
+  .dashboardSections,
+  .totalSection {
+    width: 100%;
   }
-
+  .takeHome {
+    font-size: 24px;
+  }
+  .header {
+    font-size: 44px;
+  }
+  .createDrop {
+    width: 90%;
+  }
+}

@@ -3,7 +3,7 @@ import api from "../../store/api";
 
 const ownerApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // fetch owner data
+    //fetch owner data
     getOwner: builder.query({
       query: () => ({
         url: "/owner",

@@ -14,7 +14,7 @@ export default function MemberNotifications() {
 
   // Get the last 6 unique payments, only considering the first drop per payment
   const paidDrops = member.drop
-    ?.filter((drop) => drop.paidDrop) // Filter drops with a valid paidDrop
+    ?.filter((drop) => drop.paidDrop)
     .reduce((uniquePayments, drop) => {
       // Only keep the first instance of each payment (by paidDrop.id)
       if (!uniquePayments.some((pd) => pd.paidDrop.id === drop.paidDrop.id)) {
@@ -60,7 +60,6 @@ export default function MemberNotifications() {
                   - Payment of ${paidDrop.amount} from {paidDrop.payee}
                 </p>
               </div>
-              {/* Map over the drops associated with this paidDrop */}
               <div className={styles.paidDates}>
                 <p className={styles.paidMessage}>
                   {" "}

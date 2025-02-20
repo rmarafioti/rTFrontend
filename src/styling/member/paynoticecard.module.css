@@ -104,7 +104,7 @@
 #no {
   background-color: #e8f2ea;
   box-shadow: none;
-  border: 1px solid var(--black)
+  border: 1px solid var(--black);
 }
 #no:hover {
   background-color: var(--white);
@@ -122,7 +122,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .paymentMethod {
@@ -141,15 +141,14 @@
   width: 100%;
 }
 
-
-
 @media (max-width: 1227px) {
   .dashboardSection {
     width: 100%;
     margin-bottom: 0rem;
     border-bottom: none;
   }
-  .memberDrops, .modalContent {
+  .memberDrops,
+  .modalContent {
     width: 100%;
   }
   .modalContent {
