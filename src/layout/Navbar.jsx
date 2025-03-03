@@ -133,14 +133,15 @@ export default function Navbar() {
   function MenuOwner() {
     return (
       <menu className={`${styles.menuOwner} ${menuOpen ? styles.active : ""}`}>
-        <ul className={styles.hamMenuSection}>
+        <ul>
           <li>
             <p className={styles.hamMenuItem} id={styles.staticInfo}>
-              Business: {owner?.ownerBusiness?.[0]?.businessName}
+              {owner?.ownerBusiness?.[0]?.businessName}
             </p>
           </li>
           <li className={styles.hamMenuItem} id={styles.staticInfo}>
-            Total: {owner?.takeHomeTotal}
+            Total Profits:{" "}
+            <b className={styles.bizTakeHome}>${owner?.takeHomeTotal}.00</b>
           </li>
           <li className={styles.hamMenuItem} id={styles.teamMembers}>
             Team Members:
