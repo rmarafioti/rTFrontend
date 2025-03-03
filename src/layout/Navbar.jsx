@@ -69,11 +69,12 @@ export default function Navbar() {
         <ul className={styles.hamMenuSection}>
           <li>
             <p className={styles.hamMenuItem} id={styles.staticInfo}>
-              business: {member?.business?.businessName}
+              {member?.business?.businessName}
             </p>
           </li>
           <li className={styles.hamMenuItem} id={styles.staticInfo}>
-            total: {member?.takeHomeTotal}
+            Total Profits:{" "}
+            <b className={styles.bizTakeHome}>${member?.takeHomeTotal}.00</b>
           </li>
           <li className={styles.hamMenuItem}>
             <NavLink to="/memberdashboard">Member Dashboard</NavLink>
