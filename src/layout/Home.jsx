@@ -11,11 +11,11 @@ export default function Home() {
           funds and streamline bookkeeping.
         </p>
       </div>
-      <p className={styles.loginStatement}>Are you a business owner?</p>
+      <h2 className={styles.loginStatement}>Choose your role:</h2>
       <Link to={`/authowner`}>
         <button className={styles.loginButton}>Owner Login</button>
       </Link>
-      <p className={styles.loginStatement}>Are you a team member?</p>
+      {/*<p className={styles.loginStatement}>Are you a team member?</p>*/}
       <Link to={`/authmember`}>
         <button className={styles.loginButton}>Team Member Login</button>
       </Link>
