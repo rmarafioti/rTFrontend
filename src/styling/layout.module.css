@@ -264,12 +264,16 @@
   #teamMembers {
     background-color: #e8f2ea;
     color: var(--black);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: normal;
     text-decoration: none;
-    text-align: center;
-    padding-left: 0rem;
+    padding-left: 1rem;
     border-bottom: 1px solid var(--black);
+  }
+
+  .bizTakeHome {
+    font-size: 24px;
+    margin-left: 1rem;
   }
 
   .teamMember {

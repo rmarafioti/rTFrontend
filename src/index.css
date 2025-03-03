@@ -48,15 +48,13 @@ h2 {
 }
 
 button {
+  color: black;
   padding: 0.5rem;
   font-size: 18px;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--white);
-  border-left: 2px solid var(--black);
-  border-bottom: 2px solid var(--black);
-  border-right: 2px solid transparent;
-  border-top: 2px solid transparent;
+  border: 2px solid rgb(149, 147, 147);
   cursor: pointer;
   box-shadow: -5px 5px 0px 1px transparent;
   transition: border-color 0.25s;

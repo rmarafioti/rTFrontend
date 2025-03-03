@@ -22,9 +22,9 @@ export default function AuthFormOwner() {
   // Controlled form fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [ownerName, setOwnerName] = useState("");
 
   // Form fields for registration
+  const [ownerName, setOwnerName] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [code, setCode] = useState("");
 
@@ -77,16 +77,6 @@ export default function AuthFormOwner() {
       </a>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Full Name:</label>
-          <input
-            className={styles.loginFormInput}
-            type="text"
-            value={ownerName}
-            onChange={(e) => setOwnerName(e.target.value)}
-            autoComplete="name"
-          />
-        </div>
-        <div className={styles.loginInputSection}>
           <label className={styles.labelName}>Username:</label>
           <input
             className={styles.loginFormInput}
@@ -109,6 +99,16 @@ export default function AuthFormOwner() {
         {/* Only show these fields if registering */}
         {!isLogin && (
           <section className={styles.register}>
+            <div className={styles.loginInputSection}>
+              <label className={styles.labelName}>Full Name:</label>
+              <input
+                className={styles.loginFormInput}
+                type="text"
+                value={ownerName}
+                onChange={(e) => setOwnerName(e.target.value)}
+                autoComplete="name"
+              />
+            </div>
             <div className={styles.loginInputSection}>
               <label className={styles.labelName}>Business:</label>
               <input
