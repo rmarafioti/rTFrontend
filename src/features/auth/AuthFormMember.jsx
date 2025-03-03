@@ -28,9 +28,9 @@ export default function AuthFormMember() {
   // Controlled form fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [memberName, setMemberName] = useState("");
 
   // Form fields for registration
+  const [memberName, setMemberName] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [code, setCode] = useState("");
 
@@ -83,16 +83,6 @@ export default function AuthFormMember() {
       </a>
       <form className={styles.loginForm} onSubmit={attemptAuth}>
         <div className={styles.loginInputSection}>
-          <label className={styles.labelName}>Full Name:</label>
-          <input
-            className={styles.loginFormInput}
-            type="text"
-            value={memberName}
-            onChange={(e) => setMemberName(e.target.value)}
-            autoComplete="name"
-          />
-        </div>
-        <div className={styles.loginInputSection}>
           <label className={styles.labelName}>Username:</label>
           <input
             className={styles.loginFormInput}
@@ -115,6 +105,16 @@ export default function AuthFormMember() {
         {/* Only show these fields if registering */}
         {!isLogin && (
           <section className={styles.register}>
+            <div className={styles.loginInputSection}>
+              <label className={styles.labelName}>Full Name:</label>
+              <input
+                className={styles.loginFormInput}
+                type="text"
+                value={memberName}
+                onChange={(e) => setMemberName(e.target.value)}
+                autoComplete="name"
+              />
+            </div>
             <div className={styles.loginInputSection}>
               <label className={styles.labelName}>Business:</label>
               {isBusinessesLoading ? (
