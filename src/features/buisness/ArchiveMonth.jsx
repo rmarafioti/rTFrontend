@@ -58,16 +58,18 @@ export default function ArchiveMonth() {
     role === "owner" && memberId ? memberDropsData?.drops : memberData?.drops;
 
   // Filter drops to only show those for the given month
-  const filteredDrops = drops.filter((drop) => {
-    const dropDate = dayjs.utc(drop.date);
-    const dropYear = dropDate.year();
-    const dropMonth = dropDate.month() + 1; // Add 1 because months are 0-based
+  const filteredDrops = drops
+    .filter((drop) => {
+      const dropDate = dayjs.utc(drop.date);
+      const dropYear = dropDate.year();
+      const dropMonth = dropDate.month() + 1; // Add 1 because months are 0-based
 
-    console.log("All Drops:", drops);
-
-    //Compare the year and month with the selected year and month
-    return dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10);
-  });
+      //Compare the year and month with the selected year and month
+      return (
+        dropYear === parseInt(year, 10) && dropMonth === parseInt(month, 10)
+      );
+    })
+    .sort((a, b) => dayjs.utc(a.date).valueOf() - dayjs.utc(b.date).valueOf());
 
   console.log("Filtered Drops:", filteredDrops);
 

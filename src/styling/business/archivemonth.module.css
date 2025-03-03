@@ -45,7 +45,6 @@
 .drops {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-self: center;
   text-align: left;
   list-style-type: none;
