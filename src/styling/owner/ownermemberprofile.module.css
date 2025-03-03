@@ -40,7 +40,8 @@
 }
 
 #monthTotalsSection {
-  padding-top: 1rem;
+  padding-top: 0rem;
+  justify-content: space-between;
 }
 
 .percent {
@@ -57,19 +58,17 @@
   background-color: var(--white);
   border: 2px solid rgb(187, 192, 196);
   font-size: 18px;
-  padding: 0.2rem;
-  margin: 1rem;
+  padding: 0.5rem;
   width: 100%;
   align-self: flex-start;
   text-align: center;
-
   transition: border-color 0.25s;
   align-self: center;
 }
 
 .linkName {
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .archiveLink:hover {
@@ -87,7 +86,7 @@
 .updatePercent {
   display: flex;
   flex-direction: column;
-  margin: 0rem 0rem 2rem 0rem;
+  justify-content: space-between;
 }
 
 .select {
@@ -109,7 +108,6 @@
   font-size: 20px;
   font-weight: normal;
   text-align: left;
-  background-color: #b5e6e1;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
   border-bottom: 1px solid rgb(187, 192, 196);
 }
@@ -129,6 +127,7 @@
   }
   .takeHome {
     font-size: 24px;
+    text-align: left;
   }
   .updatePercent {
     margin-bottom: 1rem;
