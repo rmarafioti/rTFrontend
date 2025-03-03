@@ -55,9 +55,9 @@ export default function NotificationsCard() {
 
   return (
     <section className={styles.dashboardSectionNotifications}>
-      <h2 className={styles.subHeadersNotice}>Payment Notifications:</h2>
+      <h2 className={styles.subHeadersNotice}>Recent Payment Notifications:</h2>
       {payNotices?.length ? (
-        payNotices.map((notice) => (
+        payNotices.slice(0, 3).map((notice) => (
           <div key={notice.id} className={styles.noticeSection}>
             <div>
               <p className={styles.payDate}>
